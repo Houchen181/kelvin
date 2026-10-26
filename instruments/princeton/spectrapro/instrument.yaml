@@ -1,0 +1,9 @@
+schema: 1
+id: princeton/spectrapro
+maker: Teledyne Princeton Instruments
+model: SpectraPro
+name: Princeton Instruments (Acton) SpectraPro monochromators
+kind: monochromator
+interfaces: [rs-232, usb]
+control: text
+card: card.yaml

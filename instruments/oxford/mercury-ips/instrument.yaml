@@ -1,0 +1,39 @@
+schema: 1
+id: oxford/mercury-ips
+maker: Oxford Instruments
+model: Mercury iPS
+name: Oxford Instruments Mercury iPS superconducting magnet power supply
+kind: magnet-supply
+interfaces: [lan, rs-232, usb, gpib]
+control: scpi
+identify:
+  idn: '^IDN:OXFORD INSTRUMENTS:MERCURY [iI][pP][sS]:'
+  example: IDN:OXFORD INSTRUMENTS:MERCURY IPS:223350003:2.5.09.000
+manuals:
+  - title: Mercury iPS Operator's Handbook, Issue 01, January 2012 (59-UMC0072)
+    url: https://mymercurysupport.com/sites/default/files/59_UMC0072_01.pdf
+    covers: Remote-control setup (Section 6.4 in this issue) and the command reference chapter covering the SCPI and legacy command sets
+    access: public
+  - title: Mercury list of SCPI commands (SYS and DEV device tree, including the magnet PSU commands)
+    url: https://mymercurysupport.com/sites/default/files/List-of-SCPI-commands.pdf
+    covers: Implemented SCPI commands by device path, with read/write flags (temperature, heater, level, pressure and PSU sections)
+    access: public
+links:
+  - title: Mercury Support site (Oxford Instruments; nominally for registered users, hosts the PDFs above)
+    url: https://mymercurysupport.com/
+  - title: Quantum Design Oxford legacy product support (Mercury and Triton end-of-life dates and support terms)
+    url: https://qd-oxford.com/services/legacy_product_support.html
+  - title: Product end-of-life notice (Mercury range and Triton Cryofree)
+    url: https://qd-oxford.com/siteDocs/2026_07_09_EOLN.pdf
+  - title: IPS3 superconducting magnet power supply announcement (Mercury iPS successor)
+    url: https://qd-oxford.com/about_us/2026_07_09_news_item_IPS3_superconducting_magnet_power_supply.html
+  - title: Mercury instrumentation datasheet (iTC and iPS)
+    url: https://estore.oxinst.com/INTERSHOP/static/BOS/Oxinst-US-Site/-/Oxinst/en_US/PDFS/4425_NS_Mercury%20Instrumentation%20Datasheet_4pp_v2.pdf
+software:
+  - name: QCoDeS
+    kind: python-driver
+    ref: qcodes.instrument_drivers.oxford.OxfordMercuryiPS
+    url: https://github.com/microsoft/Qcodes/blob/main/src/qcodes/instrument_drivers/oxford/MercuryiPS_VISA.py
+notes:
+  - 'Remote control is a TCP socket on port 7020 (VISA resource TCPIP0::<ip>::7020::SOCKET); RS-232/ISOBUS and USB are also fitted and GPIB is an option. The unit can run a SCPI-style or a legacy command set (ISIS reports SCPI is the more complete), and it is not standard SCPI: *IDN? returns a colon-separated string and commands use READ:/SET: with STAT: replies.'
+  - Only the Issue 01 (2012) handbook was found on the maker's Mercury Support site, so command details may differ on newer firmware; the PDF links resolved without a login although the site is nominally for registered users. The Mercury range moved to legacy support on 9 July 2026 and the Ethernet-controlled IPS3 is the announced successor.

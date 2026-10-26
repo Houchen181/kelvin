@@ -1,0 +1,62 @@
+schema: 1
+id: zhinst/shfqc
+maker: Zurich Instruments
+model: SHFQC
+name: Zurich Instruments SHFQC qubit controller
+covers: [SHFQC+]
+kind: quantum-controller
+interfaces: [usb, lan]
+control: library
+manuals:
+  - title: SHFQC+ User Manual (online)
+    url: https://docs.zhinst.com/shfqc_user_manual/index.html
+    covers: Tutorials, functional description of the readout and signal-generation sections, and specifications
+    access: public
+  - title: 'SHFQC+ User Manual: Device Node Tree'
+    url: https://docs.zhinst.com/shfqc_user_manual/nodedoc.html
+    covers: Every device node that the APIs read or write
+    access: public
+  - title: LabOne API User Manual
+    url: https://docs.zhinst.com/labone_api_user_manual/index.html
+    covers: Data Server, node tree and the Python, C, MATLAB, .NET and LabVIEW APIs
+    access: public
+  - title: LabOne Q User Manual
+    url: https://docs.zhinst.com/labone_q_user_manual/index.html
+    covers: Python framework for experiment-level control of Zurich Instruments quantum-computing hardware
+    access: public
+  - title: SHFQC+ User Manual (PDF)
+    url: https://docs.zhinst.com/pdf/ziSHFQC_UserManual.pdf
+    covers: Printable edition of the online manual
+    access: public
+links:
+  - title: 'LabOne API: which Python API should I use?'
+    url: https://docs.zhinst.com/labone_api_user_manual/description_and_guidelines/python_apis.html
+  - title: 'LabOne Q examples: instrument getting-started notebooks (SHFQC+ is notebook 03)'
+    url: https://github.com/zhinst/laboneq/tree/main/examples/instrument_getting_started
+software:
+  - name: zhinst-core
+    kind: vendor-sdk
+    ref: zhinst.core.ziDAQServer
+    url: https://pypi.org/project/zhinst-core/
+  - name: zhinst-toolkit
+    kind: vendor-sdk
+    ref: zhinst.toolkit.driver.devices.SHFQC
+    url: https://pypi.org/project/zhinst-toolkit/
+  - name: zhinst-qcodes
+    kind: python-driver
+    ref: zhinst.qcodes.SHFQC
+    url: https://pypi.org/project/zhinst-qcodes/
+  - name: LabOne Q
+    kind: vendor-sdk
+    ref: laboneq.dsl.device.instruments.SHFQC
+    url: https://pypi.org/project/laboneq/
+examples:
+  - title: labone-api-examples (the shfqc folder points to the SHFSG and SHFQA examples, which also apply to the SHFQC)
+    url: https://github.com/zhinst/labone-api-examples
+    license: MIT
+  - title: LabOne Q (Python framework with example notebooks)
+    url: https://github.com/zhinst/laboneq
+    license: Apache-2.0
+notes:
+  - Combines an SHFQA readout section and an SHFSG signal generator in one box; the toolkit's SHFQC class derives from both, and LabOne Q drives it as two logical devices. Experiment-level qubit scripts are often written in LabOne Q.
+  - The manual recommends the 1GbE port over USB 3.0 for long acquisitions, since USB can interrupt continuous measurements.

@@ -1,0 +1,29 @@
+schema: 1
+id: srs/sr830
+maker: Stanford Research Systems
+model: SR830
+name: Stanford Research SR830 DSP lock-in amplifier
+covers: [SR810]
+kind: lock-in
+interfaces: [gpib, rs-232]
+control: scpi
+card: card.yaml
+manuals:
+  - title: SR830 DSP Lock-In Amplifier manual, chapter 5 (Remote programming)
+    url: https://www.thinksrs.com/downloads/pdfs/manuals/SR830m.pdf
+    access: public
+software:
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.srs.sr830.SR830
+    url: https://github.com/pymeasure/pymeasure/blob/master/pymeasure/instruments/srs/sr830.py
+  - name: QCoDeS
+    kind: python-driver
+    ref: qcodes.instrument_drivers.stanford_research.SR830.SR830
+    url: https://github.com/microsoft/Qcodes/blob/main/src/qcodes/instrument_drivers/stanford_research/SR830.py
+examples:
+  - title: 'SRS application note: About lock-in amplifiers'
+    url: https://www.thinksrs.com/downloads/pdfs/applicationnotes/AboutLIAs.pdf
+    license: SRS (read only)
+notes:
+  - For AC transport, drive the sample from the sine output through a series resistor much larger than the sample, so the current stays constant.

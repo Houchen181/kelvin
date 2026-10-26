@@ -1,0 +1,17 @@
+schema: 1
+id: andor/ccd
+maker: Andor (Oxford Instruments)
+model: CCD and EMCCD
+name: Andor CCD and EMCCD cameras (iXon, Newton, iDus)
+covers: [iXon, Newton, iDus]
+kind: camera
+interfaces: [usb, pcie]
+control: library
+card: card.yaml
+software:
+  - name: pylablib
+    kind: python-driver
+    ref: pylablib.devices.Andor.AndorSDK2.AndorSDK2Camera
+    url: https://github.com/AlexShkarin/pyLabLib/blob/main/pylablib/devices/Andor/AndorSDK2.py
+notes:
+  - Needs Andor's SDK2. A scan cannot list these cameras without initializing (and resetting) them, so add them by address.

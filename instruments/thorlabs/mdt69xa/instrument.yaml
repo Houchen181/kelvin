@@ -1,0 +1,15 @@
+schema: 1
+id: thorlabs/mdt69xa
+maker: Thorlabs
+model: MDT69xA
+name: Thorlabs MDT693A / MDT694A piezo controllers
+covers: [MDT693A, MDT694A]
+kind: positioner
+interfaces: [usb]
+control: text
+card: card.yaml
+software:
+  - name: pylablib
+    kind: python-driver
+    ref: pylablib.devices.Thorlabs.serial.MDT69xA
+    url: https://github.com/AlexShkarin/pyLabLib/blob/main/pylablib/devices/Thorlabs/serial.py

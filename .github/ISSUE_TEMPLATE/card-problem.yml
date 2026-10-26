@@ -1,0 +1,18 @@
+name: Card problem
+description: A card, manual link or lab config that is wrong. For anything that could drive an instrument unsafely, use Security -> Report a vulnerability instead.
+labels: [card]
+body:
+  - type: input
+    id: card
+    attributes:
+      label: Card, instrument or lab config
+      placeholder: lakeshore/336
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is wrong
+      description: The parameter or command, what the manual says (with the page), and what happened.
+    validations:
+      required: true

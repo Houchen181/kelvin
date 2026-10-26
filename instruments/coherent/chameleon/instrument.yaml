@@ -1,0 +1,25 @@
+schema: 1
+id: coherent/chameleon
+maker: Coherent
+model: Chameleon Ultra
+name: Coherent Chameleon Ultra / Discovery ultrafast Ti:sapphire lasers
+covers: [Chameleon Ultra II, Chameleon Vision, Chameleon Vision-S, Chameleon Discovery]
+kind: laser
+interfaces: [rs-232, usb]
+control: text
+links:
+  - title: Chameleon Ultra product page
+    url: https://www.coherent.com/lasers/oscillators/chameleon-ultra
+  - title: Chameleon Discovery series product page
+    url: https://www.coherent.com/lasers/oscillators/chameleon-discovery-series
+  - title: Chameleon Ultra / Ultra II / Vision / Vision-S customer course (lists customer RS-232 operation)
+    url: https://www.coherent.com/support/training/course-catalog/2252625
+  - title: Chameleon Ultra datasheet (PDF; control by menu-driven GUI or RS-232)
+    url: https://www.coherent.com/content/dam/coherent/site/en/resources/datasheet/lasers/COHR_ChameleonUltra_DS_0119_3.pdf
+  - title: Chameleon Discovery NX/LX datasheet (PDF; lists RS-232 and USB control interfaces, PC required)
+    url: https://www.coherent.com/resources/datasheet/lasers/chameleon-discovery-nx-lx-ds.pdf
+  - title: Coherent support (Resource Center for manuals and software)
+    url: https://www.coherent.com/support
+notes:
+  - Coherent publishes no public copy of the operator's manual or its RS-232 command list (the product pages link only datasheets and brochures); use the manual supplied with the laser or ask Coherent support.
+  - Community code (ACQ4's Coherent driver) drives these lasers over a serial port at 19200 baud with named ASCII commands such as WAVELENGTH, VW, TMIN/TMAX and GDD. Whether Discovery models use the same command set, and how their USB port appears, is not yet confirmed.

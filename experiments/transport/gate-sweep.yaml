@@ -1,0 +1,50 @@
+schema: 1
+id: transport/gate-sweep
+area: transport
+title: Field-effect gate sweep
+summary: >-
+  Tune the carrier density with a gate and record the conductance: transfer curves, the charge-neutrality point or
+  threshold, field-effect mobility and hysteresis from traps.
+roles:
+  gate:
+    kind: [source-meter, voltage-source]
+    does: Ramps the gate voltage and watches the leakage current.
+    suggested: [keithley/2400, keithley/2450, keysight/b2900, qdevil/qdac-ii]
+  lockin:
+    kind: lock-in
+    does: Drives a small AC current and reads the four-probe voltage.
+    suggested: [srs/sr830, srs/sr860, zhinst/mfli]
+  cryostat:
+    kind: [cryostat, temperature-controller]
+    does: Holds the temperature.
+    optional: true
+    suggested: [qd/multivu, lakeshore/336]
+lab: labs/ppms-transport.yaml
+setup:
+  - Connect the SMU between the gate and the grounded sample. Keep the compliance at 1-10 nA so a breakdown cannot burn the dielectric through.
+  - The lab's guard stops any gate ramp whose leakage exceeds 1 nA.
+procedure:
+  - Sweep a small window first (±2 V), there and back, and watch the leakage.
+  - Widen it step by step; the breakdown field of SiO2 is about 1 V/nm, and hBN about 0.5 V/nm.
+plans:
+  - title: Gate sweep from -10 V to 10 V and back
+    plan:
+      plan: gate_sweep
+      setup: { gate.compliance_I: 1.0e-8, gate.output: on, lockin_xx.amplitude: 1.0, lockin_xx.frequency: 13.7,
+               lockin_xx.time_constant: "300 ms" }
+      sweep: { gate.V: { from: -10, to: 10, step: 0.05, back: true } }
+      settle: 1.0
+      measure: [lockin_xx.X, lockin_xx.Y, lockin_xy.X, gate.I]
+      after: { gate.V: 0 }
+analysis:
+  - The charge-neutrality point (graphene) or the threshold voltage (semiconductors) is where the conductance is lowest or turns on.
+  - n = C·(Vg - V0)/e, with C = ε0·εr/d per unit area (285 nm SiO2 gives about 12 nF/cm²); a Hall measurement calibrates it.
+  - The field-effect mobility is μ = (L/W)·(1/C)·dG/dVg, from the steepest part of the curve.
+pitfalls:
+  - Hysteresis between the up and down sweeps comes from charge traps; sweep slower, or anneal.
+  - The gate current also charges the gate capacitance during a ramp; that is not leakage, so judge leakage at a fixed voltage.
+safety:
+  - Kelvin ramps the gate at the lab's rate, stops on the leakage guard, and asks before going beyond the voltages you approved.
+references:
+  - title: K. S. Novoselov et al., Electric field effect in atomically thin carbon films, Science 306, 666 (2004)
+    doi: 10.1126/science.1102896

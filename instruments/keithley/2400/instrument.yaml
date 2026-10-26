@@ -1,0 +1,25 @@
+schema: 1
+id: keithley/2400
+maker: Keithley (Tektronix)
+model: '2400'
+name: Keithley 2400-series SourceMeter
+covers: ['2401', '2410', '2420', '2425', '2430', '2440']
+kind: source-meter
+interfaces: [gpib, rs-232]
+control: scpi
+card: card.yaml
+manuals:
+  - title: Keithley Series 2400 SourceMeter User's Manual, SCPI command reference
+    url: https://download.tek.com/manual/2400S-900-01_K-Sep2011_User.pdf
+    access: public
+software:
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.keithley.keithley2400.Keithley2400
+    url: https://github.com/pymeasure/pymeasure/blob/master/pymeasure/instruments/keithley/keithley2400.py
+  - name: QCoDeS
+    kind: python-driver
+    ref: qcodes.instrument_drivers.Keithley.Keithley_2400.Keithley2400
+    url: https://github.com/microsoft/Qcodes/blob/main/src/qcodes/instrument_drivers/Keithley/Keithley_2400.py
+notes:
+  - A measure command switches the output on by itself, so Kelvin reads current only while the output is already on.

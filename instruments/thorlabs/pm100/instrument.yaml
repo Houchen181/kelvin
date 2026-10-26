@@ -1,0 +1,23 @@
+schema: 1
+id: thorlabs/pm100
+maker: Thorlabs
+model: PM100
+name: Thorlabs PM100D / PM100USB / PM400 optical power meters
+covers: [PM100D, PM100USB, PM400]
+kind: power-meter
+interfaces: [usb-tmc]
+control: scpi
+card: card.yaml
+manuals:
+  - title: PM100D / PM100USB operation manual, SCPI commands
+    url: https://media.thorlabs.com/globalassets/items/p/pm/pm1/pm100d/17654-d02.pdf
+    access: public
+software:
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.thorlabs.thorlabspm100usb.ThorlabsPM100USB
+    url: https://github.com/pymeasure/pymeasure/blob/master/pymeasure/instruments/thorlabs/thorlabspm100usb.py
+  - name: QCoDeS contrib drivers
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.Thorlabs.PM100D.Thorlab_PM100D
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/Thorlabs/PM100D.py

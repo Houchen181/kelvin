@@ -1,0 +1,13 @@
+schema: 1
+id: lakeshore/350
+maker: Lake Shore Cryotronics
+model: '350'
+name: Lake Shore Model 350 temperature controller
+kind: temperature-controller
+interfaces: [usb, lan, gpib]
+control: scpi
+card: card.yaml
+manuals:
+  - title: Model 350 Temperature Controller user's manual, Remote operation
+    url: https://www.lakeshore.com/docs/default-source/software/manuals/350_manual.pdf?sfvrsn=501e9331_5
+    access: public

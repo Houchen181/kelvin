@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Houchen181/kelvin-instruments/schema/instrument.schema.json",
+  "title": "instrument.yaml",
+  "description": "One instrument model in the Kelvin instrument collection. tools/kic.py validate checks the rest: the id matches the folder, the kind is in collection.yaml, and the card next to it agrees.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "id", "maker", "model", "kind", "interfaces", "control"],
+  "properties": {
+    "schema": { "const": 1 },
+    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9.-]*/[a-z0-9][a-z0-9.-]*$", "description": "maker/model, the same as the folder and the card id" },
+    "maker": { "type": "string", "minLength": 1 },
+    "model": { "type": "string", "minLength": 1, "description": "Quote numeric model names" },
+    "name": { "type": "string", "description": "Display name; defaults to maker and model" },
+    "covers": { "type": "array", "items": { "type": "string" }, "description": "Other models with the same command set" },
+    "kind": { "type": "string", "description": "One of the kinds in collection.yaml" },
+    "categories": { "type": "array", "items": { "type": "string" }, "description": "Extra categories beyond the kind's own" },
+    "interfaces": {
+      "type": "array",
+      "items": { "enum": ["gpib", "usb-tmc", "usb", "lan", "rs-232", "rs-485", "pcie", "pxie", "analog", "web-api"] }
+    },
+    "control": { "enum": ["scpi", "text", "library", "web-api", "none"] },
+    "identify": {
+      "type": "object",
+      "description": "Only for instruments without a card: the *IDN? reply as a regex (matched ignoring case)",
+      "additionalProperties": false,
+      "properties": { "idn": { "type": "string" }, "example": { "type": "string" } }
+    },
+    "card": { "const": "card.yaml" },
+    "manuals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["title", "url"],
+        "properties": {
+          "title": { "type": "string" },
+          "url": { "type": "string", "pattern": "^https://" },
+          "covers": { "type": "string", "description": "The part that matters for remote control" },
+          "access": { "enum": ["public", "sign-in", "owners"] },
+          "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+        }
+      }
+    },
+    "links": { "$ref": "#/$defs/links" },
+    "examples": { "$ref": "#/$defs/links" },
+    "software": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "kind", "url"],
+        "properties": {
+          "name": { "type": "string" },
+          "kind": { "enum": ["python-driver", "vendor-sdk", "vendor-software"] },
+          "ref": { "type": "string", "description": "Module and class, e.g. pymeasure.instruments.srs.sr830.SR830" },
+          "url": { "type": "string", "pattern": "^https://" }
+        }
+      }
+    },
+    "notes": { "type": "array", "items": { "type": "string" } },
+    "verified": {
+      "type": "array",
+      "description": "Hardware checks of the card",
+      "items": {
+        "type": "object",
+        "required": ["lab", "by", "date"],
+        "properties": {
+          "lab": { "type": "string" },
+          "by": { "type": "string" },
+          "date": { "pattern": "^\\d{4}-\\d{2}-\\d{2}$", "description": "YYYY-MM-DD (YAML may read it as a date)" },
+          "firmware": { "type": "string" },
+          "summary": { "type": "string" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "links": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title", "url"],
+        "properties": {
+          "title": { "type": "string" },
+          "url": { "type": "string", "pattern": "^https://" },
+          "license": { "type": "string" }
+        }
+      }
+    }
+  }
+}

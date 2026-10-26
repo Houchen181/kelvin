@@ -1,0 +1,46 @@
+schema: 1
+id: rs/sgs100a
+maker: Rohde & Schwarz
+model: SGS100A
+name: Rohde & Schwarz SGS100A SGMA RF source
+kind: microwave-source
+interfaces: [lan, usb-tmc, pcie]
+control: scpi
+identify:
+  idn: ^Rohde&Schwarz,SGS100A,
+  example: Rohde&Schwarz,SGS100A,1412.0000K02/000000,3.1.17.1-03.01.158
+manuals:
+  - title: R&S SGS100A user manual (online version)
+    url: https://www.rohde-schwarz.com/webhelp/SGS100A_HTML_UserManual_en/SGS100A_HTML_UserManual_en.htm
+    covers: Network operation and remote control, remote control commands, common commands such as *IDN?
+    access: public
+  - title: R&S SGS100A user manual (PDF, version 13)
+    url: https://scdn.rohde-schwarz.com/ur/pws/dl_downloads/pdm/cl_manuals/user_manual/1173_9105_01/SGS100A_UserManual_en_13.pdf
+    covers: Same content as the online version; the file name carries the manual version
+    access: public
+  - title: Remote control via SCPI (R&S getting started, online version)
+    url: https://www.rohde-schwarz.com/webhelp/Remote_Control_SCPI_HTML_GettingStarted/Remote_Control_SCPI_HTML_GettingStarted.htm
+    covers: SCPI syntax, status registers and VISA/socket basics shared by R&S instruments
+    access: public
+links:
+  - title: R&S SGS100A manuals page
+    url: https://www.rohde-schwarz.com/us/manual/sgs100a/
+  - title: R&S SGS100A product page
+    url: https://www.rohde-schwarz.com/us/products/test-and-measurement/analog-signal-generators/rs-sgs100a-sgma-rf-source_63493-9030.html
+  - title: Connecting and Interfacing with SGMA Instruments (R&S application note)
+    url: https://www.rohde-schwarz.com/us/applications/connecting-and-interfacing-with-sgma-instruments_56280-98496.html
+software:
+  - name: RsInstrument
+    kind: vendor-sdk
+    url: https://pypi.org/project/RsInstrument/
+  - name: QCoDeS
+    kind: python-driver
+    ref: qcodes.instrument_drivers.rohde_schwarz.RohdeSchwarzSGS100A
+    url: https://github.com/microsoft/Qcodes/blob/main/src/qcodes/instrument_drivers/rohde_schwarz/SGS100A.py
+examples:
+  - title: 'R&S Examples: SignalGenerators/Python/RsInstrument (written for other SMx models, same VISA/SCPI pattern)'
+    url: https://github.com/Rohde-Schwarz/Examples/tree/main/SignalGenerators/Python/RsInstrument
+    license: MIT
+notes:
+  - The SGMA source has no front panel or display, so configure it with the R&S SGMA-GUI or SCPI over LAN (HiSLIP, VXI-11 or raw socket on port 5025) or USBTMC. It has no GPIB port; use a GPIB-to-LAN or GPIB-to-USB adapter if legacy code needs GPIB.
+  - The manual also describes a PCIe link and a LAN fast-socket mode for faster remote control than the standard LAN protocols.

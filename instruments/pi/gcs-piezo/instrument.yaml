@@ -1,0 +1,14 @@
+schema: 1
+id: pi/gcs-piezo
+maker: Physik Instrumente (PI)
+model: E-727 / E-709 / E-712
+name: PI piezo controllers with the GCS command set
+covers: [E-727, E-709, E-712, E-725]
+kind: positioner
+interfaces: [usb, lan, rs-232]
+control: text
+card: card.yaml
+software:
+  - name: PIPython
+    kind: vendor-sdk
+    url: https://pypi.org/project/PIPython/

@@ -1,0 +1,18 @@
+schema: 1
+id: keysight/n5183b
+maker: Keysight
+model: N5183B
+name: Keysight MXG N5183B microwave signal generator
+kind: microwave-source
+interfaces: [usb-tmc, lan, gpib]
+control: scpi
+card: card.yaml
+manuals:
+  - title: Keysight X-Series Signal Generators SCPI Command Reference N5180-90057, Edition 1 (May 2024)
+    url: https://www.keysight.com/content/dam/keysight/en/doc/gate/programming-guides/9018-03690.pdf
+    access: public
+software:
+  - name: QCoDeS
+    kind: python-driver
+    ref: qcodes.instrument_drivers.Keysight.Keysight_N5183B.KeysightN5183B
+    url: https://github.com/microsoft/Qcodes/blob/main/src/qcodes/instrument_drivers/Keysight/Keysight_N5183B.py

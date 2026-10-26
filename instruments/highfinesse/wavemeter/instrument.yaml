@@ -1,0 +1,29 @@
+schema: 1
+id: highfinesse/wavemeter
+maker: HighFinesse
+model: WS7
+name: HighFinesse WS6 / WS7 / WS8 wavelength meters
+covers: [WS6, WS8]
+kind: wavemeter
+interfaces: [usb]
+control: library
+links:
+  - title: Support downloads (quick start guides and technical data; no programming manual is listed)
+    url: https://www.highfinesse.com/en/support/downloads.html
+  - title: Software updates (older software and drivers on request; Windows 11 driver update notice)
+    url: https://www.highfinesse.com/en/support/software-update.html
+  - title: WS7-30 series product page
+    url: https://www.highfinesse.com/en/wavelengthmeter/wavelengthmeter-ws-7-30.html
+  - title: WS series product overview (PDF)
+    url: https://www.highfinesse.com/en/wavelengthmeter/wavelengthmeter-further-information/product-overview-wavelengthmeter-ws-series.pdf
+software:
+  - name: pylablib HighFinesse WLM (wraps wlmData.dll)
+    kind: python-driver
+    ref: pylablib.devices.HighFinesse.WLM
+    url: https://pylablib.readthedocs.io/en/latest/devices/HighFinesse.html
+  - name: HighFinesse wavemeter control software with wlmData.dll (supplied with the instrument)
+    kind: vendor-sdk
+    url: https://www.highfinesse.com/en/support/software-update.html
+notes:
+  - 'wlmData.dll does not talk to the instrument directly: it connects to the wavemeter control application (wlm_ws*.exe) running on the same PC, so that program must be started first. pylablib''s WLM class can launch it and documents where the DLL sits (Projects/64 or Com-Test in the install folder).'
+  - The DLL comes with the control software and the printed manual shipped with the instrument; HighFinesse posts no programming reference publicly, so request it from its service team (service@highfinesse.de, with the serial number) if it is missing.

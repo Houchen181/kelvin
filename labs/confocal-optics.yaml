@@ -1,0 +1,64 @@
+# A confocal microscope on an optical cryostat: a CW laser, a function generator to modulate it, a lock-in with a
+# current preamplifier for photocurrent, a gate, an XY piezo scanner, a spectrograph with a CCD, a power meter
+# and the cryostat's temperature controller. Covers PL, Raman, reflectance contrast and photocurrent mapping.
+#
+# To use it: copy it to ~/Kelvin/lab.yaml (or open it in Lab -> Set up), give each instrument its address
+# (Scan finds them) and set the limits for your sample. Until then every instrument here is simulated.
+lab: Confocal optics
+
+instruments:
+  laser:
+    card: coherent/obis
+    # address: "serial://COM7"
+    auto: never                            # a person approves every laser change
+    limits: { power: [0, 0.02] }           # W
+  fg:
+    card: keysight/33500b
+    # address: "USB0::0x0957::0x2C07::<serial>::INSTR"; square wave into the laser's modulation input
+    limits: { amplitude: [0.001, 5], offset: [0, 2.5] }
+  lockin:
+    card: srs/sr830
+    # address: "GPIB0::8::INSTR"; reference: external, from the function generator's sync output
+    limits: { amplitude: [0.004, 0.1] }
+  iamp:
+    card: srs/sr570
+    # address: "serial://COM3" (listen-only)
+    limits: { bias: [-500, 500] }          # mV
+  gate:
+    card: keithley/2450
+    # address: "USB0::0x05E6::0x2450::<serial>::INSTR"
+    limits: { V: [-10, 10], compliance_I: [1.0e-9, 1.05e-4] }  # it powers up at 105 µA; the plans set 10 nA
+    rates: { V: 0.5 }
+    guards:
+      V: [{ read: I, max_abs: 1.0e-9 }]
+  scan_x:
+    card: pi/gcs-piezo
+    # address: "TCPIP0::<ip>::50000::SOCKET"
+    vars: { axis: "1" }
+    limits: { position: [0, 100] }         # µm
+  scan_y:
+    card: pi/gcs-piezo
+    # address: the same controller
+    vars: { axis: "2" }
+    limits: { position: [0, 100] }
+  spectrograph:
+    card: princeton/spectrapro
+    # address: "serial://COM4"
+  camera:
+    card: princeton/picam
+    # address: "picam://<serial>"
+  pm:
+    card: thorlabs/pm100
+    # address: "USB0::0x1313::0x8078::<serial>::INSTR"; on a pick-off before the objective
+  tc:
+    card: lakeshore/336
+    # address: "ASRL5::INSTR"
+    limits: { setpoint: [0, 300] }
+
+# At low temperature, switch the laser off when the sample heats up. Add this once you work cold:
+# watch:
+#   - read: tc.T_A
+#     above: 30
+#     for: 10
+#     then: { laser.emission: off }
+#     note: The laser is heating the sample.

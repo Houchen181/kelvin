@@ -1,0 +1,24 @@
+schema: 1
+id: srs/sr570
+maker: Stanford Research Systems
+model: SR570
+name: Stanford Research SR570 low-noise current preamplifier
+kind: preamp
+interfaces: [rs-232]
+control: text
+card: card.yaml
+manuals:
+  - title: SR570 Low-Noise Current Preamplifier manual, Remote programming (RS-232, listen only)
+    url: https://www.thinksrs.com/downloads/pdfs/manuals/SR570m.pdf
+    access: public
+software:
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.srs.sr570.SR570
+    url: https://github.com/pymeasure/pymeasure/blob/master/pymeasure/instruments/srs/sr570.py
+  - name: QCoDeS contrib drivers
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.StanfordResearchSystems.SR570.SR570
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/StanfordResearchSystems/SR570.py
+notes:
+  - Listen-only. Its built-in bias voltage is a drive, so it can bias a tunnel junction or a dot with approval.

@@ -1,0 +1,12 @@
+schema: 1
+id: attocube/attodry
+maker: attocube
+model: attoDRY
+name: attocube attoDRY closed-cycle cryostats
+covers: [attoDRY800, attoDRY1100, attoDRY2100]
+kind: cryostat
+interfaces: [usb]
+control: library
+card: card.yaml
+notes:
+  - Driven through attocube's attoDRYLib from its example scripts; the card is a draft until someone compares it with the touch screen.

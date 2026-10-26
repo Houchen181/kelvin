@@ -1,0 +1,26 @@
+schema: 1
+id: spectra-physics/mai-tai
+maker: Spectra-Physics (MKS)
+model: Mai Tai
+name: Spectra-Physics Mai Tai Ti:sapphire ultrafast laser
+covers: [Mai Tai WB]
+kind: laser
+interfaces: [rs-232]
+control: text
+manuals:
+  - title: Mai Tai Diode-Pumped, Mode-Locked Ti:sapphire Laser User's Manual (0000-284A Rev G)
+    url: https://api.p1.mks.com/mam/celum/celum_assets/sp/resources/284A_Rev_G_Mai_Tai_Users_Manual.pdf
+    covers: Chapter 4 (SERIAL COM port, RS-232 wiring and pin descriptions) and chapter 6 Operating the System, section 'Commands and Queries Used by the Mai Tai' (RS-232 command set)
+    access: public
+  - title: Mai Tai Wideband, Mode-Locked Ti:sapphire Laser User's Manual (315A Rev A)
+    url: https://api.p1.mks.com/mam/celum/celum_assets/sp/resources/315A_Rev_A_Mai_Tai_WB_Users_Manual.pdf
+    covers: 'Operation chapter: serial command and query structure for writing your own control program (Mai Tai WB only)'
+    access: public
+links:
+  - title: Mai Tai ultrafast laser product page
+    url: https://www.spectra-physics.com/en/f/mai-tai-ultrafast-laser
+  - title: Spectra-Physics manuals listing
+    url: https://www.spectra-physics.com/en/resourceListing/manuals
+notes:
+  - Control is a plain-text command/query protocol over the laser's 9-pin RS-232 serial port (a USB-serial adapter works), for example WAVelength nnn to tune and READ:PCTWarmedup? to read the warm-up percentage; the syntax is in the 'Commands and Queries' section of the user's manual.
+  - Spectra-Physics's manuals page lists only the 284A Mai Tai and 315A Mai Tai WB manuals, and the 284A Rev G PDF dates from June 2002, so newer Mai Tai variants may use commands not listed there; confirm against your laser's firmware or ask Spectra-Physics.

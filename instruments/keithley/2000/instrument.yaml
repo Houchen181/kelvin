@@ -1,0 +1,35 @@
+schema: 1
+id: keithley/2000
+maker: Keithley (Tektronix)
+model: '2000'
+name: Keithley 2000 6½-digit multimeter
+kind: multimeter
+interfaces: [gpib, rs-232]
+control: scpi
+identify:
+  idn: ^KEITHLEY INSTRUMENTS INC\.,\s*MODEL 2000,
+  example: KEITHLEY INSTRUMENTS INC.,MODEL 2000,1234567,A19  /A02
+manuals:
+  - title: Model 2000 Multimeter User's Manual (2000-900-01 Rev. J, Aug 2010)
+    url: https://download.tek.com/manual/2000-900_J-Aug2010_User.pdf
+    covers: Remote operation and SCPI command chapters (Tektronix lists no separate programming manual for the Model 2000)
+    access: public
+links:
+  - title: 'Keithley 2000 Series: 6.5 Digit Multimeter with Scanning (Tektronix product page, discontinued)'
+    url: https://www.tek.com/en/products/keithley/digital-multimeter/keithley-2000-series-6-digit-multimeter-scanning
+software:
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.keithley.Keithley2000
+    url: https://pymeasure.readthedocs.io/en/stable/api/instruments/keithley/keithley2000.html
+  - name: QCoDeS
+    kind: python-driver
+    ref: qcodes.instrument_drivers.Keithley.Keithley_2000.Keithley2000
+    url: https://github.com/microsoft/Qcodes/blob/main/src/qcodes/instrument_drivers/Keithley/Keithley_2000.py
+examples:
+  - title: Keithley Model 2000 programming examples (scan cards; also run on a DMM6500 in SCPI 2000 mode)
+    url: https://github.com/tektronix/keithley/tree/main/Instrument_Examples/Model_2000
+    license: Tektronix Sample Source Code License (custom)
+notes:
+  - Discontinued; Tektronix names the DMM6500 as the direct replacement, with a 2000-series emulation mode and support for 2000-series scan cards.
+  - Keithley's own Model 2000 example scripts are stated to work on a DMM6500 in SCPI 2000 mode, so SCPI code written for the 2000 can usually be moved to a DMM6500.

@@ -1,0 +1,23 @@
+schema: 1
+id: rigol/dg1000z
+maker: Rigol
+model: DG1000Z
+name: Rigol DG1000Z function and arbitrary waveform generators
+covers: [DG1022Z, DG1032Z, DG1062Z]
+kind: awg
+interfaces: [usb-tmc, lan]
+control: scpi
+card: card.yaml
+manuals:
+  - title: RIGOL DG1000Z Series Programming Guide PGB09106-1110 (Oct 2016)
+    url: https://beyondmeasure.rigoltech.com/acton/attachment/1579/f-0493/1/-/-/-/-/DG1000Z%20Programming%20Guide.pdf
+    access: public
+software:
+  - name: pylablib
+    kind: python-driver
+    ref: pylablib.devices.AWG.specific.RigolDG1020Z
+    url: https://github.com/AlexShkarin/pyLabLib/blob/main/pylablib/devices/AWG/specific.py
+  - name: QCoDeS
+    kind: python-driver
+    ref: qcodes.instrument_drivers.rigol.Rigol_DG1062.RigolDG1062
+    url: https://github.com/microsoft/Qcodes/blob/main/src/qcodes/instrument_drivers/rigol/Rigol_DG1062.py

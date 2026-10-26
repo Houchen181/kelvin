@@ -1,0 +1,31 @@
+schema: 1
+id: keysight/n9020b
+maker: Keysight
+model: N9020B
+name: Keysight N9020B MXA signal analyzer (X-Series)
+covers: [N9020A, N9010B, N9030B, N9000B]
+kind: spectrum-analyzer
+interfaces: [gpib, usb-tmc, lan]
+control: scpi
+identify:
+  idn: ^(Keysight|Agilent) Technologies,N9020[AB],
+  example: Keysight Technologies,N9020B,MY00000000,A.20.00
+manuals:
+  - title: X-Series Signal Analyzer Programmer's Guide
+    url: https://www.keysight.com/us/en/assets/9018-02192/programming-guides/9018-02192.pdf
+    covers: SCPI basics and remote-interface programming; the SCPI reference itself is in each mode's User's and Programmer's Reference
+    access: sign-in
+  - title: X-Series Signal Analyzer Spectrum Analyzer Mode User's and Programmer's Reference
+    url: https://www.keysight.com/us/en/assets/9018-06099/user-manuals/9018-06099.pdf
+    covers: Spectrum analyzer mode menus and SCPI commands (PXA, MXA, EXA, CXA, MXE)
+    access: sign-in
+  - title: SA Mode User's & Programmer's Reference (newer edition, listed December 2025)
+    url: https://www.keysight.com/us/en/assets/9018-04666/user-manuals/9018-04666.pdf
+    covers: Spectrum analyzer mode menus and SCPI commands; pick the edition that matches the instrument firmware
+    access: sign-in
+links:
+  - title: N9020B MXA Specifications Guide (public PDF)
+    url: https://www.keysight.com/us/en/assets/9018-04846/technical-specifications/9018-04846.pdf
+notes:
+  - 'The SCPI reference is split by measurement mode: spectrum analyzer commands are in the SA Mode reference, while the Programmer''s Guide covers only SCPI basics and interface setup. Keysight serves these manuals on asset pages that ask for a sign-in.'
+  - N9020A units report Agilent Technologies in *IDN? while N9020B firmware reports Keysight Technologies, so the identify pattern accepts both vendor strings.

@@ -1,0 +1,61 @@
+schema: 1
+id: optics/raman
+area: optics
+title: Raman spectroscopy
+summary: >-
+  Inelastic light scattering from phonons, magnons and electronic excitations: layer number and strain in 2D
+  materials, symmetry from polarization selection rules, and phase transitions with temperature.
+roles:
+  laser:
+    kind: laser
+    does: A narrow-line laser (532, 633 or 785 nm).
+    suggested: [coherent/obis, hubner/cobolt]
+  spectrograph:
+    kind: [monochromator, spectrometer]
+    does: Disperses the scattered light (a high-groove-density grating for resolution).
+    suggested: [princeton/spectrapro, andor/shamrock, horiba/ihr]
+  camera:
+    kind: camera
+    does: Records the spectrum on a cooled CCD.
+    suggested: [princeton/picam, andor/ccd]
+  temperature:
+    kind: [temperature-controller, cryostat]
+    does: Sets the sample temperature.
+    optional: true
+    suggested: [lakeshore/336, montana/cryostation]
+  polarizer:
+    kind: motion-stage
+    does: Rotates a half-wave plate for polarization-resolved spectra.
+    optional: true
+    suggested: [thorlabs/k10cr1, newport/conex-cc]
+lab: labs/confocal-optics.yaml
+setup:
+  - A laser-line filter on the excitation and an edge or notch filter on the collection; volume Bragg notch filters reach below 10 cm⁻¹.
+  - Calibrate with the silicon phonon at 520.7 cm⁻¹ at room temperature, or a neon lamp.
+  - Parallel and crossed polarization channels need a polarizer in front of the spectrograph and a half-wave plate in the beam.
+procedure:
+  - Find the signal at low power, then check that the peak positions don't move with power (heating).
+  - Take parallel and crossed spectra, then a temperature series through any transition.
+plans:
+  - title: Temperature series at 1 mW
+    plan:
+      plan: raman_vs_t
+      setup: { laser.emission: on, laser.power: 1.0e-3, spectrograph.wavelength: 560, camera.exposure: 30,
+               tc.heater_range: medium }
+      sweep:
+        tc.setpoint: { values: [10, 50, 100, 150, 200, 250, 295], stabilize: { read: tc.T_A, within: 0.1, for: 120 } }
+      measure: [camera.spectrum, tc.T_A]
+      after: { laser.power: 0, laser.emission: off, tc.heater_range: "off" }
+analysis:
+  - Raman shift in cm⁻¹ is 10⁷·(1/λ_laser - 1/λ_scattered) with wavelengths in nm.
+  - Fit Lorentzians (or Fano lineshapes, for coupling to a continuum); follow frequency, width and intensity against temperature.
+  - The Stokes/anti-Stokes intensity ratio gives the local temperature, a check on laser heating.
+  - For graphene, the 2D band's shape and the G/2D ratio give the layer number and doping.
+pitfalls:
+  - Fluorescence can bury the Raman lines; change the excitation wavelength.
+  - Edge filters cut the low-frequency modes; check the filter edge before claiming a mode is absent.
+safety:
+  - The laser is class 3B or 4. Kelvin asks before every laser change in this lab; use the interlock and beam blocks.
+references:
+  - title: A. C. Ferrari and D. M. Basko, Raman spectroscopy as a versatile tool for studying the properties of graphene, Nature Nanotechnology 8, 235 (2013)
+    doi: 10.1038/nnano.2013.46

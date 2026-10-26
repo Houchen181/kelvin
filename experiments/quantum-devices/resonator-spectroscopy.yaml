@@ -1,0 +1,52 @@
+schema: 1
+id: quantum-devices/resonator-spectroscopy
+area: quantum-devices
+title: Superconducting resonator spectroscopy
+summary: >-
+  Transmission through a feedline coupled to superconducting resonators, against frequency and power: resonance
+  frequency, internal and coupling quality factors, two-level-system loss, kinetic inductance.
+roles:
+  readout:
+    kind: [awg, vna, quantum-controller]
+    does: Plays the probe tone and digitizes the transmitted signal (an RFSoC with QICK, or a VNA).
+    suggested: [qick/rfsoc, keysight/e5071c, rs/znb, copper-mountain/s2vna, zhinst/shfqc]
+  fridge:
+    kind: dilution-refrigerator
+    does: Cools the chip to millikelvin.
+    suggested: [bluefors/dilution-refrigerator, oxford/triton]
+lab: labs/qick-resonator.yaml
+setup:
+  - Attenuate the input line (about 60-70 dB, spread over the stages) and amplify the output with a HEMT and room-temperature amplifiers, with isolators before the HEMT.
+  - Choose the QICK Nyquist zone for the frequency (above half the DAC sampling rate, use zone 2).
+procedure:
+  - A wide scan finds the resonances; then narrow scans at decreasing power down to the single-photon level.
+plans:
+  - title: Frequency scan at one power
+    plan:
+      plan: resonator_scan
+      setup: { rfsoc.mode: tone, rfsoc.nqz: 2, rfsoc.gain: 0.05, rfsoc.readout_length: 5, rfsoc.reps: 100, rfsoc.output: on }
+      sweep: { rfsoc.frequency: { from: 6000, to: 6020, points: 401 } }
+      measure: [rfsoc.magnitude, rfsoc.phase, rfsoc.i, rfsoc.q]
+      after: { rfsoc.output: off }
+  - title: Power dependence
+    plan:
+      plan: resonator_power
+      setup: { rfsoc.mode: tone, rfsoc.nqz: 2, rfsoc.readout_length: 5, rfsoc.reps: 1000, rfsoc.output: on }
+      sweep:
+        rfsoc.gain: { values: [0.003, 0.01, 0.03, 0.1, 0.3] }
+        rfsoc.frequency: { from: 6008, to: 6012, points: 201 }
+      measure: [rfsoc.magnitude, rfsoc.phase, rfsoc.i, rfsoc.q]
+      after: { rfsoc.output: off }
+analysis:
+  - Remove the cable delay (a linear phase slope), then fit the notch-type model (circle fit) for f_r, Q_i and Q_c.
+  - Q_i that rises with power, then saturates, points to two-level-system loss; a downward shift and asymmetry at high power is kinetic-inductance nonlinearity.
+pitfalls:
+  - Impedance mismatches make the lines asymmetric; the circle fit's mismatch angle accounts for it.
+  - Too much power saturates the HEMT or bifurcates the resonator; step the power down from a safe level.
+safety:
+  - Keep the RFSoC's output gain inside the lab's limit so the cryogenic amplifier chain is never overdriven.
+references:
+  - title: S. Probst, F. B. Song, P. A. Bushev, A. V. Ustinov and M. Weides, Efficient and robust analysis of complex scattering data under noise in microwave resonators, Rev. Sci. Instrum. 86, 024706 (2015)
+    doi: 10.1063/1.4907935
+  - title: L. Stefanazzi et al., The QICK (Quantum Instrumentation Control Kit), readout and control for qubits and detectors, Rev. Sci. Instrum. 93, 044709 (2022)
+    doi: 10.1063/5.0076249

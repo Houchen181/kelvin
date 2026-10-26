@@ -1,0 +1,25 @@
+schema: 1
+id: oxford/triton
+maker: Oxford Instruments
+model: Triton
+name: Oxford Instruments Triton dilution refrigerator
+kind: dilution-refrigerator
+interfaces: [lan]
+control: text
+links:
+  - title: Quantum Design Oxford legacy product support (Triton Cryofree moved to legacy support on 8 November 2023)
+    url: https://qd-oxford.com/services/legacy_product_support.html
+  - title: Product end-of-life notice (Mercury range and Triton Cryofree)
+    url: https://qd-oxford.com/siteDocs/2026_07_09_EOLN.pdf
+software:
+  - name: QCoDeS
+    kind: python-driver
+    ref: qcodes.instrument_drivers.oxford.OxfordTriton
+    url: https://github.com/microsoft/Qcodes/blob/main/src/qcodes/instrument_drivers/oxford/triton.py
+  - name: qcodes_contrib_drivers (reads the fridge's VCL log files via Oxford's VCL converter, does not talk to the fridge electronics)
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.OxfordInstruments.Triton.Triton
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/OxfordInstruments/Triton.py
+notes:
+  - 'The fridge PC''s Triton control software accepts a TCP socket connection (port 33576 is the default in open-source drivers and in ISIS'' documentation, and only one client can connect at a time) and uses Mercury-style READ:/SET: commands. The protocol differs slightly between software versions, and QCoDeS'' driver wants the fridge''s port and, optionally, an exported registry file for the thermometer channel names.'
+  - No public command-set document was found for the Triton remote interface.

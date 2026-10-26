@@ -1,0 +1,21 @@
+schema: 1
+id: lakeshore/336
+maker: Lake Shore Cryotronics
+model: '336'
+name: Lake Shore Model 335 / 336 temperature controller
+covers: ['335']
+kind: temperature-controller
+interfaces: [usb, lan, gpib]
+control: scpi
+card: card.yaml
+manuals:
+  - title: Model 336 Temperature Controller user's manual, chapter 6 (Computer interface)
+    url: https://www.lakeshore.com/docs/default-source/product-downloads/336manual.pdf?sfvrsn=fa4e3a80_12
+    access: public
+software:
+  - name: QCoDeS
+    kind: python-driver
+    ref: qcodes.instrument_drivers.Lakeshore.Lakeshore_model_336.LakeshoreModel336
+    url: https://github.com/microsoft/Qcodes/blob/main/src/qcodes/instrument_drivers/Lakeshore/Lakeshore_model_336.py
+notes:
+  - Over USB it is a serial port at 57600 baud, 7 data bits, odd parity; the card says so and a scan tries it.

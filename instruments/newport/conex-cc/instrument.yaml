@@ -1,0 +1,40 @@
+schema: 1
+id: newport/conex-cc
+maker: Newport (MKS)
+model: CONEX-CC
+name: Newport CONEX-CC / CONEX-AGP integrated single-axis controller
+covers: [CONEX-AGP]
+kind: motion-stage
+interfaces: [usb]
+control: text
+manuals:
+  - title: CONEX-CC Controller Documentation (V2.0.x, EDH0246En1032, 09/26)
+    url: https://api.p1.mks.com/medias/sys_master/npresources/h91/hf3/10219689345054/CONEX-CC%20-%20Controller%20Documentation/CONEX-CC-Controller-Documentation.pdf
+    covers: 'Section 1.6 (USB communication settings) and Section 2 (programming: state diagram, command syntax, two-letter ASCII command set)'
+    access: public
+  - title: CONEX-CC Command Interface Manual (V2.0.x, EDH0278En1032, 12/18)
+    url: https://api.p1.mks.com/medias/sys_master/resources/hb8/h1c/9954226831390/CONEX-CC%20-%20Command%20Interface%20Manual/CONEX-CC-Command-Interface-Manual.pdf
+    covers: Function reference of the CONEX-CC .NET command interface (wrapper over the ASCII commands)
+    access: public
+  - title: CONEX-AGP Controller Documentation (V2.0.x, EDH0263En1015, 01/26)
+    url: https://api.p1.mks.com/medias/sys_master/resources/h63/h6e/10140496101406/CONEX-AGP%20-%20Controller%20Documentation/CONEX-AGP-Controller-Documentation.pdf
+    covers: 'Section 1.5 (USB communication settings) and Section 2 (programming: state diagram, command syntax, command set) for the CONEX-AGP'
+    access: public
+  - title: CONEX-AGP Command Interface Manual (V2.0.x, EDH0276En1023, 01/26)
+    url: https://api.p1.mks.com/medias/sys_master/resources/ha9/h20/10140495970334/CONEX-AGP%20-%20Command%20Interface%20Manual/CONEX-AGP-Command-Interface-Manual.pdf
+    covers: Function reference of the CONEX-AGP .NET command interface
+    access: public
+links:
+  - title: Newport CONEX-MFACC page (lists the CONEX-CC manuals and GUI installer)
+    url: https://www.newport.com/f/dc-servo-linear-stage-with-conex-controller
+  - title: Newport CONEX-AG-PR100P page (lists the CONEX-AGP manuals and installer)
+    url: https://www.newport.com/p/CONEX-AG-PR100P
+software:
+  - name: Newport CONEX-CC GUI installer (Windows)
+    kind: vendor-software
+    url: https://www.newport.com/f/dc-servo-linear-stage-with-conex-controller
+  - name: Newport CONEX-AGP installer (Windows)
+    kind: vendor-software
+    url: https://www.newport.com/p/CONEX-AG-PR100P
+notes:
+  - CONEX-CC and CONEX-AGP are single-axis controllers built into Newport CONEX actuators and rotation stages. They appear as a USB virtual COM port (921600 baud, 8N1, Xon/Xoff, CRLF) and take two-letter ASCII commands prefixed by the controller number (1OR home, 1PA2.2 move, 1TP position); the AGP (Agilis piezo) command set is smaller.

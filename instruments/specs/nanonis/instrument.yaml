@@ -1,0 +1,31 @@
+schema: 1
+id: specs/nanonis
+maker: SPECS Zurich
+model: Nanonis SPM Controller
+name: SPECS Nanonis SPM controller (TCP programming interface)
+covers: [Nanonis BP5, Nanonis Mimea BP5e]
+kind: spm-controller
+interfaces: [lan]
+control: library
+manuals:
+  - title: Nanonis TCP Protocol document for the SPM controller (TCPProtocol_SPM.pdf in SPECS Zurich's GitHub repository)
+    url: https://raw.githubusercontent.com/SPECS-Zurich-GmbH/nanonis_spm/main/TCPProtocol_SPM.pdf
+    covers: Reference of the TCP functions (names, argument types and sizes) used by the official Python package
+    access: public
+links:
+  - title: Nanonis Programming Interface PI 5 (TCP and LabVIEW APIs; says the TCP documentation is also in MY SPECS)
+    url: https://www.specs-group.com/nanonis/products/detail/programming-interface-2/
+  - title: MY SPECS download area (login required; Nanonis V5/V5e software and manuals)
+    url: https://www.specs-group.com/my-specs/
+software:
+  - name: nanonis_spm (Python package published by SPECS Zurich on PyPI and GitHub)
+    kind: vendor-sdk
+    ref: nanonis_spm.Nanonis
+    url: https://pypi.org/project/nanonis-spm/
+examples:
+  - title: nanonis_spm_examples (example scripts shipped in the official repository)
+    url: https://github.com/SPECS-Zurich-GmbH/nanonis_spm/tree/main/nanonis_spm_examples
+    license: MIT
+notes:
+  - 'The TCP interface is a binary protocol: every argument must have the exact size given in the protocol document, which is why the official Python package expects numpy types. The official examples connect to localhost port 6501, and newer Nanonis releases accept several connections that each execute commands serially.'
+  - SPECS ships the TCP interface with its LabVIEW Programming Interface add-on, so check that your license includes it. The Nanonis Tramea has a separate protocol document and Python package.

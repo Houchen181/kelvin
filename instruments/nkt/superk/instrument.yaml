@@ -1,0 +1,35 @@
+schema: 1
+id: nkt/superk
+maker: NKT Photonics
+model: SuperK EXTREME
+name: NKT Photonics SuperK EXTREME / FIANIUM supercontinuum lasers
+covers: [SuperK FIANIUM]
+kind: laser
+interfaces: [usb, lan, rs-232]
+control: library
+manuals:
+  - title: SuperK EXTREME Product Guide
+    url: https://lf.hamamatsu.com/wp-json/nktphotonics/v1/download/SuperK-EXTREME/SuperK%20EXTREME%20Product%20Guide.pdf
+    access: public
+  - title: SuperK FIANIUM and FIANIUM Low Noise Product Guide
+    url: https://lf.hamamatsu.com/wp-json/nktphotonics/v1/download/SuperK-FIANIUM/SuperK%20FIANIUM%20and%20FIANIUM%20Low%20Noise%20Product%20Guide.pdf
+    covers: Connecting a PC (USB, Ethernet and RS-232 serial ports) and the CONTROL software; the register-level programming interface is in the SDK Instruction manual inside the SDK download
+    access: public
+links:
+  - title: NKT Download Center (SDK, Generic User Interface, USB drivers, CONTROL software)
+    url: https://lf.hamamatsu.com/download-center/
+  - title: Product manuals and documentation
+    url: https://lf.hamamatsu.com/product-manuals-and-documentation/
+  - title: SuperK FIANIUM product page
+    url: https://lf.hamamatsu.com/products/supercontinuum-white-light-lasers/superk-fianium/
+software:
+  - name: NKT Photonics SDK (NKTPDLL, register files, SDK Instruction manual)
+    kind: vendor-sdk
+    url: https://lf.hamamatsu.com/download-center/
+  - name: pylablib NKT Interbus driver (direct serial implementation, no DLL needed)
+    kind: python-driver
+    ref: pylablib.devices.NKT.GenericInterbusDevice
+    url: https://github.com/AlexShkarin/pyLabLib/blob/main/pylablib/devices/NKT/interbus.py
+notes:
+  - The lasers and their SELECT/VARIA/Koheras modules use NKT's Interbus register protocol over a built-in USB-to-RS-232 bridge (it appears as a COM port); the protocol, device types and register files are in 'SDK Instruction manual.pdf' inside the SDK zip, not as a standalone PDF.
+  - pylablib's GenericInterbusDevice reads and writes the registers directly (SuperK EXTREME main module at Interbus address 15, device type 96, per its docs). NKT's site now redirects from nktphotonics.com to lf.hamamatsu.com, and the EXTREME guide is no longer on the manuals page even though the file is still served.

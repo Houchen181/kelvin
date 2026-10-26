@@ -1,0 +1,43 @@
+schema: 1
+id: basel/lnhr-dac
+maker: Basel Precision Instruments
+model: SP1060
+name: Basel Precision Instruments LNHR DAC II (SP1060) 12/24-channel low-noise DAC
+kind: voltage-source
+interfaces: [lan, rs-232]
+control: text
+manuals:
+  - title: 12/24-channel LNHR DACII SP1060 users manual
+    url: https://www.baspi.ch/_files/ugd/68eb62_ed0cc567cc26466382f596cf9190b4ac.pdf
+    access: public
+  - title: LNHR DAC II Programmers Manual and Commander description (on request; also on the USB stick shipped with the instrument)
+    url: https://www.baspi.ch/manuals
+    covers: Full command reference; the manuals page says it is available on request, so it is not downloadable
+    access: owners
+links:
+  - title: Basel Precision Instruments manuals page
+    url: https://www.baspi.ch/manuals
+  - title: LNHR DAC IIa (SP1085) product page, successor model
+    url: https://www.baspi.ch/low-noise-high-resolution-dac-iia
+software:
+  - name: BASPI QCoDeS driver for the LNHR DAC II
+    kind: python-driver
+    ref: Baspi_Lnhrdac2.BaspiLnhrdac2
+    url: https://github.com/BASPI/LNHRDACII-qcodes
+  - name: BASPI Telnet driver and tools for the LNHR DAC II
+    kind: vendor-sdk
+    url: https://github.com/BASPI/LNHRDACII-tools
+  - name: BASPI QCoDeS driver for the LNHR DAC IIa (SP1085)
+    kind: python-driver
+    ref: Baspi_Lnhrdac2a.BaspiLnhrdac2a
+    url: https://github.com/BASPI/LNHRDACIIa-qcodes
+examples:
+  - title: BASPI LNHR DAC II Telnet driver and fast 2D scan notebooks
+    url: https://github.com/BASPI/LNHRDACII-tools
+    license: GPL-3.0
+  - title: BASPI LNHR DAC II QCoDeS driver with example notebook
+    url: https://github.com/BASPI/LNHRDACII-qcodes
+    license: unknown
+notes:
+  - 'Not to be confused with the earlier 8-channel LNHR DAC (SP927): the DAC II is SP1060, and the newer DAC IIa (SP1085) is described by its developers as a backward-compatible successor. Check the model plate before picking a manual or driver.'
+  - Commands are plain text over telnet (TCP port 23, VISA address TCPIP0::<ip>::23::SOCKET in the vendor QCoDeS driver) or RS-232; the programmers manual with the full command list is owner-only.

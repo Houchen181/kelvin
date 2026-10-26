@@ -1,0 +1,14 @@
+schema: 1
+id: ocean/spectrometer
+maker: Ocean Insight
+model: USB spectrometers
+name: Ocean Insight USB spectrometers (Flame, HR, QE Pro, USB2000+)
+covers: [Flame, HR4000, QE Pro, USB2000+, USB4000]
+kind: spectrometer
+interfaces: [usb]
+control: library
+card: card.yaml
+software:
+  - name: python-seabreeze (community)
+    kind: python-driver
+    url: https://github.com/ap--/python-seabreeze

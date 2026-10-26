@@ -1,0 +1,31 @@
+schema: 1
+id: thorlabs/scientific-camera
+maker: Thorlabs
+model: CS165MU
+name: Thorlabs Kiralux / Quantalux / Zelux scientific cameras (Scientific Camera SDK)
+covers: [CS165MU1, CS505MU1, CS895MU, CS2100M-USB]
+kind: camera
+interfaces: [usb]
+control: library
+links:
+  - title: CS165MU product page (Zelux 1.6 MP)
+    url: https://www.thorlabs.com/item/CS165MU
+  - title: CS165MU1 product page (Zelux 1.6 MP with external trigger)
+    url: https://www.thorlabs.com/item/CS165MU1
+  - title: 'Software for Scientific and Compact USB Cameras (ThorImageCAM, ThorCam, Programming Interfaces: Scientific Camera SDK for Windows and Linux)'
+    url: https://www.thorlabs.com/software-pages/thorcam
+software:
+  - name: Thorlabs Scientific Camera SDK ("Windows SDK and Doc. for Scientific Cameras" v2.3 with C, C++, C#/.NET, LabVIEW, MATLAB and Python interfaces)
+    kind: vendor-sdk
+    url: https://www.thorlabs.com/software-pages/thorcam
+  - name: pylablib Thorlabs scientific camera driver (tested with Kiralux)
+    kind: python-driver
+    ref: pylablib.devices.Thorlabs.ThorlabsTLCamera
+    url: https://pylablib.readthedocs.io/en/latest/devices/Thorlabs_TLCamera.html
+examples:
+  - title: 'Thorlabs Camera_Examples (Zelux, Kiralux, Quantalux: C++, C#, MATLAB and Python)'
+    url: https://github.com/Thorlabs/Camera_Examples
+    license: MIT
+notes:
+  - Control is through Thorlabs' native camera SDK DLLs, which are installed with ThorImageCAM or ThorCam; copy the Native DLLs next to your script. The Python wrapper (thorlabs_tsi_sdk) is installed with pip from a zip inside the SDK download, not from PyPI.
+  - CS165MU is a Zelux camera; the Windows SDK covers Thorlabs' scientific cameras, and the Linux SDK covers the compact scientific cameras except the 1.3 MP Kiralux.

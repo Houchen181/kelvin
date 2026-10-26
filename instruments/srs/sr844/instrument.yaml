@@ -1,0 +1,29 @@
+schema: 1
+id: srs/sr844
+maker: Stanford Research Systems
+model: SR844
+name: Stanford Research Systems SR844 RF lock-in amplifier
+kind: lock-in
+categories: [rf-microwave]
+interfaces: [gpib, rs-232]
+control: scpi
+identify:
+  idn: ^Stanford_Research_Systems,SR844,
+  example: Stanford_Research_Systems,SR844,s/n00123,ver1.000
+manuals:
+  - title: SR844 RF Lock-In Amplifier Manual (SRS)
+    url: https://www.thinksrs.com/downloads/pdfs/manuals/SR844m.pdf
+    access: public
+links:
+  - title: SR844 product page (Stanford Research Systems)
+    url: https://www.thinksrs.com/products/sr844.html
+  - title: SR844 datasheet
+    url: https://www.thinksrs.com/downloads/pdfs/catalog/SR844c.pdf
+software:
+  - name: QCoDeS contrib drivers
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.StanfordResearchSystems.SR844.SR844
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/StanfordResearchSystems/SR844.py
+notes:
+  - 25 kHz to 200 MHz lock-in for small RF signals (for example RF reflectometry or resonator readout); GPIB (IEEE-488.2) and RS-232 are both standard and, per SRS, give access to all instrument functions.
+  - Commands are SRS-specific mnemonics rather than SCPI; the *IDN? pattern above was taken from open-source GPIB driver code, so confirm the serial-number and version fields on your unit.

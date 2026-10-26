@@ -1,0 +1,65 @@
+schema: 1
+id: spin-resonance/nv-odmr
+area: spin-resonance
+title: NV-center ODMR (CW and pulsed)
+summary: >-
+  Optically detected magnetic resonance of nitrogen-vacancy centers: the dip in fluorescence when the microwave
+  hits a spin transition gives the field, strain and temperature at the NV. The first step before Rabi and
+  coherence measurements.
+roles:
+  pulses:
+    kind: pulse-generator
+    does: Times the laser (through the AOM), the microwave and the counter's gate.
+    suggested: [swabian/pulse-streamer, spincore/pulseblaster]
+  microwave:
+    kind: microwave-source
+    does: Drives the spin transitions near 2.87 GHz through an antenna.
+    suggested: [srs/sg384, rs/smb100a, windfreak/synthhd]
+  counter:
+    kind: photon-counter
+    does: Counts the fluorescence photons in signal and reference windows.
+    suggested: [swabian/time-tagger, picoquant/multiharp-150]
+  aom:
+    kind: aom-driver
+    does: Switches the laser.
+    suggested: [moglabs/xrf, novatech/409b]
+  laser:
+    kind: laser
+    does: Green excitation (532 nm).
+    suggested: [coherent/obis, hubner/cobolt]
+lab: labs/nv-odmr.yaml
+setup:
+  - "Wiring as in the lab config: pulse generator outputs to the AOM switch, the microwave switch and the counter gate."
+  - Measure the AOM's delay and set laser_delay; check the sequence with show_sequence before it plays.
+procedure:
+  - CW ODMR at low microwave and laser power finds the resonances; pulsed ODMR with a calibrated π pulse narrows them.
+plans:
+  - title: CW ODMR from 2.82 GHz to 2.92 GHz
+    plan:
+      plan: cw_odmr
+      setup: { laser.emission: on, laser.power: 0.05, aom.output: on, aom.power: 20, mw.output: on, mw.power: -20,
+               pg.protocol: cw, pg.running: on }
+      sweep: { mw.frequency: { from: 2.82e9, to: 2.92e9, points: 201 } }
+      measure: [counter.rate, counter.contrast]
+      after: { pg.running: off, mw.output: off }
+  - title: Pulsed ODMR around 2.87 GHz with a 100 ns π pulse
+    plan:
+      plan: pulsed_odmr
+      setup: { laser.emission: on, laser.power: 0.05, aom.output: on, aom.power: 20, mw.output: on, mw.power: -10,
+               pg.protocol: pulsed_odmr, pg.t_pi: 1.0e-7, pg.running: on }
+      sweep: { mw.frequency: { from: 2.86e9, to: 2.88e9, points: 101 } }
+      measure: [counter.signal, counter.reference, counter.contrast]
+      after: { pg.running: off, mw.output: off }
+analysis:
+  - "At zero field the ms = 0 to ±1 transitions sit at D ≈ 2.87 GHz, split by strain (E). A field along the NV axis splits them by 2·γ·B, with γ = 28 GHz/T."
+  - Fit Lorentzian dips for center, width and contrast; reduce microwave and laser power until the width stops shrinking to resolve the 14N hyperfine triplet (2.16 MHz).
+pitfalls:
+  - Microwave heating of the sample and antenna shifts D (about -74 kHz/K); keep the duty cycle below the max_mw_duty set in the lab.
+  - High laser power ionizes NV⁻ to NV⁰ and lowers the contrast.
+safety:
+  - Microwave amplifiers can deliver watts; keep the antenna terminated and the power inside the lab's limits. The laser is class 3B.
+references:
+  - title: M. W. Doherty et al., The nitrogen-vacancy colour centre in diamond, Physics Reports 528, 1 (2013)
+    doi: 10.1016/j.physrep.2013.02.001
+  - title: L. Rondin et al., Magnetometry with nitrogen-vacancy defects in diamond, Rep. Prog. Phys. 77, 056503 (2014)
+    doi: 10.1088/0034-4885/77/5/056503

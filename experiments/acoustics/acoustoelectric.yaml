@@ -1,0 +1,57 @@
+schema: 1
+id: acoustics/acoustoelectric
+area: acoustics
+title: Acoustoelectric effect
+summary: >-
+  A surface acoustic wave drags carriers along and builds up a DC voltage (or current) in a conductor on its
+  path. Its size follows the attenuation, so it tracks conductivity, quantum Hall states and magnetic order
+  without contacts in the acoustic path.
+roles:
+  rf:
+    kind: microwave-source
+    does: Drives the IDT at its resonance.
+    suggested: [srs/sg384, rs/smb100a, keysight/n5183b]
+  voltmeter:
+    kind: [nanovoltmeter, multimeter]
+    does: Reads the acoustoelectric voltage along the sample (or a diode detector at the second IDT).
+    suggested: [keithley/2182a, keysight/34465a]
+  cryostat:
+    kind: [cryostat, magnet-supply]
+    does: Sets temperature and field.
+    suggested: [qd/multivu, ami/430]
+lab: labs/saw.yaml
+setup:
+  - Contacts at the two ends of the sample along the SAW path; the voltmeter between them.
+  - Pulse-modulate the RF (a 10 % duty cycle) at high power to keep the heating down.
+procedure:
+  - Sweep the RF frequency over the IDT resonance and find the peak voltage.
+  - At that frequency, sweep the field (or gate, or temperature).
+  - Launch from the other IDT; a true acoustoelectric voltage changes sign with the SAW direction.
+plans:
+  - title: Frequency scan over the IDT resonance
+    plan:
+      plan: ae_frequency
+      setup: { rf.power: 0, rf.output: on, nvm.nplc: 5 }
+      sweep: { rf.frequency: { from: 3.8e8, to: 4.2e8, points: 201 } }
+      settle: 0.5
+      measure: [nvm.V]
+      after: { rf.output: off }
+  - title: Field sweep at the resonance
+    plan:
+      plan: ae_field
+      setup: { rf.frequency: 4.0e8, rf.power: 0, rf.output: on, nvm.nplc: 5, cryo.B_rate: 0.01 }
+      sweep: { cryo.B_set: { from: -9, to: 9, step: 0.05, back: true } }
+      settle: 1
+      measure: [nvm.V, cryo.B, cryo.T]
+      after: { rf.output: off, cryo.B_set: 0 }
+analysis:
+  - The voltage is proportional to the SAW intensity times the attenuation coefficient; normalize by the RF power reaching the sample.
+  - Separate it from RF rectification and heating by its reversal with SAW direction and its linearity in RF power.
+pitfalls:
+  - Electromagnetic crosstalk from the IDT induces voltages that don't reverse with direction.
+  - The IDT resonance drifts with temperature; repeat the frequency scan at each temperature.
+safety:
+  - High RF power heats the IDT and the sample; the lab limits it, and Kelvin asks before each increase.
+references:
+  - title: A. Wixforth, J. Scriba, M. Wassermeier, J. P. Kotthaus, G. Weimann and W. Schlapp, Surface acoustic waves on GaAs/AlxGa1-xAs heterostructures, Phys. Rev. B 40, 7874 (1989)
+    doi: 10.1103/PhysRevB.40.7874

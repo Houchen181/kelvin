@@ -1,0 +1,32 @@
+schema: 1
+id: thorlabs/mc2000b
+maker: Thorlabs
+model: MC2000B
+name: Thorlabs MC2000B optical chopper
+covers: [MC2000B-EC]
+kind: chopper
+interfaces: [usb]
+control: text
+manuals:
+  - title: MC2000B / MC2000B-EC Optical Chopper User Guide (TTN102010-D02, Rev C, January 2025)
+    url: https://media.thorlabs.com/globalassets/items/m/mc/mc2/mc2000b/ttn102010-d02.pdf
+    covers: Chapter 7 Remote Communications (USB drivers, command line interface settings) and chapter 8 Commands (8.1 commands and queries, 8.2 blade indices, 8.3-8.4 blade-dependent reference input/output)
+    access: public
+links:
+  - title: MC2000B product page (lists the manual)
+    url: https://www.thorlabs.com/item/MC2000B
+  - title: MC2000B-EC product page (same manual)
+    url: https://www.thorlabs.com/item/MC2000B-EC
+  - title: MC2000B software download page
+    url: https://www.thorlabs.com/software-pages/mc2000b
+software:
+  - name: Thorlabs MC2000B software package (GUI, drivers, LabVIEW / C++ / Python SDKs)
+    kind: vendor-sdk
+    url: https://www.thorlabs.com/software-pages/mc2000b
+examples:
+  - title: 'Thorlabs Light_Control_and_Manipulation_Examples (MC2000B: C# serial example and C++ SDK example)'
+    url: https://github.com/Thorlabs/Light_Control_and_Manipulation_Examples
+    license: MIT
+notes:
+  - The chopper appears as a USB virtual COM port (115200 baud, 8 data bits, no parity, 1 stop bit, no flow control); commands are lower case, written Keyword=argument or Keyword? and ended with a carriage return, and the unit echoes the command and answers with a '>' prompt (id? returns the model number and firmware version; Thorlabs' C# example also sends freq=, blade=, ref=, output= and enable=).
+  - Set the blade type to match the installed blade before choosing the reference-in/out signals, because the available reference modes depend on the blade (manual sections 8.3 and 8.4).

@@ -1,0 +1,19 @@
+schema: 1
+id: keysight/33500b
+maker: Keysight
+model: 33500B
+name: Keysight 33500B / 33600A waveform generators
+covers: [33600A]
+kind: function-generator
+interfaces: [usb-tmc, lan, gpib]
+control: scpi
+card: card.yaml
+software:
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.agilent.agilent33500.Agilent33500
+    url: https://github.com/pymeasure/pymeasure/blob/master/pymeasure/instruments/agilent/agilent33500.py
+  - name: pylablib
+    kind: python-driver
+    ref: pylablib.devices.AWG.specific.Agilent33500
+    url: https://github.com/AlexShkarin/pyLabLib/blob/main/pylablib/devices/AWG/specific.py

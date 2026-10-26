@@ -1,0 +1,30 @@
+schema: 1
+id: zhinst/mfli
+maker: Zurich Instruments
+model: MFLI
+name: Zurich Instruments MFLI 500 kHz / 5 MHz lock-in amplifier
+kind: lock-in
+interfaces: [usb, lan]
+control: library
+card: card.yaml
+manuals:
+  - title: 'LabOne User Manual MFLI, Node Doc: /DEV/OSCS, /DEV/DEMODS, /DEV/SIGOUTS'
+    url: https://docs.zhinst.com/pdf/ziMFLI_UserManual.pdf
+    access: public
+software:
+  - name: zhinst-core
+    kind: vendor-sdk
+    url: https://pypi.org/project/zhinst-core/
+  - name: zhinst-toolkit
+    kind: vendor-sdk
+    url: https://pypi.org/project/zhinst-toolkit/
+  - name: QCoDeS contrib drivers
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.ZurichInstruments.MFLI.MFLI
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/ZurichInstruments/MFLI.py
+examples:
+  - title: zhinst-toolkit examples
+    url: https://github.com/zhinst/zhinst-toolkit/tree/main/examples
+    license: MIT
+notes:
+  - Driven through LabOne's data server (zhinst-core); a scan finds MFLIs through LabOne.

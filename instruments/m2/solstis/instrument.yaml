@@ -1,0 +1,20 @@
+schema: 1
+id: m2/solstis
+maker: M Squared
+model: SolsTiS
+name: M Squared SolsTiS Ti:sapphire laser (ICE-BLOC)
+kind: laser
+interfaces: [lan]
+control: web-api
+card: card.yaml
+software:
+  - name: pylablib
+    kind: python-driver
+    ref: pylablib.devices.M2.solstis.Solstis
+    url: https://github.com/AlexShkarin/pyLabLib/blob/main/pylablib/devices/M2/solstis.py
+  - name: QCoDeS contrib drivers
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.M2.M2_Solstis_3.M2Solstis3
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/M2/M2_Solstis_3.py
+notes:
+  - Enter the control computer's IP and port under Remote interface on the laser's web page first.

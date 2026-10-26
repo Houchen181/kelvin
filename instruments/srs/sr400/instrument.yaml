@@ -1,0 +1,23 @@
+schema: 1
+id: srs/sr400
+maker: Stanford Research Systems
+model: SR400
+name: Stanford Research Systems SR400 gated photon counter
+kind: photon-counter
+interfaces: [gpib, rs-232]
+control: text
+manuals:
+  - title: SR400 Gated Photon Counter manual (Revision 2.7, November 2018)
+    url: https://www.thinksrs.com/downloads/pdfs/manuals/SR400m.pdf
+    covers: Remote Programming chapter (command list) plus the RS-232 and GPIB interface chapters with example programs
+    access: public
+links:
+  - title: SR400 product page
+    url: https://www.thinksrs.com/products/sr400.html
+  - title: SR400 tech support page
+    url: https://www.thinksrs.com/support/sr400sup.html
+  - title: SR400 datasheet
+    url: https://www.thinksrs.com/downloads/pdfs/catalog/SR400c.pdf
+notes:
+  - Commands are short ASCII mnemonics over RS-232 or GPIB (for example CS start, CH pause, CR reset, GW set gate width), not SCPI, so there is no *IDN? query. The RS-232 terminator can be changed with the SE command.
+  - No SRS-published Python driver was found (the srsinst packages cover other models), so expect to write a thin PyVISA or serial wrapper around the manual's command list.

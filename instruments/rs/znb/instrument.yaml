@@ -1,0 +1,47 @@
+schema: 1
+id: rs/znb
+maker: Rohde & Schwarz
+model: ZNB
+name: Rohde & Schwarz ZNB vector network analyzer
+covers: [ZNB4, ZNB8, ZNB20, ZNB26, ZNB40, ZNB43, ZNBT8, ZNBT20, ZNBT26, ZNBT40]
+kind: vna
+interfaces: [gpib, usb-tmc, lan]
+control: scpi
+identify:
+  idn: ^Rohde-Schwarz,ZNBT?\d+-\d+Port,
+  example: Rohde-Schwarz,ZNB8-4Port,1311601044100104,2.70
+manuals:
+  - title: R&S ZNB User Manual (online version)
+    url: https://www.rohde-schwarz.com/webhelp/ZNB_HTML_UserManual_en/ZNB_HTML_UserManual_en.htm
+    covers: Remote control chapter, SCPI command reference and programming examples (this edition is for firmware 4.25 or higher)
+    access: public
+  - title: R&S ZNB User Manual (PDF, version 74)
+    url: https://scdn.rohde-schwarz.com/ur/pws/dl_downloads/pdm/cl_manuals/user_manual/1173_9163_01/ZNB_UserManual_en_74.pdf
+    covers: Same content as the online version; the file name carries the manual version
+    access: public
+  - title: Remote control via SCPI (R&S getting started, online version)
+    url: https://www.rohde-schwarz.com/webhelp/Remote_Control_SCPI_HTML_GettingStarted/Remote_Control_SCPI_HTML_GettingStarted.htm
+    covers: SCPI syntax, status registers and VISA/socket basics shared by R&S instruments; referenced from the ZNB remote control chapter
+    access: public
+links:
+  - title: R&S ZNB manuals page (all versions and firmware)
+    url: https://www.rohde-schwarz.com/us/manual/znb/
+  - title: R&S ZNB product page
+    url: https://www.rohde-schwarz.com/us/products/test-and-measurement/vnas/rs-znb-vector-network-analyzer_63493-11648.html
+  - title: R&S ZNB3000 User Manual page (separate manual for the ZNB3000 variant)
+    url: https://www.rohde-schwarz.com/us/manual/rs-znb3000-user-manual_78701-1545988.html
+software:
+  - name: RsInstrument
+    kind: vendor-sdk
+    url: https://pypi.org/project/RsInstrument/
+  - name: QCoDeS (base class; RohdeSchwarzZNB8 and RohdeSchwarzZNB20 are thin subclasses)
+    kind: python-driver
+    ref: qcodes.instrument_drivers.rohde_schwarz.RohdeSchwarzZNBBase
+    url: https://github.com/microsoft/Qcodes/blob/main/src/qcodes/instrument_drivers/rohde_schwarz/ZNB.py
+examples:
+  - title: 'R&S Examples: VectorNetworkAnalyzers/Python/RsInstrument (ZNB calibration, segmented sweep, S2P copy)'
+    url: https://github.com/Rohde-Schwarz/Examples/tree/main/VectorNetworkAnalyzers/Python/RsInstrument
+    license: MIT
+notes:
+  - The manual documents VXI-11 over VISA for LAN and USBTMC for USB. The GPIB port is option ZNB-B10 and cannot control other instruments. The analyzer has a built-in SCPI recorder and can export SCPI scripts for a front-panel setup.
+  - The manual edition follows the firmware (version 74 is for 4.25 or higher), so pick the matching edition from the manuals page when the analyzer runs older firmware.

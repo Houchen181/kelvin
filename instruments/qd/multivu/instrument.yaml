@@ -1,0 +1,24 @@
+schema: 1
+id: qd/multivu
+maker: Quantum Design
+model: MultiVu systems
+name: Quantum Design PPMS, DynaCool, VersaLab and MPMS3 through MultiVu
+covers: [PPMS, DynaCool, VersaLab, MPMS3]
+kind: cryostat
+interfaces: [lan]
+control: library
+card: card.yaml
+manuals:
+  - title: Quantum Design MultiPyVu documentation (the MultiVu server and its Python client)
+    url: https://qdusa.com/siteDocs/appNotes/1070-220.pdf
+    access: public
+software:
+  - name: MultiPyVu
+    kind: vendor-sdk
+    url: https://pypi.org/project/MultiPyVu/
+  - name: QCoDeS
+    kind: python-driver
+    ref: qcodes.instrument_drivers.QuantumDesign.DynaCoolPPMS.DynaCool.DynaCool
+    url: https://github.com/microsoft/Qcodes/blob/main/src/qcodes/instrument_drivers/QuantumDesign/DynaCoolPPMS/DynaCool.py
+notes:
+  - Run the MultiPyVu server on the computer with MultiVu. MultiVu ramps temperature and field itself; Kelvin sets the rate and setpoint and waits for the reading.

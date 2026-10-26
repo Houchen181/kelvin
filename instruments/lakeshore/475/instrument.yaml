@@ -1,0 +1,33 @@
+schema: 1
+id: lakeshore/475
+maker: Lake Shore Cryotronics
+model: '475'
+name: Lake Shore Model 475 DSP gaussmeter
+kind: gaussmeter
+interfaces: [gpib, rs-232]
+control: scpi
+identify:
+  idn: ^LSCI,MODEL475,
+  example: LSCI,MODEL475,1234567,02032003
+manuals:
+  - title: Model 475 Gaussmeter Manual
+    url: https://www.lakeshore.com/docs/default-source/product-downloads/manuals/475_manual.pdf
+    covers: 'Remote-communication sections: IEEE-488 and RS-232C interface setup, and the command list'
+    access: public
+links:
+  - title: Model 475 downloads page (manual, probe documents, application notes)
+    url: https://www.lakeshore.com/products/categories/downloads/magnetic-products/gaussmeters-teslameters/model-475-dsp-gaussmeter
+  - title: Model 475 specifications (computer interfaces, ranges)
+    url: https://www.lakeshore.com/products/categories/specification/magnetic-products/gaussmeters-teslameters/model-475-dsp-gaussmeter
+  - title: F71 and F41 teslameters (newer Lake Shore field instruments)
+    url: https://www.lakeshore.com/products/categories/overview/magnetic-products/gaussmeters-teslameters/f71-and-f41-teslameters
+  - title: Lake Shore Python driver on PyPI (supports F41/F71, not the 475)
+    url: https://pypi.org/project/lakeshore/
+software:
+  - name: InstrumentKit
+    kind: python-driver
+    ref: instruments.lakeshore.Lakeshore475
+    url: https://instrumentkit.readthedocs.io/en/latest/apiref/lakeshore.html
+notes:
+  - DSP gaussmeter for Hall probes (DC and AC fields). Readings can be returned as ASCII or binary over IEEE-488, up to 100 readings/s in binary, and a 1,024-reading buffer can fill at up to 1,000 readings/s; the analog output can drive a magnet power supply.
+  - Lake Shore's newer F71 and F41 teslameters (USB and Ethernet, GPIB optional, SCPI) are supported by the official lakeshore Python package, which does not cover the 475.

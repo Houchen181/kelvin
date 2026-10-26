@@ -1,0 +1,65 @@
+schema: 1
+id: transport/hall-magnetoresistance
+area: transport
+title: Hall effect and magnetoresistance
+summary: >-
+  Sweep the field and read the longitudinal and Hall voltages together: carrier type, density and mobility,
+  multi-band transport, the anomalous Hall effect and magnetoresistance.
+roles:
+  cryostat:
+    kind: [cryostat, magnet-supply]
+    does: Holds the temperature and sweeps the field.
+    suggested: [qd/multivu, ami/430, lakeshore/625, attocube/attodry]
+  lockin_xx:
+    kind: lock-in
+    does: Drives the current and reads the longitudinal voltage.
+    suggested: [srs/sr830, srs/sr860, zhinst/mfli]
+  lockin_xy:
+    kind: lock-in
+    does: Reads the Hall voltage, locked to the first lock-in's reference.
+    suggested: [srs/sr830, srs/sr860]
+lab: labs/ppms-transport.yaml
+setup:
+  - A Hall bar, or a van der Pauw square with four contacts at the corners. The current flows along the bar; Vxx between two contacts on one side, Vxy across the bar.
+  - lockin_xx's sine output drives the current through a series resistor much larger than the sample. Set lockin_xy to an external reference, from lockin_xx's TTL reference output.
+  - Use the same time constant on both lock-ins, and wait about five time constants after each field step.
+procedure:
+  - Stabilize the temperature, then sweep the field from negative to positive and back.
+  - Repeat at the temperatures of interest; for the anomalous Hall effect, include temperatures above and below the ordering temperature.
+plans:
+  - title: Field sweep at 2 K, -9 T to 9 T and back
+    plan:
+      plan: hall_mr
+      setup: { lockin_xx.amplitude: 1.0, lockin_xx.frequency: 13.7, lockin_xx.time_constant: "300 ms",
+               lockin_xy.time_constant: "300 ms", cryo.B_rate: 0.01 }
+      sweep:
+        cryo.T_set: { values: [2], stabilize: { read: cryo.T, within: 0.02, for: 300 } }
+        cryo.B_set: { from: -9, to: 9, step: 0.1, back: true }
+      settle: 1.5
+      measure: [lockin_xx.X, lockin_xx.Y, lockin_xy.X, lockin_xy.Y, cryo.B, cryo.T]
+      after: { cryo.B_set: 0 }
+  - title: Hall at six temperatures
+    plan:
+      plan: hall_vs_t
+      setup: { lockin_xx.amplitude: 1.0, lockin_xx.frequency: 13.7, lockin_xx.time_constant: "300 ms",
+               lockin_xy.time_constant: "300 ms", cryo.B_rate: 0.01 }
+      sweep:
+        cryo.T_set: { values: [2, 10, 50, 100, 200, 300], stabilize: { read: cryo.T, within: 0.05, for: 300 } }
+        cryo.B_set: { from: -9, to: 9, step: 0.25 }
+      settle: 1.5
+      measure: [lockin_xx.X, lockin_xy.X, cryo.B, cryo.T]
+      after: { cryo.B_set: 0 }
+analysis:
+  - Contacts are never perfectly aligned. Symmetrize Rxx(B) = [R(B) + R(-B)]/2 and antisymmetrize Rxy(B) = [R(B) - R(-B)]/2, pairing points from the two sweep directions.
+  - A straight Rxy gives the density, n = B/(e·Rxy) per unit area in 2D (divide by the thickness in 3D); the sign of the slope gives the carrier type. Mobility μ = 1/(n·e·ρxx).
+  - A curved Rxy means two or more kinds of carriers; fit a two-band model to ρxx(B) and ρxy(B) together.
+  - In a magnet, Rxy = R0·B + RA·M; a hysteresis loop in Rxy at low field is the anomalous Hall effect.
+pitfalls:
+  - A superconducting magnet traps flux, so the field near zero can differ from the setpoint by a few mT. Use the measured field, or reset the magnet before low-field work.
+  - Heating by the current at low temperature. Check that the result doesn't change when the current is halved.
+safety:
+  - MultiVu ramps the field itself at the rate Kelvin sets; stay inside your magnet's rated field and rate. A stopped run holds the field (safe_actions in the lab).
+references:
+  - title: L. J. van der Pauw, A method of measuring specific resistivity and Hall effect of discs of arbitrary shape, Philips Research Reports 13, 1 (1958)
+  - title: N. Nagaosa, J. Sinova, S. Onoda, A. H. MacDonald and N. P. Ong, Anomalous Hall effect, Rev. Mod. Phys. 82, 1539 (2010)
+    doi: 10.1103/RevModPhys.82.1539

@@ -1,0 +1,10 @@
+schema: 1
+id: keysight/b2900
+maker: Keysight
+model: B2900
+name: Keysight B2900A/B series precision source-measure units
+covers: [B2901A, B2902A, B2911A, B2912A, B2901B, B2902B, B2911B, B2912B]
+kind: source-meter
+interfaces: [usb-tmc, lan, gpib]
+control: scpi
+card: card.yaml

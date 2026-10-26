@@ -1,0 +1,39 @@
+schema: 1
+id: keithley/6221
+maker: Keithley (Tektronix)
+model: '6221'
+name: Keithley 6221 AC and DC current source
+covers: ['6220']
+kind: current-source
+interfaces: [gpib, rs-232, lan]
+control: scpi
+identify:
+  idn: ^KEITHLEY INSTRUMENTS INC\.,\s*MODEL 622[01],
+  example: KEITHLEY INSTRUMENTS INC.,MODEL 6221,1234567,D03  /700x
+manuals:
+  - title: Model 6220 DC Current Source / Model 6221 AC and DC Current Source Reference Manual (622x-901-01 Rev. C, Oct 2008)
+    url: https://download.tek.com/manual/622x-901-01%20(C%20-%20Oct%202008)(Ref).pdf
+    covers: 'Sections 10-14: remote operations (GPIB, RS-232, Ethernet), status structure, common commands, DISPlay/FORMat/SYSTem commands and SCPI reference tables'
+    access: public
+links:
+  - title: Keithley Ultra-sensitive Current Sources Series 6200 (Tektronix product page)
+    url: https://www.tek.com/en/products/keithley/low-level-sensitive-and-specialty-instruments/keithley-ultra-sensitive-current-sources-series-6200
+software:
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.keithley.Keithley6221
+    url: https://pymeasure.readthedocs.io/en/stable/api/instruments/keithley/keithley6221.html
+  - name: InstrumentKit
+    kind: python-driver
+    ref: instruments.keithley.Keithley6220
+    url: https://github.com/instrumentkit/InstrumentKit/blob/main/src/instruments/keithley/keithley6220.py
+examples:
+  - title: Keithley 6220/6221 Python example (arbitrary waveform, 6221 only)
+    url: https://github.com/tektronix/keithley/tree/main/Instrument_Examples/Model_622x
+    license: Tektronix Sample Source Code License (custom)
+  - title: Keithley 6221 + 2182A delta and differential conductance examples (Python)
+    url: https://github.com/tektronix/keithley/tree/main/Instrument_Examples/Model_622x_2182A
+    license: Tektronix Sample Source Code License (custom)
+notes:
+  - Usually run with a 2182A nanovoltmeter in Delta, Pulse Delta or Differential Conductance mode for low-noise resistance and I-V work; the 6221 configures and reads the 2182A itself over a null-modem RS-232 cable plus Trigger Link (Reference Manual section 5), so the PC normally only talks to the 6221.
+  - Ethernet exists only on the 6221 (the 6220 has GPIB and RS-232); the InstrumentKit class targets the DC-only 6220 command subset.

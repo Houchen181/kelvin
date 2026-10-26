@@ -1,0 +1,25 @@
+schema: 1
+id: keithley/2182a
+maker: Keithley (Tektronix)
+model: 2182A
+name: Keithley 2182A nanovoltmeter
+covers: ['2182']
+kind: nanovoltmeter
+interfaces: [gpib, rs-232]
+control: scpi
+card: card.yaml
+manuals:
+  - title: Keithley Model 2182A Nanovoltmeter User's Manual, SCPI reference
+    url: https://download.tek.com/manual/2182A-900-01C_July_2022_User.pdf
+    access: public
+software:
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.keithley.keithley2182.Keithley2182
+    url: https://github.com/pymeasure/pymeasure/blob/master/pymeasure/instruments/keithley/keithley2182.py
+  - name: QCoDeS contrib drivers
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.Tektronix.Keithley_2182A.Keithley2182A
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/Tektronix/Keithley_2182A.py
+notes:
+  - Paired with a 6221 current source it runs delta mode, which cancels thermoelectric offsets in low-resistance measurements.

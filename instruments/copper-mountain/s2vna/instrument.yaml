@@ -1,0 +1,60 @@
+schema: 1
+id: copper-mountain/s2vna
+maker: Copper Mountain
+model: S2VNA
+name: Copper Mountain 2-port USB VNAs (S5048, S5065, M5180 and similar) via the S2VNA software
+covers: [S5045, S5048, S5065, S5085, S5180, S5243, S7530, M5045, M5065, M5090, M5180, SC5065, SC5090, SC7540]
+kind: vna
+interfaces: [usb, lan]
+control: scpi
+identify:
+  idn: ^CMT,\s*[A-Z]{1,2}\d{4}[A-Z]?,
+  example: CMT, M5180, 23047001, 25.3.1/2
+manuals:
+  - title: S2VNA Operating and Programming Manual
+    url: https://coppermountaintech.com/wp-content/uploads/2025/04/S2VNA-Operating-and-Programming-Manual.pdf
+    covers: 'Programming chapters: SCPI commands over HiSLIP or TCP socket, with COM equivalents'
+    access: public
+  - title: 'S2VNA online help: Programming'
+    url: https://coppermountaintech.com/help-s2/programming-manual.html
+    covers: Current online SCPI/COM programming manual for the S2VNA software
+    access: public
+  - title: S2VNA and S4VNA SCPI Programming Manual (Revision 20.3, September 2020)
+    url: https://coppermountaintech.com/wp-content/uploads/2020/09/SxVNA-SCPI-Programming-Manual-2.pdf
+    covers: Older stand-alone SCPI command reference for S2 and S4 series software
+    access: public
+links:
+  - title: 'S2VNA help: Network settings (HiSLIP and socket servers)'
+    url: https://coppermountaintech.com/help-s2/network-settings.html
+  - title: 'S2VNA help: command-line parameters (/SocketServer, /HislipServer, /simulate)'
+    url: https://coppermountaintech.com/help-s2/command-line-parameters.html
+  - title: 'S2VNA help: *IDN? command'
+    url: https://coppermountaintech.com/help-s2/idn.html
+  - title: CMT automation overview (guides, examples, drivers)
+    url: https://coppermountaintech.com/automation/
+  - title: Automation Guide for CMT VNAs (PDF)
+    url: https://coppermountaintech.com/wp-content/uploads/2021/11/Automation-guide-for-CMT-VNAs.pdf
+  - title: Getting Started with Python (CMT video and example)
+    url: https://coppermountaintech.com/video/getting-started-with-python/
+software:
+  - name: S2VNA software (download page)
+    kind: vendor-software
+    url: https://coppermountaintech.com/demo-the-software/
+  - name: QCoDeS
+    kind: python-driver
+    ref: qcodes.instrument_drivers.CopperMountain.CopperMountainM5xxx
+    url: https://github.com/microsoft/Qcodes/tree/main/src/qcodes/instrument_drivers/CopperMountain
+  - name: qcodes_contrib_drivers
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.CopperMountain.S5048.CMTS5048
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/CopperMountain/S5048.py
+examples:
+  - title: CMT Example-VnaSocketTest (C# TCP socket client)
+    url: https://github.com/Copper-Mountain-Technologies/Example-VnaSocketTest
+    license: MIT
+  - title: CMT Example-VnaNiVisa (C# NI-VISA client)
+    url: https://github.com/Copper-Mountain-Technologies/Example-VnaNiVisa
+    license: MIT
+notes:
+  - The SCPI server is part of the S2VNA program on the host PC, not the VNA hardware. Enable it under System > Misc Setup > Network Remote Control Settings (socket default port 5025, HiSLIP 4880) or start S2VNA with /SocketServer:on /SocketPort:5025; /simulate:on runs without hardware.
+  - Run one S2VNA instance per attached VNA and give each its own port (and /SerialNumber) when several are connected to one PC.

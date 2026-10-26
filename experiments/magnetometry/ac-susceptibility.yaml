@@ -1,0 +1,57 @@
+schema: 1
+id: magnetometry/ac-susceptibility
+area: magnetometry
+title: AC susceptibility with a lock-in
+summary: >-
+  A primary coil drives a small AC field; a pair of counter-wound pickup coils, one around the sample, reads
+  the induced voltage. The in-phase and out-of-phase parts give χ' and χ'': superconducting transitions,
+  magnetic order, spin-glass freezing.
+roles:
+  lockin:
+    kind: lock-in
+    does: Drives the primary coil and reads the pickup voltage.
+    suggested: [srs/sr830, srs/sr860, zhinst/mfli]
+  temperature:
+    kind: temperature-controller
+    does: Steps the temperature.
+    suggested: [lakeshore/336, lakeshore/350]
+lab: labs/cryostat-electrical.yaml
+setup:
+  - The sine output drives the primary coil through a series resistor (about 1 kΩ) for a field of 0.1-1 Oe.
+  - The two pickup coils are wound in opposite senses and connected in series to the lock-in's differential input, so they cancel when empty.
+  - Measure the empty coil first and set the phase so the empty-coil signal is small and the sample's diamagnetic signal goes into X.
+procedure:
+  - Step through the transition with stabilized temperatures and record X and Y.
+  - For spin glasses, repeat at several frequencies; for nonlinear susceptibility, read the third harmonic.
+plans:
+  - title: χ' and χ'' from 4 K to 20 K
+    plan:
+      plan: ac_susceptibility
+      setup: { lockin.amplitude: 1.0, lockin.frequency: 997, lockin.harmonic: 1, lockin.time_constant: "1 s", tc.heater_range: low }
+      sweep:
+        tc.setpoint: { from: 4, to: 20, step: 0.1, stabilize: { read: tc.T_A, within: 0.01, for: 30 } }
+      settle: 3
+      measure: [lockin.X, lockin.Y, tc.T_A]
+      after: { lockin.amplitude: 0.004, tc.heater_range: "off" }
+  - title: Third harmonic through the same range
+    plan:
+      plan: ac_susceptibility_3w
+      setup: { lockin.amplitude: 1.0, lockin.frequency: 997, lockin.harmonic: 3, lockin.time_constant: "1 s", tc.heater_range: low }
+      sweep:
+        tc.setpoint: { from: 4, to: 20, step: 0.1, stabilize: { read: tc.T_A, within: 0.01, for: 30 } }
+      settle: 3
+      measure: [lockin.X, lockin.Y, tc.T_A]
+      after: { lockin.amplitude: 0.004, tc.heater_range: "off", lockin.harmonic: 1 }
+analysis:
+  - A superconductor shows a drop in χ' (shielding) at Tc and a peak in χ'' where the losses are largest.
+  - For a spin glass, the freezing temperature shifts with frequency; ΔTf/(Tf·Δlog10 f) separates spin glasses (about 0.005-0.05) from superparamagnets.
+  - Calibrate the absolute scale with a known superconductor (lead, niobium) of the same shape.
+pitfalls:
+  - The pickup coils' own temperature-dependent background; subtract an empty-coil run.
+  - A field amplitude that is too large suppresses weak superconductivity and broadens the transition.
+safety:
+  - The lab's watch switches the heater off if the stage overheats.
+references:
+  - title: M. Nikolo, Superconductivity, a guide to alternating current susceptibility measurements and alternating current susceptometer design, Am. J. Phys. 63, 57 (1995)
+    doi: 10.1119/1.17770
+  - title: J. A. Mydosh, Spin Glasses, an Experimental Introduction (Taylor & Francis, 1993)

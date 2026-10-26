@@ -1,0 +1,18 @@
+schema: 1
+id: rs/smb100a
+maker: Rohde & Schwarz
+model: SMB100A
+name: Rohde & Schwarz SMB100A RF and microwave signal generator
+kind: microwave-source
+interfaces: [gpib, usb-tmc, lan]
+control: scpi
+card: card.yaml
+manuals:
+  - title: R&S SMB100A Operating Manual 1407.0806.32, version 23, remote control commands (pp. 284-449)
+    url: https://scdn.rohde-schwarz.com/ur/pws/dl_downloads/dl_common_library/dl_manuals/dl_user_manual/SMB100A_OperatingManual_en_23.pdf
+    access: public
+software:
+  - name: QCoDeS contrib drivers
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.RohdeSchwarz.SMB100A.RohdeSchwarz_SMB100A
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/RohdeSchwarz/SMB100A.py

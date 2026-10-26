@@ -1,0 +1,65 @@
+schema: 1
+id: optics/photoluminescence
+area: optics
+title: Photoluminescence spectroscopy
+summary: >-
+  Excite with a laser above the gap and record the emission spectrum: excitons, trions, defects and their
+  dependence on excitation power and temperature.
+roles:
+  laser:
+    kind: laser
+    does: Excites the sample.
+    suggested: [coherent/obis, hubner/cobolt, m2/solstis]
+  spectrograph:
+    kind: [monochromator, spectrometer]
+    does: Disperses the emission.
+    suggested: [princeton/spectrapro, andor/shamrock, horiba/ihr, ocean/spectrometer]
+  camera:
+    kind: camera
+    does: Records the spectrum on a cooled CCD.
+    suggested: [princeton/picam, andor/ccd]
+  power_meter:
+    kind: power-meter
+    does: Measures the excitation power on a pick-off.
+    suggested: [thorlabs/pm100, newport/2936-r]
+  temperature:
+    kind: [temperature-controller, cryostat]
+    does: Sets the sample temperature.
+    optional: true
+    suggested: [lakeshore/336, montana/cryostation, attocube/attodry]
+lab: labs/confocal-optics.yaml
+setup:
+  - Focus the laser through the objective; send the emission through a long-pass or notch filter onto the spectrograph slit.
+  - Calibrate the wavelength axis with a neon or argon lamp at the grating and center you will use.
+  - Measure the power on the pick-off and calibrate it once against the power at the sample.
+procedure:
+  - Find the spot at low power, then take a power series over two to three decades.
+  - Take a temperature series with stabilized steps if the emission is temperature dependent.
+plans:
+  - title: Power series from 0.1 mW to 10 mW
+    plan:
+      plan: pl_power
+      setup: { laser.emission: on, spectrograph.wavelength: 750, spectrograph.grating: 1, camera.exposure: 1.0 }
+      sweep: { laser.power: { from: 1.0e-4, to: 1.0e-2, points: 9, log: true } }
+      settle: 1
+      measure: [camera.spectrum, pm.power]
+      after: { laser.power: 0, laser.emission: off }
+  - title: Temperature series at 1 mW
+    plan:
+      plan: pl_vs_t
+      setup: { laser.emission: on, laser.power: 1.0e-3, spectrograph.wavelength: 750, camera.exposure: 1.0,
+               tc.heater_range: medium }
+      sweep:
+        tc.setpoint: { values: [10, 30, 50, 75, 100, 150, 200, 250, 295], stabilize: { read: tc.T_A, within: 0.1, for: 120 } }
+      measure: [camera.spectrum, pm.power, tc.T_A]
+      after: { laser.power: 0, laser.emission: off, tc.heater_range: "off" }
+analysis:
+  - Fit peaks with Lorentzians or Voigts; take energies (E = 1239.84/λ[nm] eV), widths and integrated intensities.
+  - Integrated intensity against power on log-log axes has a slope near 1 for excitons, near 2 for biexcitons, and below 1 when defects saturate.
+  - Peak energy against temperature follows the Varshni relation; the width grows with phonon scattering.
+pitfalls:
+  - Laser heating and photodoping change the spectrum; check that it doesn't change with power at the lowest powers.
+  - Cosmic rays leave sharp spikes; take two frames and keep the minimum.
+  - The sample drifts during temperature changes; refocus before each spectrum.
+safety:
+  - The laser is class 3B or 4. Kelvin asks before every laser change in this lab (auto never); use the interlock and beam blocks.

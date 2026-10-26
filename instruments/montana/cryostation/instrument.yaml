@@ -1,0 +1,39 @@
+schema: 1
+id: montana/cryostation
+maker: Montana Instruments
+model: Cryostation s-series
+name: Montana Instruments Cryostation s-series closed-cycle optical cryostat
+covers: [s50, s100, s200]
+kind: cryostat
+categories: [optics]
+interfaces: [lan]
+control: text
+manuals:
+  - title: Cryostation s-series User Manual, SHI configuration (4100-1-DOC002 v1.2; listed for the s200)
+    url: https://cdn.prod.website-files.com/6118466f5c775b56d53d49e9/695d7ffcee2d9010efc7f5a4_4100-1-DOC002_1.2%20(User%20Manual%20-%20Cryostation%20s-series%20-%20SHI%20Configuration%20MI75%20VCM).pdf
+    access: public
+  - title: Cryostation s-series User Manual, HC-4 configuration (4100-DOC002 v1.1; legacy s50, s100 and s200)
+    url: https://cdn.prod.website-files.com/6118466f5c775b56d53d49e9/632dd3e429ac0b67b9d53b9d_4100-DOC002_1.1%20(User%20Manual%20-%20Cryostation%20s-series%20-%20HC-4%20Configuration).pdf
+    access: public
+links:
+  - title: Montana Instruments product documentation (user manuals and procedures)
+    url: https://www.montanainstruments.com/support/product-documentation
+  - title: Montana Instruments software downloads (communication specification, LabVIEW and DLL examples)
+    url: https://www.montanainstruments.com/support/software-downloads
+  - title: Cryostation s200 product page (REST API, Galaxy software)
+    url: https://www.montanainstruments.com/cryostation-s200
+software:
+  - name: Cryostation Communication Specification and Python scripts (ZIP; contains the protocol specification)
+    kind: vendor-sdk
+    url: https://zkdnawkvhd.s3.amazonaws.com/software-downloads/Cryostation-Communication-Specification-1.zip
+  - name: qcodes_contrib_drivers
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.MontanaInstruments.cryostation.MontanaInstruments_Cryostation
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/MontanaInstruments/cryostation.py
+examples:
+  - title: LabVIEW and DLL command examples (ZIP)
+    url: https://zkdnawkvhd.s3.amazonaws.com/software-downloads/LabView-Example-Scripts.zip
+    license: unknown
+notes:
+  - Older systems use an ASCII TCP protocol (default port 7773 in the QMI driver documentation) whose server must be enabled in the laptop GUI first. Montana's Communication Specification is inside the Python-scripts ZIP on its software-downloads page, listed under Gen 1 and Gen 2 systems.
+  - The current s200 page advertises a REST API on the built-in Galaxy software, and Montana says scripting examples for Gen 3 systems are reached by browsing to the system's IP address on the local network.

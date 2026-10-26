@@ -1,0 +1,23 @@
+schema: 1
+id: yokogawa/gs200
+maker: Yokogawa
+model: GS200
+name: Yokogawa GS200 / GS210 DC voltage and current source
+covers: [GS210]
+kind: voltage-source
+interfaces: [gpib, usb-tmc, lan]
+control: scpi
+card: card.yaml
+manuals:
+  - title: Yokogawa GS200 User's Manual, communication commands
+    url: https://web-material3.yokogawa.com/IMGS210-01EN.pdf
+    access: public
+software:
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.yokogawa.yokogawags200.YokogawaGS200
+    url: https://github.com/pymeasure/pymeasure/blob/master/pymeasure/instruments/yokogawa/yokogawags200.py
+  - name: QCoDeS
+    kind: python-driver
+    ref: qcodes.instrument_drivers.yokogawa.Yokogawa_GS200.YokogawaGS200
+    url: https://github.com/microsoft/Qcodes/blob/main/src/qcodes/instrument_drivers/yokogawa/Yokogawa_GS200.py

@@ -1,0 +1,18 @@
+schema: 1
+id: attocube/anc350
+maker: attocube
+model: ANC350
+name: attocube ANC350 closed-loop positioner controller
+kind: positioner
+interfaces: [usb]
+control: library
+card: card.yaml
+software:
+  - name: pylablib
+    kind: python-driver
+    ref: pylablib.devices.Attocube.anc350.ANC350
+    url: https://github.com/AlexShkarin/pyLabLib/blob/main/pylablib/devices/Attocube/anc350.py
+  - name: QCoDeS contrib drivers
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.Attocube.ANC350.ANC350
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/Attocube/ANC350.py

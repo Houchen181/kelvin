@@ -1,0 +1,50 @@
+schema: 1
+id: transport/iv-curve
+area: transport
+title: Current-voltage characteristics
+summary: >-
+  Source a voltage and measure the current to see whether contacts are ohmic, find leakage and breakdown, and
+  characterize diodes, junctions and other nonlinear devices. The first check on any new device.
+roles:
+  smu:
+    kind: source-meter
+    does: Sources the voltage and measures the current through the device.
+    suggested: [keithley/2450, keithley/2400, keysight/b2900, keithley/2636b]
+  voltmeter:
+    kind: [nanovoltmeter, multimeter]
+    does: Measures the voltage between inner contacts for a four-probe I-V.
+    optional: true
+    suggested: [keithley/2182a, keysight/34465a]
+  temperature:
+    kind: [temperature-controller, cryostat]
+    does: Holds the sample temperature.
+    optional: true
+    suggested: [lakeshore/336, qd/multivu]
+lab: labs/cryostat-electrical.yaml
+setup:
+  - "Two-terminal: the SMU's force HI and LO to two contacts. Four-terminal: force on the outer contacts, sense (or a nanovoltmeter) on the inner ones."
+  - Ground the shields at one point only, and keep the outputs off while wiring.
+  - Start with a compliance well below what would damage the device, such as 1 µA for a fresh 2D device.
+procedure:
+  - Sweep a small range first (±10 mV) and check that the curve is straight and passes through zero.
+  - Widen the range in steps, sweeping there and back to see hysteresis or charging.
+  - Repeat between all contact pairs to find bad contacts before a long measurement.
+plans:
+  - title: I-V there and back over ±100 mV
+    plan:
+      plan: iv_curve
+      setup: { smu.compliance_I: 1.0e-5, smu.nplc: 1, smu.output: on }
+      sweep: { smu.V: { from: -0.1, to: 0.1, points: 101, back: true } }
+      measure: [smu.I]
+      after: { smu.V: 0, smu.output: off }
+analysis:
+  - The low-bias slope gives the resistance; the difference between two- and four-terminal values is the contact resistance.
+  - A numerical dI/dV shows thresholds; a gap between the up and down sweeps means charging, heating or hysteresis.
+pitfalls:
+  - A sweep faster than the device's RC time shows a false hysteresis; slow it down or add settle time.
+  - Thermoelectric offsets of microvolts show up in low-resistance samples; reverse the current, or use delta mode with a current source and nanovoltmeter.
+safety:
+  - Static discharge destroys 2D devices and thin gate oxides; ground yourself and keep outputs off while wiring.
+  - Kelvin asks before the output turns on and before each larger voltage; keep the lab's compliance limit low until you know the device.
+references:
+  - title: Keithley, Low Level Measurements Handbook, 7th edition (Tektronix)

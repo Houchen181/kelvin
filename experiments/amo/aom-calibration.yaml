@@ -1,0 +1,50 @@
+schema: 1
+id: amo/aom-calibration
+area: amo
+title: AOM diffraction efficiency
+summary: >-
+  Measure the first-order diffracted power against RF power and frequency: the drive level for maximum
+  efficiency, the linear range for amplitude control, and the bandwidth for frequency scans or double-pass setups.
+roles:
+  aom:
+    kind: aom-driver
+    does: Drives the AOM.
+    suggested: [moglabs/xrf, novatech/409b]
+  power_meter:
+    kind: power-meter
+    does: Measures the power in the first order.
+    suggested: [thorlabs/pm100, newport/2936-r]
+lab: labs/aom-bench.yaml
+setup:
+  - Align the AOM at the Bragg angle at the center frequency, and block every order except the first in front of the power meter.
+  - Set the power meter's wavelength to the laser's.
+procedure:
+  - Sweep the RF power at the center frequency, then the frequency at the chosen power.
+plans:
+  - title: Efficiency against RF power at 80 MHz
+    plan:
+      plan: aom_power
+      setup: { aom.frequency: 80, aom.output: on, pm.wavelength: 780 }
+      sweep: { aom.power: { from: -20, to: 30, step: 1 } }
+      settle: 0.5
+      measure: [pm.power]
+      after: { aom.power: -50, aom.output: off }
+  - title: Frequency response at 25 dBm
+    plan:
+      plan: aom_frequency
+      setup: { aom.power: 25, aom.output: on, pm.wavelength: 780 }
+      sweep: { aom.frequency: { from: 60, to: 100, step: 0.5 } }
+      settle: 0.5
+      measure: [pm.power]
+      after: { aom.power: -50, aom.output: off }
+analysis:
+  - Efficiency is the first-order power over the undiffracted power without RF; it follows sin² of the square root of the RF power and falls past saturation.
+  - Use the power below saturation for amplitude control, and a lookup table against frequency for constant power during scans.
+pitfalls:
+  - RF power above the AOM's rating heats the crystal and shifts the beam; it can destroy the transducer.
+  - Thermal lensing changes the alignment over minutes at high RF power; let it settle.
+safety:
+  - Keep the RF limit in the lab at the AOM's rating; Kelvin asks before each increase. The beam is a laser hazard.
+references:
+  - title: E. A. Donley, T. P. Heavner, F. Levi, M. O. Tataw and S. R. Jefferts, Double-pass acousto-optic modulator system, Rev. Sci. Instrum. 76, 063112 (2005)
+    doi: 10.1063/1.1930095

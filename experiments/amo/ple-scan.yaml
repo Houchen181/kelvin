@@ -1,0 +1,46 @@
+schema: 1
+id: amo/ple-scan
+area: amo
+title: Photoluminescence excitation (PLE) wavelength scan
+summary: >-
+  Tune the excitation laser and record the emission: absorption resonances, excited states and the energy
+  transfer that feeds an emitter (defects, quantum dots, rare-earth ions, excitons).
+roles:
+  laser:
+    kind: [laser, laser-driver]
+    does: A tunable CW laser (or the controller of a tunable diode laser).
+    suggested: [m2/solstis, toptica/dlc-pro]
+  counter:
+    kind: photon-counter
+    does: Counts the emission through a filter that blocks the laser.
+    suggested: [swabian/time-tagger, picoquant/multiharp-150, srs/sr400]
+  power_meter:
+    kind: power-meter
+    does: Normalizes the excitation power.
+    suggested: [thorlabs/pm100]
+  wavemeter:
+    kind: wavemeter
+    does: Checks the laser wavelength independently.
+    optional: true
+    suggested: [highfinesse/wavemeter, bristol/wavemeter]
+lab: labs/tunable-laser.yaml
+setup:
+  - Collect the emission through a long-pass (or band-pass) filter that blocks every scanned laser wavelength.
+  - Pick off a little laser power for the power meter (and the wavemeter).
+procedure:
+  - A coarse scan finds the resonances, then fine scans across each.
+plans:
+  - title: Scan from 730 nm to 740 nm in 0.01 nm steps
+    plan:
+      plan: ple_scan
+      setup: { counter.integration: 0.5 }
+      sweep: { laser.wavelength_target: { from: 730, to: 740, step: 0.01 } }
+      settle: 0.2
+      measure: [laser.wavelength, counter.rate, pm.power]
+analysis:
+  - Divide the count rate by the excitation power at each point; plot against the measured wavelength, not the target.
+pitfalls:
+  - Mode hops and lost etalon locks skip wavelengths; check laser.wavelength against the target.
+  - Laser light leaking through the filter rises near the emission band; measure a bare-substrate spot.
+safety:
+  - The laser is class 3B or 4; Kelvin never sends the SolsTiS's raw hardware outputs.

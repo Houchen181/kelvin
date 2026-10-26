@@ -1,0 +1,70 @@
+schema: 1
+id: quantum-machines/opx
+maker: Quantum Machines
+model: OPX+
+name: Quantum Machines OPX+ / OPX1000 quantum controller (QUA)
+covers: [OPX, OPX1000]
+kind: quantum-controller
+interfaces: [lan]
+control: library
+manuals:
+  - title: Quantum Machines documentation (QUA, hardware and API reference)
+    url: https://docs.quantum-machines.co/latest/
+    covers: Entry point for the QOP guides, QUA language, hardware pages and Python API references
+    access: public
+  - title: QOP Conceptual Overview
+    url: https://docs.quantum-machines.co/latest/docs/Introduction/qop_overview/
+    covers: Quantum Machine, configuration and QUA concepts
+    access: public
+  - title: Quantum Machine Manager API
+    url: https://docs.quantum-machines.co/latest/docs/API_references/qm_manager_api/
+    covers: 'QuantumMachinesManager: connecting to the controller by host and port'
+    access: public
+  - title: QUA API
+    url: https://docs.quantum-machines.co/latest/docs/API_references/qua/dsl_main/
+    covers: Python DSL reference for writing QUA programs
+    access: public
+  - title: Quantum Machine API (OPX+)
+    url: https://docs.quantum-machines.co/latest/docs/API_references/qm_api/
+    covers: Open a quantum machine and run jobs on OPX+
+    access: public
+  - title: Quantum Machine API (OPX1000)
+    url: https://docs.quantum-machines.co/latest/docs/API_references/qm_opx1000_api/
+    covers: Open a quantum machine and run jobs on OPX1000
+    access: public
+links:
+  - title: QOP networking and QM router
+    url: https://docs.quantum-machines.co/latest/docs/Hardware/network_and_router/
+  - title: QOP installation guide
+    url: https://docs.quantum-machines.co/latest/docs/Releases/qop_installation_guide/
+  - title: OPX1000 FEMs guide
+    url: https://docs.quantum-machines.co/latest/docs/Guides/opx1000_fems/
+  - title: OPX Simulator guide
+    url: https://docs.quantum-machines.co/latest/docs/Guides/simulator/
+  - title: Simulator access through the cloud service (QM SaaS, available from QM on request)
+    url: https://docs.quantum-machines.co/latest/docs/Guides/qm_saas_guide/
+  - title: OPX and OPX+ specification
+    url: https://docs.quantum-machines.co/latest/docs/Hardware/OPX_hardware/
+  - title: OPX1000 specification
+    url: https://docs.quantum-machines.co/latest/docs/Hardware/OPX1000_hardware/
+software:
+  - name: qm-qua
+    kind: vendor-sdk
+    ref: qm.quantum_machines_manager.QuantumMachinesManager
+    url: https://pypi.org/project/qm-qua/
+  - name: qualang-tools
+    kind: vendor-sdk
+    url: https://pypi.org/project/qualang-tools/
+  - name: QUAM
+    kind: vendor-sdk
+    url: https://pypi.org/project/quam/
+  - name: qm-saas (client for the cloud simulator)
+    kind: vendor-sdk
+    url: https://pypi.org/project/qm-saas/
+examples:
+  - title: qua-libs (QUA libraries, tutorials and control applications for superconducting, spin, quantum-dot and atomic setups)
+    url: https://github.com/qua-platform/qua-libs
+    license: BSD-3-Clause
+notes:
+  - Programs are written in QUA through the qm-qua Python SDK, which talks to the controller over the network via QuantumMachinesManager(host, port). The cloud simulator (QM SaaS, on request from QM) allows developing QUA programs without hardware.
+  - OPX+ and OPX1000 have separate API pages and release streams (QOP 2 and QOP 3), so read the pages for the controller generation in the lab.

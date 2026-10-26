@@ -1,0 +1,37 @@
+schema: 1
+id: thorlabs/cld1010
+maker: Thorlabs
+model: CLD1010LP
+name: Thorlabs CLD1010 compact laser diode and TEC controller
+covers: [CLD1011LP, CLD1015]
+kind: laser-driver
+interfaces: [usb-tmc]
+control: scpi
+identify:
+  idn: ^Thorlabs,CLD10(10|11|15)
+  example: Thorlabs,CLD1010LP,M00295819,1.0.0
+manuals:
+  - title: CLD101x Operation Manual (English)
+    url: https://media.thorlabs.com/globalassets/items/c/cl/cld/cld1015/doc-104674.pdf
+    covers: 'Chapter ''Remote Operation'': driver installation, Instrument Communicator, IEEE 488.2 common commands, SCPI command reference, status and error reporting'
+    access: public
+  - title: CLD101x Programmers Reference Manual
+    url: https://media.thorlabs.com/globalassets/items/c/cl/cld/cld1015/doc-104772.pdf
+    covers: 'Standalone SCPI programming reference: write your own application (32/64-bit), IEEE 488.2 common commands, SCPI command reference, status and error reporting'
+    access: public
+links:
+  - title: CLD1010LP product page (lists both manuals)
+    url: https://www.thorlabs.com/item/CLD1010LP
+  - title: Software for the 4000 Series and CLD1000 Series drivers (TL4000 VISA driver)
+    url: https://www.thorlabs.com/software-pages/4000_series
+software:
+  - name: Thorlabs TL4000 VXIpnp VISA instrument driver (Series 4000 and CLD1000 software page)
+    kind: vendor-sdk
+    url: https://www.thorlabs.com/software-pages/4000_series
+examples:
+  - title: 'Thorlabs Current_And_Temperature_Controller_Examples (CLD10xy: PyVISA and ctypes in Python, LabVIEW, MATLAB)'
+    url: https://github.com/Thorlabs/Current_And_Temperature_Controller_Examples
+    license: MIT
+notes:
+  - The CLD101x enumerates as a USBTMC device (VISA resource such as USB0::0x1313::0x804F::M00xxxxxx::INSTR in Thorlabs' example), so install a VISA runtime or Thorlabs' TL4000 driver package first; the PyVISA example sets the laser current with source1:current:level:amplitude 0.065 (amperes).
+  - '*IDN? is documented as Thorlabs,<model code>,<serial>,<firmware> (the example above is built from that format and the serial in Thorlabs'' example, not captured from a unit). The TL4000 DLL also drives the ITC4000/LDC4000/TED4000 controllers, but their SCPI reference is a separate Series 4000 document, so use the CLD101x Programmers Reference for command names.'

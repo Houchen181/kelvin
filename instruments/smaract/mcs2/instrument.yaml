@@ -1,0 +1,30 @@
+schema: 1
+id: smaract/mcs2
+maker: SmarAct
+model: MCS2
+name: SmarAct MCS2 modular positioning controller
+kind: positioner
+interfaces: [usb, lan]
+control: scpi
+manuals:
+  - title: MCS2 Programmer's Guide (supplied with the controller/SDK; not published online)
+    url: https://www.smaract.com/en/motion/products/control-systems-and-software-working/control-systems/mcs2
+    covers: ASCII (SCPI-style) interface chapter and the SmarActCTL API reference
+    access: owners
+links:
+  - title: SmarAct MCS2 product page
+    url: https://www.smaract.com/en/motion/products/control-systems-and-software-working/control-systems/mcs2
+  - title: SmarAct MCS2 communication interfaces (USB, Ethernet SCPI-style ASCII protocol, API)
+    url: https://www.smaract.com/en/motion/products/control-systems-and-software-working/control-systems/mcs2-communication-interfaces
+  - title: SmarAct Software Development Kits (supplied with each system; inquiry form on the page)
+    url: https://www.smaract.com/en/control-systems-and-software/product/software-development-kits
+software:
+  - name: SmarAct MCS2 SDK (SmarActCTL library for C/C++, Python module, LabVIEW; supplied with the system)
+    kind: vendor-sdk
+    url: https://www.smaract.com/en/motion/products/control-systems-and-software-working/control-systems/mcs2-communication-interfaces
+  - name: pylablib SmarAct MCS2 driver (needs SmarActCTL.dll)
+    kind: python-driver
+    ref: pylablib.devices.SmarAct.MCS2
+    url: https://github.com/AlexShkarin/pyLabLib/blob/main/pylablib/devices/SmarAct/MCS2.py
+notes:
+  - Drives SmarAct stick-slip, scanner-piezo and electromagnetic positioners with optional closed-loop sensor modules, often cryo or UHV types. The SCPI-style ASCII protocol is on Ethernet (a PSI open-source driver documents TCP port 55551, CR/LF termination, no reply to set/move commands, errors polled with :SYST:ERR:NEXT?), while the SmarActCTL library covers USB and Ethernet.

@@ -1,0 +1,71 @@
+schema: 1
+id: transport/differential-conductance
+area: transport
+title: Tunneling spectroscopy (dI/dV)
+summary: >-
+  Add a small AC modulation to a DC bias and read the AC current with a lock-in: the differential conductance
+  dI/dV of tunnel junctions, superconducting gaps, magnons and phonons in inelastic tunneling, and zero-bias
+  anomalies.
+roles:
+  bias:
+    kind: [voltage-source, source-meter]
+    does: Sets the DC bias, through a divider.
+    suggested: [yokogawa/gs200, basel/lnhr-dac, qdevil/qdac-ii]
+  lockin:
+    kind: lock-in
+    does: Adds the AC modulation and reads the AC current.
+    suggested: [srs/sr830, srs/sr860, zhinst/mfli]
+  iamp:
+    kind: preamp
+    does: Turns the junction current into a voltage at a virtual ground.
+    suggested: [srs/sr570]
+  dmm:
+    kind: multimeter
+    does: Reads the DC current from the preamplifier's output.
+    suggested: [keysight/34465a, keithley/2000, keithley/dmm6500]
+  temperature:
+    kind: [temperature-controller, cryostat, dilution-refrigerator]
+    does: Holds the temperature; resolution is limited to about 3.5 kT.
+    suggested: [lakeshore/336, qd/multivu, bluefors/dilution-refrigerator]
+lab: labs/cryostat-electrical.yaml
+setup:
+  - "Bias: the DC source through a 1:100 divider, summed with the lock-in's sine output through a 1:10^4 divider (a resistive adder or a transformer), into one side of the junction."
+  - "Current: the other side into the SR570's input (a virtual ground); its output into the lock-in input and the DMM."
+  - Keep the AC amplitude below about kT/e at the sample (86 µV per kelvin) so it does not broaden the features.
+procedure:
+  - Check a wide bias window at a coarse step, then zoom into the features.
+  - For a superconducting gap, repeat against temperature and field.
+plans:
+  - title: dI/dV over ±5 mV at the sample
+    plan:
+      plan: didv
+      setup: { bias.current_limit: 0.01, bias.output: on, lockin.amplitude: 0.5, lockin.frequency: 77.7,
+               lockin.time_constant: "300 ms" }
+      sweep: { bias.level: { from: -0.5, to: 0.5, step: 0.002 } }
+      settle: 1.0
+      measure: [lockin.X, lockin.Y, dmm.V_dc]
+      after: { bias.level: 0, bias.output: off }
+  - title: dI/dV against temperature
+    plan:
+      plan: didv_vs_t
+      setup: { bias.current_limit: 0.01, bias.output: on, lockin.amplitude: 0.5, lockin.frequency: 77.7,
+               lockin.time_constant: "300 ms", tc.heater_range: low }
+      sweep:
+        tc.setpoint: { values: [4, 6, 8, 10, 15, 20], stabilize: { read: tc.T_A, within: 0.02, for: 120 } }
+        bias.level: { from: -0.5, to: 0.5, step: 0.005 }
+      settle: 1.0
+      measure: [lockin.X, dmm.V_dc, tc.T_A]
+      after: { bias.level: 0, bias.output: off, tc.heater_range: "off" }
+analysis:
+  - "dI/dV = (X / G_amp) / V_ac: X is the lock-in reading, G_amp the SR570 gain in V/A, V_ac the modulation at the sample after the divider."
+  - The DC current is the DMM reading over G_amp; integrating dI/dV against bias should reproduce it.
+  - A superconducting gap fits a Dynes-broadened BCS density of states; inelastic features appear as steps in dI/dV and peaks in d²I/dV².
+pitfalls:
+  - The divider's output resistance and the line resistance add to the junction. For low-resistance junctions, measure the voltage across the junction four-probe.
+  - The SR570's input offset shifts zero bias; check it with the junction disconnected.
+safety:
+  - Tunnel barriers are fragile. The lab keeps the bias small and ramps it; Kelvin asks before going beyond what you approved.
+references:
+  - title: E. L. Wolf, Principles of Electron Tunneling Spectroscopy, 2nd edition (Oxford University Press, 2012)
+  - title: R. C. Dynes, V. Narayanamurti and J. P. Garno, Direct measurement of quasiparticle-lifetime broadening in a strong-coupled superconductor, Phys. Rev. Lett. 41, 1509 (1978)
+    doi: 10.1103/PhysRevLett.41.1509

@@ -1,0 +1,13 @@
+# Superconducting resonator readout with an RFSoC board running QICK: one generator drives the feedline,
+# one readout channel digitizes the transmitted signal after the cryogenic amplifiers.
+#
+# To use it: copy it to ~/Kelvin/lab.yaml (or open it in Lab -> Set up), give the board its address
+# and set the limits for your chain. Until then it is simulated.
+lab: QICK resonator readout
+
+instruments:
+  rfsoc:
+    card: qick/rfsoc
+    # address: "qick://<name server>:8888/<proxy name>"
+    vars: { gen: "0", ro: "0" }
+    limits: { gain: [0, 0.5] }

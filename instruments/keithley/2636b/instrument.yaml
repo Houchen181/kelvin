@@ -1,0 +1,46 @@
+schema: 1
+id: keithley/2636b
+maker: Keithley (Tektronix)
+model: 2636B
+name: Keithley 2636B System SourceMeter SMU (2600B series)
+covers: [2601B, 2602B, 2604B, 2611B, 2612B, 2614B, 2634B, 2635B]
+kind: source-meter
+interfaces: [usb-tmc, lan, gpib, rs-232]
+control: text
+identify:
+  idn: ^Keithley Instruments Inc\.,\s*Model 26(0[124]|1[124]|3[456])B,
+  example: Keithley Instruments Inc., Model 2636B, 4498311, 3.3.5
+manuals:
+  - title: Series 2600B System SourceMeter Instrument Reference Manual (2600BS-901-01F, Nov 2021)
+    url: https://download.tek.com/manual/2600BS-901-01F_2600B_Reference_Aug2021.pdf
+    covers: TSP command reference and in-depth instrument operation (the manual Tektronix points programmers to)
+    access: public
+links:
+  - title: 2600B Series SMU (Tektronix product page)
+    url: https://www.tek.com/en/products/keithley/source-measure-units/2600b-series-sourcemeter
+software:
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.keithley.Keithley2600
+    url: https://pymeasure.readthedocs.io/en/stable/api/instruments/keithley/keithley2600.html
+  - name: QCoDeS
+    kind: python-driver
+    ref: qcodes.instrument_drivers.Keithley.Keithley_2636B.Keithley2636B
+    url: https://github.com/microsoft/Qcodes/blob/main/src/qcodes/instrument_drivers/Keithley/Keithley_2636B.py
+  - name: tm_devices (Tektronix)
+    kind: vendor-sdk
+    ref: tm_devices.drivers.source_measure_units.smu26xx.smu2636b.SMU2636B
+    url: https://github.com/tektronix/tm_devices/blob/main/src/tm_devices/drivers/source_measure_units/smu26xx/smu2636b.py
+  - name: tm_devices on PyPI
+    kind: vendor-sdk
+    url: https://pypi.org/project/tm-devices/
+  - name: TSP Toolkit (VS Code extension for TSP instruments)
+    kind: vendor-software
+    url: https://github.com/tektronix/tsp-toolkit
+examples:
+  - title: Keithley Series 2600 TSP examples
+    url: https://github.com/tektronix/keithley/tree/main/Instrument_Examples/Series_2600
+    license: Tektronix Sample Source Code License (custom)
+notes:
+  - 'A TSP (Lua) instrument rather than SCPI: queries are wrapped in print(), e.g. print(smua.measure.v()), while *IDN? still works; scripts can also be stored and run on the instrument, which cuts bus traffic during sweeps.'
+  - The 2636B is a dual-channel model; this reference manual applies to the whole 2600B family listed under covers (Tektronix lists the 2606B separately).

@@ -1,0 +1,47 @@
+schema: 1
+id: picoquant/multiharp-150
+maker: PicoQuant
+model: MultiHarp 150
+name: PicoQuant MultiHarp 150 time tagger
+covers: [MultiHarp 160]
+kind: photon-counter
+interfaces: [usb]
+control: library
+manuals:
+  - title: MultiHarp 150/160 MHLib programming manual (Windows)
+    url: https://downloads.picoquant.com/manuals/MultiHarp150_160_DLL_Manual.pdf
+    covers: MHLib DLL function reference, demo descriptions and multi-device use
+    access: public
+  - title: MultiHarp 150/160 MHLib programming manual (Linux)
+    url: https://downloads.picoquant.com/manuals/MultiHarp150_160_DLL_Linux_Manual.pdf
+    covers: MHLib Linux library function reference
+    access: public
+  - title: MultiHarp 150/160 user manual
+    url: https://downloads.picoquant.com/manuals/MultiHarp150_160_Manual.pdf
+    covers: Instrument and operation software manual
+    access: public
+links:
+  - title: MultiHarp 160 product page (current sibling model)
+    url: https://www.picoquant.com/products/time-tagging-tcspc-electronics/multiharp-160/
+  - title: PicoQuant downloads (software, MHLib and manuals)
+    url: https://www.picoquant.com/downloads/
+  - title: snAPI documentation (lists the supported devices)
+    url: https://picoquant.github.io/snAPI/introduction.html
+software:
+  - name: snAPI
+    kind: vendor-sdk
+    ref: snAPI.Main.snAPI
+    url: https://pypi.org/project/snapi/
+  - name: MHLib programming library (Windows DLL and Linux library, from the downloads page)
+    kind: vendor-sdk
+    url: https://www.picoquant.com/downloads/
+examples:
+  - title: PicoQuant MH150-Demos (MHLib demo code)
+    url: https://github.com/PicoQuant/MH150-Demos
+    license: unknown
+  - title: PicoQuant snAPI demos (Python)
+    url: https://github.com/PicoQuant/snAPI/tree/main/demos
+    license: Custom PicoQuant snAPI license (demo code may be modified and redistributed with notices kept)
+notes:
+  - Control is through the MHLib DLL over USB 3.0 (or the Linux library), or from Python through snAPI; there is no SCPI interface.
+  - The MH150-Demos repository holds MHLib 3.1 demos from 2022, while the current library and manual are 4.0 (64-bit, Windows 10 and 11), so prefer the demos in the current download or snAPI.

@@ -1,0 +1,37 @@
+schema: 1
+id: hinds/pem
+maker: Hinds Instruments
+model: PEM-200
+name: Hinds Instruments PEM-200 photoelastic modulator controller (and PEM-100)
+covers: [PEM-100]
+kind: modulator
+interfaces: [usb, lan, rs-232]
+control: scpi
+manuals:
+  - title: PEM-200 Photoelastic Modulator User Manual
+    url: https://www.hindsinstruments.com/wp-content/uploads/PEM-200-User-Manual.pdf
+    covers: 'Remote control over the USB serial-COM interface: SCPI-derived text commands in long and short forms (for example :MODulator:AMPlitude / :MOD:AMP), *IDN?, detector and system commands'
+    access: public
+  - title: PEM-100 Photoelastic Modulator User Manual
+    url: https://www.hindsinstruments.com/wp-content/uploads/PEM-100-User-Manual.pdf
+    covers: 'PEM-100 only: chapter 5 RS232 settings (Table 5.1), chapter 8 Command Line Interpreter (CLI port settings and command descriptions, Tables 8.1-8.2) and the RS232-to-USB / RS232-to-IEEE-488 converters; the command set differs from the PEM-200'
+    access: public
+links:
+  - title: PEM-200 controller product page
+    url: https://www.hindsinstruments.com/products/components/photoelastic-modulators/pem-200-controller/
+  - title: Hinds resources and user manuals
+    url: https://www.hindsinstruments.com/resources/
+  - title: PEM-200 technical overview (PDF)
+    url: https://www.hindsinstruments.com/wp-content/uploads/PEM200_Technical-Overview.pdf
+  - title: PEM-100 controller product bulletin (PDF)
+    url: https://www.hindsinstruments.com/wp-content/uploads/PEM-100-Controller-Product-Bulletin.pdf
+software:
+  - name: PEM-200 user interface and Windows serial driver (listed on the PEM-200 product page)
+    kind: vendor-software
+    url: https://www.hindsinstruments.com/products/components/photoelastic-modulators/pem-200-controller/
+  - name: PEM-100 LabVIEW driver and controller software (listed on the resources page)
+    kind: vendor-sdk
+    url: https://www.hindsinstruments.com/resources/
+notes:
+  - The PEM-200 shows up as a USB serial COM port and takes SCPI-derived text commands terminated with a newline or semicolon; the PEM-100 is RS-232 only (settings in Table 5.1 of its manual) with its own command line interpreter, so check which controller you have before reusing scripts.
+  - Hinds' PEM Technical Overview lists optional Ethernet for the PEM-200, but its command details were only checked for the USB interface.

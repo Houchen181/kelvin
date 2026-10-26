@@ -1,0 +1,4 @@
+# Cards decide what Kelvin treats as safe: every change gets a maintainer's review.
+*                         @Houchen181
+/instruments/**/card.yaml @Houchen181
+/labs/                    @Houchen181

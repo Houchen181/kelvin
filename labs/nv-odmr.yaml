@@ -1,0 +1,32 @@
+# NV centers in diamond: a 532 nm laser gated by an AOM, a microwave source into an antenna, a photon counter
+# and a pulse generator that times all three. Kelvin builds and checks the pulse sequences itself.
+#
+# Wiring: pulse generator output 0 -> the AOM driver's TTL switch input, output 1 -> the microwave switch (or the
+# source's pulse-modulation input), output 2 -> the counter's gate. Set laser_delay to the AOM's measured delay.
+#
+# To use it: copy it to ~/Kelvin/lab.yaml (or open it in Lab -> Set up), give each instrument its address
+# (Scan finds them) and set the limits for your setup. Until then every instrument here is simulated.
+lab: NV ODMR
+
+instruments:
+  pg:
+    card: swabian/pulse-streamer
+    # address: "pulsestreamer://169.254.8.2"
+    vars: { laser: "0", mw: "1", gate: "2", laser_delay: "4.5e-7", max_mw_duty: "0.3" }
+  mw:
+    card: srs/sg384
+    # address: "TCPIP0::<ip>::5025::SOCKET"; for pulsing: mod_type pulse, pulse_source external, modulation on
+    limits: { power: [-110, 0] }           # dBm into the amplifier and antenna; includes the safe -110 dBm
+  counter:
+    card: swabian/time-tagger
+    # address: "timetagger://<serial>?click=1&gate=2"
+  aom:
+    card: moglabs/xrf
+    # address: "TCPIP0::<ip>::7802::SOCKET"
+    vars: { ch: "1" }
+    limits: { power: [-50, 30] }           # dBm
+  laser:
+    card: coherent/obis
+    # address: "serial://COM7"
+    auto: never
+    limits: { power: [0, 0.1] }            # W

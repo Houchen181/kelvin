@@ -1,0 +1,48 @@
+schema: 1
+id: optics/pl-mapping
+area: optics
+title: Hyperspectral PL and Raman mapping
+summary: >-
+  Raster the sample under the focused laser and record a spectrum at every point: maps of emission energy,
+  intensity and linewidth, strain and doping across a flake or a device.
+roles:
+  laser:
+    kind: laser
+    does: Excites the sample.
+    suggested: [coherent/obis, hubner/cobolt]
+  scanner:
+    kind: [positioner, motion-stage]
+    does: Moves the sample (or the beam) in x and y.
+    suggested: [pi/gcs-piezo, attocube/anc350, smaract/mcs2, mcl/nano-drive]
+  spectrograph:
+    kind: [monochromator, spectrometer]
+    does: Disperses the emission.
+    suggested: [princeton/spectrapro, andor/shamrock]
+  camera:
+    kind: camera
+    does: Records a spectrum per point.
+    suggested: [princeton/picam, andor/ccd]
+lab: labs/confocal-optics.yaml
+setup:
+  - A closed-loop scanner keeps the map square; at low temperature, open-loop piezos creep and need a reference image.
+  - Take a reflection image first to place the map on the flake.
+procedure:
+  - A coarse map at short exposure finds the region, then a fine map with the exposure the signal needs.
+plans:
+  - title: 51 x 51 map over 50 µm
+    plan:
+      plan: pl_map
+      setup: { laser.emission: on, laser.power: 1.0e-3, spectrograph.wavelength: 750, camera.exposure: 0.5 }
+      sweep:
+        scan_y.position: { from: 0, to: 50, step: 1 }
+        scan_x.position: { from: 0, to: 50, step: 1 }
+      measure: [camera.spectrum]
+      after: { laser.power: 0, laser.emission: off }
+analysis:
+  - Fit each spectrum, then map peak energy, width and integrated intensity; the run's data folder keeps one spectrum per point.
+  - Correct drift by aligning repeated reference maps or features at the flake edge.
+pitfalls:
+  - Exposure times add up quickly; 2601 points at 0.5 s is over 20 minutes before overheads.
+  - Focus changes across tilted samples; level the sample or add a focus axis.
+safety:
+  - The laser stays on for the whole map; keep the power low and the enclosure closed.

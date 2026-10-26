@@ -1,0 +1,15 @@
+schema: 1
+id: andor/scmos
+maker: Andor (Oxford Instruments)
+model: sCMOS
+name: Andor sCMOS cameras (Zyla, Neo, Sona, Marana)
+covers: [Zyla, Neo, Sona, Marana]
+kind: camera
+interfaces: [usb, pcie]
+control: library
+card: card.yaml
+software:
+  - name: pylablib
+    kind: python-driver
+    ref: pylablib.devices.Andor.AndorSDK3.AndorSDK3Camera
+    url: https://github.com/AlexShkarin/pyLabLib/blob/main/pylablib/devices/Andor/AndorSDK3.py

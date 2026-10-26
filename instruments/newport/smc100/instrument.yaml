@@ -1,0 +1,27 @@
+schema: 1
+id: newport/smc100
+maker: Newport (MKS)
+model: SMC100CC
+name: Newport SMC100CC / SMC100PP single-axis motion controller
+covers: [SMC100PP]
+kind: motion-stage
+interfaces: [rs-232, rs-485, usb]
+control: text
+manuals:
+  - title: SMC100CC & SMC100PP User's Manual (EDH0206En2062, 09/26)
+    url: https://api.p1.mks.com/medias/sys_master/resources/hec/h2b/10211813294110/SMC100CC_and_SMC100PP_-_User_Manual/SMC100CC-and-SMC100PP-User-Manual.pdf
+    covers: 'Section 3 (RS-232C/USB/RS-485 communication) and Section 5 (programming: state diagram, command syntax, full two-letter ASCII command set)'
+    access: public
+  - title: SMC100CC & SMC100PP Command Interface Manual (V1.0.x, EDH0311En1023, 12/21)
+    url: https://api.p1.mks.com/medias/sys_master/resources/hc4/h75/9954230992926/SMC100%20-%20Command%20Interface%20Manual/SMC100-Command-Interface-Manual.pdf
+    covers: Function reference of the Newport.SMC100.CommandInterface.dll .NET assembly (one Get/Set function per ASCII command), with a Python example
+    access: public
+links:
+  - title: Newport SMC100CC product page (manuals and utility software)
+    url: https://www.newport.com/p/SMC100CC
+software:
+  - name: Newport SMC100 Utility installer (Windows GUI, listed on the product page)
+    kind: vendor-software
+    url: https://www.newport.com/p/SMC100CC
+notes:
+  - Single-axis driver for Newport DC-servo and stepper positioners. Commands are two-letter ASCII mnemonics with the controller address as prefix (1OR home, 1PA2.2 move, 1TP position) over RS-232 at 57600 baud, 8N1, CRLF; moves are refused until a home search (OR) has put the controller in the READY state, and up to 31 controllers can share one port via the RS-485 link.

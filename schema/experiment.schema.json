@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Houchen181/kelvin-instruments/schema/experiment.schema.json",
+  "title": "experiment",
+  "description": "An experiment in the Kelvin instrument collection. tools/kic.py validate also checks each plan against its lab config.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "id", "area", "title", "summary", "roles"],
+  "properties": {
+    "schema": { "const": 1 },
+    "id": { "type": "string", "pattern": "^[a-z0-9-]+/[a-z0-9-]+$", "description": "area/file name" },
+    "area": { "type": "string", "description": "One of the areas in collection.yaml" },
+    "title": { "type": "string" },
+    "summary": { "type": "string" },
+    "roles": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["kind"],
+        "properties": {
+          "kind": { "oneOf": [{ "type": "string" }, { "type": "array", "items": { "type": "string" } }] },
+          "does": { "type": "string" },
+          "optional": { "type": "boolean" },
+          "suggested": { "type": "array", "items": { "type": "string" }, "description": "Instrument ids in this collection" }
+        }
+      }
+    },
+    "lab": { "type": "string", "pattern": "^labs/[a-z0-9-]+\\.yaml$" },
+    "needs_cards": { "type": "array", "items": { "type": "string" }, "description": "Kinds with no card yet" },
+    "setup": { "$ref": "#/$defs/sentences" },
+    "procedure": { "$ref": "#/$defs/sentences" },
+    "plans": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title", "plan"],
+        "properties": {
+          "title": { "type": "string" },
+          "plan": {
+            "type": "object",
+            "description": "A Kelvin plan",
+            "required": ["plan"],
+            "additionalProperties": false,
+            "properties": {
+              "plan": { "type": "string" }, "description": { "type": "string" }, "device": { "type": "string" },
+              "requires": { "type": "array", "items": { "type": "string" } },
+              "preconditions": { "type": "array", "items": { "type": "string" } },
+              "setup": { "type": "object" }, "sweep": { "type": "object" },
+              "repeat": { "type": "integer", "minimum": 1 },
+              "time": { "type": "object" }, "settle": { "type": "number", "minimum": 0 },
+              "measure": { "type": "array", "items": { "type": "string" } },
+              "after": { "type": "object" }, "on_abort": { "type": "object" }
+            }
+          }
+        }
+      }
+    },
+    "analysis": { "$ref": "#/$defs/sentences" },
+    "pitfalls": { "$ref": "#/$defs/sentences" },
+    "safety": { "$ref": "#/$defs/sentences" },
+    "references": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title"],
+        "properties": {
+          "title": { "type": "string" },
+          "doi": { "type": "string", "pattern": "^10\\.\\d{4,9}/\\S+$" },
+          "url": { "type": "string", "pattern": "^https://" }
+        }
+      }
+    }
+  },
+  "$defs": { "sentences": { "type": "array", "items": { "type": "string" } } }
+}

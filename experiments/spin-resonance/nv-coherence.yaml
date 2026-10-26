@@ -1,0 +1,78 @@
+schema: 1
+id: spin-resonance/nv-coherence
+area: spin-resonance
+title: NV-center Rabi, Ramsey, Hahn echo and T1
+summary: >-
+  Pulsed spin control of NV centers: Rabi oscillations calibrate the π pulse; Ramsey, Hahn echo and T1 measure
+  the dephasing, coherence and relaxation times that set the sensitivity to fields and noise.
+roles:
+  pulses:
+    kind: pulse-generator
+    does: Builds and plays the sequences.
+    suggested: [swabian/pulse-streamer, spincore/pulseblaster]
+  microwave:
+    kind: microwave-source
+    does: Drives the spin at resonance.
+    suggested: [srs/sg384, rs/smb100a]
+  counter:
+    kind: photon-counter
+    does: Counts the signal and reference windows.
+    suggested: [swabian/time-tagger]
+  aom:
+    kind: aom-driver
+    does: Switches the laser.
+    suggested: [moglabs/xrf]
+  laser:
+    kind: laser
+    does: Green excitation.
+    suggested: [coherent/obis]
+lab: labs/nv-odmr.yaml
+setup:
+  - Find the resonance with ODMR first, and park the microwave on it.
+procedure:
+  - Rabi gives the π time; enter it as t_pi. Then Ramsey (detuned by a few MHz), Hahn echo and T1.
+plans:
+  - title: Rabi, 0-400 ns
+    plan:
+      plan: rabi
+      setup: { laser.emission: on, laser.power: 0.05, aom.output: on, aom.power: 20, mw.output: on, mw.power: -10,
+               mw.frequency: 2.87e9, pg.protocol: rabi, pg.running: on }
+      sweep: { pg.tau: { from: 0, to: 4.0e-7, points: 81 } }
+      measure: [counter.signal, counter.reference, counter.contrast]
+      after: { pg.running: off, mw.output: off }
+  - title: Ramsey, 2 MHz detuned, 0-2 µs
+    plan:
+      plan: ramsey
+      setup: { laser.emission: on, laser.power: 0.05, aom.output: on, aom.power: 20, mw.output: on, mw.power: -10,
+               mw.frequency: 2.872e9, pg.protocol: ramsey, pg.t_pi: 1.0e-7, pg.running: on }
+      sweep: { pg.tau: { from: 0, to: 2.0e-6, points: 101 } }
+      measure: [counter.signal, counter.reference, counter.contrast]
+      after: { pg.running: off, mw.output: off }
+  - title: Hahn echo, 1 µs to 100 µs
+    plan:
+      plan: hahn_echo
+      setup: { laser.emission: on, laser.power: 0.05, aom.output: on, aom.power: 20, mw.output: on, mw.power: -10,
+               mw.frequency: 2.87e9, pg.protocol: hahn_echo, pg.t_pi: 1.0e-7, pg.running: on }
+      sweep: { pg.tau: { from: 1.0e-6, to: 1.0e-4, points: 41, log: true } }
+      measure: [counter.signal, counter.reference, counter.contrast]
+      after: { pg.running: off, mw.output: off }
+  - title: T1, 1 µs to 5 ms
+    plan:
+      plan: t1
+      setup: { laser.emission: on, laser.power: 0.05, aom.output: on, aom.power: 20, pg.protocol: t1, pg.running: on }
+      sweep: { pg.tau: { from: 1.0e-6, to: 5.0e-3, points: 31, log: true } }
+      measure: [counter.signal, counter.reference, counter.contrast]
+      after: { pg.running: off }
+analysis:
+  - Rabi oscillations give the π time, 1/(2·f_Rabi); Kelvin fits it and suggests the next step.
+  - Ramsey fringes decay with T2*; beating comes from the 14N hyperfine lines.
+  - The echo decays as exp(-(2τ/T2)^n); revivals at the 13C Larmor period show the nuclear spin bath.
+  - T1 is the exponential recovery of the population; milliseconds at room temperature.
+pitfalls:
+  - An uncalibrated laser delay or a short readout window lowers the contrast; check the sequence drawing.
+  - Pulse errors accumulate in long sequences; check the π pulse again after changing microwave power.
+safety:
+  - Starting a sequence counts as a drive, so a person approves it. Keep the microwave duty cycle inside the lab's limit.
+references:
+  - title: J. F. Barry et al., Sensitivity optimization for NV-diamond magnetometry, Rev. Mod. Phys. 92, 015004 (2020)
+    doi: 10.1103/RevModPhys.92.015004

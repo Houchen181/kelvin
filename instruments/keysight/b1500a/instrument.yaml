@@ -1,0 +1,31 @@
+schema: 1
+id: keysight/b1500a
+maker: Keysight
+model: B1500A
+name: Keysight B1500A semiconductor device parameter analyzer
+kind: parameter-analyzer
+interfaces: [gpib]
+control: text
+manuals:
+  - title: B1500 Series Device Analyzer Programming Guide
+    url: https://www.keysight.com/us/en/assets/9018-01851/programming-guides/9018-01851.pdf
+    covers: Programming basics, remote mode functions, programming examples, FLEX command reference and error messages
+    access: public
+links:
+  - title: B1500A Semiconductor Device Analyzer datasheet (Keysight asset page)
+    url: https://www.keysight.com/us/en/assets/7018-01289/data-sheets/5989-2785.pdf
+software:
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.agilent.AgilentB1500
+    url: https://pymeasure.readthedocs.io/en/stable/api/instruments/agilent/agilentB1500.html
+  - name: QCoDeS
+    kind: python-driver
+    ref: qcodes.instrument_drivers.Keysight.keysightb1500.KeysightB1500
+    url: https://github.com/microsoft/Qcodes/blob/main/src/qcodes/instrument_drivers/Keysight/keysightb1500/KeysightB1500_base.py
+  - name: Keysight B1500A VXIplug&play driver (User's Guide)
+    kind: vendor-sdk
+    url: https://www.keysight.com/us/en/assets/9018-05643/programming-guides/9018-05643.pdf
+notes:
+  - Remote control is the FLEX command set (two-letter commands such as CN, DV, XE, UNT?; not SCPI) over GPIB; Keysight's EasyEXPERT documentation treats LAN as a data-transfer path, not a control path.
+  - Prepare the instrument for external control as the Programming Guide describes before sending FLEX commands (EasyEXPERT on the instrument has to be handled first), and plan for a GPIB interface on the lab PC.

@@ -1,0 +1,19 @@
+schema: 1
+id: bristol/wavemeter
+maker: Bristol Instruments
+model: '671'
+name: Bristol Instruments 671 / 771 / 871 wavelength meters
+covers: ['771', '871']
+kind: wavemeter
+interfaces: [usb, lan]
+control: scpi
+links:
+  - title: '671 Series specifications (datasheet: USB/Ethernet interface, library of SCPI commands)'
+    url: https://www.bristol-inst.com/wp-content/uploads/2023/09/Bristol-671-Series-Laser-Wavelength-Meter-Specifications.pdf
+  - title: 771 Series laser spectrum analyzer specifications (datasheet)
+    url: https://www.bristol-inst.com/wp-content/uploads/2023/09/Bristol-771-Series-Laser-Spectrum-Analyzer-Specifications.pdf
+  - title: '871 Series specifications (datasheet: USB/Ethernet, SCPI library, RS-422 streaming)'
+    url: https://www.bristol-inst.com/wp-content/uploads/2023/09/Bristol-871-Series-Laser-Wavelength-Meter-Specifications.pdf
+notes:
+  - SCPI is offered over USB and Ethernet; QuTech's open-source QMI driver reaches the 871A through a plain TCP socket on port 23, and the 871 can also stream readings over RS-422.
+  - Bristol's public product pages link only datasheets and brochures, so ask Bristol (service@bristol-inst.com) for the programmer's guide that matches your firmware before scripting.

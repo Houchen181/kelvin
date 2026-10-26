@@ -1,0 +1,28 @@
+name: Hardware verification
+description: Report that you checked a card on a real instrument.
+labels: [verification]
+body:
+  - type: input
+    id: card
+    attributes:
+      label: Card id
+      placeholder: srs/sr830
+    validations:
+      required: true
+  - type: input
+    id: firmware
+    attributes:
+      label: Model and firmware (from *IDN?)
+    validations:
+      required: true
+  - type: input
+    id: lab
+    attributes:
+      label: Lab
+  - type: textarea
+    id: checked
+    attributes:
+      label: What you compared
+      description: Readings against the front panel, which drives you moved and into what load, anything that differed from the card.
+    validations:
+      required: true

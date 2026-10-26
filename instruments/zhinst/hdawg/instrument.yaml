@@ -1,0 +1,59 @@
+schema: 1
+id: zhinst/hdawg
+maker: Zurich Instruments
+model: HDAWG
+name: Zurich Instruments HDAWG arbitrary waveform generator
+covers: [HDAWG4, HDAWG8]
+kind: awg
+interfaces: [usb, lan]
+control: library
+manuals:
+  - title: HDAWG User Manual (online)
+    url: https://docs.zhinst.com/hdawg_user_manual/index.html
+    covers: AWG sequencer, Command Table tutorial, functional description and specifications
+    access: public
+  - title: 'HDAWG User Manual: Device Node Tree'
+    url: https://docs.zhinst.com/hdawg_user_manual/nodedoc.html
+    covers: Every device node that the APIs read or write
+    access: public
+  - title: LabOne API User Manual
+    url: https://docs.zhinst.com/labone_api_user_manual/index.html
+    covers: Data Server, node tree and the Python, C, MATLAB, .NET and LabVIEW APIs
+    access: public
+  - title: HDAWG User Manual (PDF)
+    url: https://docs.zhinst.com/pdf/ziHDAWG_UserManual.pdf
+    covers: Printable edition of the online manual
+    access: public
+links:
+  - title: 'LabOne API: which Python API should I use?'
+    url: https://docs.zhinst.com/labone_api_user_manual/description_and_guidelines/python_apis.html
+  - title: 'HDAWG tutorial: pulse-level sequencing with the Command Table'
+    url: https://docs.zhinst.com/hdawg_user_manual/tutorials/command_table.html
+software:
+  - name: zhinst-core
+    kind: vendor-sdk
+    ref: zhinst.core.ziDAQServer
+    url: https://pypi.org/project/zhinst-core/
+  - name: zhinst-toolkit
+    kind: vendor-sdk
+    ref: zhinst.toolkit.driver.devices.HDAWG
+    url: https://pypi.org/project/zhinst-toolkit/
+  - name: zhinst-qcodes (also reachable as qcodes.instrument_drivers.zurich_instruments.hdawg.HDAWG)
+    kind: python-driver
+    ref: zhinst.qcodes.HDAWG
+    url: https://pypi.org/project/zhinst-qcodes/
+  - name: LabOne Q
+    kind: vendor-sdk
+    ref: laboneq.dsl.device.instruments.HDAWG
+    url: https://pypi.org/project/laboneq/
+  - name: qcodes_contrib_drivers (older LabOne-based driver)
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.ZurichInstruments.ZIHDAWG8.ZIHDAWG8
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/ZurichInstruments/ZIHDAWG8.py
+examples:
+  - title: labone-api-examples (hdawg folder with Python and MATLAB examples)
+    url: https://github.com/zhinst/labone-api-examples
+    license: MIT
+notes:
+  - 'There is no SCPI interface: the PC runs the LabOne Data Server and the Python API (zhinst-core, zhinst-toolkit or LabOne Q) talks to it, with the instrument attached by USB or 1GbE.'
+  - Waveforms are played from AWG sequencer programs, and the Command Table supports pulse-level sequencing.

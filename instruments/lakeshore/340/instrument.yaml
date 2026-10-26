@@ -1,0 +1,33 @@
+schema: 1
+id: lakeshore/340
+maker: Lake Shore Cryotronics
+model: '340'
+name: Lake Shore Model 340 cryogenic temperature controller
+kind: temperature-controller
+interfaces: [gpib, rs-232]
+control: scpi
+identify:
+  idn: ^LSCI,MODEL340,
+  example: LSCI,MODEL340,123456,02032001
+manuals:
+  - title: Operating Manual for Model 340 Cryogenic Temperature Controller
+    url: https://www.lakeshore.com/docs/default-source/product-downloads/manuals/340_manual.pdf
+    covers: 'Remote-communication sections: IEEE-488 and RS-232C interface setup, and the command list'
+    access: public
+links:
+  - title: Model 340 downloads page (discontinued products)
+    url: https://www.lakeshore.com/products/categories/downloads/discontinued-products/discontinued-products/model-340-cryogenic-temperature-controller
+  - title: Model 340 specifications (computer interfaces, inputs, discontinuation notice)
+    url: https://www.lakeshore.com/products/categories/specification/discontinued-products/discontinued-products/model-340-cryogenic-temperature-controller
+software:
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.lakeshore.LakeShore3xx
+    url: https://pymeasure.readthedocs.io/en/latest/api/instruments/lakeshore/lakeshore3xx.html
+  - name: InstrumentKit
+    kind: python-driver
+    ref: instruments.lakeshore.Lakeshore340
+    url: https://instrumentkit.readthedocs.io/en/latest/apiref/lakeshore.html
+notes:
+  - 'Discontinued: Lake Shore''s 340 page points to the Models 336 and 350 as current alternatives, although many existing cryostat setups still use it.'
+  - Only IEEE-488.2 and RS-232C (19,200 baud maximum) are fitted, with no USB or Ethernet. PyMeasure documents the 340 inside its LakeShore3xx class, where the available channels depend on which input option card is installed.

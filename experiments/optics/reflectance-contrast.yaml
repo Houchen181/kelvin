@@ -1,0 +1,42 @@
+schema: 1
+id: optics/reflectance-contrast
+area: optics
+title: Reflectance contrast spectroscopy
+summary: >-
+  White-light reflectance of a flake against the bare substrate: layer thickness, excitonic resonances and their
+  shifts with temperature, gate or field.
+roles:
+  spectrograph:
+    kind: [monochromator, spectrometer]
+    does: Disperses the reflected light.
+    suggested: [princeton/spectrapro, andor/shamrock, ocean/spectrometer]
+  camera:
+    kind: camera
+    does: Records the spectrum.
+    suggested: [princeton/picam, andor/ccd]
+  scanner:
+    kind: [positioner, motion-stage]
+    does: Moves between the flake and the substrate.
+    suggested: [pi/gcs-piezo, attocube/anc350]
+lab: labs/confocal-optics.yaml
+setup:
+  - A stable white-light source (a tungsten-halogen lamp or a supercontinuum) focused to a spot smaller than the flake; the CW laser stays off.
+  - Take a dark spectrum with the light blocked.
+procedure:
+  - Record the flake and a nearby bare-substrate spot under identical conditions, then repeat against temperature or gate.
+plans:
+  - title: Flake and substrate spectra
+    plan:
+      plan: reflectance_contrast
+      setup: { laser.emission: off, spectrograph.wavelength: 650, camera.exposure: 0.1 }
+      sweep: { scan_x.position: { values: [10, 30] } }
+      measure: [camera.spectrum]
+analysis:
+  - Contrast C = (R_flake - R_substrate)/R_substrate, after subtracting the dark spectrum from both.
+  - Excitons show as dispersive features; fit them with a transfer-matrix model of the stack, or take dC/dλ.
+pitfalls:
+  - The lamp drifts; alternate flake and substrate spectra if the measurement takes long.
+  - Thin-film interference in the substrate (SiO2 on Si) shapes the background; model the full stack.
+references:
+  - title: K. F. Mak, C. Lee, J. Hone, J. Shan and T. F. Heinz, Atomically thin MoS2, a new direct-gap semiconductor, Phys. Rev. Lett. 105, 136805 (2010)
+    doi: 10.1103/PhysRevLett.105.136805

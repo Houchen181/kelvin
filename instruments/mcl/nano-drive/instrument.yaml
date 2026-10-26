@@ -1,0 +1,22 @@
+schema: 1
+id: mcl/nano-drive
+maker: Mad City Labs
+model: Nano-Drive
+name: Mad City Labs Nano-Drive piezo nanopositioning controller
+covers: [Nano-Drive C, Nano-Drive45, Nano-Drive85]
+kind: positioner
+interfaces: [usb, analog]
+control: library
+links:
+  - title: Nano-Drive series product page (USB interfaces, DLL, LabVIEW)
+    url: https://www.madcitylabs.com/nanodrive.html
+  - title: Mad City Labs software page
+    url: https://www.madcitylabs.com/software.html
+  - title: Nano-Drive catalog pages (PDF)
+    url: https://www.madcitylabs.com/catalog/nanodriveseries.pdf
+software:
+  - name: Mad City Labs Madlib DLL (C, C#, MATLAB, Python; supplied with USB Nano-Drives, no public download)
+    kind: vendor-sdk
+    url: https://www.madcitylabs.com/nanodrive.html
+notes:
+  - Closed-loop piezo controllers for sample scanning and focus control. USB models are driven through the vendor DLL (LabVIEW example VIs are included) and every model has front-panel BNC analog inputs (0-10 V by default) as a fallback; no public programming manual was found on madcitylabs.com, so ask Mad City Labs for the DLL manual.

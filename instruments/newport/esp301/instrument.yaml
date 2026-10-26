@@ -1,0 +1,24 @@
+schema: 1
+id: newport/esp301
+maker: Newport (MKS)
+model: ESP301
+name: Newport ESP301 three-axis motion controller
+kind: motion-stage
+interfaces: [gpib, usb, rs-232]
+control: text
+manuals:
+  - title: ESP301 Integrated 3-Axis Motion Controller/Driver User's Manual (EDH0235En1040, 09/17)
+    url: https://api.p1.mks.com/medias/sys_master/images/images/hda/h3e/9117547069470/ESP301-User-s-Manual.pdf
+    covers: 'Section 3 (remote mode): RS-232C, USB and IEEE-488 interfaces, command syntax, command list (3.5) and command descriptions (3.6)'
+    access: public
+  - title: ESP301 LabVIEW Drivers Manual (V1.0.x, EDH0339En1010, 07/13)
+    url: https://api.p1.mks.com/medias/sys_master/images/images/hb8/h45/8797091495966/ESP301-LabVIEW-Drivers-Manual.pdf
+    covers: Reference for the LabVIEW command VIs (Newport ESP301.lvlib)
+    access: public
+software:
+  - name: InstrumentKit Newport ESP-301 driver
+    kind: python-driver
+    ref: instruments.newport.NewportESP301
+    url: https://instrumentkit.readthedocs.io/en/latest/apiref/newport.html
+notes:
+  - Three-axis controller used on Newport stage stacks. Commands are ASCII mnemonics prefixed by the axis number (for example 1PA10 moves axis 1 to 10 units) over RS-232C, USB or GPIB; the manual documents VE? (model and firmware version) rather than *IDN?.

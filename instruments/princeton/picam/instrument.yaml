@@ -1,0 +1,17 @@
+schema: 1
+id: princeton/picam
+maker: Teledyne Princeton Instruments
+model: PICam cameras
+name: Teledyne Princeton Instruments cameras through PICam
+covers: [PyLoN, PIXIS, ProEM, BLAZE, KURO, SOPHIA]
+kind: camera
+interfaces: [usb, lan]
+control: library
+card: card.yaml
+software:
+  - name: pylablib
+    kind: python-driver
+    ref: pylablib.devices.PrincetonInstruments.picam.PicamCamera
+    url: https://github.com/AlexShkarin/pyLabLib/blob/main/pylablib/devices/PrincetonInstruments/picam.py
+notes:
+  - PICam is installed with LightField or on its own; Kelvin calls it directly.

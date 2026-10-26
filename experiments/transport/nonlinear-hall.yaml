@@ -1,0 +1,78 @@
+schema: 1
+id: transport/nonlinear-hall
+area: transport
+title: Nonlinear Hall effect (second harmonic)
+summary: >-
+  Drive an AC current at ω and read the transverse voltage at 2ω: the second-order (nonlinear) Hall response from
+  a Berry curvature dipole, skew scattering or magnetic order. The same lock-in method measures harmonic Hall
+  signals of spin-orbit torque.
+roles:
+  lockin_drive:
+    kind: lock-in
+    does: Drives the current at ω and reads the first-harmonic voltages.
+    suggested: [srs/sr830, srs/sr860, zhinst/mfli]
+  lockin_2w:
+    kind: lock-in
+    does: Reads the transverse voltage at 2ω, locked to the drive.
+    suggested: [srs/sr830, srs/sr860, zhinst/mfli]
+  cryostat:
+    kind: [cryostat, temperature-controller]
+    does: Sets temperature and field.
+    suggested: [qd/multivu, lakeshore/336]
+lab: labs/ppms-transport.yaml
+setup:
+  - A Hall bar or a disc with contacts around it, so the current can be sent along different crystal axes.
+  - lockin_xx's sine output drives the current through a series resistor much larger than the sample. lockin_xy uses an external reference (lockin_xx's TTL output) with harmonic 2, across the Hall contacts.
+  - Check first that every contact is ohmic. A rectifying contact makes a 2ω signal of its own.
+procedure:
+  - Measure the 2ω transverse voltage against the current amplitude. A true second-order response grows as I².
+  - Repeat at a few frequencies (it should not change), with the current along other axes, and against temperature (and field, in a magnet).
+plans:
+  - title: 2ω Hall voltage against the excitation amplitude
+    plan:
+      plan: nonlinear_hall
+      setup: { lockin_xx.frequency: 17.777, lockin_xx.harmonic: 1, lockin_xx.time_constant: "1 s",
+               lockin_xy.harmonic: 2, lockin_xy.time_constant: "1 s" }
+      sweep: { lockin_xx.amplitude: { from: 0.1, to: 1.0, step: 0.05 } }
+      settle: 5
+      measure: [lockin_xx.X, lockin_xx.Y, lockin_xy.X, lockin_xy.Y]
+      after: { lockin_xx.amplitude: 0.004 }
+  - title: Temperature dependence at a fixed current
+    plan:
+      plan: nonlinear_hall_vs_t
+      setup: { lockin_xx.frequency: 17.777, lockin_xx.amplitude: 0.5, lockin_xx.time_constant: "1 s",
+               lockin_xy.harmonic: 2, lockin_xy.time_constant: "1 s" }
+      sweep:
+        cryo.T_set: { from: 2, to: 100, step: 2, stabilize: { read: cryo.T, within: 0.02, for: 120 } }
+      settle: 5
+      measure: [lockin_xx.X, lockin_xy.X, lockin_xy.Y, cryo.T]
+      after: { lockin_xx.amplitude: 0.004 }
+  - title: Field sweep at a fixed current, -9 T to 9 T and back
+    plan:
+      plan: nonlinear_hall_vs_b
+      setup: { lockin_xx.frequency: 17.777, lockin_xx.amplitude: 0.5, lockin_xx.time_constant: "1 s",
+               lockin_xy.harmonic: 2, lockin_xy.time_constant: "1 s", cryo.B_rate: 0.01 }
+      sweep: { cryo.B_set: { from: -9, to: 9, step: 0.1, back: true } }
+      settle: 5
+      measure: [lockin_xx.X, lockin_xy.X, lockin_xy.Y, cryo.B, cryo.T]
+      after: { lockin_xx.amplitude: 0.004, cryo.B_set: 0 }
+analysis:
+  - With I = I0·sin(ωt), an I² response appears at 2ω, 90° out of phase with the reference, so it shows up mostly in Y of the 2ω lock-in. Its sign depends on the lock-in's phase convention; check it once with a diode.
+  - Plot V2ω against Vω on log-log axes; the slope should be 2.
+  - Scaling of E2ω/Eω² against σxx² across temperature separates the intrinsic (Berry curvature dipole) part from extrinsic, disorder-driven parts.
+  - In a magnet, separate the parts even and odd in field; spin-orbit-torque harmonic Hall analysis also uses the field dependence.
+pitfalls:
+  - Joule heating gives 2ω thermoelectric voltages. Compare the longitudinal 2ω voltage, and check how the signal depends on frequency.
+  - Capacitive pickup between the drive and Hall wires gives a 2ω signal that grows with frequency.
+  - Contacts that rectify. Verify linear I-V curves on every contact pair first.
+safety:
+  - Microdevices heat quickly. Start with a small amplitude; the lab limits the sine output, and Kelvin asks before each larger excitation.
+references:
+  - title: I. Sodemann and L. Fu, Quantum nonlinear Hall effect induced by Berry curvature dipole in time-reversal invariant materials, Phys. Rev. Lett. 115, 216806 (2015)
+    doi: 10.1103/PhysRevLett.115.216806
+  - title: Q. Ma et al., Observation of the nonlinear Hall effect under time-reversal-symmetric conditions, Nature 565, 337 (2019)
+    doi: 10.1038/s41586-018-0807-6
+  - title: K. Kang, T. Li, E. Sohn, J. Shan and K. F. Mak, Nonlinear anomalous Hall effect in few-layer WTe2, Nature Materials 18, 324 (2019)
+    doi: 10.1038/s41563-019-0294-7
+  - title: Z. Z. Du, C. M. Wang, S. Li, H.-Z. Lu and X. C. Xie, Disorder-induced nonlinear Hall effect with time-reversal symmetry, Nature Communications 10, 3047 (2019)
+    doi: 10.1038/s41467-019-10941-3

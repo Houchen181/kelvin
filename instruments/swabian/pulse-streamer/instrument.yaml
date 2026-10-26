@@ -1,0 +1,19 @@
+schema: 1
+id: swabian/pulse-streamer
+maker: Swabian Instruments
+model: Pulse Streamer 8/2
+name: Swabian Instruments Pulse Streamer 8/2
+kind: pulse-generator
+interfaces: [lan]
+control: library
+card: card.yaml
+manuals:
+  - title: Pulse Streamer 8/2 documentation (v2.1), Python API
+    url: https://www.swabianinstruments.com/static/documentation/pulse-streamer/v2.1/sections/api-doc.html
+    access: public
+software:
+  - name: pulsestreamer
+    kind: vendor-sdk
+    url: https://pypi.org/project/pulsestreamer/
+notes:
+  - Kelvin builds and checks NV pulse sequences itself (CW and pulsed ODMR, Rabi, Ramsey, Hahn echo, T1); say which output is the laser, the microwave and the gate under vars.

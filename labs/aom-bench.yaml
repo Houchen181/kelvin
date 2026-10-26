@@ -1,0 +1,15 @@
+# An acousto-optic modulator on a bench: an agile RF driver and a power meter in the first diffracted order.
+#
+# To use it: copy it to ~/Kelvin/lab.yaml (or open it in Lab -> Set up), give each instrument its address
+# (Scan finds them) and set the RF limit your AOM is rated for. Until then every instrument here is simulated.
+lab: AOM bench
+
+instruments:
+  aom:
+    card: moglabs/xrf
+    # address: "TCPIP0::<ip>::7802::SOCKET"
+    vars: { ch: "1" }
+    limits: { power: [-50, 30] }           # dBm; most AOMs take at most 1-2 W
+  pm:
+    card: thorlabs/pm100
+    # address: "USB0::0x1313::0x8078::<serial>::INSTR"

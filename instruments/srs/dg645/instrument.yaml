@@ -1,0 +1,18 @@
+schema: 1
+id: srs/dg645
+maker: Stanford Research Systems
+model: DG645
+name: Stanford Research DG645 digital delay generator
+kind: delay-generator
+interfaces: [gpib, rs-232, lan]
+control: scpi
+card: card.yaml
+manuals:
+  - title: DG645 Digital Delay Generator User Manual, Rev 1.1, Remote programming (pp. 44-63)
+    url: https://www.thinksrs.com/downloads/pdfs/manuals/DG645m.pdf
+    access: public
+software:
+  - name: QCoDeS contrib drivers
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.StanfordResearchSystems.DG645.DG645
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/StanfordResearchSystems/DG645.py

@@ -1,0 +1,14 @@
+schema: 1
+id: thorlabs/itc4000
+maker: Thorlabs
+model: ITC4000
+name: Thorlabs ITC4000-series laser diode and TEC controllers
+covers: [ITC4001, ITC4002QCL, ITC4005, ITC4020]
+kind: laser-driver
+interfaces: [usb-tmc]
+control: scpi
+card: card.yaml
+manuals:
+  - title: Thorlabs Series 4000 SCPI Programmers Reference (ITC4000, LDC4000, TED4000)
+    url: https://media.thorlabs.com/globalassets/items/t/te/ted/ted4015/16407-d03.pdf
+    access: public

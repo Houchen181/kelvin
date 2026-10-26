@@ -1,0 +1,56 @@
+schema: 1
+id: hubner/cobolt
+maker: HÜBNER Photonics (Cobolt)
+model: 06-01
+name: HÜBNER Photonics Cobolt 04-01 / 06-01 / 08-01 series lasers
+covers: [04-01, 08-01]
+kind: laser
+interfaces: [usb, rs-232]
+control: text
+manuals:
+  - title: Cobolt 06-01 Series Owner's Manual (D0136-P, October 2023)
+    url: https://hubner-photonics.com/wp-content/uploads/2023/11/D0136-P_Manual-Cobolt-06-01-Series_October_2023-1.pdf
+    covers: 'Operation via data port (p. 42: connections, handshaking, USB driver) and Communication commands (p. 45)'
+    access: public
+  - title: Cobolt 06-01 Series 12 V Owner's Manual (D0951-D)
+    url: https://hubner-photonics.com/wp-content/uploads/2026/04/D0951-D-Manual-Cobolt-06-01-Series-12-V.pdf
+    covers: 'Chapter 4 Operation via data port: remote interface configuration, command syntax, command list and command descriptions (12 V variants use a different syntax from the other manuals)'
+    access: public
+  - title: Cobolt 04-01 Series Owner's Manual (D0105-J, April 2025)
+    url: https://hubner-photonics.com/wp-content/uploads/2014/10/D0105-J_Manual-Cobolt-04-01-Series_April_2025.pdf
+    covers: 'Operation via data port (p. 24: RS232 and USB communication) and Communication commands (p. 25)'
+    access: public
+  - title: Cobolt 08-01 Series Owner's Manual (D0141-Q, April 2025)
+    url: https://hubner-photonics.com/wp-content/uploads/2015/09/D0141-Q_Manual-Cobolt-08-01-Series_April_2025.pdf
+    covers: 'Operation via data port (p. 35: RS232 communication, USB driver) and Communication commands (p. 36)'
+    access: public
+links:
+  - title: Cobolt 06-01 Series product page
+    url: https://hubner-photonics.com/products/lasers/diode-lasers/06-01-series/
+  - title: Cobolt 04-01 Series product page
+    url: https://hubner-photonics.com/products/lasers/single-frequency-lasers/04-01-series/
+  - title: Cobolt 08-01 Series product page
+    url: https://hubner-photonics.com/products/lasers/narrow-linewidth-lasers/08-01-series/
+  - title: Software, USB drivers and LabVIEW drivers (Cobolt Monitor)
+    url: https://hubner-photonics.com/downloads/
+  - title: Cobolt Lasers GitHub organization (pycobolt, samples)
+    url: https://github.com/cobolt-lasers
+software:
+  - name: pycobolt (official Python package from Cobolt Lasers, install from GitHub)
+    kind: vendor-sdk
+    ref: pycobolt.CoboltLaser
+    url: https://github.com/cobolt-lasers/pycobolt
+  - name: pylablib Hubner Cobolt driver
+    kind: python-driver
+    ref: pylablib.devices.Hubner.Cobolt
+    url: https://pylablib.readthedocs.io/en/latest/devices/Hubner.html
+  - name: Cobolt Monitor GUI and USB driver
+    kind: vendor-software
+    url: https://hubner-photonics.com/downloads/
+examples:
+  - title: 'cobolt-lasers/samples (C++ and Python hello_laser: list COM ports and read the serial number)'
+    url: https://github.com/cobolt-lasers/samples
+    license: MIT
+notes:
+  - Serial settings are 115200 baud, 8 data bits, no parity, 1 stop bit; commands end with a carriage return and the laser only replies, never talks first. USB (virtual COM port) and RS-232 carry the same protocol.
+  - Short commands such as l? (laser on/off state) and hrs? (operating hours) are listed in the 04-01, 06-01 and 08-01 manuals, but the 06-01 12 V manual (D0951) documents a different syntax, so use the manual revision that matches your laser.

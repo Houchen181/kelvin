@@ -1,0 +1,33 @@
+schema: 1
+id: environment/cooldown-log
+area: environment
+title: Cooldown log
+summary: >-
+  Record every thermometer (and a sample reading) through a cooldown, so this cooldown can be compared with the
+  last: a slow stage means poor thermal contact, a leak or a blocked line, and the sample's resistance shows
+  transitions on the way down.
+roles:
+  temperature:
+    kind: [temperature-controller, cryostat, resistance-bridge]
+    does: Reads the thermometers.
+    suggested: [lakeshore/336, lakeshore/350, lakeshore/218, lakeshore/372, oxford/mercury-itc]
+  lockin:
+    kind: lock-in
+    does: Reads the sample's resistance at the same time.
+    optional: true
+    suggested: [srs/sr830]
+lab: labs/cryostat-electrical.yaml
+setup:
+  - Start the log before the cooldown begins; Kelvin's watches (such as the heater cut-off in this lab) keep running without a chat.
+procedure:
+  - Log every 30 s until base temperature, then compare the curve with earlier cooldowns in the data folder.
+plans:
+  - title: Every 30 s for 12 h
+    plan:
+      plan: cooldown_log
+      time: { every: 30, for: 43200 }
+      measure: [tc.T_A, tc.T_B, tc.heater, lockin.X]
+analysis:
+  - Overlay with earlier cooldowns; the time to each stage temperature and the base temperature reveal contact or vacuum problems early.
+pitfalls:
+  - A thermometer calibration curve that doesn't match the sensor gives smooth but wrong temperatures; check them at a known point (77 K, 4.2 K).

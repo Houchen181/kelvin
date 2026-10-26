@@ -1,0 +1,42 @@
+schema: 1
+id: keysight/e8257d
+maker: Keysight
+model: E8257D
+name: Keysight E8257D PSG analog signal generator
+covers: [E8267D, E8663D]
+kind: microwave-source
+interfaces: [gpib, lan, rs-232]
+control: scpi
+identify:
+  idn: ^(Agilent|Keysight) Technologies,E8257D,
+  example: Agilent Technologies,E8257D,US00000000,C.05.50
+manuals:
+  - title: E8257D, E8267D, E8663D PSG Signal Generators SCPI Command Reference
+    url: https://www.keysight.com/us/en/assets/9018-04965/programming-guides/9018-04965.pdf
+    covers: Complete SCPI command reference for the PSG
+    access: sign-in
+  - title: Signal Generators Programming Guide (ESG, PSG, MXG)
+    url: https://www.keysight.com/us/en/assets/9018-04964/programming-guides/9018-04964.pdf
+    covers: Remote operation over GPIB, LAN and RS-232 with programming examples
+    access: sign-in
+  - title: E8257D/67D and E8663D PSG Installation Guide
+    url: https://www.keysight.com/us/en/assets/9018-04961/installation-guides/9018-04961.pdf
+    covers: 'Configuring for Remote Control: GPIB address, LAN and RS-232 setup menus (Utility > GPIB/RS-232 LAN)'
+    access: public
+links:
+  - title: E8257D/67D and E8663D PSG User's Guide (sign-in)
+    url: https://www.keysight.com/us/en/assets/9018-04962/user-manuals/9018-04962.pdf
+  - title: E8257D PSG Configuration Guide
+    url: https://www.keysight.com/us/en/assets/7018-01233/configuration-guides/5989-1325.pdf
+software:
+  - name: QCoDeS
+    kind: python-driver
+    ref: qcodes.instrument_drivers.agilent.AgilentE8257D
+    url: https://github.com/microsoft/Qcodes/blob/main/src/qcodes/instrument_drivers/agilent/Agilent_E8257D.py
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.agilent.Agilent8257D
+    url: https://github.com/pymeasure/pymeasure/blob/master/pymeasure/instruments/agilent/agilent8257D.py
+notes:
+  - Older PSG still common as a microwave drive source. The GPIB address defaults to 19 (range 0 to 30) and the LAN and RS-232 settings sit under Utility > GPIB/RS-232 LAN.
+  - The QCoDeS driver reads the installed frequency option with DIAG:CPU:INFO:OPT:DET? and raises an error if none of the options it knows (513, 520, 521, 532, 540, 550, 567) is found.

@@ -1,0 +1,15 @@
+schema: 1
+id: andor/shamrock
+maker: Andor (Oxford Instruments)
+model: Shamrock / Kymera
+name: Andor Shamrock and Kymera spectrographs
+covers: [Shamrock 163, Shamrock 303i, Shamrock 500i, Kymera 193i, Kymera 328i]
+kind: monochromator
+interfaces: [usb]
+control: library
+card: card.yaml
+software:
+  - name: pylablib
+    kind: python-driver
+    ref: pylablib.devices.Andor.Shamrock.ShamrockSpectrograph
+    url: https://github.com/AlexShkarin/pyLabLib/blob/main/pylablib/devices/Andor/Shamrock.py

@@ -1,0 +1,43 @@
+schema: 1
+id: lakeshore/372
+maker: Lake Shore Cryotronics
+model: '372'
+name: Lake Shore Model 372 AC resistance bridge and temperature controller
+kind: resistance-bridge
+categories: [cryogenics]
+interfaces: [gpib, usb, lan]
+control: scpi
+identify:
+  idn: ^LSCI,MODEL372,
+  example: LSCI,MODEL372,372184,05302003
+manuals:
+  - title: Manual for Model 372 AC Bridge and Temperature Controller
+    url: https://www.lakeshore.com/docs/default-source/product-downloads/manuals/372_manual.pdf
+    covers: List of all commands and queries for the IEEE-488, USB and Ethernet computer interfaces
+    access: public
+links:
+  - title: Model 372 AC resistance bridge (Lake Shore product overview)
+    url: https://www.lakeshore.com/products/categories/overview/temperature-products/ac-resistance-bridges/model-372-ac-resistance-bridge-temperature-controller
+  - title: Model 372 downloads (manual, quick start guide, application notes)
+    url: https://www.lakeshore.com/products/categories/downloads/temperature-products/ac-resistance-bridges/model-372-ac-resistance-bridge-temperature-controller
+  - title: 'Lake Shore drivers: USB, LabVIEW, Python, IVI.NET and EPICS'
+    url: https://www.lakeshore.com/resources/software/drivers
+software:
+  - name: lakeshore (Lake Shore Python driver)
+    kind: vendor-sdk
+    ref: lakeshore.Model372
+    url: https://lake-shore-python-driver.readthedocs.io/en/latest/model_372.html
+  - name: lakeshore on PyPI
+    kind: vendor-sdk
+    url: https://pypi.org/project/lakeshore/
+  - name: QCoDeS
+    kind: python-driver
+    ref: qcodes.instrument_drivers.Lakeshore.Lakeshore_model_372.LakeshoreModel372
+    url: https://github.com/microsoft/Qcodes/blob/main/src/qcodes/instrument_drivers/Lakeshore/Lakeshore_model_372.py
+examples:
+  - title: Lake Shore python-driver example scripts (372_control_loop_example.py, 372_input_setup_example.py)
+    url: https://github.com/lakeshorecryotronics/python-driver/tree/main/docs/examples
+    license: MIT
+notes:
+  - Standard bridge and heater controller for dilution-refrigerator thermometry; USB emulates a standard RS-232 serial port and Ethernet is TCP/IP (Lake Shore specifications).
+  - Commands are Lake Shore-specific rather than SCPI, and the instrument also offers a Model 370 command-emulation mode; the *IDN? example comes from an open-source simulator, so check serial and firmware fields on your unit.

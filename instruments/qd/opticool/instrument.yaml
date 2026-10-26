@@ -1,0 +1,31 @@
+schema: 1
+id: qd/opticool
+maker: Quantum Design
+model: OptiCool
+name: Quantum Design OptiCool magneto-optical cryostat
+kind: cryostat
+categories: [magnets, optics]
+interfaces: [lan]
+control: library
+manuals:
+  - title: 'Application Note 1070-220: MultiPyVu: Controlling QD Cryostats Using Python (PPMS, DynaCool, VersaLab, OptiCool, MPMS3)'
+    url: https://qdusa.com/siteDocs/appNotes/1070-220.pdf
+    covers: MultiPyVu server and client setup and commands for controlling the cryostat through MultiVu
+    access: public
+links:
+  - title: OptiCool product page (brochures, specifications)
+    url: https://qdusa.com/products/opticool.html
+  - title: Quantum Design application notes (OptiCool and software integration notes)
+    url: https://qdusa.com/resources/application_notes.html
+software:
+  - name: MultiPyVu (Quantum Design's Python package for MultiVu)
+    kind: vendor-sdk
+    ref: MultiPyVu.Client
+    url: https://pypi.org/project/MultiPyVu/
+  - name: qcodes_contrib_drivers
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.QuantumDesign.Opticool.Opticool
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/QuantumDesign/Opticool.py
+notes:
+  - 'Remote control goes through MultiVu: run MultiPyVu.Server on the Windows PC that runs MultiVu and MultiPyVu.Client locally or from another machine over TCP. It sets and reads temperature, field and chamber state, and get_aux_temperature() reads the OptiCool auxiliary thermometer.'
+  - MultiPyVu 3.8.0 (September 2026) added support for the OptiCool Vector magnet, and QD's LabVIEW and .NET note 1070-210 lists PPMS, DynaCool, VersaLab and MPMS3 but not the OptiCool. No public OptiCool user manual was found; QD's manuals are normally in its Pharos portal (account required).

@@ -1,0 +1,32 @@
+schema: 1
+id: pfeiffer/tpg36x
+maker: Pfeiffer Vacuum
+model: TPG 362
+name: Pfeiffer Vacuum TPG 361 / TPG 362 SingleGauge / DualGauge vacuum gauge controllers
+covers: [TPG 361]
+kind: vacuum-gauge
+interfaces: [rs-485, usb, lan]
+control: text
+manuals:
+  - title: TPG 361 / TPG 362 Communication Protocol (BG 5510 BEN/D, 2018-08)
+    url: https://www.shop.buschgroup.com/api/empolis/resource/environment/project1_p/documents/pfeifferSharepointProd/2181-bg5510ben_d.pdf
+    covers: Mnemonic and Pfeiffer Vacuum protocol command reference for the single- and dual-channel ActiveLine controllers
+    access: public
+  - title: TPG 361 / TPG 362 Operating Instructions (BG 5500 BEN/D)
+    url: https://www.shop.buschgroup.com/api/empolis/resource/environment/project1_p/documents/pfeifferSharepointProd/152-bg5500ben_d.pdf
+    covers: Interface connections and technical data, including the RS-485 interface
+    access: public
+links:
+  - title: ActiveLine LabVIEW driver installation instructions (TPG 36x)
+    url: https://www.shop.buschgroup.com/api/empolis/resource/environment/project1_p/documents/pfeifferSharepointProd/9594-pv-activeline-readme-labview.pdf
+software:
+  - name: InstrumentKit
+    kind: python-driver
+    ref: instruments.pfeiffer.TPG36x
+    url: https://instrumentkit.readthedocs.io/en/latest/apiref/pfeiffer.html
+  - name: Pfeiffer Vacuum ActiveLine LabVIEW driver (PV ActiveLine, covers TPG 36x)
+    kind: vendor-sdk
+    url: https://www.shop.buschgroup.com/api/empolis/resource/environment/project1_p/documents/pfeifferSharepointProd/9593-pv-activeline.zip
+notes:
+  - 'ASCII mnemonic protocol terminated by CR+LF: send a command such as PR1, wait for the ACK (0x06), then send ENQ (0x05) to fetch the reply. InstrumentKit''s documentation example opens it as a serial port at 9600 baud.'
+  - Pfeiffer's current documents are served from the Busch Group shop site; older pfeiffer-vacuum.com product pages now redirect to pfeiffervacuum.com and several return 404. That document server answers HEAD with 500, so check links with a ranged GET.

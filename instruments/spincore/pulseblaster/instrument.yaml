@@ -1,0 +1,14 @@
+schema: 1
+id: spincore/pulseblaster
+maker: SpinCore
+model: PulseBlaster
+name: SpinCore PulseBlaster pulse generators
+covers: [PulseBlasterESR-PRO, PulseBlaster USB]
+kind: pulse-generator
+interfaces: [usb, pcie]
+control: library
+card: card.yaml
+software:
+  - name: spinapi (community wrapper)
+    kind: python-driver
+    url: https://pypi.org/project/spinapi/

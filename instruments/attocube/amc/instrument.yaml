@@ -1,0 +1,36 @@
+schema: 1
+id: attocube/amc
+maker: attocube
+model: AMC300
+name: attocube AMC300 / AMC100 piezo positioner controller
+covers: [AMC100, AMC110, AMC150]
+kind: positioner
+interfaces: [lan, usb]
+control: web-api
+manuals:
+  - title: AMC Interface Manual AMC110 & AMC300 (v1.5.1, 08/2026)
+    url: https://raw.githubusercontent.com/attocube-systems/AMC-APIs/master/AMC_Interface_Manual_v1.5.1.pdf
+    covers: Section 2 (web interface, JSON-RPC 2.0 over TCP port 9090 and websocket, C/C#/LabVIEW/MATLAB/Python wrappers) and Section 3 (API function reference)
+    access: public
+links:
+  - title: attocube AMC300 product page
+    url: https://www.attocube.com/en/products/nanopositioners/motion-controllers-overview/amc300
+  - title: attocube AMC110 product page
+    url: https://www.attocube.com/en/products/nanopositioners/motion-controllers-overview/amc110
+  - title: AMC300 datasheet (PDF)
+    url: https://www.attocube.com/downloads/amc300.pdf
+software:
+  - name: attocube AMC-APIs Python package (amc_api_python)
+    kind: vendor-sdk
+    ref: amc_api_python.AMC.Device
+    url: https://github.com/attocube-systems/AMC-APIs/tree/master/python
+  - name: QCoDeS contrib driver for the AMC100 (built on the AMC-APIs package)
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.Attocube.AMC100.AttocubeAMC100
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/Attocube/AMC100.py
+examples:
+  - title: 'attocube-systems/AMC-APIs: bindings and examples for Python, C, C#, LabVIEW and MATLAB'
+    url: https://github.com/attocube-systems/AMC-APIs
+    license: MIT
+notes:
+  - Controller for attocube piezo positioners and scanners (three axes) that serves a web interface and accepts JSON-RPC 2.0 requests on TCP port 9090, so any language can talk to it directly. Axes are numbered 0-2, positions are in nm (micro-degrees for rotators) and voltages in mV.

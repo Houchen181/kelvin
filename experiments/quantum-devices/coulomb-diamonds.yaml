@@ -1,0 +1,63 @@
+schema: 1
+id: quantum-devices/coulomb-diamonds
+area: quantum-devices
+title: Coulomb diamonds in quantum dots
+summary: >-
+  Map the current (or dI/dV) through a quantum dot against bias and gate voltage: charging energy, lever arm,
+  excited states and Kondo resonances, in gate-defined dots, nanowires, nanotubes and small islands.
+roles:
+  gate:
+    kind: [source-meter, voltage-source]
+    does: Sweeps the plunger gate.
+    suggested: [keithley/2400, qdevil/qdac-ii, basel/lnhr-dac]
+  bias:
+    kind: voltage-source
+    does: Sets the source-drain bias through a divider.
+    suggested: [yokogawa/gs200, basel/lnhr-dac, qdevil/qdac-ii]
+  iamp:
+    kind: preamp
+    does: Reads the drain current at a virtual ground.
+    suggested: [srs/sr570]
+  dmm:
+    kind: multimeter
+    does: Reads the DC current from the preamplifier's output.
+    suggested: [keysight/34465a, keithley/dmm6500]
+  lockin:
+    kind: lock-in
+    does: Adds a small AC bias and reads dI/dV.
+    optional: true
+    suggested: [srs/sr830, zhinst/mfli]
+  fridge:
+    kind: [dilution-refrigerator, temperature-controller, resistance-bridge]
+    does: Keeps the electrons cold (the dot's levels must be wider apart than kT).
+    suggested: [bluefors/dilution-refrigerator, oxford/triton, lakeshore/372]
+lab: labs/cryostat-electrical.yaml
+setup:
+  - Bias the source through a 1:100 divider (add the lock-in's sine through a 1:10^4 divider for dI/dV); the drain goes to the SR570.
+  - Filter every line at the mixing chamber (RC and copper-powder or RF filters); electron temperature sets the resolution.
+procedure:
+  - Find Coulomb peaks with a gate sweep at small bias, then map bias against gate over a few peaks.
+plans:
+  - title: Bias against gate, ±5 mV at the sample
+    plan:
+      plan: coulomb_diamonds
+      setup: { gate.compliance_I: 1.0e-9, gate.output: on, bias.current_limit: 0.01, bias.output: on,
+               lockin.amplitude: 0.1, lockin.frequency: 77.7, lockin.time_constant: "100 ms" }
+      sweep:
+        gate.V: { from: 0, to: 2, step: 0.005 }
+        bias.level: { from: -0.5, to: 0.5, step: 0.01 }
+      settle: 0.3
+      measure: [lockin.X, dmm.V_dc]
+      after: { bias.level: 0, gate.V: 0, bias.output: off }
+analysis:
+  - The diamonds' height in bias is the addition energy, e·V_bias at the tips (E_C plus any level spacing).
+  - The lever arm α = E_add/(e·ΔVg) converts gate voltage to energy; the two edge slopes give the capacitance ratios.
+  - Lines parallel to the diamond edges outside the diamonds are excited states; a zero-bias ridge inside a diamond with odd occupation is the Kondo effect.
+pitfalls:
+  - Charge switching moves the diamonds between sweeps; slow sweeps and stable gates help.
+  - The SR570's input offset shifts zero bias; calibrate it against the diamond symmetry.
+safety:
+  - Gate leakage destroys the dot; the lab's guard stops the gate ramp above 2 nA.
+references:
+  - title: R. Hanson, L. P. Kouwenhoven, J. R. Petta, S. Tarucha and L. M. K. Vandersypen, Spins in few-electron quantum dots, Rev. Mod. Phys. 79, 1217 (2007)
+    doi: 10.1103/RevModPhys.79.1217

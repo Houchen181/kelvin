@@ -1,0 +1,65 @@
+schema: 1
+id: spin-resonance/fmr
+area: spin-resonance
+title: Ferromagnetic resonance (field-modulated)
+summary: >-
+  Microwave absorption by a precessing magnetization, read with field modulation and a lock-in: resonance field,
+  effective magnetization, g-factor and Gilbert damping of magnetic films and crystals.
+roles:
+  magnet:
+    kind: [magnet-supply, cryostat]
+    does: Sweeps the static field.
+    suggested: [ami/430, lakeshore/625, cryomagnetics/4g, qd/multivu]
+  microwave:
+    kind: microwave-source
+    does: Drives a coplanar waveguide under the sample.
+    suggested: [rs/smb100a, keysight/n5183b, srs/sg384, rs/sgs100a]
+  lockin:
+    kind: lock-in
+    does: Drives the modulation coils and reads the diode detector.
+    suggested: [srs/sr830, srs/sr860]
+  vna:
+    kind: vna
+    does: Broadband FMR without modulation (S21 of the waveguide).
+    optional: true
+    suggested: [keysight/e5071c, rs/znb]
+lab: labs/fmr.yaml
+setup:
+  - The sample lies face-down on a coplanar waveguide; the transmitted microwave goes to a Schottky diode detector into the lock-in input.
+  - The lock-in's sine output drives small Helmholtz coils (through an audio amplifier) for a modulation of about 0.1-1 mT, much less than the linewidth.
+procedure:
+  - At each frequency, sweep the field through the resonance; then repeat over a range of frequencies.
+plans:
+  - title: Field sweep at 10 GHz
+    plan:
+      plan: fmr_field_sweep
+      setup: { mw.frequency: 1.0e10, mw.power: 10, mw.output: on, lockin.frequency: 87.7, lockin.amplitude: 1.0,
+               lockin.time_constant: "300 ms" }
+      sweep: { magnet.B_target: { from: 0, to: 0.6, step: 0.001 } }
+      settle: 1
+      measure: [lockin.X, lockin.Y, magnet.B]
+      after: { mw.output: off, lockin.amplitude: 0.004, magnet.B_target: 0 }
+  - title: Field sweeps from 4 GHz to 16 GHz
+    plan:
+      plan: fmr_frequencies
+      setup: { mw.power: 10, mw.output: on, lockin.frequency: 87.7, lockin.amplitude: 1.0, lockin.time_constant: "300 ms" }
+      sweep:
+        mw.frequency: { values: [4.0e9, 6.0e9, 8.0e9, 10.0e9, 12.0e9, 14.0e9, 16.0e9] }
+        magnet.B_target: { from: 0, to: 0.8, step: 0.001 }
+      settle: 1
+      measure: [lockin.X, magnet.B]
+      after: { mw.output: off, lockin.amplitude: 0.004, magnet.B_target: 0 }
+analysis:
+  - Field modulation measures the derivative of the absorption; fit derivative Lorentzians (symmetric plus antisymmetric) for the resonance field and linewidth.
+  - "In-plane field: f = (γ/2π)·sqrt(μ0Hr·(μ0Hr + μ0Meff)); perpendicular: f = (γ/2π)·(μ0Hr - μ0Meff). The fit gives γ (the g-factor) and Meff."
+  - "The full width at half maximum grows linearly with frequency, μ0ΔH = μ0ΔH0 + 4πα·f/γ (γ in rad s⁻¹ T⁻¹): the slope gives the Gilbert damping α, the intercept the inhomogeneous broadening."
+pitfalls:
+  - Over-modulation broadens and distorts the line; keep the modulation below a fifth of the linewidth.
+  - Standing waves in cables change the power at the sample with frequency; normalize each sweep.
+safety:
+  - The magnet ramps through the AMI 430 at its own rate, inside the lab's limits; a stopped run holds the field.
+references:
+  - title: C. Kittel, On the theory of ferromagnetic resonance absorption, Phys. Rev. 73, 155 (1948)
+    doi: 10.1103/PhysRev.73.155
+  - title: M. Farle, Ferromagnetic resonance of ultrathin metallic layers, Rep. Prog. Phys. 61, 755 (1998)
+    doi: 10.1088/0034-4885/61/7/001

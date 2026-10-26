@@ -1,0 +1,43 @@
+name: validate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.9", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: pip install pyyaml jsonschema
+      - name: Check every instrument, card, experiment and lab config
+        run: python tools/kic.py validate --warnings
+      - name: Check the files against the JSON schemas
+        run: |
+          python - <<'EOF'
+          import glob, json, sys
+          sys.path.insert(0, "tools")
+          import jsonschema, kic
+          bad = 0
+          for schema, pattern in (("schema/instrument.schema.json", "instruments/*/*/instrument.yaml"),
+                                  ("schema/experiment.schema.json", "experiments/*/*.yaml")):
+              validator = jsonschema.Draft202012Validator(json.load(open(schema)))
+              for path in sorted(glob.glob(pattern)):
+                  for e in validator.iter_errors(kic.load_yaml(kic.Path(path))):
+                      print("%s: %s" % (path, e.message))
+                      bad += 1
+          sys.exit(1 if bad else 0)
+          EOF
+      - name: index.json and CATALOG.md are up to date
+        run: python tools/kic.py index --check
+      - name: install into an empty Kelvin folder
+        run: |
+          mkdir -p /tmp/kelvin-home
+          python tools/kic.py install --kelvin-home /tmp/kelvin-home
+          python tools/kic.py install --kelvin-home /tmp/kelvin-home

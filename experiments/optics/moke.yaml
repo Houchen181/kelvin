@@ -1,0 +1,52 @@
+schema: 1
+id: optics/moke
+area: optics
+title: Magneto-optical Kerr effect
+summary: >-
+  The polarization of reflected light rotates in proportion to the magnetization: hysteresis loops, coercive
+  fields and ordering temperatures of thin films and flakes.
+roles:
+  laser:
+    kind: laser
+    does: A stable CW laser, intensity modulated for lock-in detection.
+    suggested: [coherent/obis, hubner/cobolt]
+  modulation:
+    kind: [function-generator, modulator]
+    does: Modulates the laser, or the polarization with a photoelastic modulator.
+    suggested: [keysight/33500b, hinds/pem]
+  lockin:
+    kind: lock-in
+    does: Reads the balanced detector's difference signal.
+    suggested: [srs/sr830, srs/sr860, zhinst/mfli]
+  magnet:
+    kind: [cryostat, magnet-supply]
+    does: Sweeps the field.
+    suggested: [qd/multivu, qd/opticool, lakeshore/625]
+lab: labs/magneto-optics.yaml
+setup:
+  - "Polar MOKE: normal incidence, field along the beam. After the sample, a half-wave plate and a Wollaston prism split the beam onto balanced photodiodes."
+  - Balance the photodiodes at zero field (or above saturation) with the half-wave plate.
+  - "Alternative: a photoelastic modulator at 50 kHz, reading rotation at 2f and ellipticity at 1f."
+procedure:
+  - Sweep the field through the loop there and back; repeat at temperatures across the ordering temperature.
+plans:
+  - title: Hysteresis loop over ±1 T
+    plan:
+      plan: moke_loop
+      setup: { laser.emission: on, laser.power: 1.0e-3, fg.frequency: 1777, fg.output: on, lockin.time_constant: "300 ms",
+               cryo.B_rate: 0.01 }
+      sweep: { cryo.B_set: { from: -1, to: 1, step: 0.01, back: true } }
+      settle: 1
+      measure: [lockin.X, lockin.Y, cryo.B, pm.power]
+      after: { laser.power: 0, laser.emission: off, fg.output: off, cryo.B_set: 0 }
+analysis:
+  - For small rotations, θK ≈ ΔV/(2·Vsum), with ΔV the difference signal and Vsum the sum of the two photodiodes, read the same way.
+  - Subtract the linear background from Faraday rotation in the windows and objective, then read the coercive field and remanence.
+pitfalls:
+  - Laser intensity drift looks like a signal; normalize by the sum or the power meter.
+  - Vibrations of the cryostat move the spot and the balance; let it settle after field changes.
+safety:
+  - The laser is class 3B or 4. Kelvin asks before every laser change; a stopped run holds the field.
+references:
+  - title: Z. Q. Qiu and S. D. Bader, Surface magneto-optic Kerr effect, Rev. Sci. Instrum. 71, 1243 (2000)
+    doi: 10.1063/1.1150496

@@ -1,0 +1,31 @@
+schema: 1
+id: thorlabs/kdc101
+maker: Thorlabs
+model: KDC101
+name: Thorlabs KDC101 K-Cube brushed DC servo motor controller
+covers: [TDC001]
+kind: motion-stage
+interfaces: [usb]
+control: library
+software:
+  - name: pylablib Thorlabs Kinesis/APT driver
+    kind: python-driver
+    ref: pylablib.devices.Thorlabs.KinesisMotor
+    url: https://pylablib.readthedocs.io/en/stable/devices/Thorlabs_kinesis.html
+  - name: QCoDeS contrib driver for the KDC101 (uses the Kinesis DLLs)
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.Thorlabs.KDC101.Thorlabs_KDC101
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/Thorlabs/KDC101.py
+  - name: InstrumentKit APT motor controller
+    kind: python-driver
+    ref: instruments.thorlabs.APTMotorController
+    url: https://instrumentkit.readthedocs.io/en/latest/apiref/thorlabs.html
+examples:
+  - title: 'Thorlabs Motion_Control_Examples: KDC101 (Kinesis .NET with pythonnet, Kinesis C with ctypes)'
+    url: https://github.com/Thorlabs/Motion_Control_Examples/tree/main/Python/Kinesis/KCube/KDC101
+    license: MIT
+  - title: 'Thorlabs Motion_Control_Examples: KDC101 raw APT serial-protocol example (pySerial)'
+    url: https://github.com/Thorlabs/Motion_Control_Examples/blob/main/Python/Serial%20Command/KDC101_serial.py
+    license: MIT
+notes:
+  - Servo controller for Z8xx linear actuators and PRM1-Z8 rotation stages. It can be driven through the Kinesis libraries or with raw APT binary messages on the USB virtual COM port (Thorlabs' serial example uses 115200 baud, 8N1, no flow control); the APT USB device needs 'Load VCP' enabled in Windows Device Manager first.

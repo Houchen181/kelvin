@@ -1,0 +1,38 @@
+schema: 1
+id: horiba/ihr
+maker: HORIBA
+model: iHR320
+name: HORIBA iHR320 / iHR550 imaging spectrometers
+covers: [iHR550]
+kind: spectrometer
+interfaces: [usb]
+control: library
+manuals:
+  - title: ICL API Programmers Manual (EzSpec-SDK, in the horiba-sdk Python documentation)
+    url: https://horiba-python-sdk.readthedocs.io/en/latest/icl_api/
+    covers: 'Command and control API: connecting to ICL, command format, general commands (icl_info, icl_shutdown, icl_binMode) and monochromator module commands (mono_discover, mono_open, mono_close, ...)'
+    access: public
+links:
+  - title: iHR Series product page
+    url: https://www.horiba.com/int/scientific/products/detail/action/show/Product/ihr-series-1590/
+  - title: EzSpec-SDK product page (supported instruments include MicroHR, iHR320, iHR550)
+    url: https://www.horiba.com/int/scientific/products/detail/action/show/Product/ezspec-sdk-6853/
+  - title: EzSpec-SDK flyer (PDF)
+    url: https://static.horiba.com/fileadmin/Horiba/Products/Scientific/Custom_Spectroscopy_Solutions/EzSpec-SDK/EzSpec-SDK_Flyer_2025.pdf
+  - title: horiba-sdk Python documentation
+    url: https://horiba-python-sdk.readthedocs.io/en/latest/
+software:
+  - name: horiba-sdk (official Python package; needs the licensed EzSpec-SDK / ICL installed)
+    kind: vendor-sdk
+    ref: horiba_sdk.devices.single_devices.monochromator.Monochromator
+    url: https://pypi.org/project/horiba-sdk/
+  - name: HORIBA EzSpec-SDK GitHub organization (Python, .NET, C++, LabVIEW SDKs)
+    kind: vendor-sdk
+    url: https://github.com/HORIBAEzSpecSDK
+examples:
+  - title: HORIBAEzSpecSDK/python-sdk examples (monochromator, CCD, SpectraCq3)
+    url: https://github.com/HORIBAEzSpecSDK/python-sdk
+    license: MIT
+notes:
+  - 'Current remote control goes through HORIBA''s ICL service (a Windows console app installed with the paid EzSpec-SDK): your program sends JSON commands over a websocket (ws://localhost:25010 by default, a remote ICL address also works) as described in the ICL API manual, and the MIT-licensed horiba-sdk Python package wraps this but will not work without the licensed SDK and ICL installed.'
+  - The older iHR operation manual (J81092) describes driving the spectrometer from SynerJY, Spectrometer Utilities or LabVIEW; that file on horiba.com returned HTTP 403 when checked, so it is not linked here.

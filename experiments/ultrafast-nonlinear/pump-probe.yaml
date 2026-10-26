@@ -1,0 +1,49 @@
+schema: 1
+id: ultrafast-nonlinear/pump-probe
+area: ultrafast-nonlinear
+title: Pump-probe transient reflectivity
+summary: >-
+  A pump pulse excites the sample and a delayed probe pulse reads the change in reflectivity: carrier cooling and
+  recombination, coherent phonons, and the recovery of ordered phases on femtosecond to nanosecond timescales.
+roles:
+  laser:
+    kind: laser
+    does: Femtosecond pulses, split into pump and probe (often with an OPA or harmonic for the pump).
+    suggested: [lightcon/pharos, spectra-physics/mai-tai, coherent/chameleon]
+  delay:
+    kind: motion-stage
+    does: A linear stage that sets the pump-probe delay (6.67 fs per µm of travel in a double pass).
+    suggested: [newport/xps, thorlabs/kdc101, pi/c-863, newport/smc100]
+  chopper:
+    kind: chopper
+    does: Chops the pump at a sub-harmonic of the repetition rate.
+    suggested: [thorlabs/mc2000b]
+  lockin:
+    kind: lock-in
+    does: Reads the probe photodiode at the chopping frequency.
+    suggested: [srs/sr830, srs/sr860, zhinst/mfli]
+  cryostat:
+    kind: [cryostat, temperature-controller]
+    does: Holds the temperature.
+    optional: true
+    suggested: [montana/cryostation, lakeshore/336]
+needs_cards: [motion-stage, chopper]
+setup:
+  - The pump passes the chopper and the delay stage; pump and probe overlap on the sample with the pump spot larger than the probe's.
+  - The reflected probe goes to a photodiode (or a balanced pair with a reference beam); cross-polarize pump and probe and block the pump before the detector.
+  - Find time zero with a cross-correlation (sum-frequency in a BBO crystal, or two-photon absorption in a photodiode).
+procedure:
+  - A coarse delay scan finds the response, then fine steps around time zero for coherent oscillations; repeat against pump fluence and temperature.
+  - Kelvin can run the delay scan as a plan once the delay stage and chopper have cards.
+analysis:
+  - ΔR/R is the lock-in signal over the probe's DC level. Fit exponentials convolved with the instrument response; Fourier-transform the residual for coherent phonon frequencies.
+  - The fluence dependence separates linear responses from saturation and nonlinear decay.
+pitfalls:
+  - The beam walks on the sample if the stage axis isn't parallel to the beam; check the overlap at both ends of the delay.
+  - Scattered pump light reaching the detector looks like a signal at negative delay.
+  - Heat accumulates at high repetition rates; check the signal before time zero.
+safety:
+  - Ultrafast lasers are class 4; keep the beam enclosed and at waist height away from the eyes.
+references:
+  - title: A. Othonos, Probing ultrafast carrier and phonon dynamics in semiconductors, J. Appl. Phys. 83, 1789 (1998)
+    doi: 10.1063/1.367411

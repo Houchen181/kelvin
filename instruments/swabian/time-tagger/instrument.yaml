@@ -1,0 +1,22 @@
+schema: 1
+id: swabian/time-tagger
+maker: Swabian Instruments
+model: Time Tagger
+name: Swabian Instruments Time Tagger (20, Ultra, X)
+covers: [Time Tagger 20, Time Tagger Ultra, Time Tagger X]
+kind: photon-counter
+interfaces: [usb]
+control: library
+card: card.yaml
+manuals:
+  - title: Time Tagger documentation, event counting (GatedCounter, Countrate)
+    url: https://www.swabianinstruments.com/static/documentation/TimeTagger/api/measurements/event_counting.html
+    access: public
+software:
+  - name: Swabian-TimeTagger
+    kind: vendor-sdk
+    url: https://pypi.org/project/Swabian-TimeTagger/
+  - name: QCoDeS contrib drivers
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.SwabianInstruments.Swabian_Instruments_Time_Tagger.TimeTagger
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/SwabianInstruments/Swabian_Instruments_Time_Tagger.py

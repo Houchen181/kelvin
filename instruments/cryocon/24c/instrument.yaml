@@ -1,0 +1,17 @@
+schema: 1
+id: cryocon/24c
+maker: Cryo-con
+model: 24C
+name: Cryo-con Model 24C cryogenic temperature controller
+kind: temperature-controller
+interfaces: [lan, rs-232, gpib, usb]
+control: scpi
+identify:
+  idn: ^Cryo-con,24C,
+  example: Cryo-con,24C,204683,1.01A
+links:
+  - title: 'Quantum Design Europe (distributor, not the maker): overview of Cryo-con 22C/24C/26/32 controllers and their interfaces'
+    url: https://qd-europe.com/de/en/news/product-application-news-spectrum/find-the-right-temperature-monitor-and-controller-for-your-cryogenic-experiments
+notes:
+  - Four-input, four-loop controller; Ethernet and RS-232 are standard, GPIB and USB are options. The third-party ALBA Synchrotron 'cryocon' library on PyPI (tested on M24C and M32, not an official or listed-framework driver) uses TCP port 5000 and reports that the hardware accepts queries only every 100 ms.
+  - The maker's site (cryocon.com) was serving a parked-domain page when checked on 2026-10-26, so no manual or datasheet URL could be verified. Ask a distributor or the company for the 24C user's manual.

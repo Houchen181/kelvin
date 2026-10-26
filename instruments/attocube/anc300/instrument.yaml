@@ -1,0 +1,24 @@
+schema: 1
+id: attocube/anc300
+maker: attocube
+model: ANC300
+name: attocube ANC300 piezo positioner controller
+kind: positioner
+interfaces: [usb, lan]
+control: text
+card: card.yaml
+software:
+  - name: pylablib
+    kind: python-driver
+    ref: pylablib.devices.Attocube.anc300.ANC300
+    url: https://github.com/AlexShkarin/pyLabLib/blob/main/pylablib/devices/Attocube/anc300.py
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.attocube.anc300.ANC300Controller
+    url: https://github.com/pymeasure/pymeasure/blob/master/pymeasure/instruments/attocube/anc300.py
+  - name: QCoDeS contrib drivers
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.Attocube.ANC300.ANC300
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/Attocube/ANC300.py
+notes:
+  - Open-loop stick-slip steps plus a DC offset for fine scanning; the offset is a high voltage and ramps only with approval.

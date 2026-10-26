@@ -1,0 +1,39 @@
+schema: 1
+id: keysight/e5071c
+maker: Keysight
+model: E5071C
+name: Keysight E5071C ENA vector network analyzer
+kind: vna
+interfaces: [gpib, usb-tmc, lan]
+control: scpi
+identify:
+  idn: ^(Agilent|Keysight) Technologies,E5071C,
+  example: Agilent Technologies,E5071C,MY123400101,A.07.00
+manuals:
+  - title: 'E5071C ENA Help: Remote Control'
+    url: https://helpfiles.keysight.com/csg/e5071c/programming/remote_control/remote_control.htm
+    covers: GPIB, LAN and USB remote-control setup, SCPI message syntax, status reporting and sample programs
+    access: public
+  - title: 'E5071C ENA Help: Command Reference'
+    url: https://helpfiles.keysight.com/csg/e5071c/programming/command_reference/command_reference.htm
+    covers: Command finder; each command page gives the SCPI syntax together with the COM equivalent
+    access: public
+links:
+  - title: 'E5071C Help: documentation index (install and service guides are separate downloads)'
+    url: https://helpfiles.keysight.com/csg/e5071c/product_information/documentations.htm
+  - title: 'E5071C Help: *IDN? command page'
+    url: https://helpfiles.keysight.com/csg/e5071c/programming/command_reference/ieee/scpi_ieee4882_idn.htm
+  - title: 'E5071C Help: LAN remote control (SICL-LAN and telnet servers)'
+    url: https://helpfiles.keysight.com/csg/e5071c/programming/remote_control/overview/lan_remote_control_system.htm
+  - title: 'E5071C Help: USB remote control (USBTMC)'
+    url: https://helpfiles.keysight.com/csg/e5071c/programming/remote_control/overview/usb_remote_control_system.htm
+  - title: 'E5080B Help: Code Emulator for E5071C (run E5071C SCPI on the successor)'
+    url: https://helpfiles.keysight.com/csg/e5080b/Programming/Code_Emulator_for_E5071C.htm
+software:
+  - name: pylablib
+    kind: python-driver
+    ref: pylablib.devices.Agilent.vna.AgilentE5071C
+    url: https://github.com/AlexShkarin/pyLabLib/blob/main/pylablib/devices/Agilent/vna.py
+notes:
+  - Windows-based ENA with GPIB, LAN and a rear USB (USBTMC-USB488) port. For LAN control switch the network on under System > Misc Setup > Network Setup before connecting with VISA.
+  - Each command page in the help lists the SCPI form and its COM (built-in VBA) equivalent. The E5080B can run E5071C SCPI in its code-emulation mode, which helps when migrating old scripts.

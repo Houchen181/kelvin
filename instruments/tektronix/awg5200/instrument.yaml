@@ -1,0 +1,46 @@
+schema: 1
+id: tektronix/awg5200
+maker: Tektronix
+model: AWG5200
+name: Tektronix AWG5200 series arbitrary waveform generator
+covers: [AWG5202, AWG5204, AWG5208]
+kind: awg
+interfaces: [lan, usb-tmc, gpib]
+control: scpi
+identify:
+  idn: ^TEKTRONIX,AWG52(02|04|08),
+  example: TEKTRONIX,AWG5204,B010001,FV:6.3.0080.0
+manuals:
+  - title: AWG5200 Series Programmer Manual (077-1337-00 Rev A, software 6.0.x)
+    url: https://download.tek.com/manual/AWG5200-Programmer-Manual-077133700-RevA.pdf
+    covers: Remote control over LAN, USBTMC and GPIB, and the complete SCPI command reference
+    access: public
+links:
+  - title: AWG5200 Programmer Manual page (tek.com)
+    url: https://www.tek.com/en/arbitrary-waveform-generator/awg5200-manual/awg5200-series-0
+  - title: AWG5200 product page
+    url: https://www.tek.com/en/products/arbitrary-waveform-generators/awg5200
+  - title: AWG5200 Instrument Help (printable PDF)
+    url: https://download.tek.com/manual/AWG5200-Arbitrary-Waveform-Generator-Printable-Help-Document-077133400-REVA.pdf
+  - title: AWG5000 and AWG7000 Series Programmer Manual (older AWG5014C and similar)
+    url: https://download.tek.com/manual/AWG5000-and-AWG7000-Programmer-Manual-077006105-RevA.pdf
+software:
+  - name: tm_devices (Tektronix Python package)
+    kind: vendor-sdk
+    ref: tm_devices.drivers.awgs.awg5200.AWG5200
+    url: https://pypi.org/project/tm-devices/
+  - name: QCoDeS (AWG5208 only)
+    kind: python-driver
+    ref: qcodes.instrument_drivers.tektronix.TektronixAWG5208
+    url: https://github.com/microsoft/Qcodes/blob/main/src/qcodes/instrument_drivers/tektronix/AWG5208.py
+  - name: QCoDeS (older AWG5014C)
+    kind: python-driver
+    ref: qcodes.instrument_drivers.tektronix.TektronixAWG5014
+    url: https://github.com/microsoft/Qcodes/blob/main/src/qcodes/instrument_drivers/tektronix/AWG5014.py
+examples:
+  - title: tm_devices examples (signal generators, including AWG scripts)
+    url: https://github.com/tektronix/tm_devices/tree/main/examples/signal_generators
+    license: Apache-2.0
+notes:
+  - LAN control runs through VXI-11 or a raw socket via TekVISA, and the rear USB device port speaks USBTMC. GPIB works only through a TEK-USB-488 adapter on that port.
+  - The older AWG5014C uses the AWG5000/AWG7000 programmer manual and its own QCoDeS driver, so check the command differences before reusing AWG5200 scripts on it.

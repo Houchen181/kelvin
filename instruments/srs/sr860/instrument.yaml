@@ -1,0 +1,23 @@
+schema: 1
+id: srs/sr860
+maker: Stanford Research Systems
+model: SR860
+name: Stanford Research SR860 / SR865A lock-in amplifiers
+covers: [SR865, SR865A]
+kind: lock-in
+interfaces: [gpib, rs-232, usb-tmc, lan]
+control: scpi
+card: card.yaml
+manuals:
+  - title: SR860 Lock-In Amplifier manual, Remote operation
+    url: https://www.thinksrs.com/downloads/pdfs/manuals/SR860m.pdf
+    access: public
+software:
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.srs.sr860.SR860
+    url: https://github.com/pymeasure/pymeasure/blob/master/pymeasure/instruments/srs/sr860.py
+  - name: QCoDeS
+    kind: python-driver
+    ref: qcodes.instrument_drivers.stanford_research.SR860.SR860
+    url: https://github.com/microsoft/Qcodes/blob/main/src/qcodes/instrument_drivers/stanford_research/SR860.py

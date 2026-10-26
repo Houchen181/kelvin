@@ -1,0 +1,16 @@
+schema: 1
+id: coherent/obis
+maker: Coherent
+model: OBIS
+name: Coherent OBIS LX/LS lasers
+covers: [OBIS LX, OBIS LS]
+kind: laser
+interfaces: [usb, rs-232]
+control: scpi
+card: card.yaml
+manuals:
+  - title: OBIS LX/LS operator's manual, Host command reference
+    url: https://www.coherent.com/content/dam/coherent/site/en/resources/manuals/lasers/obis-lx-ls-operators-manual.pdf
+    access: public
+notes:
+  - Emission and power are drives; a person approves every laser change unless the lab says otherwise.

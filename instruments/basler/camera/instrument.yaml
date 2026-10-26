@@ -1,0 +1,22 @@
+schema: 1
+id: basler/camera
+maker: Basler
+model: ace / dart
+name: Basler industrial cameras (pylon)
+covers: [ace, dart, boost]
+kind: camera
+interfaces: [usb, lan]
+control: library
+card: card.yaml
+software:
+  - name: pypylon
+    kind: vendor-sdk
+    url: https://pypi.org/project/pypylon/
+  - name: pylablib
+    kind: python-driver
+    ref: pylablib.devices.Basler.pylon.BaslerPylonCamera
+    url: https://github.com/AlexShkarin/pyLabLib/blob/main/pylablib/devices/Basler/pylon.py
+examples:
+  - title: pypylon samples
+    url: https://github.com/basler/pypylon/tree/master/samples
+    license: BSD-3-Clause

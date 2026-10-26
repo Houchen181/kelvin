@@ -1,0 +1,40 @@
+# Transport in a Quantum Design PPMS or DynaCool: two lock-ins for the longitudinal and Hall voltages,
+# a source-meter on the gate, a DC source and a nanovoltmeter.
+#
+# To use it: copy it to ~/Kelvin/lab.yaml (or open it in Lab -> Set up), give each instrument its address
+# (Scan finds them) and set the limits for your sample. Until then every instrument here is simulated,
+# so the experiments that use this lab can be tried first.
+lab: PPMS transport
+
+instruments:
+  cryo:
+    card: qd/multivu
+    # address: "qd://<MultiVu computer>:5000"
+    limits: { T_set: [1.8, 350], B_set: [-9, 9] }   # set B_set to your magnet's rating
+  lockin_xx:
+    card: srs/sr830
+    # address: "GPIB0::8::INSTR"
+    limits: { amplitude: [0.004, 1] }   # sine out through a series resistor much larger than the sample
+  lockin_xy:
+    card: srs/sr830
+    # address: "GPIB0::9::INSTR"; reference: external, from lockin_xx's TTL output
+    limits: { amplitude: [0.004, 0.01] }   # its own sine output is not used
+  gate:
+    card: keithley/2400
+    # address: "GPIB0::24::INSTR"
+    limits: { V: [-10, 10], compliance_I: [1.0e-9, 1.05e-4] }   # it powers up at 105 µA; the plans set 10 nA
+    rates: { V: 0.2 }
+    guards:
+      V: [{ read: I, max_abs: 1.0e-9 }]   # stop the ramp if the gate leaks more than 1 nA
+  source:
+    card: yokogawa/gs200
+    # address: "GPIB0::2::INSTR"; voltage mode, into a series resistor for a DC current
+    limits: { level: [-1, 1], current_limit: [0.001, 0.01] }
+    rates: { level: 0.1 }
+  nvm:
+    card: keithley/2182a
+    # address: "GPIB0::7::INSTR"
+
+safe_actions:
+  cryo.B_set: hold   # a stopped run leaves the field where it is (ramping a magnet down takes a while)
+  cryo.T_set: hold

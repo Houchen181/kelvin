@@ -1,0 +1,23 @@
+schema: 1
+id: newport/xps
+maker: Newport (MKS)
+model: XPS-D
+name: Newport XPS-D / XPS-RL universal high-performance motion controller
+covers: [XPS-RL, XPS-RLD, XPS-Q8]
+kind: motion-stage
+interfaces: [lan]
+control: text
+manuals:
+  - title: XPS-D Programmer's Manual (EDH0373En1050, 06/26)
+    url: https://api.p1.mks.com/medias/sys_master/npresources/h3e/h82/10211812802590/XPS_Unified_-_Programmer_s_Manual/XPS-Unified-Programmer-s-Manual.pdf
+    covers: TCP/IP communication, the XPS .NET assemblies (C#, LabVIEW, IronPython, MATLAB, Python via pythonnet) and the full XPS function reference
+    access: public
+links:
+  - title: Newport XPS-RLD2 product page (manuals, firmware, .NET assembly)
+    url: https://www.newport.com/p/XPS-RLD2
+software:
+  - name: Newport HXP / XPS .NET assembly (V2.3.1)
+    kind: vendor-sdk
+    url: https://www.newport.com/p/XPS-RLD2
+notes:
+  - Drives Newport ILS/DL linear stages (optical delay lines) and XY/XYZ stacks over Ethernet. Commands are function calls (GroupInitialize, GroupHomeSearch, GroupMoveAbsolute, ...) sent over a TCP socket on port 5001 or through the vendor .NET assembly, which Python can load with pythonnet; a group must be initialized and homed before it will move.

@@ -1,0 +1,44 @@
+schema: 1
+id: cryomagnetics/4g
+maker: Cryomagnetics
+model: 4G
+name: Cryomagnetics Model 4G superconducting magnet power supply
+covers: [4G-100, 4G-150, 4G-200S, 4G-Dual]
+kind: magnet-supply
+interfaces: [usb, lan, gpib]
+control: scpi
+identify:
+  idn: ^Cryomagnetics.*4G
+  example: Cryomagnetics,4G,2239,1.02,208
+manuals:
+  - title: Model 4G Superconducting Magnet Power Supply Operations Manual
+    url: https://cryomagnetics.com/wp-content/uploads/2022/05/4G-Rev-9_3.pdf
+    covers: 'Remote operation sections: computer interface setup and the command list'
+    access: public
+links:
+  - title: Model 4G product page (variants, interfaces)
+    url: https://cryomagnetics.com/products/model-4g-bipolar-power-supplies-superconducting-magnets/
+  - title: Cryomagnetics downloads (manual, LabVIEW drivers, example VIs)
+    url: https://cryomagnetics.com/downloads/
+software:
+  - name: Cryomagnetics 4G LabVIEW drivers (4G_Drivers.zip)
+    kind: vendor-sdk
+    url: https://cryomagnetics.com/wp-content/uploads/2022/05/4G_Drivers.zip
+  - name: QCoDeS
+    kind: python-driver
+    ref: qcodes.instrument_drivers.cryomagnetics.CryomagneticsModel4G
+    url: https://github.com/microsoft/Qcodes/blob/main/src/qcodes/instrument_drivers/cryomagnetics/_cryomagnetics4g.py
+  - name: qcodes_contrib_drivers
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.Cryomagnetics.Model_4G.Model_4G
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/Cryomagnetics/Model_4G.py
+examples:
+  - title: LabVIEW example VI for a single-channel 4G (ZIP)
+    url: https://cryomagnetics.com/wp-content/uploads/2022/05/Single-4G_Example_VI.zip
+    license: unknown
+  - title: LabVIEW example VI for a dual-channel 4G (ZIP)
+    url: https://cryomagnetics.com/wp-content/uploads/2022/05/Dual-4G_Example_VI.zip
+    license: unknown
+notes:
+  - Four-quadrant bipolar supply with persistent-switch heater supply and quench detection (per the maker). QCoDeS' driver uses REMOTE and LOCAL commands to hand control between the computer and the front panel.
+  - USB shows up as an FTDI virtual COM port (the maker's downloads page links the VCP driver). QCoDeS' driver retries I/O after a device clear because communication was found to be unstable.

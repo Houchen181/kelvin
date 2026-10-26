@@ -1,0 +1,56 @@
+schema: 1
+id: transport/landau-fan
+area: transport
+title: Landau fan and quantum oscillations
+summary: >-
+  Map the resistance against gate voltage and field: Landau levels, the quantum Hall effect, Shubnikov-de Haas
+  oscillations, effective mass and quantum lifetime.
+roles:
+  cryostat:
+    kind: [cryostat, magnet-supply]
+    does: Steps the field at a stable low temperature.
+    suggested: [qd/multivu, ami/430, oxford/mercury-ips]
+  gate:
+    kind: [source-meter, voltage-source]
+    does: Sweeps the carrier density.
+    suggested: [keithley/2400, keithley/2450, qdevil/qdac-ii]
+  lockin_xx:
+    kind: lock-in
+    does: Drives the current and reads Rxx.
+    suggested: [srs/sr830, srs/sr860]
+  lockin_xy:
+    kind: lock-in
+    does: Reads Rxy.
+    suggested: [srs/sr830, srs/sr860]
+lab: labs/ppms-transport.yaml
+setup:
+  - As for the Hall measurement, with the gate on a source-meter guarded against leakage.
+  - Use a small current (10-100 nA) so the electrons stay cold enough to resolve the levels.
+procedure:
+  - Find the charge-neutrality point at zero field first.
+  - Step the field and sweep the gate at each step. Field steps of 0.1-0.25 T suit a fan; for oscillations in 1/B, sweep the field at fixed gate instead.
+plans:
+  - title: Gate sweeps at fields from 0 T to 9 T
+    plan:
+      plan: landau_fan
+      setup: { gate.compliance_I: 1.0e-8, gate.output: on, lockin_xx.amplitude: 1.0, lockin_xx.frequency: 13.7,
+               lockin_xx.time_constant: "300 ms", lockin_xy.time_constant: "300 ms", cryo.B_rate: 0.01 }
+      sweep:
+        cryo.B_set: { from: 0, to: 9, step: 0.25 }
+        gate.V: { from: -10, to: 10, step: 0.1 }
+      settle: 1.0
+      measure: [lockin_xx.X, lockin_xy.X, gate.I, cryo.B]
+      after: { gate.V: 0, cryo.B_set: 0 }
+analysis:
+  - Plot Rxx against Vg and B. Lines of constant filling factor ν = n·h/(e·B) fan out from the charge-neutrality point; their slopes calibrate the gate capacitance.
+  - Quantum Hall plateaus sit at Rxy = h/(ν·e²) where Rxx vanishes.
+  - Shubnikov-de Haas oscillations are periodic in 1/B. The frequency F gives the Fermi surface area (Onsager, F = ħ·A/(2πe)), the temperature dependence of the amplitude gives the effective mass (Lifshitz-Kosevich), and the Dingle plot gives the quantum lifetime.
+pitfalls:
+  - The map takes hours. Keep the gate inside the window you have checked, and let the guard watch the leakage.
+  - Gate hysteresis shifts the fan between sweep directions; sweep one direction only.
+safety:
+  - The field stays inside the lab's limits and ramps through MultiVu; a stopped run holds the field.
+references:
+  - title: D. Shoenberg, Magnetic Oscillations in Metals (Cambridge University Press, 1984)
+  - title: K. von Klitzing, G. Dorda and M. Pepper, New method for high-accuracy determination of the fine-structure constant based on quantized Hall resistance, Phys. Rev. Lett. 45, 494 (1980)
+    doi: 10.1103/PhysRevLett.45.494

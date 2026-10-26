@@ -1,0 +1,26 @@
+schema: 1
+id: ni/daqmx
+maker: NI (National Instruments)
+model: DAQmx devices
+name: NI DAQ devices through NI-DAQmx (USB-600x, USB-62xx, PCIe/PXIe-63xx, cDAQ)
+covers: [USB-6001, USB-6211, PCIe-6321, PXIe-6363, cDAQ]
+kind: daq
+interfaces: [usb, pcie, pxie]
+control: library
+card: card.yaml
+software:
+  - name: nidaqmx
+    kind: vendor-sdk
+    url: https://pypi.org/project/nidaqmx/
+  - name: pylablib
+    kind: python-driver
+    ref: pylablib.devices.NI.daq.NIDAQ
+    url: https://github.com/AlexShkarin/pyLabLib/blob/main/pylablib/devices/NI/daq.py
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.ni.daqmx.DAQmx
+    url: https://github.com/pymeasure/pymeasure/blob/master/pymeasure/instruments/ni/daqmx.py
+examples:
+  - title: nidaqmx-python examples
+    url: https://github.com/ni/nidaqmx-python/tree/master/examples
+    license: MIT

@@ -1,0 +1,60 @@
+schema: 1
+id: zhinst/hf2li
+maker: Zurich Instruments
+model: HF2LI
+name: Zurich Instruments HF2LI 50 MHz lock-in amplifier
+covers: [HF2IS]
+kind: lock-in
+interfaces: [usb]
+control: library
+manuals:
+  - title: 'HF2 User Manual: Communication and Connectivity chapter (online)'
+    url: https://docs.zhinst.com/hf2_user_manual/programming.html
+    covers: Connectivity overview, ziServer, its text-based console, enabling remote connections
+    access: public
+  - title: 'HF2 User Manual: Device Node Tree (online)'
+    url: https://docs.zhinst.com/hf2_user_manual/nodedoc.html
+    covers: Reference of all settings and data nodes used through the LabOne APIs
+    access: public
+  - title: HF2 User Manual (online)
+    url: https://docs.zhinst.com/hf2_user_manual/
+    access: public
+  - title: HF2 User Manual (PDF)
+    url: https://docs.zhinst.com/pdf/ziHF2_UserManual.pdf
+    access: public
+  - title: LabOne API User Manual (Python, MATLAB, LabVIEW, .NET, C)
+    url: https://docs.zhinst.com/labone_api_user_manual/
+    covers: API documentation for all instrument types; HF2-specific functions are listed under 'HF2 Only'
+    access: public
+links:
+  - title: HF2LI 50 MHz Lock-in Amplifier (Zurich Instruments, discontinued product page)
+    url: https://www.zhinst.com/europe/en/support/discontinued-products/hf2li-lock-in-amplifier/
+  - title: Zurich Instruments Software Download Center (LabOne, HF2 data server)
+    url: https://www.zhinst.com/europe/en/support/download-center/
+software:
+  - name: zhinst-core (LabOne Python Core API)
+    kind: vendor-sdk
+    ref: zhinst.core.ziDAQServer
+    url: https://pypi.org/project/zhinst-core/
+  - name: zhinst-toolkit
+    kind: vendor-sdk
+    ref: zhinst.toolkit.Session
+    url: https://pypi.org/project/zhinst-toolkit/
+  - name: zhinst-qcodes
+    kind: python-driver
+    ref: zhinst.qcodes.HF2
+    url: https://pypi.org/project/zhinst-qcodes/
+  - name: QCoDeS contrib drivers
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.ZurichInstruments.HF2LI.HF2LI
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/ZurichInstruments/HF2LI.py
+examples:
+  - title: LabOne API examples (hf2/python and hf2-mf-uhf/python)
+    url: https://github.com/zhinst/labone-api-examples
+    license: MIT
+  - title: zhinst-toolkit examples (includes hf2.md)
+    url: https://github.com/zhinst/zhinst-toolkit/tree/main/examples
+    license: MIT
+notes:
+  - Discontinued (Zurich Instruments names the VHFLI as its replacement). It is controlled through the separate HF2 Data Server (ziServer, port 8005 in the vendor's examples), which cannot be shared with sessions to other Zurich Instruments devices.
+  - In zhinst-toolkit open the session with hf2=True (or port 8005); zhinst-core adds HF2-only functions on ziDAQServer.

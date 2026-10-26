@@ -1,0 +1,74 @@
+schema: 1
+id: optics/photocurrent-mapping
+area: optics
+title: Scanning photocurrent microscopy
+summary: >-
+  Modulate the laser, raster it over a device and read the photocurrent with a lock-in: where light is turned
+  into current (contacts, junctions, edges), and by which mechanism (photovoltaic, photothermoelectric,
+  bolometric), against gate voltage.
+roles:
+  laser:
+    kind: laser
+    does: A modulated CW laser focused on the device.
+    suggested: [coherent/obis, hubner/cobolt]
+  modulation:
+    kind: [function-generator, chopper]
+    does: Modulates the laser (or chops the beam) and gives the lock-in its reference.
+    suggested: [keysight/33500b, thorlabs/mc2000b]
+  lockin:
+    kind: lock-in
+    does: Reads the photocurrent at the modulation frequency.
+    suggested: [srs/sr830, srs/sr860, zhinst/mfli]
+  iamp:
+    kind: preamp
+    does: Converts the photocurrent to a voltage.
+    suggested: [srs/sr570]
+  scanner:
+    kind: [positioner, motion-stage]
+    does: Rasters the sample.
+    suggested: [pi/gcs-piezo, attocube/anc350]
+  gate:
+    kind: [source-meter, voltage-source]
+    does: Sets the carrier density.
+    optional: true
+    suggested: [keithley/2450, keithley/2400]
+lab: labs/confocal-optics.yaml
+setup:
+  - Drive the laser's modulation input with a square wave between 0 and 2.5 V (check your laser's input), and take the lock-in reference from the generator's sync output.
+  - Connect the device between the SR570's input and ground; read the reflected light on a photodiode at the same time to locate the contacts.
+  - Choose a modulation frequency below the device's bandwidth, and well below the inverse thermal time for photothermoelectric signals.
+procedure:
+  - Map at zero gate, then repeat at a few gate voltages, or park the beam on a hot spot and sweep the gate.
+  - Check the signal's linearity in laser power at the brightest spot.
+plans:
+  - title: Photocurrent map over 40 µm
+    plan:
+      plan: photocurrent_map
+      setup: { fg.frequency: 377, fg.amplitude: 2.5, fg.offset: 1.25, fg.output: on, laser.emission: on,
+               laser.power: 5.0e-4, lockin.time_constant: "100 ms" }
+      sweep:
+        scan_y.position: { from: 0, to: 40, step: 0.5 }
+        scan_x.position: { from: 0, to: 40, step: 0.5 }
+      settle: 0.3
+      measure: [lockin.X, lockin.Y, pm.power]
+      after: { laser.power: 0, laser.emission: off, fg.output: off }
+  - title: Gate dependence at a fixed spot
+    plan:
+      plan: photocurrent_vs_gate
+      setup: { fg.frequency: 377, fg.amplitude: 2.5, fg.offset: 1.25, fg.output: on, laser.emission: on,
+               laser.power: 5.0e-4, lockin.time_constant: "300 ms", gate.compliance_I: 1.0e-8, gate.output: on }
+      sweep: { gate.V: { from: -10, to: 10, step: 0.1 } }
+      settle: 1
+      measure: [lockin.X, lockin.Y, gate.I]
+      after: { gate.V: 0, laser.power: 0, laser.emission: off, fg.output: off }
+analysis:
+  - Photocurrent is the lock-in signal over the SR570 gain; responsivity is that current over the laser power at the sample.
+  - A photovoltaic signal follows the built-in field and changes sign across a junction; a photothermoelectric signal follows the Seebeck coefficient and changes sign with doping at the charge-neutrality point, often more than once.
+pitfalls:
+  - Scattered light reaching the contacts gives a background; compare with the beam far from the device.
+  - The lock-in phase shifts with modulation frequency for slow (thermal or trap) responses; record X and Y.
+safety:
+  - The laser is class 3B or 4; the gate's leakage guard stays on during maps.
+references:
+  - title: N. M. Gabor et al., Hot carrier-assisted intrinsic photoresponse in graphene, Science 334, 648 (2011)
+    doi: 10.1126/science.1211384

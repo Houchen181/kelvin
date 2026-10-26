@@ -1,0 +1,13 @@
+schema: 1
+id: novatech/409b
+maker: Novatech
+model: 409B
+name: Novatech 409B four-channel DDS signal generator
+kind: aom-driver
+interfaces: [rs-232]
+control: text
+card: card.yaml
+manuals:
+  - title: Model 409B Instruction Manual, Rev 2.05b (firmware 2.1 or later), serial commands (pp. 4-7)
+    url: https://www.novatechsales.com/docs/409b_man.pdf
+    access: public

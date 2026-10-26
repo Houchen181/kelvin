@@ -1,0 +1,48 @@
+schema: 1
+id: picoquant/hydraharp-400
+maker: PicoQuant
+model: HydraHarp 400
+name: PicoQuant HydraHarp 400 TCSPC / time tagger
+kind: photon-counter
+interfaces: [usb]
+control: library
+manuals:
+  - title: HydraHarp 400 HHLib programming manual (Windows)
+    url: https://downloads.picoquant.com/manuals/discontinued/HydraHarp400_DLL_Manual.pdf
+    covers: HHLib DLL function reference and demo descriptions
+    access: public
+  - title: HydraHarp 400 HHLib programming manual (Linux)
+    url: https://downloads.picoquant.com/manuals/discontinued/HydraHarp400_DLL_Linux_Manual.pdf
+    covers: HHLib Linux library function reference
+    access: public
+  - title: HydraHarp 400 user manual
+    url: https://downloads.picoquant.com/manuals/discontinued/HydraHarp400_Manual.pdf
+    covers: Instrument and operation software manual
+    access: public
+links:
+  - title: 'HydraHarp 400 discontinuation notice (successor: HydraHarp 500)'
+    url: https://www.picoquant.com/news/hydraharp-400-discontinued/
+  - title: PicoQuant downloads (software, HHLib and manuals)
+    url: https://www.picoquant.com/downloads/
+  - title: snAPI documentation (lists the supported devices)
+    url: https://picoquant.github.io/snAPI/introduction.html
+  - title: HydraHarp 500 product page (successor)
+    url: https://www.picoquant.com/products/time-tagging-tcspc-electronics/hydraharp-500/
+software:
+  - name: snAPI
+    kind: vendor-sdk
+    ref: snAPI.Main.snAPI
+    url: https://pypi.org/project/snapi/
+  - name: HHLib programming library (Windows DLL and Linux library, from the downloads page)
+    kind: vendor-sdk
+    url: https://www.picoquant.com/downloads/
+examples:
+  - title: PicoQuant HH400-v3.x-Demos (HHLib demo code)
+    url: https://github.com/PicoQuant/HH400-v3.x-Demos
+    license: Custom PicoQuant HHLib license (demo code may be modified and redistributed with notices kept)
+  - title: PicoQuant snAPI demos (Python)
+    url: https://github.com/PicoQuant/snAPI/tree/main/demos
+    license: Custom PicoQuant snAPI license (demo code may be modified and redistributed with notices kept)
+notes:
+  - Discontinued in November 2025 (successor HydraHarp 500). Control is through the HHLib DLL on Windows or the Linux library over USB, wrapped for Python by PicoQuant's snAPI; there is no SCPI interface.
+  - The GitHub demo repository matches HHLib 3.0.0.4 (April 2022).

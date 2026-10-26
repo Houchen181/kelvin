@@ -1,0 +1,40 @@
+schema: 1
+id: pi/c-863
+maker: Physik Instrumente (PI)
+model: C-863
+name: Physik Instrumente C-863 Mercury DC motor controller
+covers: [C-863.11, C-863.12]
+kind: motion-stage
+interfaces: [usb, rs-232]
+control: text
+manuals:
+  - title: C-863.12 Mercury DC Motor Controller User Manual MS249 (v2.1.0, 2025-02-14)
+    url: https://www.physikinstrumente.com/en/products/controllers-and-drivers/motion-controllers-drivers-for-linear-torque-stepper-dc-servo-motors/c-863-mercury-servo-controller-900606/
+    covers: C-863.12 controller user manual (chapter list not public); PI sends it after a request form on the Downloads tab (ADD TO LIST, REQUEST)
+    access: sign-in
+  - title: PI GCS DLL Software Manual SM151 (2024-06-07)
+    url: https://www.physikinstrumente.com/en/products/controllers-and-drivers/motion-controllers-drivers-for-linear-torque-stepper-dc-servo-motors/c-863-mercury-servo-controller-900606/
+    covers: Reference for the PI GCS DLL that PIPython wraps; same request form
+    access: sign-in
+links:
+  - title: PI C-863 Mercury Servo Controller product page
+    url: https://www.physikinstrumente.com/en/products/controllers-and-drivers/motion-controllers-drivers-for-linear-torque-stepper-dc-servo-motors/c-863-mercury-servo-controller-900606/
+  - title: C-863 datasheet (PDF)
+    url: https://www.physikinstrumente.com/fileadmin/user_upload/physik_instrumente/files/datasheets/C-863-Datasheet.pdf
+  - title: Short Instructions MS242EK (safety; explains how to request the manuals)
+    url: https://www.physikinstrumente.com/fileadmin/user_upload/physik_instrumente/files/user_manuals/C-xxx-E-8xx-ShortInstructions-MS242EK-EN.pdf
+software:
+  - name: PIPython (official PI Python library for GCS controllers)
+    kind: vendor-sdk
+    ref: pipython.GCSDevice
+    url: https://pypi.org/project/PIPython/
+  - name: QCoDeS contrib driver for PI Mercury controllers (basic single-axis GCS subset)
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.physik_instrumente.mercury.mercury
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/physik_instrumente/mercury.py
+examples:
+  - title: PIPython samples (quickstart, simple move, data recorder, RS-232/USB/TCP daisy chain with a C-863.11)
+    url: https://github.com/PI-PhysikInstrumente/PIPython/tree/master/samples
+    license: unknown
+notes:
+  - DC-motor controller for PI linear stages, up to 16 units per daisy chain, controlled with the GCS command set over RS-232 or USB. PI provides manuals only through a request form on the product page's Downloads tab; PIPython's daisy-chain sample opens a C-863.11 over RS-232 at 115200 baud.

@@ -1,0 +1,40 @@
+schema: 1
+id: quantum-devices/qubit-time-domain
+area: quantum-devices
+title: Superconducting qubit characterization
+summary: >-
+  The standard bring-up of a transmon: resonator punch-out, two-tone qubit spectroscopy, Rabi, T1, Ramsey and
+  echo, and single-shot readout calibration.
+roles:
+  controller:
+    kind: [quantum-controller, awg]
+    does: Plays shaped pulses on the qubit and readout lines and demodulates the readout.
+    suggested: [zhinst/shfqc, quantum-machines/opx, qick/rfsoc, zhinst/hdawg, tektronix/awg5200]
+  sources:
+    kind: microwave-source
+    does: Local oscillators for IQ mixers, when the controller doesn't synthesize the carrier itself.
+    optional: true
+    suggested: [rs/sgs100a, keysight/e8257d, srs/sg384]
+  fridge:
+    kind: dilution-refrigerator
+    does: Cools the chip to about 10 mK.
+    suggested: [bluefors/dilution-refrigerator, oxford/triton]
+needs_cards: [quantum-controller]
+setup:
+  - Input lines attenuated and filtered at each stage; output through isolators and a HEMT (or a parametric amplifier first).
+procedure:
+  - Resonator spectroscopy at high and low power (punch-out) shows that a qubit is coupled.
+  - Two-tone spectroscopy finds the qubit; Rabi calibrates the π pulse; then T1, Ramsey (T2*) and Hahn echo (T2E).
+  - Calibrate single-shot readout from the IQ clouds of the ground and excited states.
+  - Kelvin's QICK card plays one generator as a tone or pulses, enough for resonator spectroscopy; these sequences need a card for a qubit controller or a QICK program card.
+analysis:
+  - "T1: exponential decay after a π pulse. Ramsey: decaying fringes at the detuning, giving T2* and the exact qubit frequency. Echo: T2E, limited by 2·T1."
+  - Readout fidelity from the overlap of the two IQ distributions.
+pitfalls:
+  - Thermal population of the excited state reduces contrast; check the effective temperature from the IQ clouds.
+  - Readout photons dephase the qubit; let the resonator ring down before the next pulse.
+references:
+  - title: P. Krantz et al., A quantum engineer's guide to superconducting qubits, Applied Physics Reviews 6, 021318 (2019)
+    doi: 10.1063/1.5089550
+  - title: A. Blais, A. L. Grimsmo, S. M. Girvin and A. Wallraff, Circuit quantum electrodynamics, Rev. Mod. Phys. 93, 025005 (2021)
+    doi: 10.1103/RevModPhys.93.025005

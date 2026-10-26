@@ -1,0 +1,15 @@
+schema: 1
+id: toptica/dlc-pro
+maker: TOPTICA Photonics
+model: DLC pro
+name: TOPTICA DLC pro diode laser controller
+kind: laser-driver
+interfaces: [lan, usb]
+control: text
+card: card.yaml
+software:
+  - name: toptica-lasersdk
+    kind: vendor-sdk
+    url: https://pypi.org/project/toptica-lasersdk/
+notes:
+  - Its command line is on TCP port 1998. The card is a draft until someone checks the current's unit on a real controller.

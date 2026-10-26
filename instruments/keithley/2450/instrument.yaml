@@ -1,0 +1,25 @@
+schema: 1
+id: keithley/2450
+maker: Keithley (Tektronix)
+model: '2450'
+name: Keithley 2450 / 2460 / 2461 / 2470 SourceMeter
+covers: ['2460', '2461', '2470']
+kind: source-meter
+interfaces: [gpib, usb-tmc, lan]
+control: scpi
+card: card.yaml
+manuals:
+  - title: Keithley 2450 Reference Manual, SCPI command reference
+    url: https://download.tek.com/manual/2450-901-01E_Sept_2019_Ref.pdf
+    access: public
+software:
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.keithley.keithley2450.Keithley2450
+    url: https://github.com/pymeasure/pymeasure/blob/master/pymeasure/instruments/keithley/keithley2450.py
+  - name: QCoDeS
+    kind: python-driver
+    ref: qcodes.instrument_drivers.Keithley.Keithley_2450.Keithley2450
+    url: https://github.com/microsoft/Qcodes/blob/main/src/qcodes/instrument_drivers/Keithley/Keithley_2450.py
+notes:
+  - Use the SCPI command set (not TSP) on the front panel's System > Settings for this card.

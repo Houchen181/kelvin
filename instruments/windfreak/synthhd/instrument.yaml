@@ -1,0 +1,19 @@
+schema: 1
+id: windfreak/synthhd
+maker: Windfreak Technologies
+model: SynthHD
+name: Windfreak SynthHD dual-channel microwave generator
+covers: [SynthHD PRO, SynthHD v2]
+kind: microwave-source
+interfaces: [usb]
+control: text
+card: card.yaml
+manuals:
+  - title: Windfreak SynthHD & HD PRO API Guide v1.0b (written for hardware and firmware v1.4)
+    url: https://windfreaktech.com/wp-content/uploads/2016/12/WFT_SerialProgramming_API_10b.pdf
+    access: public
+software:
+  - name: QCoDeS contrib drivers
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.Windfreak.Windfreak_SynthHD.WindfreakSynthHD
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/Windfreak/Windfreak_SynthHD.py

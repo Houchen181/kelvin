@@ -1,0 +1,190 @@
+# The Kelvin instrument collection: what the folders hold and how they are sorted.
+#
+#   instruments/<maker>/<model>/instrument.yaml   one per instrument model: who makes it, how it talks, its manuals
+#   instruments/<maker>/<model>/card.yaml         the Kelvin card, when there is one (the same file Kelvin loads)
+#   experiments/<area>/<name>.yaml                 what to measure, with which instruments, and example plans
+#   labs/<name>.yaml                               lab configs for common setups, ready for Kelvin
+#
+# Every instrument has exactly one kind; its category follows from the kind. An instrument can name extra
+# categories in its own `categories` list (an RFSoC board is an AWG and an RF instrument).
+schema: 1
+name: Kelvin instrument collection
+repository: https://github.com/Houchen181/kelvin-instruments
+
+categories:
+  electronics:
+    title: Electronics and electrical measurement
+    description: Sources, meters, lock-ins, preamplifiers, generators and data acquisition, the core of transport measurements.
+    kinds:
+      source-meter: Source-measure units
+      voltage-source: DC voltage sources and low-noise DACs
+      current-source: Precision AC and DC current sources
+      multimeter: Digital multimeters
+      nanovoltmeter: Nanovoltmeters
+      electrometer: Electrometers and picoammeters
+      lock-in: Lock-in amplifiers
+      preamp: Voltage and current preamplifiers
+      resistance-bridge: AC resistance bridges
+      function-generator: Function generators
+      awg: Arbitrary waveform generators
+      oscilloscope: Oscilloscopes and digitizers
+      daq: Data acquisition devices
+      lcr-meter: LCR meters and impedance analyzers
+      power-supply: DC power supplies
+      parameter-analyzer: Semiconductor parameter analyzers
+      switch-matrix: Switch matrices and multiplexers
+  rf-microwave:
+    title: RF and microwave
+    description: Signal generators, network and spectrum analyzers, acousto-optic drivers and qubit controllers.
+    kinds:
+      microwave-source: RF and microwave signal generators
+      vna: Vector network analyzers
+      spectrum-analyzer: Spectrum and signal analyzers
+      aom-driver: AOM and EOM drivers, DDS synthesizers
+      quantum-controller: Qubit control systems
+  timing:
+    title: Timing, pulses and photon counting
+    description: Pulse pattern and delay generators, photon counters and time taggers.
+    kinds:
+      pulse-generator: Pulse pattern generators
+      delay-generator: Digital delay generators
+      photon-counter: Photon counters, time taggers and TCSPC
+  lasers:
+    title: Lasers and laser control
+    description: CW, tunable and ultrafast lasers, diode and TEC controllers, wavelength meters.
+    kinds:
+      laser: Lasers
+      laser-driver: Laser diode and TEC controllers
+      wavemeter: Wavelength meters
+  optics:
+    title: Optics, detection and spectroscopy
+    description: Power meters, spectrometers, spectrographs, scientific cameras, detectors and modulators.
+    kinds:
+      power-meter: Optical power and energy meters
+      spectrometer: Spectrometers
+      monochromator: Monochromators and imaging spectrographs
+      camera: Scientific cameras
+      photodetector: Photodiodes, APDs, PMTs and single-photon detectors
+      chopper: Optical choppers
+      modulator: Photoelastic and electro-optic modulators
+  motion:
+    title: Motion and positioning
+    description: Piezo positioners and scanners, motorized stages, delay lines and rotation mounts.
+    kinds:
+      positioner: Piezo positioners and scanners
+      motion-stage: Motorized stages, delay lines and rotation mounts
+  cryogenics:
+    title: Cryogenics, vacuum and sample environment
+    description: Temperature controllers, cryostat systems, dilution refrigerators and vacuum gauges.
+    kinds:
+      temperature-controller: Temperature controllers and monitors
+      cryostat: Cryostat systems
+      dilution-refrigerator: Dilution refrigerators
+      vacuum-gauge: Vacuum gauges and controllers
+      level-meter: Cryogen level meters
+  magnets:
+    title: Magnets and field measurement
+    description: Superconducting magnet supplies, gaussmeters and teslameters.
+    kinds:
+      magnet-supply: Magnet power supplies
+      gaussmeter: Gaussmeters and teslameters
+  scanning-probe:
+    title: Scanning probe microscopy
+    description: Controllers for STM, AFM and scanning sensors.
+    kinds:
+      spm-controller: SPM controllers
+
+areas:
+  transport:
+    title: Electrical transport
+    description: Resistance, Hall effect, gating, tunneling and superconductivity, DC and with lock-ins.
+  magnetometry:
+    title: Magnetometry
+    description: Magnetization and susceptibility.
+  optics:
+    title: Optical spectroscopy and imaging
+    description: Photoluminescence, Raman, reflectance, photocurrent and magneto-optics.
+  ultrafast-nonlinear:
+    title: Ultrafast and nonlinear optics
+    description: Second-harmonic generation and pump-probe spectroscopy.
+  spin-resonance:
+    title: Spin resonance and quantum sensing
+    description: NV-center ODMR and coherence, ferromagnetic resonance.
+  quantum-devices:
+    title: Quantum devices
+    description: Superconducting resonators and qubits, quantum dots.
+  acoustics:
+    title: Acoustics and phononics
+    description: Surface acoustic waves, acoustoelectric and magnetoacoustic effects.
+  amo:
+    title: Atomic, molecular and optical control
+    description: AOMs, tunable lasers and wavelength scans.
+  environment:
+    title: Sample environment
+    description: Cooldowns, temperature steps and field ramps.
+
+# Interfaces and control styles an instrument.yaml may name.
+interfaces: [gpib, usb-tmc, usb, lan, rs-232, rs-485, pcie, pxie, analog, web-api]
+controls:
+  scpi: SCPI or IEEE 488.2 text commands
+  text: Another text command protocol
+  library: The maker's DLL, SDK or Python package
+  web-api: HTTP, JSON or RPC over the network
+  none: No remote control
+
+# The cards that come with Kelvin itself. Kelvin keeps its own copy of these and ignores a card in
+# ~/Kelvin/cards with the same id, so `kic install` leaves them out.
+kelvin:
+  cards_folder: ~/Kelvin/cards
+  bundled:
+    version: 0.3.24
+    cards:
+      - ami/430
+      - andor/ccd
+      - andor/scmos
+      - andor/shamrock
+      - attocube/anc300
+      - attocube/anc350
+      - attocube/attodry
+      - basler/camera
+      - coherent/obis
+      - keithley/2182a
+      - keithley/2400
+      - keithley/2450
+      - keysight/33500b
+      - keysight/34465a
+      - keysight/b2900
+      - keysight/n5183b
+      - lakeshore/336
+      - lakeshore/350
+      - lakeshore/625
+      - lightcon/pharos
+      - m2/solstis
+      - moglabs/xrf
+      - ni/daqmx
+      - novatech/409b
+      - ocean/spectrometer
+      - oxford/mercury-itc
+      - pi/gcs-piezo
+      - princeton/picam
+      - princeton/spectrapro
+      - qd/multivu
+      - qick/rfsoc
+      - rigol/dg1000z
+      - rs/smb100a
+      - spincore/pulseblaster
+      - srs/dg645
+      - srs/sg384
+      - srs/sr560
+      - srs/sr570
+      - srs/sr830
+      - srs/sr860
+      - swabian/pulse-streamer
+      - swabian/time-tagger
+      - thorlabs/itc4000
+      - thorlabs/mdt69xa
+      - thorlabs/pm100
+      - toptica/dlc-pro
+      - windfreak/synthhd
+      - yokogawa/gs200
+      - zhinst/mfli

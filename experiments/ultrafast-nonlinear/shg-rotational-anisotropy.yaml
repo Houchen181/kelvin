@@ -1,0 +1,55 @@
+schema: 1
+id: ultrafast-nonlinear/shg-rotational-anisotropy
+area: ultrafast-nonlinear
+title: Rotational-anisotropy second-harmonic generation
+summary: >-
+  Focus femtosecond pulses on the sample and record the second harmonic while the light's polarization (or the
+  scattering plane) rotates. The patterns fit the χ(2) tensor and reveal the point-group symmetry, and how it
+  breaks at structural, electronic or magnetic transitions.
+roles:
+  laser:
+    kind: laser
+    does: Femtosecond pulses (Ti:sapphire near 800 nm, or a Yb laser near 1030 nm).
+    suggested: [lightcon/pharos, spectra-physics/mai-tai, coherent/chameleon]
+  polarization:
+    kind: motion-stage
+    does: Rotates the incident polarization and the analyzer (half-wave plates or polarizers on rotation mounts).
+    suggested: [thorlabs/k10cr1, newport/conex-cc, newport/smc100]
+  detector:
+    kind: [photon-counter, camera, lock-in]
+    does: Counts the SHG photons through a short-pass and band-pass filter, or reads a PMT with a chopper and lock-in.
+    suggested: [srs/sr400, picoquant/multiharp-150, andor/ccd, srs/sr830]
+  chopper:
+    kind: chopper
+    does: Chops the beam for lock-in detection.
+    optional: true
+    suggested: [thorlabs/mc2000b]
+  cryostat:
+    kind: [cryostat, temperature-controller]
+    does: Holds the temperature across a transition.
+    optional: true
+    suggested: [montana/cryostation, attocube/attodry, lakeshore/336]
+needs_cards: [motion-stage]
+setup:
+  - "Normal incidence: rotate the incident polarization with a half-wave plate and the analyzer with a second one in front of a fixed polarizer, together, for parallel and crossed channels. Oblique incidence: rotate the scattering plane instead (rotating the sample also works)."
+  - Block the fundamental with a short-pass filter and a band-pass at 2ω before the detector; check that the signal vanishes without the sample and scales as the square of the power.
+  - Calibrate the pattern on a crystal of known symmetry, such as GaAs (111) or z-cut quartz (GaAs (001) gives no SHG at normal incidence).
+procedure:
+  - Record parallel and crossed patterns (or PP, PS, SP, SS at oblique incidence) at 5-10° steps, then repeat across temperature.
+  - Kelvin can run the rotation as a plan once the rotation mounts have cards; until then they turn in their own software.
+analysis:
+  - Fit each pattern with |e(2ω)·χ(2):e(ω)e(ω)|² for the candidate point groups; the number of independent tensor elements and their temperature dependence identify the order parameter.
+  - Distinguish electric-dipole SHG (non-centrosymmetric crystals, surfaces) from weaker electric-quadrupole contributions; time-reversal-odd (c-type) tensors indicate magnetic order.
+pitfalls:
+  - Peak intensities near the damage threshold heat or ablate the sample; work at the lowest pulse energy that gives a clean pattern.
+  - Cryostat windows and dichroic optics are birefringent; calibrate the polarization at the sample position.
+  - A small sample tilt adds terms that look like lower symmetry.
+safety:
+  - Ultrafast lasers are class 4. Kelvin never sends the PHAROS's start, standby or preset actions, and asks before every attenuator change.
+references:
+  - title: D. H. Torchinsky, H. Chu, T. Qi, G. Cao and D. Hsieh, A low temperature nonlinear optical rotational anisotropy spectrometer for the determination of crystallographic and electronic symmetries, Rev. Sci. Instrum. 85, 083102 (2014)
+    doi: 10.1063/1.4891417
+  - title: M. Fiebig, V. V. Pavlov and R. V. Pisarev, Second-harmonic generation as a tool for studying electronic and magnetic structures of crystals, J. Opt. Soc. Am. B 22, 96 (2005)
+    doi: 10.1364/JOSAB.22.000096
+  - title: J. W. Harter, Z. Y. Zhao, J.-Q. Yan, D. G. Mandrus and D. Hsieh, A parity-breaking electronic nematic phase transition in the spin-orbit coupled metal Cd2Re2O7, Science 356, 295 (2017)
+    doi: 10.1126/science.aad1188

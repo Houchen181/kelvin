@@ -1,0 +1,50 @@
+schema: 1
+id: keysight/e5080b
+maker: Keysight
+model: E5080B
+name: Keysight E5080B ENA vector network analyzer
+covers: [E5080A, E5081A]
+kind: vna
+interfaces: [gpib, usb-tmc, lan]
+control: scpi
+identify:
+  idn: ^Keysight Technologies,E5080B,
+  example: Keysight Technologies,E5080B,MY00000000,A.06.01.02
+manuals:
+  - title: 'E5080B VNA Help: Programming Guide'
+    url: https://helpfiles.keysight.com/csg/e5080b/Programming/Programming_Guide.htm
+    covers: How to find SCPI commands (SCPI command recorder, simulated UI, command tree); COM is not officially supported
+    access: public
+  - title: 'E5080B VNA Help: SCPI Command Tree'
+    url: https://helpfiles.keysight.com/csg/e5080b/Programming/GP-IB_Command_Finder/SCPI_Command_Tree.htm
+    covers: Full SCPI command tree by branch (CALCulate, SENSe, ...)
+    access: public
+  - title: 'E5080B VNA Help: IEEE 488.2 Common Commands'
+    url: https://helpfiles.keysight.com/csg/e5080b/Programming/GP-IB_Command_Finder/Common_Commands.htm
+    covers: '*IDN?, *OPC?, *RST and the other common commands'
+    access: public
+  - title: 'E5080B VNA Help: How to Configure for GPIB, SCPI and SICL'
+    url: https://helpfiles.keysight.com/csg/e5080b/Programming/Learning_about_GPIB/How_to_Configure_for_GPIB_SCPI_and_SICL.htm
+    covers: 'Remote Interface dialog: GPIB address, SICL/VXI-11, LAN sockets on port 5025, Telnet on port 5024'
+    access: public
+links:
+  - title: 'E5080B VNA Help: home'
+    url: https://helpfiles.keysight.com/csg/e5080b/index.htm
+  - title: 'E5080B VNA Help: SCPI Example Programs'
+    url: https://helpfiles.keysight.com/csg/e5080b/Programming/GPIB_Example_Programs/SCPI_Example_Programs.htm
+  - title: 'E5080B VNA Help: Controlling the VNA Using Python (PyVISA over HiSLIP)'
+    url: https://helpfiles.keysight.com/csg/e5080b/Programming/GPIB_Example_Programs/Controlling_the_VNA_Using_Python.htm
+  - title: 'E5080B VNA Help: Code Emulator for E5071C'
+    url: https://helpfiles.keysight.com/csg/e5080b/Programming/Code_Emulator_for_E5071C.htm
+  - title: 'E5080B VNA Help: rear and side panels (GPIB, USBTMC and LAN connectors)'
+    url: https://helpfiles.keysight.com/csg/e5080b/Rear_Panel/ENARtour.htm
+  - title: E5080B data sheet (public PDF)
+    url: https://www.keysight.com/content/dam/keysight/en/doc/ungate/data-sheets/5992-3843.pdf
+software:
+  - name: qcodes_contrib_drivers
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.Keysight.Keysight_E5080B.KeySight_E5080B
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/Keysight/Keysight_E5080B.py
+notes:
+  - Uses the same SCPI commands as the high-end PNA analyzers; COM is not officially supported. Over LAN use HiSLIP (the VISA string is shown in the Remote Interface dialog) or raw sockets on port 5025, and Telnet on port 5024 for single commands.
+  - E5071C scripts run in the code-emulation mode for most functions, but sweep-end detection through the status byte and the frequency-offset (mixer) mode are not supported there.

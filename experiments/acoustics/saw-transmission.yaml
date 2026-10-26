@@ -1,0 +1,42 @@
+schema: 1
+id: acoustics/saw-transmission
+area: acoustics
+title: Surface acoustic wave transmission and magnetoacoustics
+summary: >-
+  Launch a surface acoustic wave with one interdigital transducer (IDT) and detect it with another: the change
+  in amplitude and velocity against field, temperature or gate probes the conductivity of a 2D layer, magnetoelastic
+  coupling and acoustically driven spin resonance.
+roles:
+  vna:
+    kind: vna
+    does: Measures S21 between the two IDTs, with time-domain gating.
+    suggested: [keysight/e5071c, keysight/e5080b, rs/znb, copper-mountain/s2vna]
+  cryostat:
+    kind: [cryostat, magnet-supply]
+    does: Sets temperature and field.
+    suggested: [qd/multivu, ami/430]
+  gate:
+    kind: [source-meter, voltage-source]
+    does: Tunes the carrier density of a 2D layer on the delay line.
+    optional: true
+    suggested: [keithley/2400, keithley/2450]
+needs_cards: [vna]
+setup:
+  - IDTs on a piezoelectric substrate (LiNbO3, GaAs, ZnO or AlN films), the sample on the delay line between them.
+  - Calibrate the VNA at the cryostat's ports; turn on time-domain gating around the acoustic delay L/v (microseconds), which separates the SAW from electromagnetic crosstalk (nanoseconds).
+procedure:
+  - Find the IDT resonance and the acoustic peak in the time domain; gate it.
+  - At the resonance frequency, record amplitude and phase of the gated S21 against field, temperature or gate.
+  - Kelvin can run these sweeps as plans once a VNA has a card; Kelvin drafts one from the manuals listed here.
+analysis:
+  - The attenuation change is Δ|S21| in dB; the velocity change is Δv/v = -Δφ/(2π·f·τ), with τ the acoustic delay and φ the transmission phase (sign conventions vary).
+  - "For a 2D conductor, attenuation peaks where the sheet conductivity equals σ_m = v·(ε0 + εs): about 3×10⁻⁷ S on GaAs, of order 10⁻⁶ S on LiNbO3."
+  - Acoustically driven FMR shows up as resonant absorption when the magnon frequency matches the SAW frequency at the right field angle.
+pitfalls:
+  - The IDT resonance shifts with temperature; re-center it at each temperature.
+  - Triple-transit echoes and bulk waves add peaks in the time domain; gate only the first SAW arrival.
+references:
+  - title: M. Weiler et al., Elastically driven ferromagnetic resonance in nickel thin films, Phys. Rev. Lett. 106, 117601 (2011)
+    doi: 10.1103/PhysRevLett.106.117601
+  - title: A. Wixforth, J. Scriba, M. Wassermeier, J. P. Kotthaus, G. Weimann and W. Schlapp, Surface acoustic waves on GaAs/AlxGa1-xAs heterostructures, Phys. Rev. B 40, 7874 (1989)
+    doi: 10.1103/PhysRevB.40.7874

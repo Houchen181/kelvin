@@ -1,0 +1,30 @@
+schema: 1
+id: lakeshore/218
+maker: Lake Shore Cryotronics
+model: '218'
+name: Lake Shore Model 218 temperature monitor
+covers: [218S, 218E]
+kind: temperature-controller
+interfaces: [gpib, rs-232]
+control: scpi
+identify:
+  idn: ^LSCI,MODEL218[SE]?,
+  example: LSCI,MODEL218S,LSB2EH,041813
+manuals:
+  - title: Model 218 Temperature Monitor User's Manual
+    url: https://www.lakeshore.com/docs/default-source/product-downloads/manuals/218_manual.pdf
+    covers: 'Remote-communication sections: IEEE-488 (218S only) and RS-232C interface setup, and the command list'
+    access: public
+links:
+  - title: Model 218 downloads page (manual, catalog, CAD files)
+    url: https://www.lakeshore.com/products/categories/downloads/temperature-products/cryogenic-temperature-monitors/model-218-temperature-monitor
+  - title: Model 218 specifications (computer interfaces, inputs)
+    url: https://www.lakeshore.com/products/categories/specification/temperature-products/cryogenic-temperature-monitors/model-218-temperature-monitor
+software:
+  - name: pylablib
+    kind: python-driver
+    ref: pylablib.devices.Lakeshore.Lakeshore218
+    url: https://pylablib.readthedocs.io/en/latest/devices/Lakeshore.html
+notes:
+  - Eight-input monitor for diodes, platinum RTDs and NTC resistors. Read temperatures with KRDG? (kelvin) or SRDG? (sensor units); channel 0 returns all eight. Only the 218S has IEEE-488, the 218E is serial-only.
+  - The RS-232C link (9600 baud maximum) uses 7 data bits plus a parity bit instead of 8N1, so USB-serial adapters need explicit settings and some setups need a null-modem cable.

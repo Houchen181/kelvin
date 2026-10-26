@@ -1,0 +1,40 @@
+schema: 1
+id: bluefors/dilution-refrigerator
+maker: Bluefors
+model: LD / XLD / SD / LH series
+name: Bluefors dilution refrigerators (Control Software, temperature controller, gas handling system)
+kind: dilution-refrigerator
+interfaces: [lan, web-api]
+control: web-api
+manuals:
+  - title: Control Software 2 Python examples README (API authentication, TLS and the location of the on-instrument API reference)
+    url: https://github.com/BlueforsOy/Control_Software_gen2_API_examples/blob/main/README.md
+    covers: HTTP and WebSocket API access with Keycloak token authentication and HTTPS certificate handling; the full API reference is served by the instrument itself at /api/v1/swagger-ui/index.html
+    access: public
+links:
+  - title: Control Software Generation 2 (REST APIs and WebSockets)
+    url: https://bluefors.com/products/dilution-refrigerator-measurement-systems/control-software/
+  - title: Gas Handling System Generation 2
+    url: https://bluefors.com/products/dilution-refrigerator-measurement-systems/gas-handling-system/
+  - title: Bluefors Temperature Controller (Ethernet API with REST, WebSocket and MQTT)
+    url: https://bluefors.com/news/enhanced-user-experience-with-the-temperature-controller/
+  - title: Bluefors support documents (login required; manuals, service instructions, software)
+    url: https://bluefors.com/support-documents/
+software:
+  - name: Bluefors Temperature Controller (BFTC) Python driver (official; plain and QCoDeS variants)
+    kind: vendor-sdk
+    url: https://github.com/BlueforsOy/Bluefors_Temperature_Controller
+  - name: qcodes_contrib_drivers (reads the fridge log files, does not talk to the fridge electronics)
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.BlueFors.BlueFors.BlueFors
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/BlueFors/BlueFors.py
+examples:
+  - title: Control Software 2 Python examples (HTTP API, websocket monitoring, cooldown scripts)
+    url: https://github.com/BlueforsOy/Control_Software_gen2_API_examples
+    license: MIT
+  - title: Bluefors Temperature Controller (BFTC) Python driver examples
+    url: https://github.com/BlueforsOy/Bluefors_Temperature_Controller
+    license: MIT
+notes:
+  - Control Software 2 serves a REST API and WebSockets over HTTPS with Keycloak token authentication; the OpenAPI (Swagger) reference is served by the instrument itself. On Windows the CS2 installer does not register its HTTPS certificate with the system trust store, so install it or pass the certificate file (cert_path) to the client.
+  - The separate temperature controller (BFTC) is driven with JSON over WebSocket (port 5002 in the official driver). Manuals and software are only in the login-protected support portal.

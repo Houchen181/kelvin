@@ -1,0 +1,31 @@
+name: Add an instrument
+description: Ask for an instrument (or a card for one) to be added to the collection.
+labels: [instrument]
+body:
+  - type: input
+    id: model
+    attributes:
+      label: Maker and model
+      placeholder: Stanford Research Systems SR844
+    validations:
+      required: true
+  - type: input
+    id: idn
+    attributes:
+      label: Its reply to *IDN? (if it speaks SCPI)
+      placeholder: Stanford_Research_Systems,SR844,s/n12345,ver1.006
+  - type: input
+    id: manual
+    attributes:
+      label: Link to the maker's programming manual
+  - type: dropdown
+    id: connection
+    attributes:
+      label: How it connects
+      multiple: true
+      options: [GPIB, USB, LAN, RS-232, PCIe/PXIe, The maker's DLL or SDK, Web API]
+  - type: textarea
+    id: use
+    attributes:
+      label: What you use it for
+      description: The experiment, and which settings and readings matter.

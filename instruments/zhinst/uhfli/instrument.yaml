@@ -1,0 +1,52 @@
+schema: 1
+id: zhinst/uhfli
+maker: Zurich Instruments
+model: UHFLI
+name: Zurich Instruments UHFLI 600 MHz lock-in amplifier
+covers: [UHFAWG]
+kind: lock-in
+interfaces: [usb, lan]
+control: library
+manuals:
+  - title: 'UHF User Manual: Device Node Tree (online)'
+    url: https://docs.zhinst.com/uhf_user_manual/nodedoc.html
+    covers: Reference of all settings and data nodes used through the LabOne APIs
+    access: public
+  - title: UHF User Manual (online)
+    url: https://docs.zhinst.com/uhf_user_manual/
+    access: public
+  - title: UHF User Manual (PDF)
+    url: https://docs.zhinst.com/pdf/ziUHF_UserManual.pdf
+    access: public
+  - title: LabOne API User Manual (Python, MATLAB, LabVIEW, .NET, C)
+    url: https://docs.zhinst.com/labone_api_user_manual/
+    covers: API documentation for all instrument types
+    access: public
+links:
+  - title: UHFLI 600 MHz Lock-in Amplifier (Zurich Instruments product page)
+    url: https://www.zhinst.com/europe/en/products/uhfli-lock-in-amplifier/
+  - title: Zurich Instruments Software Download Center (LabOne)
+    url: https://www.zhinst.com/europe/en/support/download-center/
+software:
+  - name: zhinst-core (LabOne Python Core API)
+    kind: vendor-sdk
+    ref: zhinst.core.ziDAQServer
+    url: https://pypi.org/project/zhinst-core/
+  - name: zhinst-toolkit
+    kind: vendor-sdk
+    ref: zhinst.toolkit.driver.devices.uhfli.UHFLI
+    url: https://pypi.org/project/zhinst-toolkit/
+  - name: zhinst-qcodes
+    kind: python-driver
+    ref: zhinst.qcodes.UHFLI
+    url: https://pypi.org/project/zhinst-qcodes/
+examples:
+  - title: LabOne API examples (uhf/python and hf2-mf-uhf/python)
+    url: https://github.com/zhinst/labone-api-examples
+    license: MIT
+  - title: zhinst-toolkit examples
+    url: https://github.com/zhinst/zhinst-toolkit/tree/main/examples
+    license: MIT
+notes:
+  - Programmatic control goes through the LabOne Data Server on the host (default port 8004) over USB 2.0 or 1 GbE; every setting and data stream is a node path listed in the Device Node Tree.
+  - zhinst-toolkit gives a Pythonic interface, zhinst-core the thin Core API; the vendor's QCoDeS driver zhinst-qcodes builds on zhinst-toolkit.

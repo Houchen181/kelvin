@@ -1,0 +1,20 @@
+schema: 1
+id: lakeshore/625
+maker: Lake Shore Cryotronics
+model: '625'
+name: Lake Shore Model 625 superconducting magnet power supply
+kind: magnet-supply
+interfaces: [gpib, rs-232]
+control: scpi
+card: card.yaml
+manuals:
+  - title: Model 625 Superconducting Magnet Power Supply user's manual, Remote operation
+    url: https://www.lakeshore.com/docs/default-source/product-downloads/manuals/625_manual.pdf?sfvrsn=2d9f6b7_1
+    access: public
+software:
+  - name: QCoDeS contrib drivers
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.Lakeshore.Model_625.Lakeshore625
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/Lakeshore/Model_625.py
+notes:
+  - The card drives current; the coil constant and persistent-switch heater stay blocked, so a field is current times your magnet's constant.

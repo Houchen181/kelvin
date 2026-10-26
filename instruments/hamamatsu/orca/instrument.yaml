@@ -1,0 +1,42 @@
+schema: 1
+id: hamamatsu/orca
+maker: Hamamatsu
+model: ORCA-Flash4.0 V3
+name: Hamamatsu ORCA-Flash4.0 / ORCA-Quest scientific CMOS cameras (DCAM-API)
+covers: [ORCA-Flash4.0, ORCA-Quest, ORCA-Quest 2]
+kind: camera
+interfaces: [usb, pcie]
+control: library
+links:
+  - title: DCAM-SDK4 (header and library files, API documentation, property lists and C/C++/Python samples)
+    url: https://www.hamamatsu.com/us/en/product/cameras/software/driver-software/dcam-sdk4.html
+  - title: DCAM-API for Windows (runtime and drivers, compatibility notes)
+    url: https://www.hamamatsu.com/us/en/product/cameras/software/driver-software/dcam-api-for-windows.html
+  - title: DCAM-API Lite for Linux
+    url: https://www.hamamatsu.com/us/en/product/cameras/software/driver-software/dcam-api-lite-for-linux.html
+  - title: Driver software overview (DCAM-API, DCAM-SDK4, DCIMG-SDK)
+    url: https://www.hamamatsu.com/us/en/product/cameras/software/driver-software.html
+  - title: DCAM-API third-party plugins (LabVIEW, MATLAB, EPICS, Micro-Manager)
+    url: https://dcam-api.com/third-party-plugins/
+  - title: ORCA-Flash4.0 V3 (C13440-20CU) product page
+    url: https://www.hamamatsu.com/us/en/product/cameras/cmos-cameras/C13440-20CU.html
+  - title: ORCA-Quest 2 (C15550-22UP) product page
+    url: https://www.hamamatsu.com/us/en/product/cameras/qcmos-cameras/C15550-22UP.html
+  - title: 'ORCA-Flash4.0 V3 instruction manual (hardware manual: interfaces, operation modes)'
+    url: https://www.hamamatsu.com/content/dam/hamamatsu-photonics/sites/static/sys/en/manual/C13440-20CU_IM_En.pdf
+  - title: ORCA-Quest 2 instruction manual (hardware manual)
+    url: https://www.hamamatsu.com/content/dam/hamamatsu-photonics/sites/static/sys/en/manual/C15550-22UP_IM_En.pdf
+software:
+  - name: DCAM-SDK4 (free download under a click-through licence)
+    kind: vendor-sdk
+    url: https://www.hamamatsu.com/us/en/product/cameras/software/driver-software/dcam-sdk4.html
+  - name: DCAM-API for Windows runtime and drivers
+    kind: vendor-software
+    url: https://www.hamamatsu.com/us/en/product/cameras/software/driver-software/dcam-api-for-windows.html
+  - name: pylablib DCAM camera driver (tested with ORCA-Flash and ImagEM)
+    kind: python-driver
+    ref: pylablib.devices.DCAM.DCAMCamera
+    url: https://pylablib.readthedocs.io/en/latest/devices/DCAM.html
+notes:
+  - 'All control goes through DCAM-API properties (dcamapi.dll): install the DCAM-API runtime and the driver for your interface (USB 3.x, or the Camera Link / CoaXPress frame grabber), then use DCAM-SDK4 for the API reference, property lists and samples; there is no standalone programming PDF on the website.'
+  - Newer DCAM-API versions drop support for older cameras and each runtime has a compatibility note, so check the note for your runtime version before upgrading.

@@ -1,0 +1,11 @@
+schema: 1
+id: lightcon/pharos
+maker: Light Conversion
+model: PHAROS
+name: Light Conversion PHAROS femtosecond laser
+kind: laser
+interfaces: [lan, web-api]
+control: web-api
+card: card.yaml
+notes:
+  - 'Its REST API has no login of its own: keep the laser on the lab network. Kelvin never sends start, standby or preset actions.'

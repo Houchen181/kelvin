@@ -1,0 +1,24 @@
+# Ferromagnetic resonance with field modulation: a microwave source into a coplanar waveguide, a diode detector
+# into a lock-in, and the lock-in's sine output driving small modulation coils through an audio amplifier.
+# The field comes from a superconducting magnet on an AMI 430.
+#
+# To use it: copy it to ~/Kelvin/lab.yaml (or open it in Lab -> Set up), give each instrument its address
+# (Scan finds them) and set the limits for your setup. Until then every instrument here is simulated.
+lab: FMR
+
+instruments:
+  magnet:
+    card: ami/430
+    # address: "TCPIP0::<ip>::7180::SOCKET"; set its field units to tesla (the card's health check requires it)
+    limits: { B_target: [-1, 1] }          # T
+  mw:
+    card: rs/smb100a
+    # address: "TCPIP0::<ip>::inst0::INSTR"
+    limits: { power: [-145, 15] }          # dBm; the low end includes the card's safe -145 dBm
+  lockin:
+    card: srs/sr830
+    # address: "GPIB0::8::INSTR"
+    limits: { amplitude: [0.004, 2] }      # into the audio amplifier that drives the modulation coils
+
+safe_actions:
+  magnet.B_target: hold

@@ -1,0 +1,24 @@
+schema: 1
+id: qick/rfsoc
+maker: QICK (open source)
+model: RFSoC boards
+name: RFSoC boards running QICK (ZCU111, ZCU216, RFSoC 4x2)
+covers: [ZCU111, ZCU216, RFSoC 4x2]
+kind: awg
+categories: [rf-microwave]
+interfaces: [lan]
+control: library
+card: card.yaml
+software:
+  - name: qick
+    kind: vendor-sdk
+    url: https://pypi.org/project/qick/
+  - name: Pyro4
+    kind: python-driver
+    url: https://pypi.org/project/Pyro4/
+examples:
+  - title: QICK demo notebooks
+    url: https://github.com/openquantumhardware/qick/tree/main/qick_demos
+    license: MIT
+notes:
+  - Kelvin plays one generator as a tone or pulses and reads I/Q from one readout; it stops every generator when the output goes off.

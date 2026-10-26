@@ -1,0 +1,23 @@
+# Surface acoustic waves in a PPMS or DynaCool: an RF source drives one interdigital transducer (IDT); a
+# nanovoltmeter reads the acoustoelectric voltage along the sample, or a diode detector on the other IDT.
+#
+# To use it: copy it to ~/Kelvin/lab.yaml (or open it in Lab -> Set up), give each instrument its address
+# (Scan finds them) and set the limits for your device. Until then every instrument here is simulated.
+lab: SAW
+
+instruments:
+  cryo:
+    card: qd/multivu
+    # address: "qd://<MultiVu computer>:5000"
+    limits: { T_set: [1.8, 350], B_set: [-9, 9] }
+  rf:
+    card: srs/sg384
+    # address: "TCPIP0::<ip>::5025::SOCKET"
+    limits: { power: [-110, 10] }          # dBm into the IDT; the low end includes the card's safe -110 dBm
+  nvm:
+    card: keithley/2182a
+    # address: "GPIB0::7::INSTR"
+
+safe_actions:
+  cryo.B_set: hold
+  cryo.T_set: hold

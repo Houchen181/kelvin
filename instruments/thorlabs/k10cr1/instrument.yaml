@@ -1,0 +1,24 @@
+schema: 1
+id: thorlabs/k10cr1
+maker: Thorlabs
+model: K10CR1
+name: Thorlabs K10CR1 motorized rotation mount
+covers: [K10CR2]
+kind: motion-stage
+interfaces: [usb]
+control: library
+software:
+  - name: pylablib Thorlabs Kinesis/APT driver
+    kind: python-driver
+    ref: pylablib.devices.Thorlabs.KinesisMotor
+    url: https://pylablib.readthedocs.io/en/stable/devices/Thorlabs_kinesis.html
+  - name: QCoDeS contrib driver for the K10CR1
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.Thorlabs.K10CR1.Thorlabs_K10CR1
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/Thorlabs/K10CR1.py
+examples:
+  - title: 'Thorlabs Motion_Control_Examples: K10CR1/K10CR2 cage rotator (Python, pythonnet)'
+    url: https://github.com/Thorlabs/Motion_Control_Examples/tree/main/Python/Kinesis/Integrated%20Stages/Cage%20Rotator
+    license: MIT
+notes:
+  - Rotates waveplates and polarizers in optical setups. Thorlabs' own Python example drives it through the Kinesis .NET libraries on Windows and homes the stage before moving it; pylablib instead speaks the APT binary protocol over USB and needs no Thorlabs DLLs.

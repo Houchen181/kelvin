@@ -1,0 +1,17 @@
+# Photoluminescence excitation (PLE) with a tunable Ti:sapphire laser: the laser steps its wavelength, a photon
+# counter takes the emission through a long-pass filter, a power meter normalizes the excitation.
+#
+# To use it: copy it to ~/Kelvin/lab.yaml (or open it in Lab -> Set up), give each instrument its address
+# (Scan finds them). Until then every instrument here is simulated.
+lab: Tunable laser
+
+instruments:
+  laser:
+    card: m2/solstis
+    # address: "m2://<ip>:<port>" (enter this computer's IP under Remote interface on the laser's web page)
+  counter:
+    card: swabian/time-tagger
+    # address: "timetagger://<serial>?click=1"
+  pm:
+    card: thorlabs/pm100
+    # address: "USB0::0x1313::0x8078::<serial>::INSTR"

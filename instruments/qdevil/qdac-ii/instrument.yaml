@@ -1,0 +1,45 @@
+schema: 1
+id: qdevil/qdac-ii
+maker: QDevil (Quantum Machines)
+model: QDAC-II
+name: QDevil QDAC-II 24-channel low-noise DAC
+covers: [QDAC-II Compact]
+kind: voltage-source
+interfaces: [usb, lan]
+control: scpi
+identify:
+  idn: ^QDevil,\s*QDAC-II,
+  example: QDevil, QDAC-II, 1234, 14-1.70
+manuals:
+  - title: QDAC-II (Compact) Command Reference
+    url: https://docs.quantum-machines.co/latest/docs/Hardware/assets/QDAC-II%20Compact%20Command%20Reference.pdf
+    covers: SCPI command reference (IEEE common commands and instrument commands), linked by the maker for both QDAC-II and QDAC-II Compact
+    access: public
+  - title: QDAC-II User Manual
+    url: https://docs.quantum-machines.co/latest/docs/Hardware/assets/QDAC-II%20User%20Manual.pdf
+    access: public
+  - title: QDAC-II Compact Operation Manual
+    url: https://docs.quantum-machines.co/latest/docs/Hardware/assets/QDAC-II%20Compact%20Operation%20Manual.pdf
+    access: public
+links:
+  - title: 'QDAC documentation: manuals, firmware, drivers and examples (Quantum Machines)'
+    url: https://docs.quantum-machines.co/latest/docs/Hardware/QDAC/
+software:
+  - name: QCoDeS contrib drivers
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.QDevil.QDAC2.QDac2
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/QDevil/QDAC2.py
+  - name: QDevil qdac2-tools (pyvisa wrapper and USB detector)
+    kind: vendor-sdk
+    ref: qdac2.QDAC2
+    url: https://github.com/QDevil/qdac2-tools/blob/master/src/qdac2.py
+examples:
+  - title: QCoDeS QDAC-II example notebooks
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/tree/main/docs/examples/QDevil/QDAC2
+    license: MIT
+  - title: QDevil qdac2-tools (QDAC-II and QSwitch scripts)
+    url: https://github.com/QDevil/qdac2-tools
+    license: ISC
+notes:
+  - SCPI over a raw TCP socket (VISA TCPIP::<ip>::5025::SOCKET in the QCoDeS examples) or over the USB virtual serial port (921600 baud in both the QCoDeS driver and QDevil's qdac2 helper).
+  - Check the firmware against the manual version (the maker's page offers 14-1.70 as the current update); the QCoDeS driver rejects firmware older than 0.17.5.

@@ -1,0 +1,23 @@
+schema: 1
+id: srs/sg384
+maker: Stanford Research Systems
+model: SG384
+name: Stanford Research SG380-series RF signal generators
+covers: [SG382, SG386]
+kind: microwave-source
+interfaces: [gpib, rs-232, lan]
+control: scpi
+card: card.yaml
+manuals:
+  - title: SG380 Series RF Signal Generators User Manual, Rev 2.07, Remote programming (pp. 56-77)
+    url: https://www.thinksrs.com/downloads/pdfs/manuals/SG380m.pdf
+    access: public
+software:
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.srs.sg380.SG380
+    url: https://github.com/pymeasure/pymeasure/blob/master/pymeasure/instruments/srs/sg380.py
+  - name: QCoDeS
+    kind: python-driver
+    ref: qcodes.instrument_drivers.stanford_research.SG384.SG384
+    url: https://github.com/microsoft/Qcodes/blob/main/src/qcodes/instrument_drivers/stanford_research/SG384.py

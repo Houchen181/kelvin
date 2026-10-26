@@ -1,0 +1,58 @@
+schema: 1
+id: transport/resistance-vs-temperature
+area: transport
+title: Resistance against temperature
+summary: >-
+  Four-probe resistance with a lock-in from room temperature to base: metal or insulator, phase transitions
+  (charge density waves, magnetic order, superconductivity) and the residual resistance ratio.
+roles:
+  lockin:
+    kind: lock-in
+    does: Drives the current through a series resistor and reads the voltage between the inner contacts.
+    suggested: [srs/sr830, srs/sr860, zhinst/mfli, signal-recovery/7270]
+  temperature:
+    kind: [temperature-controller, cryostat]
+    does: Steps or ramps the temperature and reads the thermometers.
+    suggested: [lakeshore/336, lakeshore/350, oxford/mercury-itc, qd/multivu]
+  preamp:
+    kind: preamp
+    does: Amplifies small voltages differentially before the lock-in.
+    optional: true
+    suggested: [srs/sr560]
+lab: labs/cryostat-electrical.yaml
+setup:
+  - Put a resistor much larger than the sample (1-10 MΩ for a 1 kΩ sample) in series with the sine output, so the current is the sine amplitude over that resistor and stays constant as the sample changes.
+  - Read the voltage between the two inner contacts differentially (A-B) and return the current to the lock-in's ground.
+  - Pick a frequency away from mains harmonics (13.7 Hz, 17.777 Hz). The phase should sit near zero; a large Y means capacitive coupling or a bad contact.
+procedure:
+  - Check the room-temperature resistance and phase before cooling.
+  - Log continuously during the cooldown for a quick curve, then take stabilized steps through any transition.
+  - Warm up and compare. A difference between the cooling and warming curves points to a first-order transition or to thermal lag.
+plans:
+  - title: Log during a cooldown, every 10 s for 12 h
+    plan:
+      plan: r_t_cooldown
+      setup: { lockin.amplitude: 1.0, lockin.frequency: 13.7, lockin.time_constant: "300 ms" }
+      time: { every: 10, for: 43200 }
+      measure: [lockin.X, lockin.Y, tc.T_A, tc.T_B]
+  - title: Stabilized steps from 300 K to 10 K
+    plan:
+      plan: r_t_steps
+      setup: { lockin.amplitude: 1.0, lockin.frequency: 13.7, lockin.time_constant: "300 ms", tc.heater_range: medium }
+      sweep:
+        tc.setpoint: { from: 300, to: 10, step: 5, stabilize: { read: tc.T_A, within: 0.05, for: 60, timeout: 1800 } }
+      settle: 2
+      measure: [lockin.X, lockin.Y, tc.T_A, tc.T_B]
+      after: { tc.heater_range: "off" }
+analysis:
+  - R = X / I, with I the sine amplitude over the series resistor. For a film, ρ = R·w·t/L; for an arbitrary shape, use the van der Pauw method.
+  - The residual resistance ratio R(300 K)/R(base) measures sample quality.
+  - dR/dT sharpens the kinks at magnetic and charge-density-wave transitions.
+pitfalls:
+  - Self-heating at low temperature. Halve the current and check that the resistance doesn't change.
+  - The thermometer sits on the stage, not on the sample. Sweep slowly, or compare cooling and warming.
+  - A Y channel that grows as the sample cools means a contact is becoming resistive. Check the two-terminal resistances.
+safety:
+  - Kelvin asks before each heater range and setpoint the lab allows; this lab's watch switches the heater off above 330 K.
+references:
+  - title: L. J. van der Pauw, A method of measuring specific resistivity and Hall effect of discs of arbitrary shape, Philips Research Reports 13, 1 (1958)

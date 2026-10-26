@@ -1,0 +1,31 @@
+schema: 1
+id: magnetometry/squid-magnetometry
+area: magnetometry
+title: SQUID magnetometry (M-T and M-H)
+summary: >-
+  Magnetization against temperature (zero-field-cooled and field-cooled) and against field (hysteresis loops)
+  in a SQUID or VSM magnetometer such as the MPMS3.
+roles:
+  magnetometer:
+    kind: cryostat
+    does: Sets temperature and field and measures the moment.
+    suggested: [qd/multivu]
+setup:
+  - Mount the sample in a straw or quartz holder with as little GE varnish or tape as possible, and note its mass and orientation.
+  - Center it with a short scan at a field where the moment is easy to see.
+procedure:
+  - "Zero-field cooled (ZFC): reset the magnet to remove remanent field, cool in zero field, apply the measuring field, measure while warming."
+  - "Field cooled (FC): cool in the measuring field, measure while warming (FCW) or while cooling (FCC)."
+  - "M-H: full loops at a few temperatures, with fine steps near zero field and near the coercive field."
+  - The qd/multivu card sets temperature and field from Kelvin. The moment itself comes from MultiVu's VSM or DC-scan measurement, so run the measurement sequence in MultiVu, or extend the card once MultiPyVu exposes the moment for your option.
+analysis:
+  - Subtract the holder and substrate background, measured on their own, or as a linear diamagnetic slope at high field.
+  - Moment per formula unit in Bohr magnetons is m(emu)·M_w/(m_sample(g)·5585), with M_w the molar mass in g/mol and 5585 emu/mol = N_A·μB.
+  - A ZFC/FC split below a temperature points to spin freezing or domain pinning; Curie-Weiss fits of 1/χ at high temperature give the effective moment and θ_CW.
+pitfalls:
+  - After a high field, a superconducting magnet keeps a remanent field of up to a few mT; reset or oscillate it to zero before ZFC or low-field work.
+  - Paramagnetic impurities in varnish and tape dominate the signal of small samples at low temperature.
+safety:
+  - Respect the magnetometer's field ramp limits and keep magnetic tools away from the sample chamber.
+references:
+  - title: M. McElfresh, Fundamentals of Magnetism and Magnetic Measurements Featuring Quantum Design's Magnetic Property Measurement System (Quantum Design, 1994)

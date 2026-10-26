@@ -1,0 +1,34 @@
+schema: 1
+id: signal-recovery/7270
+maker: Signal Recovery (AMETEK)
+model: '7270'
+name: Signal Recovery 7270 DSP lock-in amplifier
+kind: lock-in
+interfaces: [lan, usb, rs-232]
+control: scpi
+manuals:
+  - title: Model 7270 Instruction Manual (197852-A-MNL-F; AMETEK asks for an email address before download)
+    url: https://www.ameteksi.com/-/media/ameteksi/download_links/documentations/supportcenter/signalrecovery/instruction_manuals/197852-a-mnl-f.pdf
+    access: sign-in
+links:
+  - title: 7270 General Purpose DSP Lock-in Amplifier (AMETEK SI product page)
+    url: https://www.ameteksi.com/products/lock-in-amplifier-en/7270-general-purpose-dsp-lock-in-amplifier
+  - title: Signal Recovery product instruction manuals index (AMETEK SI)
+    url: https://www.ameteksi.com/support-center/documents/signal-recovery/product-instruction-manuals
+  - title: Model 7270 brochure
+    url: https://www.ameteksi.com/-/media/ameteksi/download_links/documentations/7270/model_7270.pdf
+software:
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.ametek.Ametek7270
+    url: https://pymeasure.readthedocs.io/en/stable/api/instruments/ametek/ametek7270.html
+  - name: QCoDeS contrib drivers
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.Ametek.SR_7270.Signalrecovery7270
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/Ametek/SR_7270.py
+  - name: Acquire data acquisition software (AMETEK SI)
+    kind: vendor-software
+    url: https://www.ameteksi.com/products/software/acquire-data-acquisition-software
+notes:
+  - The instruction manual download redirects to an email-entry page on AMETEK's site (it cannot be fetched unattended); the open-source drivers above document the command set in code.
+  - 'Protocol quirk: replies are NUL-terminated and every set command is acknowledged with a NUL that has to be read (PyMeasure and the QCoDeS contrib driver both handle this). The 7265 has a separate manual (190284-A-MNL-C) and PyMeasure driver; its command set was not verified to be identical, so it is not listed under covers.'

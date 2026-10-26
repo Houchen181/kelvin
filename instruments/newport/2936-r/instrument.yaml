@@ -1,0 +1,37 @@
+schema: 1
+id: newport/2936-r
+maker: Newport (MKS)
+model: 2936-R
+name: Newport 2936-R / 1936-R optical power meters
+covers: [1936-R, 1938-R, 2938-R, 1940-R, 2940-R]
+kind: power-meter
+interfaces: [usb, rs-232]
+control: scpi
+identify:
+  idn: ^NEWPORT (1936|2936)-R v\d
+  example: NEWPORT 2936-R v1.3.4 04/27/20 SN81397
+manuals:
+  - title: 'Instrument Communication User Manual: 1936-R/2936-R, 1938-R/2938-R and 1940-R/2940-R communication command reference (Rev 1.00, 11 Jan 2026)'
+    url: https://api.p1.mks.com/medias/sys_master/npresources/hc4/h06/10082698067998/19xx-29xx-R-Power-Meter-Commands_Ver01/19xx-29xx-R-Power-Meter-Commands-Ver01.pdf
+    covers: 'Chapter 4 Communication Command Reference (command overview, SCPI root-level commands such as *IDN?, *SAV, *RCL, ECHO, ERRors?, display commands and PM: power meter commands, pp. 12-56), chapter 5 syntax, chapter 6 error messages, chapter 7 sample programs (LabVIEW, Visual Basic, Visual C++, .NET)'
+    access: public
+links:
+  - title: 2936-R product page (manuals, software and firmware downloads)
+    url: https://www.newport.com/p/2936-R
+  - title: 1936-R product page
+    url: https://www.newport.com/p/1936-R
+  - title: 1936-R / 2936-R Power Meter User's Manual (PDF)
+    url: https://api.p1.mks.com/medias/sys_master/images/images/h7c/h54/9123359326238/90039770B-1936-2936-R-Power-Meter-User-s-Manual.pdf
+  - title: 1936-R / 2936-R datasheet (PDF)
+    url: https://api.p1.mks.com/medias/sys_master/images/images/h3b/hb5/8796989751326/1936-R-2936-R-Power-and-Energy-Meter-Datasheet.pdf
+  - title: Newport software and drivers
+    url: https://www.newport.com/software-and-drivers
+  - title: Community driver (pylabnet) showing the *IDN? reply, 38400-baud RS-232 and Newport USB DLL use
+    url: https://github.com/lukingroup/pylabnet/blob/master/pylabnet/hardware/power_meter/newport_2936.py
+software:
+  - name: Newport Computer Interface Software and LabVIEW samples (listed on the 2936-R product page)
+    kind: vendor-software
+    url: https://www.newport.com/p/2936-R
+notes:
+  - Commands are SCPI-style and case-insensitive (PM:Lambda 810 or the short form PM:L 810; several can be chained with semicolons up to 50 characters, and the replies come back comma-separated); a 2936-R starts on channel A and PM:CHANnel selects B, with the selection kept separately for the RS-232 and USB links.
+  - '*IDN? returns a space-separated string, not a comma-separated one. RS-232 runs at 38400 baud in the pylabnet driver and community code reaches USB through Newport''s USB driver DLL (newp_usb_*) rather than VISA; MKS has moved Newport PDFs between hosts, so use the product page if a link breaks.'

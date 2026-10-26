@@ -1,0 +1,20 @@
+schema: 1
+id: moglabs/xrf
+maker: MOGLabs
+model: XRF
+name: MOGLabs XRF / ARF / QRF agile RF synthesizers
+covers: [ARF, QRF]
+kind: aom-driver
+interfaces: [usb, lan]
+control: text
+card: card.yaml
+manuals:
+  - title: MOGLabs Agile RF Synthesizer & AOM driver XRF421, rev 1.8.5, Appendix C (commands)
+    url: https://santec-inst.files.svdcdn.com/production/Files/Tutorials/RF-generators-synthesizers/MOGLabs_XRF_manual.pdf
+    access: public
+software:
+  - name: mogdevice (community)
+    kind: python-driver
+    url: https://github.com/bleykauf/mogdevice
+notes:
+  - Some settings have no read-back, so Kelvin switches the RF off when it connects and remembers what it set.

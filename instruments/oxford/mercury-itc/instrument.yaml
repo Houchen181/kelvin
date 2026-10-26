@@ -1,0 +1,20 @@
+schema: 1
+id: oxford/mercury-itc
+maker: Oxford Instruments
+model: Mercury iTC
+name: Oxford Instruments Mercury iTC temperature controller
+kind: temperature-controller
+interfaces: [usb, lan, rs-232, gpib]
+control: scpi
+card: card.yaml
+manuals:
+  - title: Mercury iTC cryogenic environment controller manual (UMC0071 issue 02)
+    url: https://www.mymercurysupport.com/sites/default/files/59_UMC0071_EN_02.pdf
+    access: public
+software:
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.oxfordinstruments.mercuryitc.MercuryiTC
+    url: https://github.com/pymeasure/pymeasure/blob/master/pymeasure/instruments/oxfordinstruments/mercuryitc.py
+notes:
+  - Sensors and heaters are addressed by their UID (e.g. DB6.T1); set it per instrument with vars.

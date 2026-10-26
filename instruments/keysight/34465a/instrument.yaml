@@ -1,0 +1,17 @@
+schema: 1
+id: keysight/34465a
+maker: Keysight
+model: 34465A
+name: Keysight Truevolt 34460A / 34461A / 34465A / 34470A multimeters
+covers: [34460A, 34461A, 34470A]
+kind: multimeter
+interfaces: [usb-tmc, lan, gpib]
+control: scpi
+card: card.yaml
+software:
+  - name: QCoDeS
+    kind: python-driver
+    ref: qcodes.instrument_drivers.Keysight.Keysight_34465A_submodules.Keysight34465A
+    url: https://github.com/microsoft/Qcodes/blob/main/src/qcodes/instrument_drivers/Keysight/Keysight_34465A_submodules.py
+notes:
+  - Current and resistance modes push current through the device; the card blocks the resistance modes.

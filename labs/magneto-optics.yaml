@@ -1,0 +1,33 @@
+# Magneto-optics (MOKE, Faraday rotation) in a magneto-optical cryostat run by MultiVu: a CW laser modulated by
+# a function generator, balanced photodiodes into a lock-in, and a power meter on the incident beam.
+# The qd/multivu card is written for PPMS, DynaCool, VersaLab and MPMS3; check it on an OptiCool before trusting it.
+#
+# To use it: copy it to ~/Kelvin/lab.yaml (or open it in Lab -> Set up), give each instrument its address
+# (Scan finds them) and set the limits for your sample. Until then every instrument here is simulated.
+lab: Magneto-optics
+
+instruments:
+  cryo:
+    card: qd/multivu
+    # address: "qd://<MultiVu computer>:5000"
+    limits: { T_set: [1.8, 350], B_set: [-7, 7] }
+  laser:
+    card: coherent/obis
+    # address: "serial://COM7"
+    auto: never
+    limits: { power: [0, 0.005] }          # W
+  fg:
+    card: keysight/33500b
+    # address: "USB0::0x0957::0x2C07::<serial>::INSTR"; square wave into the laser's modulation input
+    limits: { amplitude: [0.001, 5], offset: [0, 2.5] }
+  lockin:
+    card: srs/sr830
+    # address: "GPIB0::8::INSTR"; reference: external, from the function generator's sync output
+    limits: { amplitude: [0.004, 0.1] }
+  pm:
+    card: thorlabs/pm100
+    # address: "USB0::0x1313::0x8078::<serial>::INSTR"
+
+safe_actions:
+  cryo.B_set: hold
+  cryo.T_set: hold

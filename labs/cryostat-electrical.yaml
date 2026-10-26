@@ -1,0 +1,48 @@
+# An electrical bench on a cryostat with a Lake Shore 336: a lock-in, a source-meter for I-V, a second one on
+# the gate, a DC bias source behind a divider, a current preamplifier and a DMM. Covers four-probe R(T),
+# I-V, tunneling spectroscopy (dI/dV), Coulomb diamonds and AC susceptibility.
+#
+# To use it: copy it to ~/Kelvin/lab.yaml (or open it in Lab -> Set up), give each instrument its address
+# (Scan finds them) and set the limits for your sample. Until then every instrument here is simulated.
+lab: Cryostat electrical bench
+
+instruments:
+  tc:
+    card: lakeshore/336
+    # address: "ASRL5::INSTR" (USB: 57600 baud, 7 data bits, odd parity) or "TCPIP0::<ip>::7777::SOCKET"
+    limits: { setpoint: [0, 320] }
+  lockin:
+    card: srs/sr830
+    # address: "GPIB0::8::INSTR"
+    limits: { amplitude: [0.004, 1] }
+  smu:
+    card: keithley/2450
+    # address: "USB0::0x05E6::0x2450::<serial>::INSTR"
+    limits: { V: [-1, 1], compliance_I: [1.0e-9, 1.05e-4] }    # it powers up at 105 µA
+    rates: { V: 0.5 }
+  gate:
+    card: keithley/2400
+    # address: "GPIB0::24::INSTR"
+    limits: { V: [-20, 20], compliance_I: [1.0e-9, 1.05e-4] }  # it powers up at 105 µA; the plans set 1-10 nA
+    rates: { V: 0.5 }
+    guards:
+      V: [{ read: I, max_abs: 2.0e-9 }]   # stop the ramp if the gate leaks more than 2 nA
+  bias:
+    card: yokogawa/gs200
+    # address: "GPIB0::2::INSTR"; voltage mode, through a 1:100 divider (±0.5 V here is ±5 mV at the sample)
+    limits: { level: [-0.5, 0.5], current_limit: [0.001, 0.01] }
+    rates: { level: 0.05 }
+  iamp:
+    card: srs/sr570
+    # address: "serial://COM3" (listen-only)
+    limits: { bias: [-100, 100] }   # mV
+  dmm:
+    card: keysight/34465a
+    # address: "USB0::0x2A8D::0x0101::<serial>::INSTR"; reads the SR570's output
+
+watch:
+  - read: tc.T_A
+    above: 330
+    for: 30
+    then: { tc.heater_range: "off" }
+    note: The sample stage must not overheat; switch the heater off.
