@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/Houchen181/kelvin-instruments/schema/experiment.schema.json",
+  "$id": "https://github.com/Houchen181/kelvin/schema/experiment.schema.json",
   "title": "experiment",
   "description": "An experiment in the Kelvin instrument collection. tools/kic.py validate also checks each plan against its lab config.",
   "type": "object",

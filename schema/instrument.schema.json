@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/Houchen181/kelvin-instruments/schema/instrument.schema.json",
+  "$id": "https://github.com/Houchen181/kelvin/schema/instrument.schema.json",
   "title": "instrument.yaml",
   "description": "One instrument model in the Kelvin instrument collection. tools/kic.py validate checks the rest: the id matches the folder, the kind is in collection.yaml, and the card next to it agrees.",
   "type": "object",

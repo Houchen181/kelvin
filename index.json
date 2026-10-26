@@ -1,7 +1,7 @@
 {
  "schema": 1,
  "name": "Kelvin instrument collection",
- "repository": "https://github.com/Houchen181/kelvin-instruments",
+ "repository": "https://github.com/Houchen181/kelvin",
  "counts": {
   "instruments": 111,
   "cards": 49,

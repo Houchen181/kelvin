@@ -85,8 +85,8 @@ The categories, kinds and areas are defined in [`collection.yaml`](collection.ya
 On the computer the instruments are plugged into, with Kelvin installed and started once:
 
 ```bash
-git clone https://github.com/Houchen181/kelvin-instruments
-cd kelvin-instruments
+git clone https://github.com/Houchen181/kelvin
+cd kelvin
 python tools/kic.py install
 ```
 
