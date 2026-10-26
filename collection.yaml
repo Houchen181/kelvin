@@ -1,11 +1,13 @@
 # The Kelvin instrument collection: what the folders hold and how they are sorted.
 #
-#   instruments/<maker>/<model>/instrument.yaml   one per instrument model: who makes it, how it talks, its manuals
-#   instruments/<maker>/<model>/card.yaml         the Kelvin card, when there is one (the same file Kelvin loads)
-#   experiments/<area>/<name>.yaml                 what to measure, with which instruments, and example plans
-#   labs/<name>.yaml                               lab configs for common setups, ready for Kelvin
+#   instruments/<category>/<kind>/<maker>-<model>/instrument.yaml   one per model: maker, interfaces, manuals
+#   instruments/<category>/<kind>/<maker>-<model>/card.yaml         its Kelvin card, when there is one
+#   experiments/<area>/<name>.yaml                                  what to measure, how, and example plans
+#   labs/<name>.yaml                                                lab configs for common setups, ready for Kelvin
 #
-# Every instrument has exactly one kind; its category follows from the kind. An instrument can name extra
+# Instruments are sorted by category, then kind (electronics/lock-in/srs-sr830). Their id is maker/model
+# (srs/sr830), the same as their Kelvin card's. Every instrument has exactly one kind; its category, and so its
+# folder, follows from the kind. An instrument can name extra
 # categories in its own `categories` list (an RFSoC board is an AWG and an RF instrument).
 schema: 1
 name: Kelvin instrument collection

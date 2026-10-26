@@ -1,6 +1,6 @@
 {
   "yaml.schemas": {
-    "./schema/instrument.schema.json": "instruments/*/*/instrument.yaml",
+    "./schema/instrument.schema.json": "instruments/*/*/*/instrument.yaml",
     "./schema/experiment.schema.json": "experiments/*/*.yaml"
   }
 }

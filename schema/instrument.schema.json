@@ -8,7 +8,7 @@
   "required": ["schema", "id", "maker", "model", "kind", "interfaces", "control"],
   "properties": {
     "schema": { "const": 1 },
-    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9.-]*/[a-z0-9][a-z0-9.-]*$", "description": "maker/model, the same as the folder and the card id" },
+    "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9.-]*/[a-z0-9][a-z0-9.-]*$", "description": "maker/model, the card id; the folder is instruments/<category>/<kind>/<maker>-<model>" },
     "maker": { "type": "string", "minLength": 1 },
     "model": { "type": "string", "minLength": 1, "description": "Quote numeric model names" },
     "name": { "type": "string", "description": "Display name; defaults to maker and model" },

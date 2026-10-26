@@ -57,7 +57,7 @@ safely, the maker's manual, and a starting point for the experiment. They are co
 
 | Folder | What is in it |
 |---|---|
-| [`instruments/`](instruments) | One folder per instrument model, `instruments/<maker>/<model>/`: who makes it, how it talks, where its manuals and drivers are, and its **Kelvin card** when there is one |
+| [`instruments/`](instruments) | One folder per instrument model, sorted by category and kind, such as [`instruments/electronics/lock-in/srs-sr830/`](instruments/electronics/lock-in/srs-sr830): who makes it, how it talks, where its manuals and drivers are, and its **Kelvin card** when there is one |
 | [`experiments/`](experiments) | What to measure and how, by area: roles, wiring, procedure, analysis, pitfalls, and **Kelvin plans** ready to run |
 | [`labs/`](labs) | **Lab configs** for common setups (a PPMS transport rack, a confocal microscope, an NV setup...) |
 | [`CATALOG.md`](CATALOG.md) | Everything above, by category, experiment and maker |
@@ -68,15 +68,15 @@ safely, the maker's manual, and a starting point for the experiment. They are co
 
 | Instruments | | Experiments | |
 |---|---|---|---|
-| Electronics | source-meters, lock-ins, preamps, DMMs, DACs, generators, DAQ | Transport | R(T), Hall, gating, Landau fans, nonlinear Hall, dI/dV, critical current |
-| RF and microwave | signal generators, VNAs, spectrum analyzers, AOM drivers, qubit controllers | Magnetometry | SQUID M(T) and M(H), AC susceptibility |
-| Timing | pulse and delay generators, photon counters, time taggers | Optics | PL, Raman, mapping, photocurrent, reflectance, MOKE |
-| Lasers | CW, tunable and ultrafast lasers, diode controllers, wavemeters | Ultrafast and nonlinear | SHG rotational anisotropy, pump-probe |
-| Optics | spectrometers, spectrographs, cameras, power meters, choppers, PEMs | Spin resonance | NV ODMR, Rabi, Ramsey, echo, T1, FMR |
-| Motion | piezo positioners, scanners, stages, delay lines, rotation mounts | Quantum devices | Coulomb diamonds, resonators, qubits |
-| Cryogenics | temperature controllers, PPMS/MPMS, dilution refrigerators, vacuum | Acoustics | SAW transmission, acoustoelectric |
-| Magnets | magnet supplies, gaussmeters | AMO | AOM calibration, PLE scans |
-| Scanning probe | SPM controllers | Environment | cooldown logs |
+| [Electronics](instruments/electronics) | source-meters, lock-ins, preamps, DMMs, DACs, generators, DAQ | Transport | R(T), Hall, gating, Landau fans, nonlinear Hall, dI/dV, critical current |
+| [RF and microwave](instruments/rf-microwave) | signal generators, VNAs, spectrum analyzers, AOM drivers, qubit controllers | Magnetometry | SQUID M(T) and M(H), AC susceptibility |
+| [Timing](instruments/timing) | pulse and delay generators, photon counters, time taggers | Optics | PL, Raman, mapping, photocurrent, reflectance, MOKE |
+| [Lasers](instruments/lasers) | CW, tunable and ultrafast lasers, diode controllers, wavemeters | Ultrafast and nonlinear | SHG rotational anisotropy, pump-probe |
+| [Optics](instruments/optics) | spectrometers, spectrographs, cameras, power meters, choppers, PEMs | Spin resonance | NV ODMR, Rabi, Ramsey, echo, T1, FMR |
+| [Motion](instruments/motion) | piezo positioners, scanners, stages, delay lines, rotation mounts | Quantum devices | Coulomb diamonds, resonators, qubits |
+| [Cryogenics](instruments/cryogenics) | temperature controllers, PPMS/MPMS, dilution refrigerators, vacuum | Acoustics | SAW transmission, acoustoelectric |
+| [Magnets](instruments/magnets) | magnet supplies, gaussmeters | AMO | AOM calibration, PLE scans |
+| [Scanning probe](instruments/scanning-probe) | SPM controllers | Environment | cooldown logs |
 
 The categories, kinds and areas are defined in [`collection.yaml`](collection.yaml).
 

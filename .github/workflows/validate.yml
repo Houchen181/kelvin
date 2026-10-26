@@ -25,7 +25,7 @@ jobs:
           sys.path.insert(0, "tools")
           import jsonschema, kic
           bad = 0
-          for schema, pattern in (("schema/instrument.schema.json", "instruments/*/*/instrument.yaml"),
+          for schema, pattern in (("schema/instrument.schema.json", "instruments/*/*/*/instrument.yaml"),
                                   ("schema/experiment.schema.json", "experiments/*/*.yaml")):
               validator = jsonschema.Draft202012Validator(json.load(open(schema)))
               for path in sorted(glob.glob(pattern)):

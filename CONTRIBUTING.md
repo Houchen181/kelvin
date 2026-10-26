@@ -9,8 +9,11 @@ plan parsers.
 
 ## Add an instrument
 
-Create `instruments/<maker>/<model>/instrument.yaml`, with lowercase letters, digits, `-` and `.` in both names
-(use the maker slugs already in use, such as `keithley`, `srs`, `lakeshore`, `zhinst`):
+Instruments are sorted by category, then kind: `instruments/<category>/<kind>/<maker>-<model>/instrument.yaml`.
+The kind decides the category (see `collection.yaml`), so a new source-meter from ACME goes in
+`instruments/electronics/source-meter/acme-sm-2000/`. Its id is `maker/model` in lowercase letters, digits, `-`
+and `.` (use the maker slugs already in use, such as `keithley`, `srs`, `lakeshore`, `zhinst`); `validate` says
+where an instrument belongs if it is in the wrong folder.
 
 ```yaml
 schema: 1
@@ -48,8 +51,8 @@ notes:
 
 The easiest way to write a card is with Kelvin: **Lab → Set up → Make a card for it from its manual or example
 scripts**, then **Try it** on the instrument until the readings match the front panel. Kelvin saves it as
-`~/Kelvin/cards/<maker>_<model>.yaml`; copy it to `instruments/<maker>/<model>/card.yaml` and add `card: card.yaml`
-to the `instrument.yaml` next to it.
+`~/Kelvin/cards/<maker>_<model>.yaml`; copy it as `card.yaml` into the instrument's folder
+(`instruments/<category>/<kind>/<maker>-<model>/`) and add `card: card.yaml` to the `instrument.yaml` next to it.
 
 - A card nobody has checked is `status: draft`. Kelvin keeps a draft's outputs simulated on real hardware.
 - `community` means a person has read the card against the manual: every drive and its safe value, the limits,

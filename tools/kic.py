@@ -2,7 +2,7 @@
 """kic: tools for the Kelvin instrument collection.
 
     python tools/kic.py validate               check every instrument, card, experiment and lab config
-    python tools/kic.py index [--check]        rebuild index.json and CATALOG.md from the files
+    python tools/kic.py index [--check]        rebuild index.json, CATALOG.md and the instruments/ READMEs
     python tools/kic.py find TEXT              look up instruments, experiments and labs (--idn "<*IDN? reply>")
     python tools/kic.py install [--dry-run]    put the cards Kelvin doesn't have into ~/Kelvin/cards
     python tools/kic.py manuals [ID ...]       download manuals, e.g. for a lab PC that is offline
@@ -173,26 +173,34 @@ class Collection:
                     self.p.error("collection.yaml", "kind %s is in two categories" % kind)
                 self.kind_category[kind] = cat
         self.instruments: Dict[str, Dict[str, Any]] = {}
+        self.paths: Dict[str, Path] = {}          # id -> its folder, instruments/<category>/<kind>/<maker>-<model>
         self.cards: Dict[str, Dict[str, Any]] = {}
         self.experiments: Dict[str, Dict[str, Any]] = {}
         self.labs: Dict[str, Dict[str, Any]] = {}
         self._read()
 
     def _read(self) -> None:
-        for path in sorted((ROOT / "instruments").glob("*/*/instrument.yaml")):
+        shelf = ROOT / "instruments"
+        for path in sorted(shelf.glob("*/*/*/instrument.yaml")):
             data = self._load(path)
-            if isinstance(data, dict):
-                self.instruments[path.parent.relative_to(ROOT / "instruments").as_posix()] = data
-                card = path.parent / "card.yaml"
-                if card.exists():
-                    cdata = self._load(card)
-                    if isinstance(cdata, dict):
-                        self.cards[path.parent.relative_to(ROOT / "instruments").as_posix()] = cdata
-        for card in sorted((ROOT / "instruments").glob("*/*/card.yaml")):
-            if not (card.parent / "instrument.yaml").exists():
-                self.p.error(rel(card), "a card needs an instrument.yaml next to it")
-        for stray in sorted((ROOT / "instruments").glob("*.yaml")) + sorted((ROOT / "instruments").glob("*/*.yaml")):
-            self.p.error(rel(stray), "instruments live in instruments/<maker>/<model>/")
+            if not isinstance(data, dict):
+                continue
+            iid = str(data.get("id") or rel(path.parent))
+            if iid in self.paths:
+                self.p.error(rel(path), "id %s is also used in %s" % (iid, rel(self.paths[iid])))
+                continue
+            self.instruments[iid] = data
+            self.paths[iid] = path.parent
+            card = path.parent / "card.yaml"
+            if card.exists():
+                cdata = self._load(card)
+                if isinstance(cdata, dict):
+                    self.cards[iid] = cdata
+        for path in sorted(shelf.rglob("*.yaml")):
+            if len(path.relative_to(shelf).parts) != 4 or path.name not in ("instrument.yaml", "card.yaml"):
+                self.p.error(rel(path), "instruments live in instruments/<category>/<kind>/<maker>-<model>/")
+            elif path.name == "card.yaml" and not (path.parent / "instrument.yaml").exists():
+                self.p.error(rel(path), "a card needs an instrument.yaml next to it")
         for path in sorted((ROOT / "experiments").glob("*/*.yaml")):
             data = self._load(path)
             if isinstance(data, dict):
@@ -214,6 +222,10 @@ class Collection:
 
     def category(self, iid: str) -> str:
         return self.kind_category.get(self.instruments[iid].get("kind", ""), "")
+
+    def folder_for(self, iid: str, kind: Any) -> str:
+        """Where an instrument belongs: its kind's category, its kind, then maker-model."""
+        return "instruments/%s/%s/%s" % (self.kind_category.get(str(kind), "?"), kind, iid.replace("/", "-"))
 
     def params(self, card_id: str) -> Dict[str, Dict[str, Any]]:
         card = self.cards.get(card_id) or {}
@@ -402,14 +414,18 @@ def check_library(where: str, lib: Any, p: Problems) -> None:
 
 
 def check_instrument(iid: str, data: Dict[str, Any], c: Collection) -> None:
-    p, where = c.p, "instruments/%s/instrument.yaml" % iid
+    folder = rel(c.paths[iid])
+    p, where = c.p, folder + "/instrument.yaml"
     for key in data:
         if key not in INSTRUMENT_KEYS:
             p.error(where, "unknown key %r (known: %s)" % (key, ", ".join(INSTRUMENT_KEYS)))
     if data.get("schema") != 1:
         p.error(where, "schema: 1 is required")
     if data.get("id") != iid or not ID.match(iid):
-        p.error(where, "id must be %r, the folder it is in (lowercase maker/model)" % iid)
+        p.error(where, "id must be maker/model in lowercase letters, digits, '-' and '.', such as srs/sr830")
+    elif data.get("kind") in c.kind_category and folder != c.folder_for(iid, data["kind"]):
+        p.error(where, "move it to %s/ (its kind's category, its kind, then maker-model)"
+                % c.folder_for(iid, data["kind"]))
     for key in ("maker", "model", "kind", "control"):
         if not isinstance(data.get(key), str) or not data[key].strip():
             p.error(where, "%s is required (quote a numeric model name)" % key)
@@ -449,10 +465,10 @@ def check_instrument(iid: str, data: Dict[str, Any], c: Collection) -> None:
     if (data.get("card") == "card.yaml") != (card is not None):
         p.error(where, "card: card.yaml must be said exactly when the folder has a card.yaml")
     if card is not None:
-        cwhere = "instruments/%s/card.yaml" % iid
+        cwhere = folder + "/card.yaml"
         check_card(cwhere, card, p)
         if card.get("id") != iid:
-            p.error(cwhere, "id must be %r, the folder it is in" % iid)
+            p.error(cwhere, "id must be %r, the id in the instrument.yaml next to it" % iid)
         if card.get("kind") != data.get("kind"):
             p.error(where, "kind %r differs from the card's %r" % (data.get("kind"), card.get("kind")))
         if data.get("identify"):
@@ -711,9 +727,9 @@ def kelvin_crosscheck(c: Collection) -> Optional[str]:
     registry = CardRegistry()
     for iid in c.cards:
         try:
-            registry.add(load_card(ROOT / "instruments" / iid / "card.yaml"))
+            registry.add(load_card(c.paths[iid] / "card.yaml"))
         except Exception as e:
-            c.p.error("instruments/%s/card.yaml" % iid, "Kelvin: %s" % e)
+            c.p.error(rel(c.paths[iid] / "card.yaml"), "Kelvin: %s" % e)
     for name in c.labs:
         try:
             load_lab_config(ROOT / "labs" / (name + ".yaml"), registry)
@@ -780,7 +796,7 @@ def build_index(c: Collection) -> Dict[str, Any]:
     for iid, d in c.instruments.items():
         card = c.cards.get(iid)
         identify = (card or d).get("identify") or {}
-        path = ROOT / "instruments" / iid
+        path = c.paths[iid]
         instruments.append({
             "id": iid, "maker": d["maker"], "model": d["model"], "name": display_name(d),
             "covers": d.get("covers") or [], "kind": d["kind"], "category": c.category(iid),
@@ -953,6 +969,42 @@ def manual_cell(i: Dict[str, Any]) -> str:
     return ""
 
 
+def build_shelf(index: Dict[str, Any]) -> Dict[str, str]:
+    """A README for instruments/ and for each category folder in it, so the folders read well on GitHub."""
+    ins = index["instruments"]
+    note = "<!-- Written by `python tools/kic.py index` from the instrument.yaml files; edit those, not this. -->"
+    top = ["# Instruments", "", note, "",
+           "Sorted by category, then kind: `<category>/<kind>/<maker>-<model>/`. Each folder has the instrument's "
+           "`instrument.yaml` (maker, interfaces, manuals, drivers) and its Kelvin `card.yaml` when there is one. "
+           "[CATALOG.md](../CATALOG.md) lists them all, with the experiments that use them.", "",
+           "| Category | Instruments | With a card |", "|---|---|---|"]
+    pages: Dict[str, str] = {}
+    for cat in index["categories"]:
+        here = [i for i in ins if i["category"] == cat["id"]]
+        top.append("| [%s](%s) | %d | %d |" % (cat["title"], cat["id"], len(here), sum(1 for i in here if i["card"])))
+        out = ["# " + cat["title"], "", note, "", cat["description"], ""]
+        for kind in cat["kinds"]:
+            members = sorted((i for i in here if i["kind"] == kind["id"]),
+                             key=lambda i: (i["maker"].lower(), i["model"].lower()))
+            if not members:
+                continue
+            out += ["## %s" % kind["title"], "", "| Instrument | Card | Talks over | Manual |", "|---|---|---|---|"]
+            for i in members:
+                folder = i["path"].split("/", 2)[2]
+                out.append("| [%s](%s) | %s | %s | %s |" % (
+                    md(i["name"]), folder,
+                    "[%s](%s/card.yaml)" % (i["card"]["status"], folder) if i["card"] else "no card",
+                    md(", ".join(INTERFACE_NAMES.get(x, x) for x in i["interfaces"])), manual_cell(i)))
+            out.append("")
+        also = [i for i in ins if cat["id"] in i["categories"] and i["category"] != cat["id"]]
+        if also:
+            out += ["## Also used here", ""] + ["- [%s](../%s), in %s" % (md(i["name"]), i["path"].split("/", 1)[1],
+                                                                        i["category"]) for i in also] + [""]
+        pages["instruments/%s/README.md" % cat["id"]] = "\n".join(out).rstrip("\n") + "\n"
+    pages["instruments/README.md"] = "\n".join(top) + "\n"
+    return pages
+
+
 def cmd_index(args: argparse.Namespace) -> int:
     p = Problems()
     c = Collection(p)
@@ -960,20 +1012,20 @@ def cmd_index(args: argparse.Namespace) -> int:
         print("\n".join("error: " + e for e in p.errors))
         return 1
     index = build_index(c)
-    text = json.dumps(index, indent=1, ensure_ascii=False) + "\n"
-    catalog = build_catalog(index)
+    files = {"index.json": json.dumps(index, indent=1, ensure_ascii=False) + "\n", "CATALOG.md": build_catalog(index)}
+    files.update(build_shelf(index))
     if args.check:
-        stale = [f.name for f, new in ((INDEX, text), (CATALOG, catalog))
-                 if not f.exists() or f.read_text(encoding="utf-8") != new]
+        stale = [name for name, new in files.items()
+                 if not (ROOT / name).exists() or (ROOT / name).read_text(encoding="utf-8") != new]
         if stale:
-            print("%s out of date: run python tools/kic.py index" % " and ".join(stale))
+            print("%s out of date: run python tools/kic.py index" % ", ".join(stale))
             return 1
-        print("index.json and CATALOG.md are up to date")
+        print("index.json, CATALOG.md and the instruments/ READMEs are up to date")
         return 0
-    INDEX.write_text(text, encoding="utf-8", newline="\n")
-    CATALOG.write_text(catalog, encoding="utf-8", newline="\n")
-    print("Wrote index.json and CATALOG.md: %(instruments)d instruments (%(cards)d cards), %(experiments)d "
-          "experiments, %(labs)d lab configs" % index["counts"])
+    for name, text in files.items():
+        (ROOT / name).write_text(text, encoding="utf-8", newline="\n")
+    print("Wrote index.json, CATALOG.md and the instruments/ READMEs: %(instruments)d instruments (%(cards)d cards), "
+          "%(experiments)d experiments, %(labs)d lab configs" % index["counts"])
     return 0
 
 
@@ -1173,13 +1225,12 @@ def cmd_manuals(args: argparse.Namespace) -> int:
             target.write_bytes(data)
             print("%s: %s (%d kB)" % (iid, target, len(data) >> 10))
             if args.pin and m.get("sha256") != digest:
-                pin(iid, m["url"], digest)
+                pin(ROOT / i["path"] / "instrument.yaml", m["url"], digest)
     return 1 if failed else 0
 
 
-def pin(iid: str, url: str, digest: str) -> None:
+def pin(path: Path, url: str, digest: str) -> None:
     """Record a manual's SHA-256 under its url in instrument.yaml, leaving the rest of the file as written."""
-    path = ROOT / "instruments" / iid / "instrument.yaml"
     lines = path.read_text(encoding="utf-8").split("\n")
     for n, line in enumerate(lines):
         m = re.match(r"^(\s*)(- )?url: ['\"]?(\S+?)['\"]?\s*$", line)
@@ -1273,7 +1324,11 @@ def visa_resource(address: str) -> str:
 
 
 def cmd_probe(args: argparse.Namespace) -> int:
-    path = Path(args.card) if args.card.endswith(".yaml") else ROOT / "instruments" / args.card / "card.yaml"
+    if args.card.endswith(".yaml"):
+        path = Path(args.card)
+    else:   # a card id: instruments/<category>/<kind>/<maker>-<model>/card.yaml
+        hits = sorted((ROOT / "instruments").glob("*/*/%s/card.yaml" % args.card.replace("/", "-")))
+        path = hits[0] if hits else ROOT / "instruments" / args.card
     if not path.exists():
         sys.exit("No card %s" % args.card)
     card = load_yaml(path)
