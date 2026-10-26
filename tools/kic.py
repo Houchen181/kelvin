@@ -36,7 +36,7 @@ ID = re.compile(r"^[a-z0-9][a-z0-9.-]*/[a-z0-9][a-z0-9.-]*$")
 SHA256 = re.compile(r"^[0-9a-f]{64}$")
 DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 ACCESS = ("public", "sign-in", "owners")
-SOFTWARE_KINDS = ("python-driver", "vendor-sdk", "vendor-software")
+SOFTWARE_KINDS = ("python-driver", "other-driver", "vendor-sdk", "vendor-software")   # other: Micro-Manager, LabVIEW, MATLAB
 
 # The card format, as Kelvin reads it (docs/instruments.md in Kelvin, "Writing a card").
 CARD_PARAM_KINDS = ("measure", "drive")
@@ -1267,10 +1267,8 @@ def check_url(url: str, want_pdf: bool) -> Tuple[str, str]:
                 return "html", ctype
             return ("moved", final) if final.rstrip("/") != url.rstrip("/") else ("ok", ctype)
         except urllib.error.HTTPError as e:
-            if e.code in (404, 410):
-                return "broken", "HTTP %d" % e.code
-            if method == "GET":
-                return "blocked", "HTTP %d" % e.code
+            if method == "GET":       # some servers answer HEAD with 404 and GET with the page
+                return ("broken" if e.code in (404, 410) else "blocked"), "HTTP %d" % e.code
         except (urllib.error.URLError, OSError) as e:
             if method == "GET":
                 reason = str(getattr(e, "reason", e))

@@ -1,0 +1,36 @@
+schema: 1
+id: lumicks/c-trap
+maker: LUMICKS
+model: C-Trap
+name: LUMICKS C-Trap optical tweezers
+kind: optical-tweezers
+interfaces: []
+control: library
+manuals:
+  - title: Bluelake API documentation (LUMICKS University)
+    url: https://help.lumicks.com/bluelake-api/
+    covers: Bluelake API used by the Python automation scripts
+    access: sign-in
+links:
+  - title: C-Trap product page
+    url: https://www.lumicks.com/dynamic-single-molecule/solution/c-trap
+  - title: Pylake documentation
+    url: https://lumicks-pylake.readthedocs.io/en/stable/
+software:
+  - name: Pylake (analysis of data exported from Bluelake)
+    kind: vendor-sdk
+    ref: lumicks.pylake
+    url: https://pypi.org/project/lumicks.pylake/
+  - name: Bluelake and Lakeview (C-Trap experiment and analysis software)
+    kind: vendor-software
+    url: https://www.lumicks.com/dynamic-single-molecule/solution/c-trap
+examples:
+  - title: bluelake-scripting (Python scripts and notebooks for Bluelake automation)
+    url: https://github.com/lumicks/bluelake-scripting
+    license: Apache-2.0
+  - title: Harbor (shared C-Trap analysis and automation scripts)
+    url: https://github.com/lumicks/harbor
+    license: unknown
+notes:
+  - The Bluelake API documentation is on LUMICKS University and needs a sign-in; the public bluelake-scripting repository shows how scripts and notebooks use it to automate the C-Trap.
+  - Pylake reads and analyzes files exported from Bluelake; it does not control the instrument.

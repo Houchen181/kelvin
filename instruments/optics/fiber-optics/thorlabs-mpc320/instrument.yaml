@@ -1,0 +1,27 @@
+schema: 1
+id: thorlabs/mpc320
+maker: Thorlabs
+model: MPC320
+name: Thorlabs MPC320 motorized fiber polarization controller
+kind: fiber-optics
+interfaces: [usb]
+control: library
+links:
+  - title: Motion Control Kinesis with C# Quick Start Guide
+    url: https://media.thorlabs.com/contentassets/5f57e82e38004e2aa5dfd0071bcf0732/kinesis_with_c_quick_start_guide.pdf
+software:
+  - name: Thorlabs Kinesis (Polarizer library)
+    kind: vendor-sdk
+    ref: Thorlabs.MotionControl.Polarizer
+    url: https://github.com/Thorlabs/Motion_Control_Examples/tree/main/Python/Kinesis/Integrated%20Stages/Polarization%20Controller
+  - name: pylablib
+    kind: python-driver
+    ref: pylablib.devices.Thorlabs.KinesisMotor
+    url: https://github.com/AlexShkarin/pyLabLib/blob/main/pylablib/devices/Thorlabs/kinesis.py
+examples:
+  - title: Thorlabs Motion_Control_Examples (MPCx20 examples in C#, C++, MATLAB and Python)
+    url: https://github.com/Thorlabs/Motion_Control_Examples
+    license: MIT
+notes:
+  - The controller is driven through the Kinesis polarizer library (paddle positions and jog settings) over USB; the Thorlabs repository has C#, C++, MATLAB and Python examples.
+  - The pylablib Kinesis driver contains MPC-specific polarizer-controller methods.

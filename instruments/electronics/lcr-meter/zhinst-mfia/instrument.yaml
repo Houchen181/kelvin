@@ -1,0 +1,41 @@
+schema: 1
+id: zhinst/mfia
+maker: Zurich Instruments
+model: MFIA
+name: Zurich Instruments MFIA impedance analyzer
+kind: lcr-meter
+interfaces: [usb, lan]
+control: library
+manuals:
+  - title: MFIA User Manual (online edition)
+    url: https://docs.zhinst.com/mfia_user_manual/
+    covers: Functional description, tutorials and the device node tree used by the APIs
+    access: public
+  - title: MFIA User Manual (PDF)
+    url: https://docs.zhinst.com/pdf/ziMFIA_UserManual.pdf
+    access: public
+  - title: LabOne API User Manual
+    url: https://docs.zhinst.com/labone_api_user_manual/
+    covers: Programming the instrument through the Python, MATLAB, C, .NET and LabVIEW APIs
+    access: public
+links:
+  - title: Connecting to the MFIA instrument (Ethernet and USB)
+    url: https://docs.zhinst.com/mfia_user_manual/getting_started/device_connectivity_instrument.html
+software:
+  - name: LabOne (instrument control software and user interface)
+    kind: vendor-software
+    url: https://www.zhinst.com/others/en/instruments/labone/labone-instrument-control-software/
+  - name: zhinst (LabOne Python API)
+    kind: vendor-sdk
+    url: https://pypi.org/project/zhinst/
+  - name: zhinst-toolkit
+    kind: vendor-sdk
+    ref: zhinst.toolkit.Session
+    url: https://github.com/zhinst/zhinst-toolkit
+examples:
+  - title: LabOne API examples (Python and MATLAB)
+    url: https://github.com/zhinst/labone-api-examples
+    license: MIT
+notes:
+  - The instrument is controlled through the LabOne API (device node tree) rather than a text command set.
+  - According to the MFIA manual, running LabOne on a separate PC is the supported route for the MATLAB, LabVIEW and Python APIs; by default the web interface and Data Server run on the instrument's embedded computer.

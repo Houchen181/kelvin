@@ -1,0 +1,33 @@
+schema: 1
+id: srs/rga
+maker: Stanford Research Systems
+model: RGA100
+name: SRS RGA100 / RGA200 / RGA300 residual gas analyzers
+covers: [RGA200, RGA300]
+kind: rga
+interfaces: [rs-232, lan]
+control: text
+manuals:
+  - title: 'RGA100, RGA200 and RGA300 Residual Gas Analyzer: Operating Manual and Programming Reference'
+    url: https://www.thinksrs.com/downloads/pdfs/manuals/RGAm.pdf
+    covers: 'Chapter 6: Programming the RGA Head (RS-232 interface, command syntax, RGA command set from p. 6-29)'
+    access: public
+  - title: RGA Ethernet Adapter manual
+    url: https://www.thinksrs.com/downloads/pdfs/manuals/REAm.pdf
+    access: public
+links:
+  - title: SRS RGA product page (manual, datasheet, software, Python driver)
+    url: https://www.thinksrs.com/products/rga.html
+  - title: RGA datasheet
+    url: https://www.thinksrs.com/downloads/pdfs/catalog/RGAc.pdf
+software:
+  - name: srsinst.rga
+    kind: python-driver
+    ref: srsinst.rga.RGA100
+    url: https://github.com/thinkSRS/srsinst.rga
+  - name: SRS RGA Windows software
+    kind: vendor-software
+    url: https://www.thinksrs.com/products/rga.html
+notes:
+  - The native RS-232 port runs at 28800 baud with RTS/CTS handshaking; use a USB-to-RS232 or Ethernet-to-RS232 adapter if the PC has no serial port. The Ethernet adapter gives TCP/IP access.
+  - SRS's srsinst.rga driver (MIT licence, documentation at https://thinksrs.github.io/srsinst.rga/) exposes RGA200 and RGA300 as aliases of its RGA100 class and connects either over serial or over TCP/IP with an IP address, user ID and password.

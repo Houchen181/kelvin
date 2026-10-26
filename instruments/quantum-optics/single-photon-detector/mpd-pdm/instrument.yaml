@@ -1,0 +1,26 @@
+schema: 1
+id: mpd/pdm
+maker: Micro Photon Devices
+model: PDM
+name: Micro Photon Devices PDM series SPAD modules
+kind: single-photon-detector
+interfaces: [analog]
+control: none
+manuals:
+  - title: PDM Series User Manual
+    url: https://www.micro-photon-devices.com/user-manuals/MPD_PDM_Usermanual.pdf
+    access: public
+  - title: PDM Series datasheet
+    url: https://www.micro-photon-devices.com/datasheet/MPD_PDM_Datasheet.pdf
+    covers: TTL counting output, optional NIM timing output and GATE IN input
+    access: public
+links:
+  - title: PDM product page
+    url: https://www.micro-photon-devices.com/products/single-pixels/pdm
+  - title: PDM-IR product page (separate product with a software interface)
+    url: https://www.micro-photon-devices.com/products/single-pixels/pdm-ir
+  - title: PDM-IR user manual (separate product)
+    url: https://www.micro-photon-devices.com/user-manuals/MPD_PDM-IR_Usermanual.pdf
+notes:
+  - The PDM gives a TTL pulse per detected photon, can be set up for an extra NIM output, and has a GATE IN input meant for gate windows of tens of microseconds or longer; it has no computer interface.
+  - MPD's software page lists software only for the PDM-IR, not for the PDM or PDM-UV.

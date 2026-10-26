@@ -1,0 +1,44 @@
+schema: 1
+id: liquid-instruments/moku
+maker: Liquid Instruments
+model: Moku:Pro
+name: Liquid Instruments Moku:Pro, Moku:Lab and Moku:Go
+covers: [Moku:Lab, Moku:Go]
+kind: fpga-instrument
+categories: [lasers]
+interfaces: [usb, lan, web-api]
+control: web-api
+manuals:
+  - title: Moku Scripting API overview (REST over HTTP)
+    url: https://apis.liquidinstruments.com/api/
+    covers: RESTful HTTP interface with Python, MATLAB, LabVIEW and cURL getting-started guides, device discovery with mokucli, IP address setup
+    access: public
+  - title: Moku API reference
+    url: https://apis.liquidinstruments.com/api/reference/
+    covers: Per-instrument reference pages such as Oscilloscope, Waveform Generator and PID Controller
+    access: public
+links:
+  - title: Moku API documentation home (Scripting API, Moku Compile, MokuCLI, Neural Network)
+    url: https://apis.liquidinstruments.com/
+  - title: Getting started with Python
+    url: https://apis.liquidinstruments.com/api/getting-started/starting-python.html
+  - title: Moku knowledge base
+    url: https://knowledge.liquidinstruments.com/
+software:
+  - name: moku (official Python package)
+    kind: vendor-sdk
+    ref: moku.instruments
+    url: https://pypi.org/project/moku/
+  - name: MokuCLI (device discovery, bitstream download, file transfer)
+    kind: vendor-software
+    url: https://apis.liquidinstruments.com/cli/
+examples:
+  - title: moku-examples (Python, MATLAB and other-language scripts for the Moku API)
+    url: https://github.com/liquidinstruments/moku-examples
+    license: MIT
+  - title: Laser Lock Box example (python-api/laser_lock_box_basic.py)
+    url: https://github.com/liquidinstruments/moku-examples/blob/main/python-api/laser_lock_box_basic.py
+    license: MIT
+notes:
+  - Scripts talk HTTP to the Moku's IP address (find it with mokucli list); the API overview warns that USB connections use IPv6 internally and may not work in WSL2 and LabVIEW.
+  - The Laser Lock Box instrument is available through the Python API as moku.instruments.LaserLockBox, which makes the Moku usable as a laser lock; instrument bitstreams can be downloaded with mokucli (see the Download Bitstreams page in the API docs).

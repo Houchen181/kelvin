@@ -1,0 +1,47 @@
+schema: 1
+id: yokogawa/aq6370
+maker: Yokogawa
+model: AQ6370D
+name: Yokogawa AQ6370D optical spectrum analyzer
+covers: [AQ6370C, AQ6373, AQ6373B, AQ6375, AQ6375B]
+kind: optical-spectrum-analyzer
+interfaces: [gpib, lan, rs-232]
+control: scpi
+identify:
+  idn: ^YOKOGAWA,AQ63(70[CDE]|73B?|75B?),
+  example: YOKOGAWA,AQ6370D,90Y403996,02.08
+manuals:
+  - title: AQ6370C/AQ6370D/AQ6373/AQ6373B/AQ6375/AQ6375B Optical Spectrum Analyzer Remote Control User's Manual
+    url: https://cdn.tmi.yokogawa.com/1/6057/files/IMAQ6370C-17EN.pdf
+    covers: Remote command reference for the AQ6370 family (GP-IB, Ethernet, RS-232)
+    access: public
+links:
+  - title: AQ6370D product page (discontinued-products listing)
+    url: https://tmi.yokogawa.com/us/solutions/discontinued/aq6370d-optical-spectrum-analyzer/
+  - title: AQ6370D Optical Spectrum Analyzer User's Manual
+    url: https://cdn.tmi.yokogawa.com/1/6058/files/IMAQ6370D-01EN.pdf
+  - title: AQ6370D Getting Started Guide
+    url: https://cdn.tmi.yokogawa.com/1/6059/files/IMAQ6370D-02EN.pdf
+  - title: 'FAQ: Using DL TERM to test the RS-232 port on the AQ6370D'
+    url: https://tmi.yokogawa.com/us/library/resources/faqs/using-dl-term-to-test-rs232-comm-port-on-aq6370d/
+  - title: 'FAQ: Can I use MATLAB with my AQ6370D?'
+    url: https://tmi.yokogawa.com/us/library/resources/faqs/can-i-use-matlab-with-my-aq6370d/
+software:
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.yokogawa.AQ6370D
+    url: https://github.com/pymeasure/pymeasure/blob/master/pymeasure/instruments/yokogawa/aq6370series.py
+  - name: QCoDeS contrib drivers
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.Yokogawa.Yokogawa_AQ637x.YokogawaAQ637x
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/Yokogawa/Yokogawa_AQ637x.py
+  - name: InstrumentKit
+    kind: python-driver
+    ref: instruments.yokogawa.Yokogawa6370
+    url: https://github.com/instrumentkit/InstrumentKit/blob/main/src/instruments/yokogawa/yokogawa6370.py
+  - name: AQ6370 OSA Viewer
+    kind: vendor-software
+    url: https://tmi.yokogawa.com/us/solutions/products/optical-measuring-instruments/optical-spectrum-analyzers/aq6370-viewer/
+notes:
+  - Ethernet uses TCP port 10001 and starts with a login handshake (OPEN "username", then the password) before commands are accepted; the PyMeasure driver defaults to 115200 baud on the serial port.
+  - The analyzer also has an AQ6317 emulation mode for older command sets, and the PyMeasure driver treats AQ6370C, D and E as one series.

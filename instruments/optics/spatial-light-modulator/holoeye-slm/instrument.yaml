@@ -1,0 +1,31 @@
+schema: 1
+id: holoeye/slm
+maker: HOLOEYE Photonics
+model: PLUTO-2.1
+name: HOLOEYE PLUTO-2.1 and GAEA-2 spatial light modulators (SLM Display SDK)
+covers: [PLUTO-2, GAEA-2, LETO-3, ERIS]
+kind: spatial-light-modulator
+interfaces: [usb]
+control: library
+manuals:
+  - title: SLM Display SDK package and documentation (customer portal, registration required)
+    url: https://customers.holoeye.com/
+    access: sign-in
+links:
+  - title: SLM Display SDK product page
+    url: https://holoeye.com/products/spatial-light-modulators/slm-display-sdk/
+  - title: PLUTO-2.1 phase-only SLM product page
+    url: https://holoeye.com/products/spatial-light-modulators/pluto-2-1-lcos-phase-only-refl/
+  - title: GAEA-2 phase-only 4K SLM product page
+    url: https://holoeye.com/products/spatial-light-modulators/gaea-2-phase-only/
+  - title: HOLOEYE downloads
+    url: https://holoeye.com/downloads/
+  - title: HOLOEYE spatial light modulators catalog
+    url: https://holoeye.com/wp-content/uploads/Spatial_Light_Modulators_V14.1.pdf
+software:
+  - name: HOLOEYE SLM Display SDK
+    kind: vendor-sdk
+    url: https://holoeye.com/products/spatial-light-modulators/slm-display-sdk/
+notes:
+  - The SLM Display SDK drives the SLM as a display from C or C++, LabVIEW 2017 or later, MATLAB, Octave or Python on 64-bit Windows 10 and later, and can drive several SLMs from one application.
+  - The SDK is downloaded from customers.holoeye.com after registering; the PLUTO-2.1 driver takes the image over HDMI and uses its USB link for settings such as gamma and dynamic range, and GAEA-2 needs a graphics card with HDMI 2.0 output.

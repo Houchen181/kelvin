@@ -1,0 +1,24 @@
+schema: 1
+id: almax-easylab/membrane
+maker: Almax easyLab
+model: iGM
+name: Almax easyLab Diacell iGM gas-membrane pressure controller
+kind: pressure-controller
+interfaces: [rs-232, gpib, lan, usb]
+control: unknown
+links:
+  - title: Diacell iGM Controller product page
+    url: https://www.almax-easylab.com/product/diacell-igm-controller/
+  - title: Diacell iGM Controller brochure
+    url: https://www.almax-easylab.com/wp-content/uploads/2021/01/Brochure-iGM-Controller-1.pdf
+  - title: High Pressure Manager v5 (software for the iGM)
+    url: https://www.almax-easylab.com/product/high-pressure-manager-v5/
+  - title: Diacell GM Controller (manual regulator-type version)
+    url: https://www.almax-easylab.com/product/diacell-gm-controller/
+software:
+  - name: High Pressure Manager (HPM) v5
+    kind: vendor-software
+    url: https://www.almax-easylab.com/product/high-pressure-manager-v5/
+notes:
+  - No manual or command set is public. The iGM page lists RS-232, IEEE, Ethernet and USB ports as standard and says remote operation is through Almax's Python-based High Pressure Manager, an extra-cost option; 'IEEE' is read here as IEEE-488 (GPIB), and control is left as unknown because the protocol is not documented.
+  - The manual Diacell GM Controller has a display and valves but no computer interface.

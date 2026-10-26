@@ -1,0 +1,21 @@
+schema: 1
+id: moglabs/fsc
+maker: MOGLabs
+model: FSC
+name: MOGLabs FSC fast servo controller
+kind: laser-lock
+interfaces: []
+control: unknown
+manuals:
+  - title: MOGLabs FSC manual
+    url: https://santec-inst.files.svdcdn.com/production/Files/Tutorials/Laser-Electronics/MOGLabs_FSC_manual.pdf
+    access: public
+links:
+  - title: FSC product page (Santec Instruments, which now owns MOGLabs)
+    url: https://inst.santec.com/products/quantum-instruments/electronics/fsc
+  - title: FSC datasheet
+    url: https://santec-inst.files.svdcdn.com/production/Files/Datasheets/FSC-C-E_v1.0.pdf
+  - title: Santec datasheets and manuals (lists the MOGLabs documents)
+    url: https://inst.santec.com/resources/datasheets-and-manuals
+notes:
+  - MOGLabs is now part of Santec, and the old moglabs.com manual and support links redirect to Santec's resources pages. The public product page mentions only front-panel controls; check the manual for any remote interface.

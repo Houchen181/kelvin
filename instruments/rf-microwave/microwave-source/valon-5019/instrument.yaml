@@ -1,0 +1,34 @@
+schema: 1
+id: valon/5019
+maker: Valon Technology
+model: '5019'
+name: Valon Technology 5015 and 5019 frequency synthesizers
+covers: ['5015']
+kind: microwave-source
+interfaces: [usb]
+control: text
+manuals:
+  - title: Valon 5015/5019 Operations Manual
+    url: https://valontechnology.com/5015users/Valon_5015-5019_opman.pdf
+    covers: Complete operations manual including specifications and the command list
+    access: public
+links:
+  - title: 5015/5019 downloads page (manual, Configuration Manager, terminal program, firmware requests)
+    url: https://valontechnology.com/5015users/5015.htm
+  - title: 5015 Quickstart (PDF)
+    url: https://www.valontechnology.com/5015users/5015_Quickstart.pdf
+  - title: Python GUI example files and serial test script
+    url: https://www.valontechnology.com/5015users/PythonGUI/
+  - title: LabVIEW driver sources and simple UI
+    url: https://www.valontechnology.com/5015users/LabVIEW/
+software:
+  - name: Valon 5015 Configuration Manager (V5015CM) and 5000term terminal program
+    kind: vendor-software
+    url: https://valontechnology.com/5015users/5015.htm
+  - name: qcodes_contrib_drivers
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.Valon.Valon_5015.Valon5015
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/Valon/Valon_5015.py
+notes:
+  - Commands are plain text over the USB virtual COM port (FTDI driver); the maker's terminal program connects at 9600 baud and the QCoDeS driver ends commands with CR+LF.
+  - The 5015/5019 is not SCPI compliant, so there is no *IDN?; its ID command returns the maker, model, serial number and firmware revision instead, and the QCoDeS driver was written against firmware 2.0a.

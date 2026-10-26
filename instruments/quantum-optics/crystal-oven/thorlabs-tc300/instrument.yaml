@@ -1,0 +1,17 @@
+schema: 1
+id: thorlabs/tc300
+maker: Thorlabs
+model: TC300
+name: Thorlabs TC200 and TC300 heater controllers
+kind: crystal-oven
+interfaces: [usb, rs-232]
+control: text
+software:
+  - name: InstrumentKit
+    kind: python-driver
+    ref: instruments.thorlabs.TC200
+    url: https://github.com/instrumentkit/InstrumentKit/blob/main/src/instruments/thorlabs/tc200.py
+notes:
+  - The manual could not be verified, because www.thorlabs.com serves a JavaScript page for every path and no media.thorlabs.com manual link was found; take the TC200 and TC300 manuals from the Thorlabs product pages in a browser.
+  - Neither controller uses SCPI. InstrumentKit's TC200 class sends ASCII commands over a serial line with a carriage-return terminator and a prompt, and a third-party open-source TC300 GUI driver uses a virtual serial port at 115200 baud, 8N1, with CR-terminated commands such as IDN? and TACT1?.
+  - InstrumentKit covers only the TC200; no PyMeasure, QCoDeS, pylablib or labscript driver for the TC300 was found.

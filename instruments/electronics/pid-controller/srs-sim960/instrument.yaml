@@ -1,0 +1,20 @@
+schema: 1
+id: srs/sim960
+maker: Stanford Research Systems
+model: SIM960
+name: SRS SIM960 analog PID controller
+kind: pid-controller
+interfaces: [rs-232, gpib]
+control: scpi
+manuals:
+  - title: SIM960 Operation and Service Manual
+    url: https://www.thinksrs.com/downloads/pdfs/manuals/SIM960m.pdf
+    covers: 'Remote operation: module command reference (reached through a SIM900 mainframe)'
+    access: public
+links:
+  - title: SIM960 product page
+    url: https://www.thinksrs.com/products/sim960.html
+  - title: Application note on communicating with SIM modules (ComSIMs)
+    url: https://www.thinksrs.com/downloads/pdfs/applicationnotes/ComSIMs.pdf
+notes:
+  - Analog PID controller module; all parameters can be set and queried over the serial interface through a SIM900 mainframe.

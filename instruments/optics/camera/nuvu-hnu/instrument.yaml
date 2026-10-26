@@ -1,0 +1,27 @@
+schema: 1
+id: nuvu/hnu
+maker: Nüvü Camēras
+model: HNü 512
+name: Nüvü Camēras HNü EMCCD cameras
+covers: [HNü 128, HNü 1024]
+kind: camera
+interfaces: [lan]
+control: library
+links:
+  - title: HNü 512 product page
+    url: https://www.nuvucameras.com/products/hnu-512/
+  - title: HNü 128 product page
+    url: https://www.nuvucameras.com/products/hnu-128/
+  - title: HNü 1024 product page
+    url: https://www.nuvucameras.com/products/hnu-1024/
+  - title: HNü 512 data sheet
+    url: https://www.nuvucameras.com/wp-content/uploads/nuvucameras_hnu512v3.4.7-3.pdf
+software:
+  - name: NüPixel
+    kind: vendor-software
+    url: https://www.nuvucameras.com/products/hnu-512/
+  - name: Nüvü Camēras SDK
+    kind: vendor-sdk
+    url: https://www.nuvucameras.com/products/hnu-512/
+notes:
+  - The HNü 512 page lists Gigabit Ethernet or Camera Link, the NüPixel acquisition software and an SDK for Windows and Linux; Nüvü says the user manual and software library come with the camera.

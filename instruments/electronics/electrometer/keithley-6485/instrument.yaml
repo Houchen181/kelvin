@@ -1,0 +1,27 @@
+schema: 1
+id: keithley/6485
+maker: Keithley (Tektronix)
+model: '6485'
+name: Keithley 6485 / 6487 picoammeters
+covers: ['6487']
+kind: electrometer
+interfaces: [gpib, rs-232]
+control: scpi
+manuals:
+  - title: Model 6485 and Model 6487 User's Manual (6487-900-01C)
+    url: https://download.tek.com/manual/6487-900-01(C-Mar2011)(User).pdf
+    covers: Connection, operation and remote programming of both picoammeters
+    access: public
+  - title: Model 6487 Picoammeter / Voltage Source Reference Manual (6487-901-01D)
+    url: https://www.tek.com/-/media/documents/6487-901-01d_oct2020.pdf
+    covers: '6487 only: advanced operation and descriptions of the programming commands'
+    access: public
+links:
+  - title: Series 6400 picoammeters product page
+    url: https://www.tek.com/en/products/keithley/low-level-sensitive-and-specialty-instruments/series-6400-picoammeters
+software:
+  - name: Keithley IVI/VISA driver for the 6485, 6487 and 6514
+    kind: vendor-sdk
+    url: https://www.tek.com/en/support/software/driver/models-6485-6487-and-6514-ivi-visa-based-driver-visual-basic-v-0
+notes:
+  - The 6485 and 6487 share one user's manual; the 6487 adds a built-in voltage source and has its own reference manual.

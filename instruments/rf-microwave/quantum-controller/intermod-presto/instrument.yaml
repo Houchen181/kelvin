@@ -1,0 +1,44 @@
+schema: 1
+id: intermod/presto
+maker: Intermodulation Products
+model: Presto
+name: Intermodulation Products Presto
+covers: [Vivace]
+kind: quantum-controller
+interfaces: [lan]
+control: library
+manuals:
+  - title: Presto and Vivace documentation (Presto 2.17.1)
+    url: https://intermod.pro/manuals/presto/
+    covers: Getting started, tutorials, functional description and API reference of the presto Python package
+    access: public
+  - title: 'Getting started: network and Python API setup'
+    url: https://intermod.pro/manuals/presto/setup.html
+    covers: Ethernet connection (TCP port 7878, default IP from the serial number) and installing the presto package
+    access: public
+  - title: API Reference Guide
+    url: https://intermod.pro/manuals/presto/source/presto.html
+    covers: 'Python API modules: lockin, pulsed, hardware and dcbias'
+    access: public
+links:
+  - title: 'Presto documentation: external resources (GitHub repositories)'
+    url: https://intermod.pro/manuals/presto/repos.html
+  - title: Presto microwave platforms product page
+    url: https://intermod.pro/products/microwave-platforms
+  - title: Intermodulation Products on GitHub
+    url: https://github.com/intermod-pro
+software:
+  - name: presto (Python API; wheel from the customer's download folder, also used for Vivace)
+    kind: vendor-sdk
+    ref: presto.pulsed.Pulsed
+    url: https://intermod.pro/manuals/presto/setup.html
+examples:
+  - title: presto-demo (demo scripts runnable in loop-back)
+    url: https://github.com/intermod-pro/presto-demo
+    license: MIT
+  - title: presto-measure (measurement and analysis scripts)
+    url: https://github.com/intermod-pro/presto-measure
+    license: MIT
+notes:
+  - Presto is controlled entirely over Ethernet on TCP port 7878, with a default static address derived from the serial number (serial XXYYY maps to 172.23.XX.YYY, mask 255.255.0.0). The change-network program from the download folder switches to DHCP or changes the MAC address.
+  - The presto Python wheel comes from the customer's personal download folder on intermod.pro and is not on PyPI, so the package is for owners only; the documentation itself is public.

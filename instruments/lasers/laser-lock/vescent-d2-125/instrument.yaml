@@ -1,0 +1,19 @@
+schema: 1
+id: vescent/d2-125
+maker: Vescent Photonics
+model: D2-125
+name: Vescent D2-125 laser servo
+kind: laser-lock
+interfaces: [analog]
+control: none
+manuals:
+  - title: D2-125 User Manual
+    url: https://vescent-production-media.s3.us-west-2.amazonaws.com/files/67117c0f2897eecc14f41d25.pdf
+    access: public
+links:
+  - title: D2-125 laser servo product page
+    url: https://vescent.com/products/laser-servo-controller-d2-125
+  - title: D2-125 datasheet
+    url: https://vescent-production-media.s3.us-west-2.amazonaws.com/files/67cf311d0dd3d0160e559a99.pdf
+notes:
+  - The product page lists only analog signal specifications (501 ohm impedance, plus or minus 10 V outputs, plus or minus 500 mV error input) and the D2-005 power supply, with no digital interface, so there is nothing to script.

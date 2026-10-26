@@ -1,0 +1,24 @@
+schema: 1
+id: coherent/verdi
+maker: Coherent
+model: Verdi
+name: Coherent Verdi DPSS lasers (G, V and C series)
+kind: laser
+interfaces: []
+control: unknown
+links:
+  - title: Verdi product page (G, G SLM, V and C series)
+    url: https://www.coherent.com/lasers/cw-solid-state/verdi
+  - title: Verdi G-Series datasheet
+    url: https://www.coherent.com/content/dam/coherent/site/en/resources/datasheet/lasers/verdi-g-stm-series-ds.pdf
+  - title: Verdi G SLM-Series datasheet
+    url: https://www.coherent.com/content/dam/coherent/site/en/resources/datasheet/lasers/verdi-g-slm-series-ds.pdf
+  - title: Verdi V-Series datasheet
+    url: https://www.coherent.com/content/dam/coherent/site/en/resources/datasheet/lasers/verdi-v-series-ds.pdf
+  - title: Verdi C-Series datasheet
+    url: https://www.coherent.com/content/dam/coherent/site/en/resources/datasheet/lasers/verdi-c-series-ds.pdf
+  - title: Coherent support
+    url: https://www.coherent.com/support
+notes:
+  - Coherent's public site offers Verdi datasheets and pre-installation guides but no operator's manual, so get the manual that carries the serial commands from Coherent support or the laser's shipped documentation.
+  - Coherent publishes only datasheets; the remote interface is described in the operator's manual that comes with the laser.

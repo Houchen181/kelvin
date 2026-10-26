@@ -1,0 +1,26 @@
+schema: 1
+id: thorlabs/bp209
+maker: Thorlabs
+model: BP209
+name: Thorlabs BP209 slit-scanning beam profiler
+covers: [BP209-VIS, BP209-IR1, BP209-IR2]
+kind: beam-profiler
+interfaces: [usb]
+control: library
+manuals:
+  - title: BP209 Series Beam software user manual
+    url: https://media.thorlabs.com/globalassets/items/b/bp/bp2/bp209-ir2_m/doc-104056.pdf
+    covers: Beam software GUI and operation; remote control goes through the TLBP2 driver shown in the GitHub examples
+    access: public
+software:
+  - name: Thorlabs TLBP2 beam profiler driver (installed with the Beam software)
+    kind: vendor-sdk
+    ref: TLBP2_64.dll
+    url: https://github.com/Thorlabs/Light_Analysis_Examples/tree/main/Python/Thorlabs%20BP209%20Beam%20Profiler
+examples:
+  - title: Thorlabs Light_Analysis_Examples (BP209 examples in C#, C++ and Python)
+    url: https://github.com/Thorlabs/Light_Analysis_Examples
+    license: MIT
+notes:
+  - The profiler enumerates as a raw USB device through VISA (vendor ID 0x1313, model code 0x8019) and is driven by the TLBP2 driver library from C#, C++ or Python.
+  - The Thorlabs Beam software and its driver must be installed first; the GitHub examples show the calls.

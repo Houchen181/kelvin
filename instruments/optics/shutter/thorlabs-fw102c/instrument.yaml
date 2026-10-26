@@ -1,0 +1,17 @@
+schema: 1
+id: thorlabs/fw102c
+maker: Thorlabs
+model: FW102C
+name: Thorlabs FW102C six-position motorized filter wheel
+covers: [FW212C]
+kind: shutter
+interfaces: [rs-232, usb]
+control: text
+software:
+  - name: pylablib
+    kind: python-driver
+    ref: pylablib.devices.Thorlabs.FW
+    url: https://github.com/AlexShkarin/pyLabLib/blob/main/pylablib/devices/Thorlabs/serial.py
+notes:
+  - 'Short ASCII commands over RS-232 or the USB virtual COM port: pos=N and pos? set and read the position, speed=, trig= and sensors= change options, pcount= selects 6 or 12 positions, and *idn? returns an identification string. The pylablib driver defaults to 115200 baud.'
+  - The pylablib driver avoids moves across the gap between the first and last position, which keeps an ND filter wheel from briefly passing a low-density filter.

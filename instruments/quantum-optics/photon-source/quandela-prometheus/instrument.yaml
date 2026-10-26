@@ -1,0 +1,14 @@
+schema: 1
+id: quandela/prometheus
+maker: Quandela
+model: Prometheus
+name: Quandela Prometheus quantum-dot single-photon source
+kind: photon-source
+interfaces: []
+control: unknown
+links:
+  - title: Quandela Prometheus product page
+    url: https://www.quandela.com/products-and-services/prometheus/
+notes:
+  - Prometheus is sold as a turnkey cryogenic system with laser and control included, an active time-to-space demultiplexer and optional detectors; the product page gives no control interface, manual or API.
+  - The open-source Perceval framework on Quandela's site targets its photonic quantum computers; the page does not say it controls Prometheus.

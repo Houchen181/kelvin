@@ -1,0 +1,51 @@
+schema: 1
+id: keithley/2700
+maker: Keithley (Tektronix)
+model: '2700'
+name: Keithley 2700 / 2701 / 2750 multimeter and data acquisition systems
+covers: ['2701', '2750']
+kind: multimeter
+interfaces: [gpib, rs-232, lan]
+control: scpi
+manuals:
+  - title: Model 2700 Multimeter/Switch System User's Manual (2700-900-01K)
+    url: https://download.tek.com/manual/2700-900-01K_Feb_2016.pdf
+    covers: Operation and remote (SCPI) programming of the 2700
+    access: public
+  - title: Model 2701 Ethernet-Based DMM / Data Acquisition System User Manual (2701-900-01G)
+    url: https://download.tek.com/manual/2701-900-01G_Feb_2016.pdf
+    covers: Operation and remote (SCPI) programming of the 2701
+    access: public
+  - title: Model 2701 Instrument Networking Instruction Manual (2701-904-01D)
+    url: https://download.tek.com/manual/2701-904-01D_Feb_2016.pdf
+    covers: Ethernet connection and networking for the 2701
+    access: public
+  - title: Model 2750 Multimeter/Switch System User's Manual (2750-900-01G)
+    url: https://download.tek.com/manual/2750-900-01G_Users_May2023.pdf
+    access: public
+  - title: Model 2750 Multimeter/Switch System Reference Manual (2750-901-01A)
+    url: https://download.tek.com/manual/2750-901-01A_Reference_August2023.pdf
+    covers: 2750 advanced operation and programming options
+    access: public
+links:
+  - title: 2700 / 2701 / 2750 product page (discontinued)
+    url: https://www.tek.com/en/products/keithley/data-acquisition-daq-systems/2700-multimeter-data-acquisition-switch-system
+software:
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.keithley.Keithley2700
+    url: https://pymeasure.readthedocs.io/en/latest/api/instruments/keithley/keithley2700.html
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.keithley.Keithley2750
+    url: https://pymeasure.readthedocs.io/en/latest/api/instruments/keithley/keithley2750.html
+  - name: qcodes_contrib_drivers
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.Tektronix.Keithley_2700.Keithley_2700
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/HEAD/src/qcodes_contrib_drivers/drivers/Tektronix/Keithley_2700.py
+  - name: Keithley 2700/2701/2750 IVI driver
+    kind: vendor-sdk
+    url: https://www.tek.com/en/support/software/driver/2700-software-0
+notes:
+  - The 2701 is the Ethernet-based variant and has an extra networking manual; one Keithley IVI driver covers the 2700, 2701 and 2750.
+  - The 2750 splits its documentation into a user's manual and a reference manual that holds the advanced and programming information.

@@ -1,0 +1,24 @@
+schema: 1
+id: toptica/dfc
+maker: TOPTICA Photonics
+model: DFC CORE+
+name: TOPTICA DFC difference frequency combs (DFC CORE and DFC CORE+)
+covers: [DFC CORE]
+kind: frequency-comb
+interfaces: [lan]
+control: text
+links:
+  - title: DFC product page
+    url: https://www.toptica.com/products/frequency-combs/dfc
+  - title: DFC product information (PDF)
+    url: https://www.toptica.com/downloads/pif/product_info_TOPTICA_DFC_en.pdf
+  - title: 'TOPTICA Python Laser SDK: Getting connected (shows a DFC CORE+ connection by host name)'
+    url: https://toptica.github.io/python-lasersdk/getting_connected.html
+software:
+  - name: TOPTICA Python Laser SDK (toptica-lasersdk)
+    kind: vendor-sdk
+    ref: toptica.lasersdk.client
+    url: https://pypi.org/project/toptica-lasersdk/
+notes:
+  - The DFC CORE+ is reached over the network (host name, IP address or serial number) with the TOPTICA Python Laser SDK, whose documentation says systems that combine lasers and combs get a specialized device class and documentation on the USB stick delivered with the system.
+  - No public DFC manual was found. TOPTICA's SDK examples connect to a DFC CORE+ the same way as to a DLC pro, whose command line is text based.

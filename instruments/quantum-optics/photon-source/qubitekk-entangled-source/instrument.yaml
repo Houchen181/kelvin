@@ -1,0 +1,14 @@
+schema: 1
+id: qubitekk/entangled-source
+maker: Qubitekk (IonQ)
+model: Entangled photon source
+name: Qubitekk entangled photon-pair source
+kind: photon-source
+interfaces: []
+control: unknown
+links:
+  - title: IonQ completes acquisition of Qubitekk (qubitekk.com now redirects to ionq.com)
+    url: https://ionq.com/news/ionq-completes-acquisition-of-qubitekk-solidifying-leadership-in-quantum
+notes:
+  - No public manual, product page or command reference for the Qubitekk entangled photon source was found; qubitekk.com now redirects to ionq.com, and IonQ completed the acquisition of most Qubitekk assets on 2025-01-06.
+  - InstrumentKit (instruments.qubitekk) covers the Qubitekk CC1 coincidence counter and MC1 motor controller, not the source itself.

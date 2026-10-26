@@ -1,0 +1,27 @@
+schema: 1
+id: oxford/itc503
+maker: Oxford Instruments
+model: ITC503
+name: Oxford Instruments ITC503 intelligent temperature controller
+kind: temperature-controller
+interfaces: [rs-232, gpib]
+control: text
+links:
+  - title: Quantum Design Oxford legacy product support
+    url: https://qd-oxford.com/services/legacy_product_support.html
+software:
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.oxfordinstruments.ITC503
+    url: https://github.com/pymeasure/pymeasure/blob/master/pymeasure/instruments/oxfordinstruments/itc503.py
+  - name: qcodes_contrib_drivers
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.OxfordInstruments.ITC503.ITC503
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/OxfordInstruments/ITC503.py
+  - name: InstrumentKit
+    kind: python-driver
+    ref: instruments.oxford.OxfordITC503
+    url: https://github.com/instrumentkit/InstrumentKit/blob/main/src/instruments/oxford/oxforditc503.py
+notes:
+  - 'Oxford Instruments no longer hosts this manual: nanoscience.oxinst.com now redirects to Quantum Design Oxford, whose legacy support page does not list the ITC503. Some older Oxford manuals are on the Mercury Support site (mymercurysupport.com).'
+  - The controller speaks a single-letter ASCII command language (the PyMeasure driver sets control_mode "RU" for remote and unlocked); 9600 baud with two stop bits is the serial default in PyMeasure.

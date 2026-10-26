@@ -1,0 +1,27 @@
+schema: 1
+id: yokogawa/7651
+maker: Yokogawa
+model: '7651'
+name: Yokogawa 7651 programmable DC source
+kind: voltage-source
+interfaces: [gpib]
+control: text
+manuals:
+  - title: 7651 Programmable DC Source Instruction Manual (IM 7651-01E)
+    url: https://cdn.tmi.yokogawa.com/IM7651-01E.is.pdf
+    access: public
+links:
+  - title: 7651 product page (discontinued)
+    url: https://tmi.yokogawa.com/solutions/discontinued/7651-programmable-dc-source/
+software:
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.yokogawa.Yokogawa7651
+    url: https://pymeasure.readthedocs.io/en/latest/api/instruments/yokogawa/yokogawa7651.html
+  - name: InstrumentKit
+    kind: python-driver
+    ref: instruments.yokogawa.Yokogawa7651
+    url: https://instrumentkit.readthedocs.io/en/latest/apiref/yokogawa.html
+notes:
+  - Programmable DC voltage and current source with a standard GP-IB remote interface; commands use Yokogawa's own syntax (for example S1.0;E to set the level, O1;E to enable the output), not SCPI.
+  - Discontinued in 2010; Yokogawa lists the GS200 as the replacement.

@@ -1,0 +1,20 @@
+schema: 1
+id: tdk-lambda/genesys
+maker: TDK-Lambda
+model: Genesys
+name: TDK-Lambda Genesys programmable DC power supplies
+kind: power-supply
+interfaces: [rs-232, rs-485, gpib, usb, lan]
+control: text
+software:
+  - name: PyMeasure (Genesys 40-38)
+    kind: python-driver
+    ref: pymeasure.instruments.tdk.TDK_Gen40_38
+    url: https://github.com/pymeasure/pymeasure/blob/master/pymeasure/instruments/tdk/tdk_gen40_38.py
+  - name: PyMeasure (Genesys 80-65)
+    kind: python-driver
+    ref: pymeasure.instruments.tdk.TDK_Gen80_65
+    url: https://github.com/pymeasure/pymeasure/blob/master/pymeasure/instruments/tdk/tdk_gen80_65.py
+notes:
+  - TDK-Lambda publishes a Genesys user manual with the serial command set and a separate manual for the optional IEEE 488.2 SCPI interface. They are not linked here because the maker's site refuses automated link checks.
+  - The serial protocol addresses each supply by its address (default 6) and replies to IDN? (no asterisk) with a LAMBDA,model string, as in the PyMeasure driver tests; the optional IEEE488.2 interface uses SCPI instead.

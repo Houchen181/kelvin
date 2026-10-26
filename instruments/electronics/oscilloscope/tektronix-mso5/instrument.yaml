@@ -1,0 +1,44 @@
+schema: 1
+id: tektronix/mso5
+maker: Tektronix
+model: 5 Series MSO
+name: Tektronix 5 Series MSO mixed signal oscilloscopes
+covers: [MSO54, MSO56, MSO58, MSO58LP, MSO54B, MSO56B, MSO58B]
+kind: oscilloscope
+interfaces: [lan, usb-tmc]
+control: scpi
+identify:
+  idn: ^TEKTRONIX,MSO5[468](LP|B)?,
+  example: TEKTRONIX,MSO56,SERIAL1,CF:91.1CT FV:1.99.11.1268
+manuals:
+  - title: 4/5/6 Series MSO Programmer Manual for the B-series models (077-1898-05, September 2026)
+    url: https://download.tek.com/manual/4-5-6-Series-MSO_Programmer_077189805.pdf
+    covers: 'Getting Started: remote connection over Ethernet, USB (USBTMC-USB488) and the socket server; then the command groups and the alphabetical command reference. Covers the MSO4XB, MSO5XB, MSO58LP, MSO6XB and LPD64 with firmware 2.14 and above'
+    access: public
+  - title: 4/5/6 Series MSO Programmer Manual (077-1305-16)
+    url: https://download.tek.com/manual/4-5-6-MSO-Programmer-Manual-077130516.pdf
+    covers: Remote access programming commands for the MSO44, MSO46, MSO54, MSO56, MSO58, MSO54B, MSO56B, MSO58B, MSO58LP, MSO64, MSO64B, MSO66B, MSO68B and LPD64
+    access: public
+  - title: 4/5/6 Series MSO Programmer Manual (firmware 1.26)
+    url: https://download.tek.com/manual/4-5-6-MSO-Programmer-Manual-077130512-Nov.pdf
+    covers: Remote access programming commands for instruments running firmware 1.26
+    access: public
+links:
+  - title: 4, 5, 6 Series MSO Programmer Manual page (firmware 2.14 and above)
+    url: https://www.tek.com/en/sitewide-content/manuals/4/5/6/4-5-6-series-mso-programmer-manual
+  - title: 4, 5, 6 Series Mixed Signal Oscilloscope Programmer Manual page
+    url: https://www.tek.com/en/sitewide-content/manuals/4/5/6/4-5-6-series-mixed-signal-oscilloscope-programmer-manual
+  - title: 4, 5, 6 Series MSO manuals (firmware 1.26 edition)
+    url: https://www.tek.com/en/manual/oscilloscope/4-5-6-series-mso-5-series-mso-mixed-signal-oscilloscope
+software:
+  - name: tm_devices (Tektronix Python device-control package)
+    kind: vendor-sdk
+    ref: tm_devices.drivers.MSO5
+    url: https://github.com/tektronix/tm_devices
+examples:
+  - title: Tektronix Programmatic Control Examples
+    url: https://github.com/tektronix/Programmatic-Control-Examples
+    license: Tektronix Sample Source Code License (custom)
+notes:
+  - One programmer manual serves the 4, 5 and 6 Series MSO families, so it also lists commands that a 5 Series unit may not support. The September 2026 edition is written for the B-series models, MSO58LP and LPD64; original MSO54, MSO56 and MSO58 units are covered by the earlier editions listed here, so match the edition to the model and firmware.
+  - The example IDN reply comes from the simulated MSO56 in tm_devices; real units report their own serial number and firmware string in the same four-field format.

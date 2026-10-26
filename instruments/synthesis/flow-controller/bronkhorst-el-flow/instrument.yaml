@@ -1,0 +1,42 @@
+schema: 1
+id: bronkhorst/el-flow
+maker: Bronkhorst
+model: EL-FLOW Select
+name: Bronkhorst EL-FLOW mass flow controllers
+covers: [EL-FLOW Prestige, EL-FLOW Base]
+kind: flow-controller
+interfaces: [rs-232, rs-485, usb, lan, analog]
+control: text
+manuals:
+  - title: 9.17.027 RS232 interface with propar protocol
+    url: https://products.bronkhorst.com/media/rskkdfei/917027-manual-rs232-interface.pdf
+    covers: propar protocol over RS-232; the same protocol runs over USB and RS-485
+    access: public
+  - title: 9.17.023 Operating instructions for digital instruments
+    url: https://products.bronkhorst.com/media/523ddtij/917023-manual-operation-instructions-digital-instruments.pdf
+    covers: Parameters available on digital instruments
+    access: public
+  - title: 9.17.099 EL-FLOW Select manual
+    url: https://products.bronkhorst.com/media/3u4iwfxh/917099-manual-el-flow-select.pdf
+    access: public
+links:
+  - title: EL-FLOW Select product page
+    url: https://www.bronkhorst.com/products/gas-flow/el-flow-select/
+  - title: EL-FLOW Prestige product page
+    url: https://www.bronkhorst.com/products/gas-flow/el-flow-prestige/
+  - title: EL-FLOW Base product page
+    url: https://www.bronkhorst.com/products/gas-flow/el-flow-base/
+  - title: Bronkhorst downloads
+    url: https://www.bronkhorst.com/service-support/downloads/
+software:
+  - name: bronkhorst-propar (official Python package for the propar protocol)
+    kind: vendor-sdk
+    ref: propar.instrument
+    url: https://pypi.org/project/bronkhorst-propar/
+examples:
+  - title: bronkhorst-propar examples (documentation)
+    url: https://bronkhorst-propar.readthedocs.io/en/latest/examples.html
+    license: MIT
+notes:
+  - Digital instruments speak Bronkhorst's propar protocol; manual 9.17.027 describes it over RS-232 and 9.17.023 lists the instrument parameters.
+  - The official bronkhorst-propar package talks propar over USB, RS-232 or RS-485 and can also reach several instruments on a FLOW-BUS network.

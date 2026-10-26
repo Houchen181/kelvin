@@ -1,0 +1,28 @@
+schema: 1
+id: inficon/sqc-310
+maker: INFICON
+model: SQC-310
+name: INFICON SQC-310 and SQM-160 deposition controllers
+covers: [SQM-160]
+kind: deposition-monitor
+interfaces: [rs-232, usb, lan]
+control: text
+links:
+  - title: SQC-310 thin film deposition controller product page
+    url: https://www.inficon.com/en/products/thin-film-technology/sqc-310
+  - title: SQM-160 multi-film rate/thickness monitor product page
+    url: https://www.inficon.com/en/products/thin-film-technology/sqm-160
+software:
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.inficon.SQM160
+    url: https://github.com/pymeasure/pymeasure/blob/master/pymeasure/instruments/inficon/sqm160.py
+  - name: SQC-310 Comm Software and LabVIEW examples (downloads on the product page)
+    kind: vendor-software
+    url: https://www.inficon.com/en/products/thin-film-technology/sqc-310
+  - name: SQM-160 Comm Software and LabVIEW example (downloads on the product page)
+    kind: vendor-software
+    url: https://www.inficon.com/en/products/thin-film-technology/sqm-160
+notes:
+  - RS-232 is standard on both; USB and Ethernet depend on the model and option. The PyMeasure driver targets the SQM-160, so check the SQC-310 operating manual for its command set before reusing it.
+  - The operating manuals, Windows communication software and LabVIEW examples are on each product page; inficon.com blocks command-line downloads, so open them in a browser.

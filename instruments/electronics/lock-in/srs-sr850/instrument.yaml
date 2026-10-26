@@ -1,0 +1,18 @@
+schema: 1
+id: srs/sr850
+maker: Stanford Research Systems
+model: SR850
+name: SRS SR850 DSP lock-in amplifier
+kind: lock-in
+interfaces: [gpib, rs-232]
+control: scpi
+manuals:
+  - title: SR850 DSP Lock-In Amplifier Operation and Service Manual
+    url: https://www.thinksrs.com/downloads/pdfs/manuals/SR850m.pdf
+    covers: Remote programming over GPIB and RS-232, including the command list
+    access: public
+links:
+  - title: SR850 product page
+    url: https://www.thinksrs.com/products/sr850.html
+notes:
+  - Dual-phase DSP lock-in amplifier with standard GPIB and RS-232 interfaces; the internal data buffer (up to 65k samples) can be read out over either interface.

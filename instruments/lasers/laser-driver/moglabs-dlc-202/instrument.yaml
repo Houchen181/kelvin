@@ -1,0 +1,26 @@
+schema: 1
+id: moglabs/dlc-202
+maker: MOGLabs
+model: DLC-202
+name: MOGLabs DLC-202 diode laser controller
+kind: laser-driver
+interfaces: [usb, lan]
+control: text
+manuals:
+  - title: MOGLabs DLC manual (current)
+    url: https://santec-inst.files.svdcdn.com/production/Files/Tutorials/Laser-Electronics/MOGLabs_DLC_manual.pdf
+    access: public
+  - title: MOGLabs DLC legacy manual V8 (rev 8.00)
+    url: https://santec-inst.files.svdcdn.com/production/User-Manuals/manual_dlc_rev8.00_1.pdf
+    access: public
+links:
+  - title: DLC datasheet
+    url: https://santec-inst.files.svdcdn.com/production/Files/Datasheets/MOGLabs_DLC_20250701.pdf
+  - title: MOGLabs CEL cateye laser product page (Santec Instruments)
+    url: https://inst.santec.com/products/quantum-instruments/quantum-lasers/cel
+  - title: MOGLabs CEL manual
+    url: https://santec-inst.files.svdcdn.com/production/Files/Tutorials/Tunable-laser-amplifiers/MOGLabs_CEL_manual.pdf
+  - title: Santec datasheets and manuals (lists the DLC manuals, including legacy revisions 3 to 8)
+    url: https://inst.santec.com/resources/datasheets-and-manuals
+notes:
+  - Santec, which now owns MOGLabs, hosts the current DLC manual and legacy manuals for revisions 3 to 8, so pick the revision that matches the controller and check its remote interface there.

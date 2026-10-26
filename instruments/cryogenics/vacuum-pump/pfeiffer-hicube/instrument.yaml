@@ -1,0 +1,21 @@
+schema: 1
+id: pfeiffer/hicube
+maker: Pfeiffer Vacuum
+model: HiCube
+name: Pfeiffer Vacuum HiCube pumping stations and TC 400 turbo drive unit
+covers: [HiCube Eco, HiCube Classic, HiCube Pro, TC 400]
+kind: vacuum-pump
+interfaces: [rs-485]
+control: text
+manuals:
+  - title: 'HiCube Pro turbo pumping stations: operating instructions (PT 0265 BEN/F)'
+    url: https://www.shop.buschgroup.com/api/empolis/resource/environment/project1_p/documents/pfeifferSharepointProd/1548-pt0265ben_f.pdf
+    access: public
+  - title: 'HiPace 400 with TC 400: operating instructions (TC 400 drive unit)'
+    url: https://www.pfeiffervacuum.com/us/assets/123545/1/Instruction%20Manual%20HiPace%20400%20with%20TC%20400%2024%20V_EN_en.pdf
+    covers: TC 400 operation via RS-485 with the Pfeiffer Vacuum protocol (parameter numbers such as P:010 and P:023); the telegram format itself is not included
+    access: public
+notes:
+  - The RS-485 link uses Pfeiffer Vacuum's parameter-based protocol. The telegram description is in the separate TC 400 operating instructions (PT 0203 BN), which could not be found on a current Pfeiffer or Busch site.
+  - The HiPace manual says remote control over RS-485 needs the bridge on the remote connector removed and parameters P:010 and P:023 set to 1 (ON) over RS-485. A USB RS-485 converter is the usual way to connect a PC.
+  - The Busch shop host answers HEAD with HTTP 500, so open the HiCube Pro link in a browser or with a GET request.

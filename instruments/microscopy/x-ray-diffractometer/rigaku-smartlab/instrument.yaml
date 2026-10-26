@@ -1,0 +1,32 @@
+schema: 1
+id: rigaku/smartlab
+maker: Rigaku
+model: SmartLab
+name: Rigaku SmartLab X-ray diffractometer (SmartLab Studio II, RAI)
+covers: [SmartLab SE, MiniFlex, MiniFlex XpC]
+kind: x-ray-diffractometer
+interfaces: [lan]
+control: library
+links:
+  - title: RAI (common control and data interface; Python API; TCP/IP over Ethernet)
+    url: https://rigaku.com/products/lablinc-studio/rai
+  - title: LabLinc Studio (automation, Python API)
+    url: https://rigaku.com/products/lablinc-studio
+  - title: SmartLab
+    url: https://rigaku.com/products/x-ray-diffraction-and-scattering/xrd/smartlab
+  - title: SmartLab Studio II
+    url: https://rigaku.com/products/x-ray-diffraction-and-scattering/xrd/smartlab-studio-ii
+  - title: Rigaku software downloads
+    url: https://rigaku.com/service-and-support/software-download
+  - title: Contact Rigaku service
+    url: https://rigaku.com/service-and-support/contact-service
+software:
+  - name: SmartLab Studio II
+    kind: vendor-software
+    url: https://rigaku.com/products/x-ray-diffraction-and-scattering/xrd/smartlab-studio-ii
+  - name: RAI Python API (LabLinc Studio)
+    kind: vendor-sdk
+    url: https://rigaku.com/products/lablinc-studio/rai
+notes:
+  - RAI runs on the instrument PC beside SmartLab Studio II, and a host automation system or Python code issues commands and requests bulk results over Ethernet using TCP/IP; the Python API exposes full parameter access, and Rigaku mentions a sandbox and a digital twin for testing scripts.
+  - RAI and LabLinc Studio are Rigaku products with no public API reference, so request the documentation and licensing from Rigaku.

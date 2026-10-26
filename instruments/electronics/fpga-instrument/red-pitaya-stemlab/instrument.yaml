@@ -1,0 +1,49 @@
+schema: 1
+id: red-pitaya/stemlab
+maker: Red Pitaya
+model: STEMlab
+name: Red Pitaya STEMlab boards (SCPI server) and the PyRPL lock software
+kind: fpga-instrument
+categories: [lasers]
+interfaces: [lan]
+control: scpi
+identify:
+  idn: ^REDPITAYA,INSTR
+manuals:
+  - title: 'Red Pitaya docs: SCPI server (MATLAB, LabVIEW, Scilab or Python)'
+    url: https://redpitaya.readthedocs.io/en/latest/appsFeatures/remoteControl/scpi.html
+    covers: 'Chapter 2.3.1: starting the SCPI server and example clients'
+    access: public
+  - title: 'Red Pitaya docs: list of supported SCPI and API commands'
+    url: https://redpitaya.readthedocs.io/en/latest/appsFeatures/remoteControl/command_list.html
+    covers: Command tables by function (initialization, board control, LEDs and GPIOs, analog I/O, signal generator, acquisition, DMM, UART, SPI, I2C, CAN and more), each with SCPI, Python and C++ forms
+    access: public
+  - title: 'Red Pitaya docs: known SCPI and API issues and changes by OS version'
+    url: https://redpitaya.readthedocs.io/en/latest/appsFeatures/remoteControl/knownIssues.html
+    covers: Renamed and changed commands per OS release; SYSTem:Help? lists the commands a given board accepts
+    access: public
+links:
+  - title: Red Pitaya documentation home
+    url: https://redpitaya.readthedocs.io/en/latest/
+  - title: Programming and remote-control tools overview
+    url: https://redpitaya.readthedocs.io/en/latest/appsFeatures/remoteControl/remoteAndProg.html
+  - title: scpi-server source (shows the TCP port and the *IDN? fields)
+    url: https://github.com/RedPitaya/RedPitaya/tree/master/scpi-server
+  - title: PyRPL documentation
+    url: https://pyrpl.readthedocs.io/en/latest/
+software:
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.redpitaya.RedPitayaScpi
+    url: https://pymeasure.readthedocs.io/en/latest/api/instruments/redpitaya/redpitaya_scpi.html
+  - name: PyRPL (lockbox, PID, scope and network analyzer on the Red Pitaya)
+    kind: python-driver
+    ref: pyrpl.Pyrpl
+    url: https://github.com/pyrpl-fpga/pyrpl
+examples:
+  - title: RedPitaya-Examples (SCPI, API and web API examples)
+    url: https://github.com/RedPitaya/RedPitaya-Examples
+    license: GPL-3.0
+notes:
+  - The SCPI server is started from the board's web interface and listens on TCP port 5000. The docs do not document *IDN?; the scpi-server source builds the reply as REDPITAYA,INSTR,<build date>,<version>, so match only the first two fields.
+  - Command names changed between OS releases, so check the known-issues page for the board's OS version. PyRPL runs on a PC, connects to the board by IP address over SSH (default 192.168.1.100 in its API manual) and starts its own server application on port 2222, so use it on a board that is not running the SCPI server.

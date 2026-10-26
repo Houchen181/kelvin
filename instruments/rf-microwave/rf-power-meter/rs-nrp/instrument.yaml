@@ -1,0 +1,56 @@
+schema: 1
+id: rs/nrp
+maker: Rohde & Schwarz
+model: NRP
+name: Rohde & Schwarz NRP power sensors (NRPxxS(N), NRPxxA(N), NRPxxP and NRP-Z series)
+covers: [NRP18S, NRP18SN, NRP33SN-V, NRP6AN, NRP18P, NRP40P, NRP50P, NRP-Z47]
+kind: rf-power-meter
+interfaces: [usb-tmc, usb, lan]
+control: scpi
+manuals:
+  - title: R&S NRPxS(N) Power Sensors User Manual (version 26, firmware 03.50)
+    url: https://scdn.rohde-schwarz.com/ur/pws/dl_downloads/pdm/cl_manuals/user_manual/1177_5079_01/NRPxSN_UserManual_en_26.pdf
+    covers: Remote control fundamentals, remote command descriptions and programming examples for the NRPxxS(N) sensors
+    access: public
+  - title: R&S NRP18S-xx Power Sensors User Manual (version 17, firmware 03.50)
+    url: https://scdn.rohde-schwarz.com/ur/pws/dl_downloads/pdm/cl_manuals/user_manual/1178_3686_01/NRP18S-xx_UserManual_en_17.pdf
+    covers: Remote control commands and programming examples for the NRP18S-xx sensors
+    access: public
+  - title: R&S NRPxA(N) Power Sensors User Manual (version 18)
+    url: https://scdn.rohde-schwarz.com/ur/pws/dl_downloads/pdm/cl_manuals/user_manual/1177_6017_01/NRPxAN_UserManual_en_18.pdf
+    access: public
+  - title: R&S NRPxxP Power Sensors User Manual (version 08)
+    url: https://scdn.rohde-schwarz.com/ur/pws/dl_downloads/pdm/cl_manuals/user_manual/1179_5760_01/NRPxxP_UserManual_en_08.pdf
+    covers: All instrument functions and remote control commands for the NRPxxP pulse sensors, with measurement and programming examples
+    access: public
+  - title: R&S NRP-Z47 Power Sensor Modules User Manual (version 04)
+    url: https://scdn.rohde-schwarz.com/ur/pws/dl_downloads/pdm/cl_manuals/user_manual/1706_7097_01/NRP-Z47_UserManual_en_04.pdf
+    access: public
+  - title: Remote control via SCPI (basic information, version 04)
+    url: https://scdn.rohde-schwarz.com/ur/pws/dl_downloads/pdm/cl_manuals/getting_started/1179_4592_01/Remote_Control_SCPI_GettingStarted_en_04.pdf
+    covers: Basics of SCPI remote control connections for R&S power sensors
+    access: public
+links:
+  - title: R&S NRPxxP documents (user manual, remote control via SCPI, getting started)
+    url: https://www.rohde-schwarz.com/manual/nrpxxp/
+  - title: R&S NRP Power Sensors Getting Started
+    url: https://www.rohde-schwarz.com/us/manual/nrp-power-sensors-getting-started_78701-99655.html
+  - title: R&S NRP-Z Getting Started
+    url: https://www.rohde-schwarz.com/us/manual/rs-nrp-z-getting-started_78701-57217.html
+  - title: R&S VISA and tools for remote control
+    url: https://www.rohde-schwarz.com/us/driver-pages/remote-control/3-visa-and-tools_231388.html
+software:
+  - name: RsInstrument (R&S VISA-based Python remote control module)
+    kind: vendor-sdk
+    ref: RsInstrument.RsInstrument
+    url: https://pypi.org/project/RsInstrument/
+  - name: R&S NRP Toolkit (Windows and macOS downloads are listed on the NRPxxA(N) software page)
+    kind: vendor-software
+    url: https://www.rohde-schwarz.com/software/nrp-a-an/
+examples:
+  - title: 'Rohde-Schwarz/Examples: power sensor scripts (Python RsInstrument and PyVISA, C#, MATLAB)'
+    url: https://github.com/Rohde-Schwarz/Examples/tree/main/Powersensors
+    license: MIT
+notes:
+  - 'NRPxxS(N) and NRPxxP sensors show up as USB-TMC resources (USB::0x0AAD::...::INSTR in R&S''s examples) and the LAN-capable N versions also answer on HiSLIP (TCPIP::<host>::hislip0). The older NRP-Z sensors are opened through R&S VISA with RSNRP:: resource strings.'
+  - R&S's RsInstrument module and its Examples repository (burst average, pulse analysis and trace readout scripts for NRP sensors) are the quickest way to script these sensors.

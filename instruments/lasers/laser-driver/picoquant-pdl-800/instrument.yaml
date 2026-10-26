@@ -1,0 +1,21 @@
+schema: 1
+id: picoquant/pdl-800
+maker: PicoQuant
+model: PDL 800-D
+name: PicoQuant PDL 800-D pulsed diode laser driver
+kind: laser-driver
+interfaces: []
+control: unknown
+manuals:
+  - title: PDL 800-D user manual
+    url: https://downloads.picoquant.com/manuals/PDL800-D_Manual.pdf
+    access: public
+links:
+  - title: PDL 800-D product page
+    url: https://www.picoquant.com/products/pulsed-lasers/pdl-800-d/
+  - title: PDL 800-D datasheet
+    url: https://www.picoquant.com/wp-content/uploads/datasheet-pdl-800-d.pdf
+  - title: PicoQuant download center
+    url: https://www.picoquant.com/downloads/
+notes:
+  - The manual is public, but the download center lists no PDL 800-D software, driver or SDK and the product page names only a remote interlock; read the manual for the PC interface before planning automation.

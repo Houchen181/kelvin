@@ -1,0 +1,22 @@
+schema: 1
+id: hubner/c-wave
+maker: HÜBNER Photonics
+model: C-WAVE
+name: HÜBNER Photonics C-WAVE tunable CW OPO
+kind: parametric-source
+interfaces: []
+control: unknown
+links:
+  - title: C-WAVE product page (manual and software are offered on request)
+    url: https://hubner-photonics.com/products/lasers/tunable-lasers/c-wave/
+  - title: C-WAVE datasheet D0840-E
+    url: https://hubner-photonics.com/wp-content/uploads/2025/12/C-WAVE_Datasheet_D0840-E.pdf
+  - title: C-WAVE detailed specification datasheet D0840-C (June 2025)
+    url: https://hubner-photonics.com/wp-content/uploads/2025/06/D0840-C-Datasheet_C-WAVE_June2025.pdf
+  - title: HÜBNER Photonics software and downloads
+    url: https://hubner-photonics.com/downloads/
+  - title: AbsoluteLambda option (closed-loop wavelength stabilization)
+    url: https://hubner-photonics.com/products/options-accessories/absolute-lambda/
+notes:
+  - The C-WAVE manual and control software are only sent on request (info.de@hubner-photonics.com), so the command set could not be checked.
+  - HÜBNER's datasheets describe an Ethernet connection with a browser-based control interface; ask HÜBNER for the protocol before automating.

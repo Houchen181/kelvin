@@ -1,0 +1,27 @@
+schema: 1
+id: bruker/d8
+maker: Bruker
+model: D8 ADVANCE / D8 DISCOVER
+name: Bruker D8 X-ray diffractometers (DIFFRAC.SUITE)
+covers: [D8 ADVANCE, D8 DISCOVER, D8 ENDEAVOR, D6 PHASER]
+kind: x-ray-diffractometer
+interfaces: [lan]
+control: library
+links:
+  - title: DIFFRAC.MEASUREMENT CENTER (scripting support, automation interface, LIMS connection)
+    url: https://www.bruker.com/en/products-and-solutions/diffractometers-and-x-ray-microscopes/x-ray-diffractometers/diffrac-suite-software/diffrac-measurement-center.html
+  - title: DIFFRAC.SUITE software
+    url: https://www.bruker.com/en/products-and-solutions/diffractometers-and-x-ray-microscopes/x-ray-diffractometers/diffrac-suite-software.html
+  - title: D8 ADVANCE family
+    url: https://www.bruker.com/en/products-and-solutions/diffractometers-and-x-ray-microscopes/x-ray-diffractometers/d8-advance-family.html
+  - title: D8 DISCOVER family
+    url: https://www.bruker.com/en/products-and-solutions/diffractometers-and-x-ray-microscopes/x-ray-diffractometers/d8-discover-family.html
+  - title: Bruker Support portal (the DIFFRAC.SUITE page points here for software and manuals)
+    url: https://www.brukersupport.com/
+software:
+  - name: DIFFRAC.MEASUREMENT CENTER
+    kind: vendor-software
+    url: https://www.bruker.com/en/products-and-solutions/diffractometers-and-x-ray-microscopes/x-ray-diffractometers/diffrac-suite-software/diffrac-measurement-center.html
+notes:
+  - DIFFRAC.SUITE can access and control any number of D6 PHASER, D8 ADVANCE, D8 DISCOVER and D8 ENDEAVOR diffractometers within a customer's network, and DIFFRAC.MEASUREMENT CENTER lists scripting support, an automation interface and a LIMS connection among its specifications.
+  - No programming documentation is public; ask Bruker AXS or check the Bruker Support portal for the scripting and automation interface manuals.

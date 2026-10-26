@@ -1,0 +1,34 @@
+schema: 1
+id: bruker/epr
+maker: Bruker
+model: EMX / ELEXSYS
+name: Bruker EMX and ELEXSYS EPR spectrometers (Xepr)
+covers: [ELEXSYS-II E500, ELEXSYS-II E580, ELEXSYS-II E680, ELEXSYS E780]
+kind: epr-spectrometer
+interfaces: [lan]
+control: library
+links:
+  - title: Xepr software (ELEXSYS acquisition and control, ProDeL programming language)
+    url: https://www.bruker.com/en/products-and-solutions/mr/epr-instruments/epr-research-instruments/xepr-software.html
+  - title: ELEXSYS-II E580
+    url: https://www.bruker.com/en/products-and-solutions/mr/epr-instruments/epr-research-instruments/elexsys-ii-e580.html
+  - title: ELEXSYS-II E500
+    url: https://www.bruker.com/en/products-and-solutions/mr/epr-instruments/epr-research-instruments/Elexsys-II-E500-CW-EPR.html
+  - title: ELEXSYS E780
+    url: https://www.bruker.com/en/products-and-solutions/mr/epr-instruments/epr-research-instruments/elexsys-e780.html
+  - title: EMXplus (page refers to Xenon software)
+    url: https://www.bruker.com/en/products-and-solutions/mr/epr-instruments/emxplus.html
+software:
+  - name: Xepr
+    kind: vendor-software
+    url: https://www.bruker.com/en/products-and-solutions/mr/epr-instruments/epr-research-instruments/xepr-software.html
+  - name: ProDeL (Xepr programming language)
+    kind: vendor-sdk
+    url: https://www.bruker.com/en/products-and-solutions/mr/epr-instruments/epr-research-instruments/xepr-software.html
+  - name: XeprAPI (Python 3 port of Bruker BioSpin's Python API for Xepr)
+    kind: python-driver
+    ref: XeprAPI.Xepr
+    url: https://pypi.org/project/XeprAPI/
+notes:
+  - Xepr runs ELEXSYS spectrometers and has the ProDeL language for acquisition and data manipulation; XeprAPI is Bruker BioSpin's Python API for Xepr (officially supported only on Python 2.7), and the PyPI release is a Python 3 port that wraps a bundled libxeprapi library. No Bruker programming manual is public.
+  - The EMXplus product page refers to Xenon software instead of Xepr, so check which control software a given EMX runs before relying on XeprAPI.

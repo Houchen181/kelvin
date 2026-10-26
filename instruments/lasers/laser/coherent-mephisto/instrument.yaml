@@ -1,0 +1,21 @@
+schema: 1
+id: coherent/mephisto
+maker: Coherent
+model: Mephisto
+name: Coherent Mephisto NPRO lasers
+covers: [Mephisto S]
+kind: laser
+interfaces: []
+control: unknown
+links:
+  - title: Mephisto, Mephisto S, Mephisto MOPA and Prometheus product page
+    url: https://www.coherent.com/lasers/cw-solid-state/mephisto
+  - title: Mephisto and Mephisto S datasheet
+    url: https://www.coherent.com/content/dam/coherent/site/en/resources/datasheet/lasers/mephisto-mephisto-s-ds.pdf
+  - title: Mephisto MOPA datasheet
+    url: https://www.coherent.com/content/dam/coherent/site/en/resources/datasheet/lasers/mephisto-mopa-ds.pdf
+  - title: Coherent support
+    url: https://www.coherent.com/support
+notes:
+  - Coherent's public site lists only datasheets for the Mephisto, with no operator's manual (its resource sitemap has none either), so get the manual from Coherent support or the documentation shipped with the laser.
+  - Coherent publishes only datasheets; the remote interface is described in the operator's manual that comes with the laser.

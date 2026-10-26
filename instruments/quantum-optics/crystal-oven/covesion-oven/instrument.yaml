@@ -1,0 +1,15 @@
+schema: 1
+id: covesion/oven
+maker: Covesion (Hawthorn Photonics)
+model: OC2 / OC3
+name: Covesion PPLN crystal ovens (PV10, PV20, PV40, PV50) with OC2 and OC3 temperature controllers
+kind: crystal-oven
+interfaces: []
+control: unknown
+links:
+  - title: Covesion temperature controllers
+    url: https://covesion.com/solutions/temperature-controllers/
+  - title: Covesion ovens and accessories
+    url: https://covesion.com/solutions/ovens-accessories/
+notes:
+  - No manual or software is public. The current Covesion site does not use the OC2 or OC3 names; it lists a Mini controller with USB PC control and software and a Micro controller with serial connectivity, so ask sales@covesion.com for the controller manual.

@@ -1,0 +1,18 @@
+schema: 1
+id: dicon/gp700
+maker: DiCon Fiberoptics
+model: GP700
+name: DiCon GP700 programmable fiber optic switch
+kind: fiber-optics
+interfaces: []
+control: unknown
+links:
+  - title: DiCon legacy products (GP600 and GP750 data sheets; GP700 is not listed)
+    url: https://www.diconfiberoptics.com/resources/legacy-products.php
+  - title: DiCon photonic device test automation platforms (GP800 and GP850)
+    url: https://www.diconfiberoptics.com/products/System-Photonic-Device-Test-Automation-GP.php
+  - title: DiCon downloads (login required)
+    url: https://www.diconfiberoptics.com/resources/downloads.php
+notes:
+  - DiCon offers manuals only through its login-protected download area (contact sales@diconfiberoptics.com), so ask DiCon for the GP700 programming documentation.
+  - The current public GP platform pages list LAN, serial and web GUI interfaces for the GP800 and GP850, not for the GP700.

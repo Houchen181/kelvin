@@ -1,0 +1,33 @@
+schema: 1
+id: thorlabs/pdq80a
+maker: Thorlabs
+model: PDQ80A
+name: Thorlabs PDQ80A quadrant detector with KPA101 K-Cube position aligner
+covers: [KPA101]
+kind: photodetector
+interfaces: [usb, analog]
+control: library
+manuals:
+  - title: KPA101 K-Cube Position Aligner APT User Guide (legacy APT edition)
+    url: https://media.thorlabs.com/contentassets/e92d618c92c94cea9096b3f231859611/etn033528-d02.pdf
+    covers: KPA101 operation with the PDP and PDQ detector heads and the APT software; reference-only edition since APT was discontinued on 1 July 2024
+    access: public
+links:
+  - title: Motion Control Kinesis with C# Quick Start Guide
+    url: https://media.thorlabs.com/contentassets/5f57e82e38004e2aa5dfd0071bcf0732/kinesis_with_c_quick_start_guide.pdf
+software:
+  - name: Thorlabs Kinesis (KCube PositionAligner library)
+    kind: vendor-sdk
+    ref: Thorlabs.MotionControl.KCube.PositionAligner.dll
+    url: https://github.com/Thorlabs/Motion_Control_Examples/tree/main/Python/Kinesis/KCube/KPA101
+  - name: pylablib
+    kind: python-driver
+    ref: pylablib.devices.Thorlabs.KinesisQuadDetector
+    url: https://github.com/AlexShkarin/pyLabLib/blob/main/pylablib/devices/Thorlabs/kinesis.py
+examples:
+  - title: Thorlabs Motion_Control_Examples (KPA101 examples in C#, C++ and Python)
+    url: https://github.com/Thorlabs/Motion_Control_Examples
+    license: MIT
+notes:
+  - The PDQ80A head is a passive analog quadrant detector; software control (position readout, set point, PID gains) goes through the KPA101 over USB with the Kinesis or APT libraries.
+  - Thorlabs states that stable closed-loop alignment needs a CW laser and that the unit is not recommended for pulsed lasers.

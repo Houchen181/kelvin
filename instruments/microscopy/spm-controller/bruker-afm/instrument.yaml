@@ -1,0 +1,25 @@
+schema: 1
+id: bruker/afm
+maker: Bruker
+model: NanoScope 6 / Dimension
+name: Bruker Dimension AFMs (NanoScope software and NanoScope API)
+covers: [Dimension Icon, Dimension Nexus, Dimension Pro, Dimension XR]
+kind: spm-controller
+interfaces: [lan]
+control: library
+links:
+  - title: NanoScope API (Python control of Dimension AFMs)
+    url: https://www.bruker.com/en/products-and-solutions/microscopes/materials-afm/nanoscope-api.html
+  - title: NanoScope 6 AFM controller
+    url: https://www.bruker.com/en/products-and-solutions/microscopes/materials-afm/nanoscope-afm-controller.html
+  - title: Dimension Icon AFM
+    url: https://www.bruker.com/en/products-and-solutions/microscopes/materials-afm/dimension-icon-afm.html
+  - title: AutoMET software
+    url: https://www.bruker.com/en/products-and-solutions/microscopes/materials-afm/automet-software.html
+software:
+  - name: NanoScope API
+    kind: vendor-sdk
+    url: https://www.bruker.com/en/products-and-solutions/microscopes/materials-afm/nanoscope-api.html
+notes:
+  - NanoScope API gives Python scripts access to scan parameters, stage motion, engage and withdraw, and image capture on Dimension AFMs; it needs a NanoScope 6 controller and NanoScope software v10.3R1sr1, is offered for new systems or as an upgrade, and the package includes sample scripts.
+  - Bruker states that not everything available in manual operation can be scripted yet, and no API documentation is linked publicly, so request it from Bruker.

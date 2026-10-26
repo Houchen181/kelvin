@@ -1,0 +1,14 @@
+schema: 1
+id: radiant/precision
+maker: Radiant Technologies
+model: Precision
+name: Radiant Technologies Precision ferroelectric testers
+kind: ferroelectric-tester
+interfaces: []
+control: unknown
+links:
+  - title: Radiant Technologies (ferrodevices.com)
+    url: https://www.ferrodevices.com/
+notes:
+  - The testers are operated with Radiant's Vision software on a Windows PC.
+  - Ask Radiant Technologies for the programming interface before planning automation.

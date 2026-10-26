@@ -1,0 +1,29 @@
+schema: 1
+id: toptica/digilock
+maker: TOPTICA Photonics
+model: DigiLock 110
+name: TOPTICA DigiLock 110 digital laser lock
+kind: laser-lock
+interfaces: [usb, lan]
+control: text
+manuals:
+  - title: DigiLock 110 manual
+    url: https://www.toptica.com/fileadmin/Editors_English/03_products/03_tunable_diode_lasers/04_control_electronics/02_laser_locking_electronics/04_DigiLock_110/toptica_digilock_manual.pdf
+    covers: Operation and software of the DigiLock 110; remote control is delivered as a separate Remote Control Interface (RCI) package
+    access: public
+  - title: DigiLock 110 Remote Control Interface (RCI) readme, v1.2.2 (2023-05-03)
+    url: https://www.toptica.com/fileadmin/Editors_English/03_products/03_tunable_diode_lasers/04_control_electronics/02_laser_locking_electronics/04_DigiLock_110/Readme_RCI.html
+    covers: LabVIEW VI library for remote control (LabVIEW 7.1 or newer, Windows 7 SP1 to 10); free add-on without support from TOPTICA
+    access: public
+links:
+  - title: DigiLock 110 software readme
+    url: https://www.toptica.com/fileadmin/Editors_English/03_products/03_tunable_diode_lasers/04_control_electronics/02_laser_locking_electronics/04_DigiLock_110/Readme.html
+  - title: TOPTICA locking electronics comparison (computer control row)
+    url: https://www.toptica.com/laser-locking-electronics-comparison
+software:
+  - name: DigiLock 110 Remote Control Interface (RCI, LabVIEW VIs)
+    kind: vendor-software
+    url: https://www.toptica.com/fileadmin/Editors_English/03_products/03_tunable_diode_lasers/04_control_electronics/02_laser_locking_electronics/04_DigiLock_110/Readme_RCI.html
+notes:
+  - Remote control is the RCI add-on, a LabVIEW VI library that TOPTICA supplies free of charge and without support. Its readme lists colon-separated parameter names (for example autolock:relock:output and pid<x>:lock:hold) and mentions command strings, so the text control value fits, but the wire protocol is documented only in the RCI manual, which was not found online.
+  - TOPTICA's locking-electronics comparison table marks computer control for the DigiLock 110 and not for the FALC 110.

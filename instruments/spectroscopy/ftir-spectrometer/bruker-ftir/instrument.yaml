@@ -1,0 +1,34 @@
+schema: 1
+id: bruker/ftir
+maker: Bruker
+model: INVENIO / VERTEX
+name: Bruker INVENIO and VERTEX FTIR spectrometers (OPUS)
+covers: [INVENIO-R, INVENIO-S, INVENIO-X, VERTEX 70v, VERTEX 80v, ALPHA II]
+kind: ftir-spectrometer
+interfaces: [lan]
+control: library
+links:
+  - title: OPUS base package (lists DDE, pipe, http server and OPC interfaces)
+    url: https://www.bruker.com/en/products-and-solutions/infrared-and-raman/opus-spectroscopy-software/base-package.html
+  - title: OPUS release overview (programming manual and Python API notes)
+    url: https://www.bruker.com/en/products-and-solutions/infrared-and-raman/opus-spectroscopy-software/release-overview.html
+  - title: OPUS downloads (no programming manual listed)
+    url: https://www.bruker.com/en/products-and-solutions/infrared-and-raman/opus-spectroscopy-software/downloads.html
+  - title: INVENIO FT-IR spectrometer
+    url: https://www.bruker.com/en/products-and-solutions/infrared-and-raman/ft-ir-research-spectrometers/invenio-ft-ir-spectrometer.html
+  - title: VERTEX research FT-IR spectrometers
+    url: https://www.bruker.com/en/products-and-solutions/infrared-and-raman/ft-ir-research-spectrometers/vertex-research-ft-ir-spectrometer.html
+software:
+  - name: OPUS
+    kind: vendor-software
+    url: https://www.bruker.com/en/products-and-solutions/infrared-and-raman/opus-spectroscopy-software/base-package.html
+  - name: OPUS Python API (OPUS 8.8 and later)
+    kind: vendor-sdk
+    url: https://www.bruker.com/en/products-and-solutions/infrared-and-raman/opus-spectroscopy-software/release-overview.html
+  - name: brukeropus (community package, DDE control of OPUS)
+    kind: python-driver
+    ref: brukeropus.Opus
+    url: https://pypi.org/project/brukeropus/
+notes:
+  - Instruments are driven through the OPUS software, which offers macros, VB scripts, a DDE interface (for example from LabVIEW), pipe communication, an http server and a basic OPC server; OPUS 8.8 added a Python API that runs inside OPUS or as an external script.
+  - Bruker's release notes describe a programming manual (programming.pdf, rewritten in OPUS 8.7 SP1) for remote use from an external program, but it is not on the public downloads page, so ask Bruker for it. The community brukeropus package needs OPUS running and logged in on the same Windows PC.

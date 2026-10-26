@@ -1,0 +1,23 @@
+schema: 1
+id: instec/mk2000
+maker: Instec
+model: mK2000
+name: Instec mK2000 temperature controller for heating and cooling stages
+covers: [mK2000B]
+kind: heating-stage
+interfaces: [usb, lan]
+control: scpi
+links:
+  - title: mK2000 product page
+    url: https://instec.com/TCA/46.html
+  - title: mK2000 brochure
+    url: https://instec.com/upload/portal/20211116/32288e218c5445d3261a343ef175abb7.pdf
+  - title: Instec technical support
+    url: https://instec.com/portal/page/index/id/78.html
+software:
+  - name: InstecApp Companion software (recording and plotting)
+    kind: vendor-software
+    url: https://instec.com/TCA/46.html
+notes:
+  - 'No manual is public: the product page says remote control is SCPI over a USB virtual COM port, and the SCPI command list, mK2000 manual and sample code (C#, LabVIEW, MATLAB, Python) are available from support@instec.com.'
+  - Ethernet (IP) communication is listed only for the mK2000B model.

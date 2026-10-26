@@ -1,0 +1,39 @@
+schema: 1
+id: anritsu/ms9740
+maker: Anritsu
+model: MS9740A
+name: Anritsu MS9740A optical spectrum analyzer
+covers: [MS9740B]
+kind: optical-spectrum-analyzer
+interfaces: [gpib, lan]
+control: scpi
+manuals:
+  - title: MS9740A Optical Spectrum Analyzer SCPI Remote Control Operation Manual
+    url: https://dl.cdn-anritsu.com/en-au/test-measurement/files/Manuals/Operation-Manual/MS9740A/MS9740A_Remote_Operation_Manual_SCPI_e_5_0.pdf
+    covers: SCPI remote command reference
+    access: public
+  - title: MS9740A Optical Spectrum Analyzer Remote Control Operation Manual
+    url: https://dl.cdn-anritsu.com/en-au/test-measurement/files/Manuals/Operation-Manual/MS9740A/MS9740A_Remote_Operation_Manual_e_13_0.pdf
+    covers: Remote control commands (published separately from the SCPI manual)
+    access: public
+  - title: MS9740B Optical Spectrum Analyzer SCPI Remote Control Operation Manual
+    url: https://dl.cdn-anritsu.com/en-au/test-measurement/files/Manuals/Operation-Manual/MS9740B/MS9740B_Remote_Operation_Manual_SCPI_e_3_0.pdf
+    covers: SCPI remote command reference for the MS9740B
+    access: public
+  - title: MS9740B Optical Spectrum Analyzer Remote Control Operation Manual
+    url: https://dl.cdn-anritsu.com/en-au/test-measurement/files/Manuals/Operation-Manual/MS9740B/MS9740B_Remote_Operation_Manual_e_3_0.pdf
+    covers: Remote control commands for the MS9740B (published separately from the SCPI manual)
+    access: public
+links:
+  - title: MS9740A product and downloads page (names the MS9740B as replacement)
+    url: https://www.anritsu.com/en-us/test-measurement/products/ms9740a
+  - title: MS9740A Remote Tools Package leaflet (SCPI)
+    url: https://dl.cdn-anritsu.com/en-au/test-measurement/files/Brochures-Datasheets-Catalogs/Leaflet/MS9740A_SCPI_Leaflet_EL1100.pdf
+software:
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.anritsu.AnritsuMS9740A
+    url: https://github.com/pymeasure/pymeasure/blob/master/pymeasure/instruments/anritsu/anritsuMS9740A.py
+notes:
+  - Anritsu publishes both a SCPI manual and a separate remote-control manual for each of the MS9740A and MS9740B, so check which command set the unit expects before choosing a driver.
+  - Anritsu also lists a Remote Tool Package (quick-start guide download) for the MS9740A, and the MS9740A is discontinued in favour of the MS9740B.

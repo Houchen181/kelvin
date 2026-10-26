@@ -1,0 +1,18 @@
+schema: 1
+id: pixel-photonics/snspd
+maker: Pixel Photonics
+model: Dena
+name: Pixel Photonics Dena waveguide-integrated SNSPD systems
+kind: snspd
+interfaces: [lan]
+control: library
+links:
+  - title: Dena rack format SNSPD system
+    url: https://www.pixelphotonics.com/en/single-photon-detector-products/rack-snspd-system/
+  - title: Dena desktop format SNSPD system
+    url: https://www.pixelphotonics.com/en/single-photon-detector-products/desktop-snspd-system/
+  - title: Pixel Photonics single-photon detector products
+    url: https://www.pixelphotonics.com/en/single-photon-detector-products/
+notes:
+  - Both Dena formats are listed with a user interface via Ethernet and a Python-based API, but no API documentation is public; request it from Pixel Photonics.
+  - The pages mention a Python-based API without saying what it runs over.

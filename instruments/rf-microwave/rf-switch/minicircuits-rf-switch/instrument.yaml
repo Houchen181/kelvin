@@ -1,0 +1,49 @@
+schema: 1
+id: minicircuits/rf-switch
+maker: Mini-Circuits
+model: RC series
+name: Mini-Circuits USB and Ethernet programmable RF switches (RC, USB and ZTRC series)
+covers: [USB series, ZTRC series]
+kind: rf-switch
+interfaces: [usb, lan]
+control: text
+manuals:
+  - title: 'Programming Manual: Mechanical Switch Systems (RC, USB and ZTRC series)'
+    url: https://www.minicircuits.com/softwaredownload/Prog_Manual-2-Switch.pdf
+    covers: Ethernet control API (SSH, HTTP, Telnet), USB control through the .NET and ActiveX DLLs, and direct USB programming for Linux
+    access: public
+  - title: RC Series User Guide
+    url: https://www.minicircuits.com/softwaredownload/RC-Series_User_Guide.pdf
+    covers: Hardware and software setup and operation of the RC series switch systems
+    access: public
+links:
+  - title: 'Mechanical switch systems: software, DLLs and documentation'
+    url: https://www.minicircuits.com/softwaredownload/rfswitchcontroller.html
+  - title: Programming examples for mechanical switch boxes (Python, LabVIEW, C#, VB, MATLAB)
+    url: https://www.minicircuits.com/WebStore/pte_example_download.html?fam=Mechanical%20Switch%20Box
+  - title: Mechanical RF switch systems (product family)
+    url: https://www.minicircuits.com/WebStore/RF-Mechanical-Switch-Systems.html
+  - title: Solid state RF switch systems (product family)
+    url: https://www.minicircuits.com/WebStore/RF-Solid-State-Switch-Systems.html
+  - title: Test solutions software and documentation index
+    url: https://www.minicircuits.com/WebStore/softwaredownload/software-downloads-and-documentation
+software:
+  - name: Mini-Circuits switch controller .NET DLL (mcl_RF_Switch_Controller_NET45.dll)
+    kind: vendor-sdk
+    url: https://www.minicircuits.com/softwaredownload/rfswitchcontroller.html
+  - name: QCoDeS (RC-SP4T over Ethernet)
+    kind: python-driver
+    ref: qcodes.instrument_drivers.Minicircuits.MiniCircuitsRCSP4T
+    url: https://github.com/microsoft/Qcodes/blob/main/src/qcodes/instrument_drivers/Minicircuits/_minicircuits_rc_sp4t.py
+  - name: QCoDeS (RC-SPDT over Ethernet)
+    kind: python-driver
+    ref: qcodes.instrument_drivers.Minicircuits.MiniCircuitsRCSPDT
+    url: https://github.com/microsoft/Qcodes/blob/main/src/qcodes/instrument_drivers/Minicircuits/_minicircuits_rc_spdt.py
+  - name: QCoDeS (USB-SPDT through the vendor DLL)
+    kind: python-driver
+    ref: qcodes.instrument_drivers.Minicircuits.MiniCircuitsUsbSPDT
+    url: https://github.com/microsoft/Qcodes/blob/main/src/qcodes/instrument_drivers/Minicircuits/_minicircuits_usb_spdt.py
+notes:
+  - Ethernet models are controlled with the maker's API over HTTP, Telnet or SSH from any operating system. On USB, Windows programs use the maker's .NET DLL (the ActiveX DLL is the legacy option) and Linux programs talk to the device directly.
+  - The QCoDeS USB driver loads mcl_RF_Switch_Controller64.dll or mcl_RF_Switch_Controller_NET45.dll through the clr module, so install the DLL package from the maker's page first; the RC-SPDT and RC-SP4T drivers connect over the network instead.
+  - The programming manual is listed for the mechanical RC, USB and ZTRC systems. The solid state switch systems have their own product page and their documents were not checked.

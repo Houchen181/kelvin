@@ -1,0 +1,31 @@
+schema: 1
+id: quantum-opus/opus-one
+maker: Quantum Opus
+model: Opus One
+name: Quantum Opus Opus One SNSPD system
+kind: snspd
+interfaces: [usb]
+control: text
+manuals:
+  - title: Opus One Documentation - Detector Operation
+    url: https://www.quantumopus.com/documentation/detector-operation
+    covers: Computer interface and the Quantum Opus Control Panel / QOELEC Control Panel software
+    access: public
+  - title: Opus One Documentation - Electronics Installation
+    url: https://www.quantumopus.com/documentation/electronics-installation
+    covers: USB connection of the QOELEC bias electronics to the computer
+    access: public
+  - title: Opus One Documentation - System Operation
+    url: https://www.quantumopus.com/documentation/system-operation
+    access: public
+  - title: Opus One Documentation - General Information (chapter index)
+    url: https://www.quantumopus.com/documentation/general-information
+    access: public
+links:
+  - title: Opus One product page
+    url: https://www.quantumopus.com/products/opus-one
+  - title: Contact Quantum Opus
+    url: https://www.quantumopus.com/contact
+notes:
+  - The product page mentions open-source control software and a USB serial API, but the public documentation gives no command set; ask Quantum Opus for the API description.
+  - The Detector Operation chapter says a sample web-based interface with Python, HTML and JavaScript code is available on request.

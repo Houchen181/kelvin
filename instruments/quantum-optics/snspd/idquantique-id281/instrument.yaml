@@ -1,0 +1,20 @@
+schema: 1
+id: idquantique/id281
+maker: ID Quantique
+model: ID281
+name: ID Quantique ID281 SNSPD system
+kind: snspd
+interfaces: [lan, web-api]
+control: web-api
+links:
+  - title: ID281 SNSPD system product page
+    url: https://www.idquantique.com/quantum-detection-systems/products/id281-snspd-system/
+  - title: ID281 brochure
+    url: https://marketing.idquantique.com/acton/attachment/11868/f-023b/1/-/-/-/-/ID281_Brochure.pdf
+  - title: ID281 Pro brochure
+    url: https://marketing.idquantique.com/acton/attachment/11868/f-13600d1a-a44d-4a05-a5dd-7b26a661356a/1/-/-/-/-/ID281%20Pro_Brochure.pdf
+  - title: ID Quantique support portal (login required)
+    url: https://support.idquantique.com/support/login
+notes:
+  - No public manual was found. The product page offers a Download User Manual button that opens a pop-up instead of linking to a file, so ask IDQ support or use the support portal.
+  - Remote operation is through the browser-based Qortex Web UI, from any operating system; no public API or command reference was found.

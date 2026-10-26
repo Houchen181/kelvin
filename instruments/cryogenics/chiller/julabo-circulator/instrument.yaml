@@ -1,0 +1,29 @@
+schema: 1
+id: julabo/circulator
+maker: JULABO
+model: Circulators
+name: JULABO circulators and recirculating coolers
+covers: [CORIO, MAGIO, DYNEO, PRESTO, FL series recirculating coolers]
+kind: chiller
+interfaces: [usb, rs-232, rs-485, lan]
+control: text
+manuals:
+  - title: Operating Manual, Ultra-Low Refrigerated Circulator FP51-SL (1.950.2823.en.V08), a public example of JULABO's interface command section
+    url: https://dbyt75tph3sip.cloudfront.net/asset/512030579289/document_qr637chm0l11lekorrrhucvk57/1.950.2823.en.V08.pdf
+    covers: 'Sections 12.2-12.4: communication with a PC, list of commands, status messages'
+    access: public
+links:
+  - title: JULABO operating manuals (per-product downloads tab; request form for older units)
+    url: https://www.julabo.com/en/service/downloads/operating-manuals
+  - title: JULABO software downloads (EasyTEMP, USB drivers, LabVIEW device driver)
+    url: https://www.julabo.com/en/service/downloads/software
+software:
+  - name: JULABO EasyTEMP
+    kind: vendor-software
+    url: https://www.julabo.com/en/service/downloads/software
+  - name: JULABO LabVIEW device driver (serial; start/stop, setpoint, actual and set values)
+    kind: vendor-sdk
+    url: https://www.julabo.com/en/service/downloads/software
+notes:
+  - 'JULABO does not publish one command manual: each unit''s operating manual has an interface-command appendix (IN and OUT commands such as in_pv_00 and out_sp_00), found on the product page''s downloads tab or sent on request against the serial numbers. Command lists differ somewhat between series, so check the unit''s own manual.'
+  - Enable remote control in the unit's menu first; otherwise the circulator answers queries but ignores setting commands. Open-source drivers report RS-232 defaults of 4800 baud, 7 data bits, even parity, 1 stop bit and RTS/CTS handshake (not checked against a JULABO manual).

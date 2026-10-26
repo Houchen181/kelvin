@@ -1,0 +1,35 @@
+schema: 1
+id: lakeshore/331
+maker: Lake Shore Cryotronics
+model: '331'
+name: Lake Shore Model 331 and 332 cryogenic temperature controllers
+covers: [331S, 331E, '332']
+kind: temperature-controller
+interfaces: [gpib, rs-232]
+control: scpi
+manuals:
+  - title: Model 331 Temperature Controller User's Manual
+    url: https://www.lakeshore.com/docs/default-source/product-downloads/manuals/331_manual.pdf
+    covers: 'Chapter 6: IEEE-488 interface and remote command structure (covers the 331S and 331E)'
+    access: public
+  - title: Model 332 Temperature Controller User's Manual
+    url: https://www.lakeshore.com/docs/default-source/product-downloads/manuals/332_manual.pdf
+    covers: 'Chapter 6: IEEE-488 interface and remote command structure'
+    access: public
+links:
+  - title: Model 331 overview (discontinued product)
+    url: https://www.lakeshore.com/products/categories/overview/discontinued-products/discontinued-products/model-331-cryogenic-temperature-controller
+  - title: Model 332 overview (discontinued product)
+    url: https://www.lakeshore.com/products/categories/overview/discontinued-products/discontinued-products/model-332-cryogenic-temperature-controller
+software:
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.lakeshore.LakeShore331
+    url: https://github.com/pymeasure/pymeasure/blob/master/pymeasure/instruments/lakeshore/lakeshore331.py
+  - name: qcodes_contrib_drivers
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.Lakeshore.Model_331.Model_331
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/Lakeshore/Model_331.py
+notes:
+  - Lake Shore lists the Model 331 as discontinued and points to the Model 335. The 331 page states IEEE-488 and RS-232C interfaces.
+  - The 332 has its own manual; check that its remote commands match the 331's before reusing scripts.

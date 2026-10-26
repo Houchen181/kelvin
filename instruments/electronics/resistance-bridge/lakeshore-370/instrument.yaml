@@ -1,0 +1,27 @@
+schema: 1
+id: lakeshore/370
+maker: Lake Shore Cryotronics
+model: '370'
+name: Lake Shore Model 370 AC resistance bridge
+covers: [370S, 370L, 370U]
+kind: resistance-bridge
+categories: [cryogenics]
+interfaces: [gpib, rs-232]
+control: scpi
+manuals:
+  - title: Model 370 AC Resistance Bridge User's Manual
+    url: https://www.lakeshore.com/docs/default-source/product-downloads/manuals/370_manual.pdf
+    covers: 'Chapter 6: IEEE-488 and serial interface operation, command summary (6.3) and interface commands (6.3.1)'
+    access: public
+links:
+  - title: Model 370 downloads (discontinued product)
+    url: https://www.lakeshore.com/products/categories/downloads/discontinued-products/discontinued-products/model-370-ac-resistance-bridge-
+  - title: Model 370 overview (discontinued product)
+    url: https://www.lakeshore.com/products/categories/overview/discontinued-products/discontinued-products/model-370-ac-resistance-bridge-
+software:
+  - name: InstrumentKit
+    kind: python-driver
+    ref: instruments.lakeshore.Lakeshore370
+    url: https://github.com/instrumentkit/InstrumentKit/blob/main/src/instruments/lakeshore/lakeshore370.py
+notes:
+  - Lake Shore lists the 370 as discontinued and points to the Model 372. Both IEEE-488 and RS-232C interfaces are fitted.

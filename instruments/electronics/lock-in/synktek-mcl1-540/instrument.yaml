@@ -1,0 +1,27 @@
+schema: 1
+id: synktek/mcl1-540
+maker: SynkTek
+model: MCL1-540
+name: SynkTek MCL1-540 multichannel lock-in amplifier
+kind: lock-in
+interfaces: [lan, usb]
+control: library
+manuals:
+  - title: MCL1-540 Manual
+    url: https://www.synktek.com/wp-content/uploads/2023/01/manual.pdf
+    access: public
+links:
+  - title: MCL1-540 product page
+    url: https://www.synktek.com/synktek-mcl1-540/
+  - title: Software downloads
+    url: https://www.synktek.com/service-support/downloads/
+software:
+  - name: MCL User application (full installer)
+    kind: vendor-software
+    url: https://www.synktek.com/service-support/downloads/
+  - name: MCL LabVIEW packed library (MCL.lvlibp) with example code
+    kind: vendor-sdk
+    url: https://www.synktek.com/service-support/downloads/
+notes:
+  - Control is over 1000BASE-T Ethernet or USB 2.0; programmatic access is through a LabVIEW packed library installed with the MCL software, and the instrument also has an integrated web interface.
+  - The SynkTek downloads page lists only LabVIEW-based software (no Python package).

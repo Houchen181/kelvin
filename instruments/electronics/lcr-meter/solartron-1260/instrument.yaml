@@ -1,0 +1,24 @@
+schema: 1
+id: solartron/1260
+maker: Solartron Analytical (AMETEK)
+model: 1260A
+name: Solartron 1260A impedance/gain-phase analyzer
+kind: lcr-meter
+interfaces: [gpib]
+control: text
+manuals:
+  - title: 1260A Impedance Analyzer manual
+    url: https://www.ameteksi.com/-/media/ameteksi/download_links/documentations/supportcenter/solartonanalytical/product-manuals/1260a-impedance-analyzer-ea.pdf
+    access: sign-in
+links:
+  - title: 1260A product page
+    url: https://www.ameteksi.com/products/frequency-response-analyzers/1260a-impedance-gain-phase-analyzer
+  - title: Solartron Analytical product manuals
+    url: https://www.ameteksi.com/support-center/documents/solartron-analytical/product-manuals
+software:
+  - name: SMaRT impedance measurement software
+    kind: vendor-software
+    url: https://www.ameteksi.com/products/software/smart-impedance-measurement-software
+notes:
+  - AMETEK releases the manual only after an email address is entered; the direct file URL redirects to a request form, so the content could not be inspected.
+  - Remote control is over GPIB with the analyzer's own command set, which the operating manual describes. The maker lists the 1260A among the instruments supported by its SMaRT software.

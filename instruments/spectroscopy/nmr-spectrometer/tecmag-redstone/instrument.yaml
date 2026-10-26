@@ -1,0 +1,27 @@
+schema: 1
+id: tecmag/redstone
+maker: Tecmag
+model: Redstone
+name: Tecmag Redstone NMR console (TNMR)
+kind: nmr-spectrometer
+interfaces: [usb]
+control: library
+links:
+  - title: Redstone console
+    url: https://tecmag.com/redstone/
+  - title: Online resources (NMRscript, Visual Basic and VBScript automation)
+    url: https://tecmag.com/online-resources/
+  - title: Application notes (examples with NMRscripts)
+    url: https://tecmag.com/application-notes/
+  - title: TNMR download (username and password required)
+    url: https://tecmag.com/download-tnmr/
+software:
+  - name: TNMR
+    kind: vendor-software
+    url: https://tecmag.com/redstone/
+  - name: NMRscript (Visual Basic / VBScript automation)
+    kind: vendor-sdk
+    url: https://tecmag.com/online-resources/
+notes:
+  - TNMR controls the console from a Windows PC over USB 2.0, and automation is done with NMRscripts; Tecmag's online resources page names Visual Basic as the officially supported automation language for NTNMR, the predecessor of TNMR.
+  - No scripting manual is published on tecmag.com and the TNMR installer needs a username and password from Tecmag support, so request the scripting documentation there.

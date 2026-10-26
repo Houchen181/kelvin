@@ -1,0 +1,33 @@
+schema: 1
+id: mks/mfc
+maker: MKS Instruments
+model: GE50A
+name: MKS G-Series mass flow controllers
+covers: [GM50A, GM51A, GV50A]
+kind: flow-controller
+interfaces: [rs-485, analog]
+control: text
+manuals:
+  - title: G-Series Mass Flow Controller/Meter RS485 Supplement
+    url: https://www.mks.com/f/ge50a-mass-flow-controller
+    covers: RS485 digital interface (listed on the GE50A page; the download needs an MKS sign-in)
+    access: sign-in
+  - title: G-Series/I-Series MFC Modbus Register Map and Specification
+    url: https://www.mks.com/f/ge50a-mass-flow-controller
+    covers: Modbus registers (listed on the GE50A page; the download needs an MKS sign-in)
+    access: sign-in
+  - title: G and I Series Mass Flow Controller/Meter Manual
+    url: https://www.mks.com/f/ge50a-mass-flow-controller
+    access: sign-in
+links:
+  - title: GE50A mass flow controller product page
+    url: https://www.mks.com/f/ge50a-mass-flow-controller
+  - title: GM50A and GM51A mass flow controller product page
+    url: https://www.mks.com/f/gm50a-mass-flow-controller
+  - title: GV50A mass flow controller product page
+    url: https://www.mks.com/f/gv50a-mass-flow-controller
+  - title: MKS manuals listing
+    url: https://www.mks.com/resourceListing/manuals
+notes:
+  - The G-Series manuals, including the RS485 supplement and the Modbus register map, are listed on the product pages but need an MKS sign-in; no public PDF link was found.
+  - Digital I/O is chosen when the unit is ordered (RS485, Profibus, EtherCAT, PROFINET or DeviceNet, or analog); Modbus is available as a secondary interface on units other than PROFINET and EtherCAT.

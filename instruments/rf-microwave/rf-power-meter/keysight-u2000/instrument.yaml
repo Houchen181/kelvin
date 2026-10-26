@@ -1,0 +1,21 @@
+schema: 1
+id: keysight/u2000
+maker: Keysight
+model: U2000A
+name: Keysight U2000 series USB power sensors
+covers: [U2000B, U2000H, U2001A, U2001B, U2001H, U2002A, U2002H, U2004A]
+kind: rf-power-meter
+interfaces: [usb-tmc]
+control: scpi
+manuals:
+  - title: U2000 Series USB Power Sensors Programming Guide (U2000-90411)
+    url: https://www.keysight.com/us/en/assets/9018-01701/programming-guides/9018-01701.pdf
+    covers: Remote operation, SCPI subsystems (CALCulate, SENSe, STATus, TRIGger and others), zeroing and calibration, status reporting and programming examples
+    access: sign-in
+links:
+  - title: U2000 Series USB Power Sensors configuration guide (Keysight asset page)
+    url: https://www.keysight.com/us/en/assets/7018-01517/configuration-guides/5989-6281.pdf
+notes:
+  - Each sensor is a USB power meter that is programmed with SCPI commands from VISA, so no separate power meter or GPIB adapter is needed.
+  - Zeroing and calibration have their own commands in the programming guide, which also covers frequency-dependent offset tables and saving and recalling sensor configurations.
+  - Keysight lists the programming guide as a gated download (sign-in).

@@ -1,0 +1,22 @@
+schema: 1
+id: nf/ca5351
+maker: NF Corporation
+model: CA5351
+name: NF Corporation CA5351 programmable current amplifier
+kind: preamp
+interfaces: [lan, gpib, usb]
+control: scpi
+manuals:
+  - title: Programmable Current Amplifier CA5351 Operations manual
+    url: https://www.nfcorp.co.jp/english/doc_portal/download/pdf/manual/mi/EN_CA5351_InstructionManual_001.pdf
+    access: public
+links:
+  - title: CA5351 product page
+    url: https://www.nfcorp.co.jp/english/pro/mi/loc/pre/ca5351/index.html
+  - title: NF preamplifier line-up (lists LAN / GPIB / USB for the CA5351)
+    url: https://www.nfcorp.co.jp/english/pro/mi/loc/pre/index.html
+  - title: NF document portal
+    url: https://www.nfcorp.co.jp/english/doc_portal/index.html
+notes:
+  - Programmable current amplifier with eight gain ranges (10^3 to 10^10 V/A); NF lists LAN, GPIB and USB as its remote interfaces.
+  - The NF document portal offers a single CA5351 manual and no separate remote-control PDF, unlike the LI5600 lock-in series.

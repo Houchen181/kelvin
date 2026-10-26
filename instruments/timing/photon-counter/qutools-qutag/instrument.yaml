@@ -1,0 +1,41 @@
+schema: 1
+id: qutools/qutag
+maker: qutools
+model: quTAG
+name: qutools quTAG time-to-digital converter
+kind: photon-counter
+interfaces: [usb]
+control: library
+manuals:
+  - title: quTAG DLL documentation (TDCBase custom programming library)
+    url: https://www.qutools.com/files/quTAG/documentation/
+    covers: Programming reference - device control and timestamp acquisition (tdcbase.h), multiple devices, start-stop histograms, optional HBT and lifetime modules
+    access: public
+  - title: quTAG software manual V1.5.0
+    url: https://www.qutools.com/files/quTAG/quTAG-Softwaremanual_V1.5.0-20191007.pdf
+    access: public
+  - title: quTAG manual V1.4.0 (hardware)
+    url: https://www.qutools.com/files/quTAG/quTAG-Manual_V1.4.0.pdf
+    access: public
+  - title: quTAG and MATLAB technical note
+    url: https://www.qutools.com/files/quTAG/quTAG-matlab.pdf
+    access: public
+links:
+  - title: quTAG product page and downloads
+    url: https://qutools.com/qutag/
+  - title: quTAG datasheet
+    url: https://www.qutools.com/files/quTAG/qutools_quTAG_Datasheet.pdf
+software:
+  - name: Daisy (quTAG GUI software for Windows and Linux)
+    kind: vendor-software
+    url: https://qutools.com/qutag/
+  - name: quTAG DLL / shared library (TDCBase) with QuTAG.py Python wrapper
+    kind: vendor-sdk
+    url: https://www.qutools.com/files/quTAG/documentation/
+examples:
+  - title: quTAG Python examples (07/2022)
+    url: https://www.qutools.com/files/quTAG/quTAG-Software_Python-examples-20220711.zip
+    license: unknown
+notes:
+  - The product page says examples for LabVIEW, C/C++ and Python are included and describes QuTAG.py as a wrapper around the DLL or shared library.
+  - The current software only supports devices with serial number T 01 0012 and newer; contact qutools for older units.

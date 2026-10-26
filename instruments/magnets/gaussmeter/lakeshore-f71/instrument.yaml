@@ -1,0 +1,34 @@
+schema: 1
+id: lakeshore/f71
+maker: Lake Shore Cryotronics
+model: F71
+name: Lake Shore F71 / F41 teslameters
+covers: [F41]
+kind: gaussmeter
+interfaces: [usb, lan, gpib]
+control: scpi
+manuals:
+  - title: F71/F41 Teslameter Manual (Rev. 2.0)
+    url: https://www.lakeshore.com/docs/default-source/product-downloads/manuals/f41_f71manual.pdf
+    covers: 'Chapter 4: Computer Interface Operation (SCPI, USB, Ethernet, SCPI over TCP, GPIB, command summary)'
+    access: public
+  - title: F41/F71 Quick Start Guide
+    url: https://www.lakeshore.com/docs/default-source/product-downloads/manuals/f41f71quickstartguide.pdf
+    access: public
+links:
+  - title: F71 and F41 teslameters product page
+    url: https://www.lakeshore.com/products/categories/overview/magnetic-products/gaussmeters-teslameters/f71-and-f41-teslameters
+  - title: F71 and F41 downloads page
+    url: https://www.lakeshore.com/products/categories/downloads/magnetic-products/gaussmeters-teslameters/f71-and-f41-teslameters
+software:
+  - name: lakeshore (Lake Shore Python driver)
+    kind: python-driver
+    ref: lakeshore.teslameter.Teslameter
+    url: https://lake-shore-python-driver.readthedocs.io/en/latest/teslameter.html
+examples:
+  - title: 'Lake Shore Python driver: teslameter_record_data_example.py (stream F41/F71 data to CSV)'
+    url: https://github.com/lakeshorecryotronics/python-driver/blob/main/docs/examples/teslameter_record_data_example.py
+    license: MIT
+notes:
+  - USB enumerates as a virtual serial port (the Python driver defaults to 115200 baud) and Ethernet carries SCPI over TCP (driver default port 7777); every message must end with a line feed, and an optional carriage return before it is accepted.
+  - GPIB works only through the optional MR-GPIB-USB adapter. Units sold before August 2020 also had Wi-Fi.

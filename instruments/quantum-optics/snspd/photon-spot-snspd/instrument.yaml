@@ -1,0 +1,18 @@
+schema: 1
+id: photon-spot/snspd
+maker: Photon Spot
+model: Cryospot
+name: Photon Spot SNSPD systems (Cryospot cryostats with SNSPDs)
+kind: snspd
+interfaces: []
+control: unknown
+links:
+  - title: Photon Spot cryogenics (Cryospot 4, 4TS and 5 systems)
+    url: https://www.photonspot.com/cryogenics
+  - title: Photon Spot detectors
+    url: https://www.photonspot.com/detectors
+  - title: Photon Spot solutions
+    url: https://www.photonspot.com/solutions
+notes:
+  - No manual or command reference is public. The cryogenics page lists Python-based software for turn-key operation and a vacuum pump and remote control option, and the solutions page names FreezeControl as the cryogenic-system software.
+  - Request the documentation from Photon Spot.

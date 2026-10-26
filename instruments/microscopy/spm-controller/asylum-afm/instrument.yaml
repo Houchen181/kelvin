@@ -1,0 +1,37 @@
+schema: 1
+id: asylum/afm
+maker: Asylum Research
+model: MFP-3D / Cypher / Jupiter
+name: Asylum Research (Oxford Instruments) AFMs
+covers: [MFP-3D, Cypher, Jupiter]
+kind: spm-controller
+interfaces: [usb]
+control: library
+manuals:
+  - title: Automating Your Asylum Research AFM with the MacroBuilder Interface
+    url: https://afm.oxinst.com/assets/uploads/products/asylum/documents/MacroBuilder-Automating-AFM.pdf
+    covers: Automating the AFM with the MacroBuilder interface (offered behind a contact form on Asylum's site; the direct link is public)
+    access: public
+links:
+  - title: Development of custom AFM instrumentation (direct access to the control software, MacroBuilder download)
+    url: https://afm.oxinst.com/application-detail/development-of-custom-afm-instrumentation
+  - title: Ergo AFM software for Cypher and Jupiter (works with the IGOR Pro-based software)
+    url: https://afm.oxinst.com/products/afm-software/ergo-afm-software-for-cypher-and-jupiter
+  - title: AFM software family
+    url: https://afm.oxinst.com/products/afm-software-family/
+  - title: Cypher family AFMs
+    url: https://afm.oxinst.com/products/cypher-family-afms
+  - title: MFP-3D family AFMs
+    url: https://afm.oxinst.com/products/mfp-3d-afm-systems/
+  - title: Customer support
+    url: https://afm.oxinst.com/service/support/
+software:
+  - name: Asylum Research software (IGOR Pro-based, supplied with every system)
+    kind: vendor-software
+    url: https://afm.oxinst.com/products/afm-software/ergo-afm-software-for-cypher-and-jupiter
+  - name: Ergo
+    kind: vendor-software
+    url: https://afm.oxinst.com/products/afm-software/ergo-afm-software-for-cypher-and-jupiter
+notes:
+  - The IGOR Pro-based Asylum Research software supplied with every system is user-customisable, and Asylum publishes a PDF on automating the AFM with its MacroBuilder interface; Asylum states that users can modify the control software and have access to analog and digital control lines.
+  - No external-control API reference was found on Asylum's public site, so contact Asylum Research for anything beyond MacroBuilder and Igor procedures.

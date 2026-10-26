@@ -1,0 +1,34 @@
+schema: 1
+id: nf/li5660
+maker: NF Corporation
+model: LI5660
+name: NF Corporation LI5650 / LI5660 digital lock-in amplifiers
+covers: [LI5650, LI5655, LI5645]
+kind: lock-in
+interfaces: [usb, gpib, rs-232, lan]
+control: scpi
+manuals:
+  - title: LI5655 / LI5660 Remote Control manual
+    url: https://www.nfcorp.co.jp/english/doc_portal/download/pdf/manual/mi/EN_LI5655_LI5660_RemoteControl.pdf
+    covers: Remote control commands for the LI5655 and LI5660
+    access: public
+  - title: LI5645 / LI5650 Remote Control manual
+    url: https://www.nfcorp.co.jp/english/doc_portal/download/pdf/manual/mi/EN_LI5645_LI5650_RemoteControl.pdf
+    covers: Remote control commands for the LI5645 and LI5650
+    access: public
+  - title: LI5655 / LI5660 Operations (instruction) manual
+    url: https://www.nfcorp.co.jp/english/doc_portal/download/pdf/manual/mi/EN_LI5655_LI5660_Operations.pdf
+    access: public
+  - title: LI5645 / LI5650 Operations (instruction) manual
+    url: https://www.nfcorp.co.jp/english/doc_portal/download/pdf/manual/mi/EN_LI5645_LI5650_Operations.pdf
+    access: public
+links:
+  - title: LI5660 / LI5655 / LI5650 / LI5645 product page
+    url: https://www.nfcorp.co.jp/english/pro/mi/loc/loc/li5600/index.html
+  - title: LI5600 series line-up (lists the remote control interfaces)
+    url: https://www.nfcorp.co.jp/english/pro/mi/loc/loc/li5600/lineup.html
+  - title: NF document portal
+    url: https://www.nfcorp.co.jp/english/doc_portal/index.html
+notes:
+  - Dual-phase, dual-frequency digital lock-in amplifiers (the LI5660 covers 0.5 Hz to 11 MHz) with USB, GPIB, RS-232 and LAN remote control.
+  - Commands are in separate Remote Control PDFs, one for the LI5655 / LI5660 pair and one for the LI5645 / LI5650 pair.

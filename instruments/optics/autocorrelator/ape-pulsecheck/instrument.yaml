@@ -1,0 +1,40 @@
+schema: 1
+id: ape/pulsecheck
+maker: APE Angewandte Physik und Elektronik
+model: pulseCheck
+name: APE pulseCheck autocorrelator
+covers: [pulseCheck NX, pulseCheck SM]
+kind: autocorrelator
+interfaces: [usb, lan]
+control: scpi
+links:
+  - title: pulseCheck product page
+    url: https://www.ape-berlin.de/en/autocorrelator/pulsecheck/
+  - title: APE TCP/IP software interface (SCPI99-compatible commands)
+    url: https://www.ape-berlin.de/en/software-interface-tcpip/
+  - title: pulseCheck quick installation guide (rev. 1.1.1)
+    url: https://www.ape-berlin.de/content/uploads/2023/08/APE_pulseCheck_Quick_Manual_Webseite_rev.1.1.1.pdf
+  - title: pulseCheck NX and SM data sheet (rev. 4.3.1)
+    url: https://www.ape-berlin.de/content/uploads/2025/02/APE_pulseCheck_NXSM_rev.4.3.1.pdf
+examples:
+  - title: APE TCP/IP interface example, Python
+    url: https://www.ape-berlin.de/content/uploads/2017/11/Python_0.zip
+    license: unknown
+  - title: APE TCP/IP interface example, C++ (Visual Studio 2013)
+    url: https://www.ape-berlin.de/content/uploads/2017/11/Visual-C-Visual-Studio-2013-1.zip
+    license: unknown
+  - title: APE TCP/IP interface example, C# (Visual Studio 2013)
+    url: https://www.ape-berlin.de/content/uploads/2018/01/Visual-CSharp-Visual-Studio-2013.zip
+    license: unknown
+  - title: APE TCP/IP interface examples, LabVIEW (LV2011)
+    url: https://www.ape-berlin.de/content/uploads/2021/12/TCP-interface-examples-LV2011.zip
+    license: unknown
+  - title: APE TCP/IP interface example, MATLAB
+    url: https://www.ape-berlin.de/content/uploads/2017/11/Matlab.zip
+    license: unknown
+  - title: APE TCP/IP interface example, Ruby
+    url: https://www.ape-berlin.de/content/uploads/2017/11/Ruby.zip
+    license: unknown
+notes:
+  - Commands are SCPI99-compatible text sent over a TCP socket (the APE Python example connects to port 51123 and terminates lines with CR LF); a query such as acf:data? returns an IEEE 488.2 binary block of float64 intensity and delay pairs.
+  - In APE's examples for USB devices the host is localhost, so the APE software on the connected PC appears to serve the interface; the NX can be integrated into test setups over Ethernet without an extra PC.

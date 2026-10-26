@@ -1,0 +1,17 @@
+schema: 1
+id: sumitomo/f-70
+maker: Sumitomo (SHI) Cryogenics
+model: F-70
+name: Sumitomo F-70 helium compressor
+covers: [F-70H, F-70L, F-70HP, F-70LP]
+kind: compressor
+interfaces: [rs-232]
+control: text
+links:
+  - title: F-70 indoor water-cooled compressor series (SHI product page)
+    url: https://shicryogenics.com/product/f-70-indoor-water-cooled-compressor-series/
+  - title: SHI technical support form (Americas)
+    url: https://shicryogenics.com/americas-technical-support-form/
+notes:
+  - 'No public manual: the F-70H / F-70L / F-70LP operating manual (document 267472A) has the serial command structure and command set, but it is not hosted on shicryogenics.com. Ask SHI technical support or the supplier for a copy.'
+  - Serial monitoring and control exist only on newer controller firmware; check the firmware version shown on the compressor display before wiring a host. Interface and protocol type are taken from the operating manual's contents as seen in a third-party copy and from user reports.

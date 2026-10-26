@@ -1,0 +1,23 @@
+schema: 1
+id: srs/sim900
+maker: Stanford Research Systems
+model: SIM900
+name: SRS SIM900 mainframe
+kind: mainframe
+interfaces: [rs-232, gpib]
+control: scpi
+manuals:
+  - title: SIM900 Mainframe Operation and Service Manual
+    url: https://www.thinksrs.com/downloads/pdfs/manuals/SIM900m.pdf
+    covers: 'Remote operation: mainframe commands, module routing by port number, RS-232 and GPIB setup'
+    access: public
+links:
+  - title: SIM900 product page
+    url: https://www.thinksrs.com/products/sim900.html
+  - title: SIM module support page
+    url: https://www.thinksrs.com/support/sim900sup.html
+  - title: Application note on communicating with SIM modules (ComSIMs)
+    url: https://www.thinksrs.com/downloads/pdfs/applicationnotes/ComSIMs.pdf
+notes:
+  - Eight-slot mainframe that supplies power and the RS-232 / GPIB link for SIM modules; the host addresses a module by slot (port) number through the mainframe.
+  - The qcodes_contrib_drivers SIM928 driver wraps each module command in the mainframe's SNDT command and reads the reply with GETN?.

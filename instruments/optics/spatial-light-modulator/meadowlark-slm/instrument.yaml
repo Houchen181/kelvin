@@ -1,0 +1,26 @@
+schema: 1
+id: meadowlark/slm
+maker: Meadowlark Optics
+model: SLM
+name: Meadowlark Optics liquid-crystal spatial light modulators (1920x1152, 1920x1200, 1024x1024 and 1536x1536 formats)
+kind: spatial-light-modulator
+interfaces: [pcie]
+control: library
+links:
+  - title: 1536 x 1536 Spatial Light Modulator (product page)
+    url: https://www.meadowlark.com/shop/slms/1536-x-1536-spatial-light-modulator/
+  - title: Spatial Light Modulator Optical Tweezing Kit (lists the SDK languages)
+    url: https://www.meadowlark.com/shop/slms/spatial-light-modulator-optical-tweezing-kit/2/
+  - title: 1920 x 1200 SLM data sheet
+    url: https://www.meadowlark.com/wp-content/uploads/2025/04/SLM-Standard-DS0325-1920.pdf
+  - title: SLM selection guide
+    url: https://www.meadowlark.com/wp-content/uploads/2026/02/Selection-Guide-SLMs-Single.pdf
+  - title: SLM operating principles
+    url: https://www.meadowlark.com/wp-content/uploads/2024/10/SLM-Principles-1.pdf
+software:
+  - name: Meadowlark SLM SDK and GUI (Blink)
+    kind: vendor-sdk
+    url: https://www.meadowlark.com/shop/slms/spatial-light-modulator-optical-tweezing-kit/2/
+notes:
+  - The SDK supports C++, LabVIEW, MATLAB and Python and ships with a GUI, but no SDK manual or download is public. Ask Meadowlark for the SDK version that matches the hardware, since versions for HDMI and PCIe models are not interchangeable.
+  - The 1536 x 1536 model receives phase masks over a 16-bit PCIe link; the E-series (8-bit) and S-series (10-bit) models use HDMI.

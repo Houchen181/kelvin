@@ -1,0 +1,25 @@
+schema: 1
+id: hp/34401a
+maker: HP / Agilent
+model: 34401A
+name: HP / Agilent / Keysight 34401A 6.5-digit multimeter
+kind: multimeter
+interfaces: [gpib, rs-232]
+control: scpi
+manuals:
+  - title: 34401A Digital Multimeter User's Guide (34401-90004, Edition 7)
+    url: https://www.keysight.com/us/en/assets/9018-01063/user-manuals/9018-01063.pdf
+    covers: 'Remote Interface Reference: SCPI command set, GPIB and RS-232 configuration'
+    access: public
+software:
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.hp.HP34401A
+    url: https://pymeasure.readthedocs.io/en/latest/api/instruments/hp/hp34401A.html
+  - name: QCoDeS
+    kind: python-driver
+    ref: qcodes.instrument_drivers.agilent.Agilent34401A
+    url: https://github.com/microsoft/Qcodes/blob/HEAD/src/qcodes/instrument_drivers/agilent/Agilent_34401A.py
+notes:
+  - 6.5-digit bench multimeter that speaks SCPI over GPIB or RS-232; the active interface is chosen from the front panel.
+  - Discontinued by Keysight in 2016 (the 34461A is the suggested replacement), so most units in labs are HP- or Agilent-branded.

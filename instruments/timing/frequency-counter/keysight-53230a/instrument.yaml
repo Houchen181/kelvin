@@ -1,0 +1,15 @@
+schema: 1
+id: keysight/53230a
+maker: Keysight
+model: 53230A
+name: Keysight 53230A universal frequency counter/timer
+covers: [53210A, 53220A]
+kind: frequency-counter
+interfaces: [gpib, usb-tmc, lan]
+control: scpi
+links:
+  - title: 53200A Series RF/Universal Frequency Counter/Timers data sheet (Keysight asset page)
+    url: https://www.keysight.com/us/en/assets/7018-02642/data-sheets/5990-6283.pdf
+notes:
+  - 'No programming guide could be verified for this series: the 53230A support page on keysight.com loads its manual list by script and showed only the data sheet when read, so fetch the programming guide from that page in a browser.'
+  - The 53200A series data sheet covers the 53210A, 53220A and 53230A.

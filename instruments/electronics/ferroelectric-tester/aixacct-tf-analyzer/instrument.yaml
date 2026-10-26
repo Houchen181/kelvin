@@ -1,0 +1,23 @@
+schema: 1
+id: aixacct/tf-analyzer
+maker: aixACCT Systems
+model: TF Analyzer
+name: aixACCT TF Analyzer ferroelectric and piezoelectric testers
+covers: [TF 1000, TF 2000 E, TF 3000]
+kind: ferroelectric-tester
+interfaces: []
+control: unknown
+links:
+  - title: TF Analyzer family
+    url: https://www.aixacct.com/en/testsysteme/tf-analyzer-family/
+  - title: TF Analyzer 3000
+    url: https://www.aixacct.com/en/testsysteme/tf-analyzer-family/tf-analyzer-3000/
+  - title: TF Analyzer 2000 E
+    url: https://www.aixacct.com/en/testsysteme/tf-analyzer-family/tf-analyzer-2000-e/
+  - title: TF Analyzer 1000
+    url: https://www.aixacct.com/en/testsysteme/tf-analyzer-family/tf-analyzer-1000/
+  - title: TF Analyzer product sheet (PDF)
+    url: https://www.aixacct.com/wp-content/uploads/flyertfanalyzer.pdf
+notes:
+  - The analyzers run from aixACCT's aixPlorer software; the product pages describe no connection type, programming manual, SDK or remote-control interface.
+  - Ask aixACCT whether a scripting or remote interface is available for the specific model before planning automation.

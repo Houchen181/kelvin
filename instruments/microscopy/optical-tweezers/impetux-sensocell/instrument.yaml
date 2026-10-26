@@ -1,0 +1,24 @@
+schema: 1
+id: impetux/sensocell
+maker: Impetux Optics
+model: SENSOCELL
+name: Impetux SENSOCELL optical tweezers
+covers: [SENSOCELL+]
+kind: optical-tweezers
+interfaces: [usb]
+control: library
+links:
+  - title: SENSOCELL optical tweezers product page
+    url: https://impetux.com/sensocell-optical-tweezers/
+  - title: Force spectroscopy technology (Lunam force sensor specifications)
+    url: https://www.impetux.com/force-spectroscopy-technology/
+software:
+  - name: LightACE control software with the visual LightACE SDK
+    kind: vendor-software
+    url: https://impetux.com/sensocell-optical-tweezers/
+  - name: Lunam sensor acquisition software and LabVIEW libraries (supplied with the sensor)
+    kind: vendor-sdk
+    url: https://www.impetux.com/force-spectroscopy-technology/
+notes:
+  - No manual or programming reference is public. The Lunam force sensor head connects to the PC over USB 2.0 and ships with acquisition software and LabVIEW libraries; ask Impetux for the library documentation.
+  - The LightACE control software includes a visual SDK for building custom experimental routines.

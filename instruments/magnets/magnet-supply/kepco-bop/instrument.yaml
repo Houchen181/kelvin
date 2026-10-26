@@ -1,0 +1,16 @@
+schema: 1
+id: kepco/bop
+maker: Kepco
+model: BOP
+name: Kepco BOP bipolar operational power supplies
+kind: magnet-supply
+interfaces: [gpib, rs-232, lan, analog]
+control: scpi
+software:
+  - name: PyMeasure (BOP 36-12 with BIT 4886 interface card)
+    kind: python-driver
+    ref: pymeasure.instruments.kepco.KepcoBOP3612
+    url: https://github.com/pymeasure/pymeasure/blob/master/pymeasure/instruments/kepco/kepcobop.py
+notes:
+  - Kepco publishes BOP operator's manuals (including the BOP-GL series with GPIB and RS-232) and a BIT 4886 digital interface manual on its support pages. They are not linked here because the maker's site refuses automated link checks.
+  - The PyMeasure driver targets a BOP 36-12 fitted with the BIT 4886 digital interface card and uses SCPI commands such as OUTPut.

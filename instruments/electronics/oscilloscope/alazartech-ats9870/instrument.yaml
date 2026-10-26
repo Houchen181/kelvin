@@ -1,0 +1,37 @@
+schema: 1
+id: alazartech/ats9870
+maker: AlazarTech
+model: ATS9870
+name: AlazarTech ATS9870 8-bit 1 GS/s PCIe waveform digitizer
+kind: oscilloscope
+interfaces: [pcie]
+control: library
+manuals:
+  - title: ATS-SDK User Guide (latest release, v26.2.0 when checked)
+    url: https://docs.alazartech.com/ats-sdk-user-guide/latest/
+    covers: ATS-SDK programming interface for ATS digitizers (driver library functions)
+    access: public
+  - title: ATS9870 User Manual
+    url: https://www.alazartech.com/en/download/product/399/283/ats9870-user-manual/1-2/
+    access: public
+  - title: ATS9870 datasheet and specifications (version 1.6N)
+    url: https://www.alazartech.com/en/download/product/12825/302/ats9870-datasheet-and-specifications/1-6n/
+    access: public
+links:
+  - title: ATS9870 product page
+    url: https://www.alazartech.com/en/product/ats9870/5/
+  - title: ATS-SDK product page
+    url: https://www.alazartech.com/en/product/ats-sdk/27/
+  - title: AlazarTech downloads
+    url: https://www.alazartech.com/en/downloads/
+software:
+  - name: ATS-SDK
+    kind: vendor-sdk
+    url: https://www.alazartech.com/en/product/ats-sdk/27/
+  - name: QCoDeS
+    kind: python-driver
+    ref: qcodes.instrument_drivers.AlazarTech.AlazarTechATS9870
+    url: https://github.com/microsoft/Qcodes/blob/main/src/qcodes/instrument_drivers/AlazarTech/ATS9870.py
+notes:
+  - The card is programmed through the ATS-SDK driver library rather than a text protocol, and it has no front panel or screen.
+  - AlazarTech lists the ATS9870 under Legacy Products; the ATS9872 (8 bit, 1 GS/s) appears among its current PCI Express digitizers.

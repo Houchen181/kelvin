@@ -1,0 +1,30 @@
+schema: 1
+id: keysight/e4980a
+maker: Keysight
+model: E4980A
+name: Keysight E4980A precision LCR meter
+covers: [E4980AL]
+kind: lcr-meter
+interfaces: [gpib, usb-tmc, lan]
+control: scpi
+identify:
+  idn: ^(Keysight|Agilent) Technologies,E4980AL?,
+  example: Keysight Technologies,E4980A,MY46516036,A.02.10
+manuals:
+  - title: E4980A/AL Precision LCR Meter User's Guide
+    url: https://www.keysight.com/us/en/assets/9018-05655/user-manuals/9018-05655.pdf
+    covers: Operation, programming (remote control and command reference) and specifications
+    access: public
+software:
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.agilent.AgilentE4980
+    url: https://github.com/pymeasure/pymeasure/blob/master/pymeasure/instruments/agilent/agilentE4980.py
+  - name: QCoDeS
+    kind: python-driver
+    ref: qcodes.instrument_drivers.Keysight.KeysightE4980A
+    url: https://github.com/microsoft/Qcodes/blob/main/src/qcodes/instrument_drivers/Keysight/keysight_e4980a.py
+notes:
+  - Precision LCR meter for 20 Hz to 2 MHz capacitance and impedance work. Keysight publishes the programming information inside the User's Guide, which is shared with the E4980AL; no separate programming manual was found.
+  - The *IDN? example comes from the simulated E4980A in the QCoDeS driver, so check the serial and firmware fields on your unit.
+  - Keysight's product and support pages are not linked; the document asset page here opens as an HTML landing page for the PDF.

@@ -1,0 +1,21 @@
+schema: 1
+id: srs/sim921
+maker: Stanford Research Systems
+model: SIM921
+name: SRS SIM921 AC resistance bridge
+kind: resistance-bridge
+categories: [cryogenics]
+interfaces: [rs-232, gpib]
+control: scpi
+manuals:
+  - title: SIM921 Operation and Service Manual
+    url: https://www.thinksrs.com/downloads/pdfs/manuals/SIM921m.pdf
+    covers: 'Remote operation: module command reference (reached through a SIM900 mainframe)'
+    access: public
+links:
+  - title: SIM921 product page
+    url: https://www.thinksrs.com/products/sim921.html
+  - title: Application note on communicating with SIM modules (ComSIMs)
+    url: https://www.thinksrs.com/downloads/pdfs/applicationnotes/ComSIMs.pdf
+notes:
+  - AC resistance bridge module for NTC and PTC resistive thermometers; excitation can be set from the front panel or the serial interface, and up to four user calibration curves (200 points each) can be uploaded over it.

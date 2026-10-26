@@ -1,0 +1,29 @@
+schema: 1
+id: energetiq/eq-99x
+maker: Energetiq (Hamamatsu)
+model: EQ-99X
+name: Energetiq EQ-99X laser-driven light source
+covers: [EQ-99X-FC, EQ-99X-CAL]
+kind: light-source
+interfaces: []
+control: unknown
+manuals:
+  - title: EQ-99X LDLS Operation and Maintenance Manual
+    url: https://www.energetiq.com/hubfs/Product%20Manuals/LDLS/EQ-99X%20LDLS%20Operation%20Maintenance%20Manual.pdf
+    access: public
+  - title: EQ-99 Manager User Manual (PC control software for the LDLS)
+    url: https://www.energetiq.com/hubfs/Product%20Manuals/LDLS/EQ-99%20Manager%20User%20Manual.pdf
+    access: public
+links:
+  - title: EQ-99X product page
+    url: https://www.energetiq.com/eq99x-high-brightness-broadband-light-source
+  - title: Energetiq LDLS resources (data sheets and manuals)
+    url: https://www.energetiq.com/resources
+  - title: EQ-99X data sheet
+    url: https://www.energetiq.com/hubfs/Product%20Data%20Sheets/LDLS/EQ-99X_Data_Sheet.pdf
+software:
+  - name: EQ-99 Manager
+    kind: vendor-software
+    url: https://www.energetiq.com/resources
+notes:
+  - The EQ-99 Manager user manual is the closest public documentation for computer control; no separate command reference was found, so confirm the serial or USB command set in the Operation and Maintenance Manual.

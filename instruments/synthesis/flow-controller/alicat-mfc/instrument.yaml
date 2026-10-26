@@ -1,0 +1,37 @@
+schema: 1
+id: alicat/mfc
+maker: Alicat Scientific
+model: MC series
+name: Alicat mass flow controllers
+covers: [MCD, MCE, MCQ, MCR, MCS, MCV, MCW]
+kind: flow-controller
+interfaces: [rs-232, rs-485, lan, analog]
+control: text
+manuals:
+  - title: Serial Communications Primer (revision 2, February 2023)
+    url: https://documents.alicat.com/Alicat-Serial-Primer.pdf
+    covers: ASCII serial command set
+    access: public
+  - title: Operating Manual for Mass Flow Controllers MC, MCD, MCE, MCQ, MCR, MCS, MCV and MCW (firmware 9V)
+    url: https://documents.alicat.com/manuals/DOC-MANUAL-9V-MC.pdf
+    access: public
+  - title: Operating Bulletin, ModbusRTU
+    url: https://documents.alicat.com/manuals/ModbusRTU_Manual.pdf
+    covers: Modbus RTU communication and registers
+    access: public
+  - title: Alicat MODBUS Manual
+    url: https://documents.alicat.com/manuals/DOC-MANUAL-MODBUS.pdf
+    access: public
+  - title: Alicat RS-232 Output Specifications
+    url: https://documents.alicat.com/specifications/Alicat_RS-232_Specs.pdf
+    access: public
+software:
+  - name: Alicat LabVIEW drivers (user's guide)
+    kind: vendor-sdk
+    url: https://documents.alicat.com/manuals/Alicat_LabVIEW_Drivers_User_Guide.pdf
+  - name: Alicat FlowVision2 (PC software, user manual)
+    kind: vendor-software
+    url: https://documents.alicat.com/manuals/FlowVision2_Manual.pdf
+notes:
+  - The ASCII command set is described in the Serial Communications Primer and Modbus RTU has its own manual, so check which protocol the unit is set to before writing a driver.
+  - Alicat also lists Ethernet-based options (Modbus TCP, EtherNet/IP, PROFINET) with separate manuals for those models.

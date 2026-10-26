@@ -1,0 +1,31 @@
+schema: 1
+id: razorbill/rp100
+maker: Razorbill Instruments
+model: RP100
+name: Razorbill RP100 power supply for CS100 / CS130 uniaxial strain cells
+kind: strain-cell
+interfaces: [usb]
+control: scpi
+identify:
+  idn: ^Razorbill,\s*RP100,\s*\d{6},\s*\d+\.\d+\.\d+
+  example: Razorbill,RP100,000001,1.0.2
+manuals:
+  - title: RP100 Power Supply Manual (Version 6.9, June 2023)
+    url: https://razorbillinstruments.com/wp-content/uploads/2023/06/RP100-Manual-v6-9-Web.pdf
+    covers: USB serial communication and SCPI command reference (command list, core, SYSTem, OUTPut, SOURce and MEASure commands, example code)
+    access: public
+links:
+  - title: Razorbill downloads page (RP100 manual, Windows USB driver, RP100 controller program, Python example)
+    url: https://razorbillinstruments.com/download-page/
+software:
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.razorbill.razorbillRP100
+    url: https://pymeasure.readthedocs.io/en/latest/api/instruments/razorbill/razorbillRP100.html
+examples:
+  - title: Razorbill Python demonstration script (pyvisa; drives the RP100 and a Keysight E4980AL LCR meter), user guide page
+    url: https://razorbillinstruments.com/python-demonstration-script-user-guide/
+    license: unknown
+notes:
+  - Two-channel piezo supply for Razorbill cells. It connects over USB as a virtual serial port, so the baud rate and parity settings of that port have no effect; install Razorbill's Windows USB driver first.
+  - The front-panel Error light turns red when an unrecognised SCPI command is received and stays on until the PC clears the error.

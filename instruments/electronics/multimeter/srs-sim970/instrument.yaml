@@ -1,0 +1,20 @@
+schema: 1
+id: srs/sim970
+maker: Stanford Research Systems
+model: SIM970
+name: SRS SIM970 quad digital voltmeter
+kind: multimeter
+interfaces: [rs-232, gpib]
+control: scpi
+manuals:
+  - title: SIM970 Operation and Service Manual
+    url: https://www.thinksrs.com/downloads/pdfs/manuals/SIM970m.pdf
+    covers: 'Remote operation: module command reference (reached through a SIM900 mainframe)'
+    access: public
+links:
+  - title: SIM970 product page
+    url: https://www.thinksrs.com/products/sim970.html
+  - title: Application note on communicating with SIM modules (ComSIMs)
+    url: https://www.thinksrs.com/downloads/pdfs/applicationnotes/ComSIMs.pdf
+notes:
+  - Four-channel voltmeter module with 24-bit readings; data logging goes through a SIM900 mainframe over RS-232 or GPIB.

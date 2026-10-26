@@ -1,0 +1,23 @@
+schema: 1
+id: srs/fs725
+maker: Stanford Research Systems
+model: FS725
+name: Stanford Research Systems FS725 rubidium frequency standard
+kind: frequency-reference
+interfaces: [rs-232]
+control: text
+manuals:
+  - title: FS725 Rubidium Frequency Standard manual
+    url: https://www.thinksrs.com/downloads/pdfs/manuals/FS725m.pdf
+    access: public
+links:
+  - title: FS725 product page
+    url: https://www.thinksrs.com/products/fs725.html
+  - title: FS725 tech support page
+    url: https://www.thinksrs.com/support/fs725sup.html
+  - title: FS725 datasheet
+    url: https://www.thinksrs.com/downloads/pdfs/catalog/FS725c.pdf
+  - title: SRS software downloads
+    url: https://www.thinksrs.com/downloads/soft.html
+notes:
+  - 'RS-232 is the only computer interface: the rear 9-pin connector is configured as DCE at 9600 baud and gives direct access to the built-in rubidium oscillator (SRS model PRS10). SRS supplies the Windows RbMon software for monitoring and control.'

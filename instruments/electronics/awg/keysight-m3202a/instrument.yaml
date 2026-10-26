@@ -1,0 +1,25 @@
+schema: 1
+id: keysight/m3202a
+maker: Keysight
+model: M3202A
+name: Keysight M3202A PXIe arbitrary waveform generator
+covers: [M3201A]
+kind: awg
+interfaces: [pxie]
+control: library
+manuals:
+  - title: SD1 2.x M32xxA/M33xxA Arbitrary Waveform Generators User's Guide
+    url: https://www.keysight.com/us/en/assets/9018-04448/user-manuals/9018-04448.pdf
+    covers: User's guide for the SD1 2.x software that programs the M32xxA AWG modules
+    access: sign-in
+links:
+  - title: M3202A data sheet (Keysight asset page)
+    url: https://www.keysight.com/us/en/assets/7018-05392/data-sheets/5992-1798.pdf
+software:
+  - name: qcodes_contrib_drivers
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.Keysight.M3202A.M3202A
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/Keysight/M3202A.py
+notes:
+  - The module is programmed through Keysight's SD1 software API (the keysightSD1 Python module), not SCPI; the QCoDeS contrib driver needs that module and detects SD1 2.x or 3.x.
+  - The user's guide behind the Keysight asset page is gated, so a Keysight sign-in is needed to download it.

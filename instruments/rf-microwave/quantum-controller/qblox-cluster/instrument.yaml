@@ -1,0 +1,43 @@
+schema: 1
+id: qblox/cluster
+maker: Qblox
+model: Cluster
+name: Qblox Cluster qubit control system
+covers: [QCM, QRM, QCM-RF, QRM-RF, QRC, QTM, QSM]
+kind: quantum-controller
+interfaces: [lan]
+control: library
+manuals:
+  - title: Qblox Instruments API reference (Cluster QCoDeS driver, native and SCPI interfaces)
+    url: https://docs.qblox.com/en/main/products/qblox_instruments/api/index.html
+    covers: Cluster, module and sequencer classes and parameters of the QCoDeS driver, the native interface and the SCPI interface
+    access: public
+  - title: Q1ASM instruction set and user guide
+    url: https://docs.qblox.com/en/main/products/qblox_instruments/q1/index.html
+    covers: Assembly language that programs the Q1 sequencers
+    access: public
+  - title: 'Qblox Electronics: Cluster user guide (architecture and sequencers)'
+    url: https://docs.qblox.com/en/main/products/architecture/index.html
+    covers: Cluster architecture, module types and sequencer behaviour
+    access: public
+  - title: Network ports
+    url: https://docs.qblox.com/en/main/products/qblox_instruments/communicating_with_cluster/network_ports.html
+    covers: TCP ports used by the Cluster Management Module, including 5025-5026 for instrument control
+    access: public
+links:
+  - title: Qblox Instruments overview (guides, API, tutorials)
+    url: https://docs.qblox.com/en/main/products/qblox_instruments/index.html
+  - title: Qblox Instruments tutorials index
+    url: https://docs.qblox.com/en/main/products/qblox_instruments/tutorials/index.html
+  - title: Qblox quickstart guide
+    url: https://docs.qblox.com/en/main/quickstart/index.html
+  - title: qblox_instruments source repository (GitLab)
+    url: https://gitlab.com/qblox/packages/software/qblox_instruments
+software:
+  - name: qblox-instruments (QCoDeS driver, native and SCPI interfaces)
+    kind: vendor-sdk
+    ref: qblox_instruments.Cluster
+    url: https://pypi.org/project/qblox-instruments/
+notes:
+  - The Cluster is controlled over Ethernet with the qblox-instruments Python package. The API reference documents a SCPI interface under the QCoDeS driver and the native interface, and the Cluster Management Module takes instrument control on TCP ports 5025 and 5026.
+  - Package source from release 0.9 reads a four-field *IDN? reply (manufacturer, model, serial number, build information) and expects the model Cluster MM for the mainframe.

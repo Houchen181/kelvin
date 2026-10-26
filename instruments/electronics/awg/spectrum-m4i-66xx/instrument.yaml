@@ -1,0 +1,42 @@
+schema: 1
+id: spectrum/m4i-66xx
+maker: Spectrum Instrumentation
+model: M4i.66xx
+name: Spectrum Instrumentation M4i.66xx arbitrary waveform generator cards
+covers: [M4x.66xx, M4i.96xx, M4x.96xx]
+kind: awg
+categories: [rf-microwave]
+interfaces: [pcie]
+control: library
+manuals:
+  - title: M4i.66xx, M4x.66xx, M4i.96xx and M4x.96xx manual
+    url: https://spectrum-instrumentation.com/dl/m4i_m4x_66xx_96xx_manual_english.pdf
+    covers: Card manual with the software driver and programming chapters
+    access: public
+links:
+  - title: M4i.6620-x8 product page (manuals, driver and SBench 6 downloads)
+    url: https://spectrum-instrumentation.com/products/details/M4i6620-x8.php
+  - title: M4i.66xx datasheet
+    url: https://spectrum-instrumentation.com/dl/m4i66_datasheet_english.pdf
+  - title: 'Application note: Spectrum DDS in quantum research'
+    url: https://spectrum-instrumentation.com/dl/an_spectrum_dds_in_quantum_research.pdf
+  - title: spcm Python package API documentation
+    url: https://spectruminstrumentation.github.io/spcm/spcm.html
+software:
+  - name: spcm (Spectrum Python package)
+    kind: vendor-sdk
+    ref: spcm.Card
+    url: https://pypi.org/project/spcm/
+  - name: spcm-core (low-level Python API)
+    kind: vendor-sdk
+    url: https://github.com/SpectrumInstrumentation/spcm-core
+  - name: spcm-dds-control (GUI for the DDS functionality)
+    kind: vendor-software
+    url: https://github.com/SpectrumInstrumentation/spcm-dds-control
+examples:
+  - title: spcm package examples (acquisition, generation, DDS, synchronization, clock, trigger)
+    url: https://github.com/SpectrumInstrumentation/spcm/tree/master/src/examples
+    license: MIT
+notes:
+  - 'The card is a PCIe device with no SCPI interface: programs call Spectrum''s spcm driver or its Python package, and SBench 6 gives a GUI for manual use.'
+  - For AOD-driven tweezer arrays the DDS firmware option and the maker's spcm-dds-control project are the relevant starting points; the DDS application note linked here describes its use in quantum research.

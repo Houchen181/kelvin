@@ -1,0 +1,27 @@
+schema: 1
+id: femto/dlpca-200
+maker: FEMTO
+model: DLPCA-200
+name: FEMTO DLPCA-200 variable-gain current amplifier (with LUCI-10 USB interface)
+kind: preamp
+interfaces: [usb, analog]
+control: library
+manuals:
+  - title: DLPCA-200 datasheet
+    url: https://www.femto.de/images/pdf-dokumente/de-dlpca-200.pdf
+    access: public
+  - title: LUCI-10 datasheet
+    url: https://www.femto.de/images/pdf-dokumente/de-luci-10.pdf
+    access: public
+links:
+  - title: DLPCA-200 product page
+    url: https://www.femto.de/en/current-transimpedance-amplifiers/dc-up-to-500-khz-low-noise-variable-amplification-dlpca/
+  - title: LUCI-10 USB control interface product page
+    url: https://www.femto.de/en/accessories/usb-interface-luci-10/
+software:
+  - name: FEMTO LUCI-10 driver, DLL and LabVIEW library
+    kind: vendor-sdk
+    url: https://www.femto.de/en/accessories/usb-interface-luci-10/
+notes:
+  - The amplifier itself is set through 5 opto-isolated TTL/CMOS inputs plus an analog offset-voltage input; the optional LUCI-10 adds USB control with a Windows driver, a DLL and LabVIEW VIs.
+  - 'No programming manual or software download is public: FEMTO states that the LUCI-10 download link is supplied with the product, so only the datasheets and product pages are recorded.'

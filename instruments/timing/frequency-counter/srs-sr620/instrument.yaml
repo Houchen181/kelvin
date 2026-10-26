@@ -1,0 +1,23 @@
+schema: 1
+id: srs/sr620
+maker: Stanford Research Systems
+model: SR620
+name: Stanford Research Systems SR620 universal time interval counter
+kind: frequency-counter
+interfaces: [gpib, rs-232]
+control: text
+manuals:
+  - title: SR620 Universal Time Interval Counter manual
+    url: https://www.thinksrs.com/downloads/pdfs/manuals/SR620m.pdf
+    access: public
+links:
+  - title: SR620 product page
+    url: https://www.thinksrs.com/products/sr620.html
+  - title: SR620 tech support page
+    url: https://www.thinksrs.com/support/sr620sup.html
+  - title: SR620 datasheet
+    url: https://www.thinksrs.com/downloads/pdfs/catalog/SR620c.pdf
+  - title: 'SR620 note: sending commands over RS-232 with HyperTerminal'
+    url: https://www.thinksrs.com/downloads/pdfs/other%20stuff/SR620_Hyp_Term.pdf
+notes:
+  - GPIB (IEEE-488.2) and RS-232 are both standard, and the product page says all instrument functions and configuration menu settings can be reached through them. SRS also posts a short note on sending commands over RS-232 with HyperTerminal.

@@ -1,0 +1,18 @@
+schema: 1
+id: gamma-vacuum/spce
+maker: Gamma Vacuum
+model: SPCe
+name: Gamma Vacuum SPCe ion pump controller
+kind: vacuum-pump
+interfaces: [rs-232, rs-485, lan]
+control: unknown
+links:
+  - title: Digitel SPC-ION ion pump controller (Gamma's current single-pump controller page; lists Ethernet, RS-232 and RS-485)
+    url: https://www.gammavacuum.com/products/digital-spc-ion
+  - title: SPC-ION specification sheet
+    url: https://www.gammavacuum.com/cdn/shop/files/SPC_Ion_spec_sheet.pdf
+  - title: Gamma Vacuum downloads page
+    url: https://www.gammavacuum.com/pages/downloads
+notes:
+  - No SPCe manual or serial command reference is listed on gammavacuum.com (the downloads page only offers a controller brochure); request it from Gamma (info@gammavacuum.com).
+  - An SPCe users manual (PN 900026) seen on a third-party site says the unit can be run from the front panel or remotely over serial or Ethernet, with the serial port supporting RS-232, RS-422 and RS-485. Control is left as unknown because no protocol document was available.

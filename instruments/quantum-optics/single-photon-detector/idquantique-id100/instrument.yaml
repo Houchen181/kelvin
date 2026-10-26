@@ -1,0 +1,21 @@
+schema: 1
+id: idquantique/id100
+maker: ID Quantique
+model: ID100
+name: ID Quantique ID100 visible single-photon detector
+covers: [ID120]
+kind: single-photon-detector
+interfaces: []
+control: unknown
+links:
+  - title: ID100 product page (no longer available for purchase)
+    url: https://www.idquantique.com/quantum-detection-systems/products/id100/
+  - title: ID100 brochure
+    url: https://marketing.idquantique.com/acton/attachment/11868/f-0236/1/-/-/-/-/ID100_Brochure.pdf
+  - title: ID120 brochure
+    url: https://marketing.idquantique.com/acton/attachment/11868/f-0238/1/-/-/-/-/ID120_Brochure.pdf
+  - title: ID Quantique support portal (login required)
+    url: https://support.idquantique.com/support/login
+notes:
+  - IDQ pages mark the ID100 and ID120 as no longer available for purchase, and no user manual is public, so ask IDQ support for the user guide.
+  - The ID120 page lists NIM and LVTTL outputs, adjustable settings and a tunable APD temperature; the settings interface is not documented publicly.

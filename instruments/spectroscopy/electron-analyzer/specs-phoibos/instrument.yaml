@@ -1,0 +1,32 @@
+schema: 1
+id: specs/phoibos
+maker: SPECS Zurich
+model: PHOIBOS 150 / SpecsLab Prodigy
+name: SPECS PHOIBOS electron analyzers (SpecsLab Prodigy)
+covers: [PHOIBOS 150 2D-DLD, PHOIBOS 150 2D-CMOS/-CCD]
+kind: electron-analyzer
+interfaces: [lan]
+control: text
+links:
+  - title: Remote In module (TCP server with ASCII text protocol)
+    url: https://www.specs-group.com/specs/products/detail/remote-in/
+  - title: SpecsLab Prodigy
+    url: https://www.specs-group.com/specs/products/detail/prodigy/
+  - title: Remote Out module (Prodigy controlling other devices)
+    url: https://www.specs-group.com/specs/products/detail/remote-out/
+  - title: PHOIBOS 150 2D-DLD
+    url: https://www.specs-group.com/specs/products/detail/phoibos-150-2d-dld/
+  - title: PHOIBOS 150 2D-CMOS/-CCD
+    url: https://www.specs-group.com/specs/products/detail/phoibos-150-2d-cmos-ccd/
+  - title: SPECS downloads (manuals require a login)
+    url: https://www.specs-group.com/specsgroup/service/downloads/
+software:
+  - name: SpecsLab Prodigy
+    kind: vendor-software
+    url: https://www.specs-group.com/specs/products/detail/prodigy/
+  - name: SpecsLab Prodigy Remote In (optional module)
+    kind: vendor-software
+    url: https://www.specs-group.com/specs/products/detail/remote-in/
+notes:
+  - SpecsLab Prodigy is SPECS' spectrometer control software; its optional Remote In module is a TCP server with an ASCII text protocol for configuration, acquisition control and data retrieval, and SPECS says it suits EPICS, TANGO or LabVIEW integration.
+  - The command reference is not on the public site (the downloads page shows manuals only after login), so request it from SPECS support.

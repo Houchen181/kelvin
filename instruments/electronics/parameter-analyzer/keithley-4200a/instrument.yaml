@@ -1,0 +1,34 @@
+schema: 1
+id: keithley/4200a
+maker: Keithley (Tektronix)
+model: 4200A-SCS
+name: Keithley 4200A-SCS parameter analyzer
+kind: parameter-analyzer
+interfaces: [gpib, lan]
+control: text
+manuals:
+  - title: Model 4200A-SCS KXCI Remote Control Programming (4200A-KXCI-907-01F)
+    url: https://download.tek.com/manual/4200A-KXCI-907-01F_Sept2026.pdf
+    covers: Controlling the 4200A-SCS instruments from a remote computer through KXCI
+    access: public
+  - title: 4200A-SCS LPT Library Programming (4200A-LPT-907-01E)
+    url: https://download.tek.com/manual/4200A-LPT-907-01E_LPT_Aug_2026.pdf
+    covers: Linear Parametric Test (LPT) library for programs that run on the 4200A-SCS itself
+    access: public
+links:
+  - title: 4200A-SCS product page
+    url: https://www.tek.com/en/products/keithley/4200a-scs-parameter-analyzer
+  - title: Application note - Controlling the 4200A-SCS Using KXCI and Python 3
+    url: https://www.tek.com/en/documents/application-note/controlling-the-4200a-scs-parameter-analyzer-using-kxci-and-python-3
+software:
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.keithley.Keithley4200
+    url: https://pymeasure.readthedocs.io/en/latest/api/instruments/keithley/keithley4200.html
+examples:
+  - title: Keithley KXCI examples for the 4200A-SCS (Python, GPIB and Ethernet)
+    url: https://github.com/tektronix/keithley/tree/HEAD/Instrument_Examples/Model_4200A
+    license: Tektronix Sample Source Code License (custom, see LICENSE)
+notes:
+  - Remote control goes through KXCI, an application that has to be running on the 4200A and configured in KCON (terminators, GPIB or Ethernet mode) before an external PC can connect; the example README lists the required settings.
+  - The PyMeasure driver connects to TCP port 1225 (for example TCPIP::192.168.1.1::1225::SOCKET).

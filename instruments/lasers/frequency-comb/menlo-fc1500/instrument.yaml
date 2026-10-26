@@ -1,0 +1,24 @@
+schema: 1
+id: menlo/fc1500
+maker: Menlo Systems
+model: FC1500
+name: Menlo Systems FC1500 optical frequency combs
+kind: frequency-comb
+interfaces: []
+control: unknown
+links:
+  - title: FC1500-ULN Nova product page
+    url: https://www.menlosystems.com/products/optical-frequency-combs/fc1500-uln-nova/
+  - title: FC1500-ULN Nova datasheet
+    url: https://www.menlosystems.com/downloads/fc1500-ulnnova-datasheet-en
+  - title: FC1500-Quantum product page
+    url: https://www.menlosystems.com/products/quantum-laser-systems/fc1500-quantum/
+  - title: FC1500-Quantum datasheet
+    url: https://www.menlosystems.com/wp-content/uploads/FC1500-Quantum_D-EN_A4_2024-07_3w.pdf
+  - title: Menlo Systems support and service
+    url: https://www.menlosystems.com/support/
+  - title: pywebchannel, Menlo's generic Qt WebChannel client for Python (does not name the comb)
+    url: https://github.com/MenloSystems/pywebchannel
+notes:
+  - Menlo does not publish a control manual for the FC1500 on its site, so ask Menlo support for the comb software manual and its remote-interface description before planning automation.
+  - Menlo's GitHub organization hosts pywebchannel, a generic Qt WebChannel client for Python, and a third-party library (Brush) talks to a Menlo XML-RPC comb server on port 8123; neither names the FC1500, so ask Menlo for the control protocol.

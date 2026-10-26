@@ -1,0 +1,20 @@
+schema: 1
+id: coherent/compex
+maker: Coherent
+model: COMPexPro
+name: Coherent COMPexPro excimer lasers (COMPex series)
+kind: laser
+interfaces: []
+control: unknown
+links:
+  - title: COMPex excimer laser product page
+    url: https://www.coherent.com/lasers/excimer/compex
+  - title: COMPex series datasheet
+    url: https://www.coherent.com/content/dam/coherent/site/en/resources/datasheet/lasers/compex-series-ds.pdf
+  - title: COMPex instruction manual excerpt (site preparation)
+    url: https://www.coherent.com/content/dam/coherent/site/en/resources/preinstallation/compex/compex-site-preparation-excerpt.pdf
+  - title: Coherent support
+    url: https://www.coherent.com/support
+notes:
+  - Coherent publishes only the datasheet and a site-preparation excerpt of the COMPex instruction manual, so the full manual with the remote-control commands must come from Coherent support or the laser's shipped documentation. The public page names the COMPex series, not the COMPexPro.
+  - Coherent publishes only datasheets and pre-installation documents; the remote interface is described in the operator's manual that comes with the laser.

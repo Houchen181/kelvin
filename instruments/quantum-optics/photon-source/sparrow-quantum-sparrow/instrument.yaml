@@ -1,0 +1,16 @@
+schema: 1
+id: sparrow-quantum/sparrow
+maker: Sparrow Quantum
+model: Sparrow Nest
+name: Sparrow Quantum Sparrow Nest rack-mounted single-photon source (built around the Sparrow Core chip)
+kind: photon-source
+interfaces: [lan, web-api]
+control: web-api
+links:
+  - title: Sparrow Nest product page
+    url: https://sparrowquantum.com/sparrow-nest
+  - title: Sparrow Core product page
+    url: https://sparrowquantum.com/sparrow-core
+notes:
+  - The Nest page says the system is operated through a served web app or automated with its API, but no API documentation or datasheet download is public; ask Sparrow Quantum.
+  - The Sparrow Core chip on its own has only PCB connectors for voltage control; the complete source is run from a web app served over the network.

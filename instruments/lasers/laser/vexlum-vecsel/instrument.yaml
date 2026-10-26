@@ -1,0 +1,18 @@
+schema: 1
+id: vexlum/vecsel
+maker: Vexlum
+model: VALO SF
+name: Vexlum VALO VECSEL lasers (VALO SF and VALO SHG)
+covers: [VALO SHG]
+kind: laser
+interfaces: []
+control: unknown
+links:
+  - title: VALO product page (VALO SF and VALO SHG)
+    url: https://vexlum.com/products/
+  - title: VALO datasheet (2025-11-06)
+    url: https://vexlum.com/wp-content/uploads/2025/11/VEXLUM_VALO_datasheet_2025-11-06_A4.pdf
+  - title: Vexlum download portal (manuals and software; sign in with laser serial number and manufacturing date)
+    url: https://vexlum.sprintit.fi/downloads
+notes:
+  - Vexlum's manuals and software are in a download portal that signs in with the laser's serial number and manufacturing date (MM/YYYY), so they are for owners only; the public pages do not describe the control interface.

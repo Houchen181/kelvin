@@ -1,0 +1,19 @@
+schema: 1
+id: thorlabs/sc10
+maker: Thorlabs
+model: SC10
+name: Thorlabs SC10 optical beam shutter controller
+kind: shutter
+interfaces: [rs-232]
+control: text
+links:
+  - title: KSC101 K-Cube Solenoid Controller APT User Guide (alternative Thorlabs shutter controller, APT protocol)
+    url: https://media.thorlabs.com/contentassets/e92d618c92c94cea9096b3f231859611/etn017648-d02.pdf
+software:
+  - name: InstrumentKit
+    kind: python-driver
+    ref: instruments.thorlabs.SC10
+    url: https://github.com/instrumentkit/InstrumentKit/blob/main/src/instruments/thorlabs/sc10.py
+notes:
+  - 'ASCII commands over RS-232 (CR terminator, ''> '' prompt): id? returns the name and version, ens? and ens read and toggle the enable state, and baud=0 or baud=1 selects 9600 or 115200 baud. Output modes are manual, auto, single, repeat and external.'
+  - The InstrumentKit driver source is the best public command reference found for this controller.

@@ -1,0 +1,18 @@
+schema: 1
+id: lakeshore/8600
+maker: Lake Shore Cryotronics
+model: '8600'
+name: Lake Shore 8600 Series VSM
+kind: magnetometer
+interfaces: []
+control: unknown
+links:
+  - title: 8600 Series VSM overview (discontinued product page)
+    url: https://www.lakeshore.com/products/categories/overview/discontinued-products/discontinued-products/8600-series-vsm
+  - title: 8600 Series VSM downloads (catalogs, application notes; no user manual or remote-control document)
+    url: https://www.lakeshore.com/products/categories/downloads/discontinued-products/discontinued-products/8600-series-vsm
+  - title: 8600 Series VSM catalog (US Letter)
+    url: https://www.lakeshore.com/docs/default-source/product-downloads/catalog/vsmcatalog8600_l.pdf
+notes:
+  - Discontinued; Lake Shore points to the MagRS as the replacement. It is a PC-controlled system run from Lake Shore's VSM software, and no public manual, command set or API for external control was found, so interfaces and control are left empty and unknown.
+  - The VSM software includes a scripting tool for interfacing with third-party lab equipment, which is not a remote interface for the VSM itself.

@@ -7,8 +7,8 @@
 #
 # Instruments are sorted by category, then kind (electronics/lock-in/srs-sr830). Their id is maker/model
 # (srs/sr830), the same as their Kelvin card's. Every instrument has exactly one kind; its category, and so its
-# folder, follows from the kind. An instrument can name extra
-# categories in its own `categories` list (an RFSoC board is an AWG and an RF instrument).
+# folder, follows from the kind. An instrument can name extra categories in its own `categories` list (an RFSoC
+# board is an AWG and an RF instrument).
 schema: 1
 name: Kelvin instrument collection
 repository: https://github.com/Houchen181/kelvin
@@ -32,9 +32,15 @@ categories:
       oscilloscope: Oscilloscopes and digitizers
       daq: Data acquisition devices
       lcr-meter: LCR meters and impedance analyzers
+      capacitance-bridge: Capacitance bridges
       power-supply: DC power supplies
       parameter-analyzer: Semiconductor parameter analyzers
       switch-matrix: Switch matrices and multiplexers
+      signal-analyzer: FFT and dynamic signal analyzers
+      ferroelectric-tester: Ferroelectric testers
+      pid-controller: PID and servo controllers
+      fpga-instrument: FPGA multi-instruments
+      mainframe: Instrument mainframes
   rf-microwave:
     title: RF and microwave
     description: Signal generators, network and spectrum analyzers, acousto-optic drivers and qubit controllers.
@@ -44,31 +50,57 @@ categories:
       spectrum-analyzer: Spectrum and signal analyzers
       aom-driver: AOM and EOM drivers, DDS synthesizers
       quantum-controller: Qubit control systems
+      frequency-converter: IQ up- and down-converters
+      rf-switch: RF switches
+      rf-attenuator: Programmable RF attenuators
+      rf-power-meter: RF power sensors
   timing:
     title: Timing, pulses and photon counting
-    description: Pulse pattern and delay generators, photon counters and time taggers.
+    description: Pulse and delay generators, experiment sequencers, photon counters, counters and clocks.
     kinds:
       pulse-generator: Pulse pattern generators
       delay-generator: Digital delay generators
+      sequencer: Experiment sequencers and control systems
       photon-counter: Photon counters, time taggers and TCSPC
+      frequency-counter: Frequency and time-interval counters
+      frequency-reference: Frequency references and clocks
   lasers:
     title: Lasers and laser control
-    description: CW, tunable and ultrafast lasers, diode and TEC controllers, wavelength meters.
+    description: CW, tunable and ultrafast lasers, parametric sources, combs, diode controllers, locks and wavelength meters.
     kinds:
       laser: Lasers
+      parametric-source: OPOs and OPAs
+      frequency-comb: Optical frequency combs
       laser-driver: Laser diode and TEC controllers
+      laser-lock: Laser locking and stabilization
       wavemeter: Wavelength meters
   optics:
     title: Optics, detection and spectroscopy
-    description: Power meters, spectrometers, spectrographs, scientific cameras, detectors and modulators.
+    description: Detectors, spectrometers, cameras, modulators, shutters, light shaping and fiber optics.
     kinds:
       power-meter: Optical power and energy meters
       spectrometer: Spectrometers
       monochromator: Monochromators and imaging spectrographs
+      optical-spectrum-analyzer: Optical spectrum analyzers
       camera: Scientific cameras
-      photodetector: Photodiodes, APDs, PMTs and single-photon detectors
+      photodetector: Photodiodes, APDs, PMTs and quadrant detectors
+      beam-profiler: Beam profilers
+      polarimeter: Polarimeters
+      autocorrelator: Autocorrelators and pulse characterization
       chopper: Optical choppers
       modulator: Photoelastic and electro-optic modulators
+      shutter: Shutters, filter wheels and flip mounts
+      spatial-light-modulator: Spatial light modulators and DMDs
+      fiber-optics: Fiber switches, attenuators and polarization controllers
+      light-source: Broadband lamps and LED drivers
+  quantum-optics:
+    title: Quantum optics and single photons
+    description: Single-photon detectors, photon-pair and single-photon sources, and ovens that phase-match their crystals.
+    kinds:
+      snspd: Superconducting nanowire single-photon detectors
+      single-photon-detector: Single-photon avalanche diodes and counting modules
+      photon-source: Entangled-pair, heralded and single-photon sources
+      crystal-oven: Crystal ovens for phase matching
   motion:
     title: Motion and positioning
     description: Piezo positioners and scanners, motorized stages, delay lines and rotation mounts.
@@ -77,24 +109,53 @@ categories:
       motion-stage: Motorized stages, delay lines and rotation mounts
   cryogenics:
     title: Cryogenics, vacuum and sample environment
-    description: Temperature controllers, cryostat systems, dilution refrigerators and vacuum gauges.
+    description: Temperature control, cryostats and dilution refrigerators, compressors, vacuum, strain and pressure.
     kinds:
       temperature-controller: Temperature controllers and monitors
       cryostat: Cryostat systems
       dilution-refrigerator: Dilution refrigerators
-      vacuum-gauge: Vacuum gauges and controllers
+      compressor: Cryocooler compressors
       level-meter: Cryogen level meters
+      heating-stage: Heating and cooling stages
+      chiller: Chillers and circulators
+      vacuum-gauge: Vacuum gauges and controllers
+      vacuum-pump: Vacuum pump controllers
+      rga: Residual gas analyzers
+      strain-cell: Uniaxial strain cells
+      pressure-controller: Pressure-cell controllers
   magnets:
     title: Magnets and field measurement
-    description: Superconducting magnet supplies, gaussmeters and teslameters.
+    description: Magnet power supplies, magnetometers, gaussmeters and teslameters.
     kinds:
       magnet-supply: Magnet power supplies
+      magnetometer: Magnetometers
       gaussmeter: Gaussmeters and teslameters
-  scanning-probe:
-    title: Scanning probe microscopy
-    description: Controllers for STM, AFM and scanning sensors.
+  microscopy:
+    title: Microscopy and diffraction
+    description: Scanning probe and electron microscopes, optical tweezers and X-ray diffraction.
     kinds:
       spm-controller: SPM controllers
+      electron-microscope: Electron and ion microscopes
+      optical-tweezers: Optical tweezers systems
+      x-ray-diffractometer: X-ray diffractometers and Laue cameras
+  spectroscopy:
+    title: Spectroscopy systems
+    description: Complete spectrometers for infrared, terahertz, ellipsometry, photoemission and magnetic resonance.
+    kinds:
+      ftir-spectrometer: FTIR spectrometers
+      thz-spectrometer: Terahertz spectrometers
+      ellipsometer: Ellipsometers
+      electron-analyzer: Photoelectron analyzers (ARPES, XPS)
+      nmr-spectrometer: NMR consoles
+      epr-spectrometer: EPR spectrometers
+  synthesis:
+    title: Materials synthesis and fabrication
+    description: Furnace and process controllers, mass-flow controllers, deposition monitors and lithography.
+    kinds:
+      process-controller: Furnace and process controllers
+      flow-controller: Mass-flow controllers
+      deposition-monitor: Deposition and thickness monitors
+      lithography: Lithography pattern generators
 
 areas:
   transport:
@@ -133,6 +194,7 @@ controls:
   library: The maker's DLL, SDK or Python package
   web-api: HTTP, JSON or RPC over the network
   none: No remote control
+  unknown: Remote control not documented publicly
 
 # The cards that come with Kelvin itself. Kelvin keeps its own copy of these and ignores a card in
 # ~/Kelvin/cards with the same id, so `kic install` leaves them out.

@@ -1,0 +1,40 @@
+schema: 1
+id: rhk/r9
+maker: RHK Technology
+model: R9 / R9 Plus
+name: RHK Technology R9 SPM controller
+covers: [R9 Plus]
+kind: spm-controller
+interfaces: [usb]
+control: library
+manuals:
+  - title: RHK R9 MATLAB Scripting (application note AN-7)
+    url: https://rhk-tech.com/wp-content/uploads/2025/06/AN-7-RHK_R9_MATLAB_Scripting.pdf
+    covers: Scripting the R9 from MATLAB
+    access: public
+  - title: RHK R9 LabVIEW Lithography (application note AN-9)
+    url: https://rhk-tech.com/wp-content/uploads/2025/06/AN-9-RHK_R9_LabVIEW_Lithography.pdf
+    covers: Using the R9 from LabVIEW for lithography
+    access: public
+  - title: RHK R9 Manual Control Using Controller Box and MATLAB (application note AN-8)
+    url: https://rhk-tech.com/wp-content/uploads/2025/06/AN-8-RHK_R9-Manual-Control-Using-Controller-Box-and-MATLAB.pdf
+    covers: Manual control of the R9 with a controller box and MATLAB
+    access: public
+links:
+  - title: R9 Plus page (Inventor SDK/IHDL, listed under legacy controllers)
+    url: https://rhk-tech.com/r9plus/
+  - title: Tutorial on R9 Inventor SDK basic operation
+    url: https://rhk-tech.com/2025/07/11/tutorial-on-r9-inventor-sdk-basic-operation/
+  - title: How to call VIs from R9 Procedure Space
+    url: https://rhk-tech.com/2025/07/11/how-to-call-vis-from-r9-procedure-space/
+  - title: Application notes
+    url: https://rhk-tech.com/application-notes/
+  - title: Support
+    url: https://rhk-tech.com/support/
+software:
+  - name: R9 Inventor SDK / IHDL
+    kind: vendor-sdk
+    url: https://rhk-tech.com/r9plus/
+notes:
+  - RHK lists an Inventor SDK/IHDL for the R9 that lets users customise routines and exchange data with LabVIEW VIs, MATLAB or Python, and publishes application notes on MATLAB scripting and LabVIEW lithography plus video tutorials on the SDK.
+  - RHK lists the R9 under legacy controllers, next to the newer R10; the SDK reference is not public.

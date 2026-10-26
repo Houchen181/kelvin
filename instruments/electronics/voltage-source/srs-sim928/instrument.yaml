@@ -1,0 +1,25 @@
+schema: 1
+id: srs/sim928
+maker: Stanford Research Systems
+model: SIM928
+name: SRS SIM928 isolated voltage source
+kind: voltage-source
+interfaces: [rs-232, gpib]
+control: scpi
+manuals:
+  - title: SIM928 Operation and Service Manual
+    url: https://www.thinksrs.com/downloads/pdfs/manuals/SIM928m.pdf
+    covers: 'Remote operation: module command reference (reached through a SIM900 mainframe)'
+    access: public
+links:
+  - title: SIM928 product page
+    url: https://www.thinksrs.com/products/sim928.html
+  - title: Application note on communicating with SIM modules (ComSIMs)
+    url: https://www.thinksrs.com/downloads/pdfs/applicationnotes/ComSIMs.pdf
+software:
+  - name: qcodes_contrib_drivers
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.StanfordResearchSystems.SIM928.SIM928
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/HEAD/src/qcodes_contrib_drivers/drivers/StanfordResearchSystems/SIM928.py
+notes:
+  - Isolated DC voltage source module; the qcodes_contrib_drivers driver reaches it through a SIM900 mainframe, limits the output to +/-20 V and can step the voltage when ramping.

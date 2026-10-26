@@ -1,0 +1,34 @@
+schema: 1
+id: avtech/pulse-generator
+maker: Avtech Electrosystems
+model: -B series
+name: Avtech -B series high-speed pulse generators (rise time 1 ns and below)
+covers: [AV-1030-B, AVP-AV-1-B, AVP-AV-HV2-B, AVP-AV-HV3-B, AVP-AV-2-B, AVMP-2-B, AVMP-2A-B, AVMP-3-B, AVMP-3A-B, AVMP-4-B, AVPP-1-B, AVPP-1A-B, AVPP-2-B, AVPP-2A-B, AVI-V-3L-B, AVI-V-B, AVI-V-HV2B-B, AVR-E1-B-W3, AVR-E2-B-W1, AVR-E3-B-W3, AVR-D2-B]
+kind: pulse-generator
+interfaces: [gpib, rs-232, lan]
+control: scpi
+manuals:
+  - title: Avtech Programming Manual for -B instruments
+    url: https://www.avtechpulse.com/manuals/programming/programming.pdf
+    covers: Remote programming of the -B models over IEEE-488.2 GPIB and RS-232 (Ethernet on models that have the port)
+    access: public
+  - title: Avtech archived per-model instrument manuals
+    url: https://www.avtechpulse.com/manuals/
+    covers: Index of per-model PDF manuals (for example AV-107D-B) with model-specific commands
+    access: public
+links:
+  - title: IEEE 488.2 GPIB, VXI and RS-232 option (-B suffix)
+    url: https://www.avtechpulse.com/gpib/
+  - title: LabVIEW drivers for -B instruments
+    url: https://www.avtechpulse.com/labview/
+  - title: Very high speed pulse generators (rise time 1 ns and below)
+    url: https://www.avtechpulse.com/speed/
+  - title: Applications information (programming manuals, LabVIEW, troubleshooting)
+    url: https://www.avtechpulse.com/appnote/
+software:
+  - name: Avtech LabVIEW drivers (LabVIEW 5.1 and 8.x)
+    kind: vendor-sdk
+    url: https://www.avtechpulse.com/labview/
+notes:
+  - Avtech has closed (last order date 31 January 2025), but its website, with the programming manual, per-model manuals and LabVIEW drivers, was still online when checked.
+  - Commands are SCPI-style (for example frequency 1.2 kHz, pulse:width 200ns and pulse:delay?), numbers can carry units or use scientific notation, and the same syntax works over GPIB, RS-232 and Ethernet.

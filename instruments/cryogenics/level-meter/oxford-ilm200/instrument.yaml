@@ -1,0 +1,19 @@
+schema: 1
+id: oxford/ilm200
+maker: Oxford Instruments
+model: ILM200
+name: Oxford Instruments ILM200 helium level meter
+kind: level-meter
+interfaces: [rs-232]
+control: text
+links:
+  - title: Quantum Design Oxford legacy product support
+    url: https://qd-oxford.com/services/legacy_product_support.html
+software:
+  - name: qcodes_contrib_drivers
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.OxfordInstruments.ILM200.OxfordInstruments_ILM200
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/OxfordInstruments/ILM200.py
+notes:
+  - 'Oxford Instruments no longer hosts this manual: nanoscience.oxinst.com now redirects to Quantum Design Oxford, whose legacy support page does not list the ILM200. Some older Oxford manuals are on the Mercury Support site (mymercurysupport.com).'
+  - The QCoDeS contrib driver notes that the ILM does not answer *IDN? and that commands start with @n, where n is the ISOBUS instrument number.

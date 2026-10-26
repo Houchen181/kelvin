@@ -1,0 +1,43 @@
+schema: 1
+id: minicircuits/rcdat
+maker: Mini-Circuits
+model: RCDAT
+name: Mini-Circuits RCDAT USB and Ethernet programmable attenuators
+covers: [RUDAT, ZVVA, RC4DAT, RC8DAT]
+kind: rf-attenuator
+interfaces: [usb, lan]
+control: text
+manuals:
+  - title: 'Programming Manual: Programmable Attenuators (ZVVA, RUDAT, RCDAT, RC4DAT, RC8DAT series)'
+    url: https://www.minicircuits.com/softwaredownload/Prog_Manual-6-Programmable_Attenuator.pdf
+    covers: Ethernet control API (SSH, HTTP, Telnet), USB control through the .NET and ActiveX DLLs, and direct USB programming for Linux
+    access: public
+  - title: 'User Guide: RCDAT, RUDAT and ZVVA series'
+    url: https://www.minicircuits.com/app/AN49-005.pdf
+    covers: Setup and operation of the single-channel models, hardware and software
+    access: public
+  - title: 'User Guide: RC4DAT and RC8DAT series'
+    url: https://www.minicircuits.com/app/AN49-011.pdf
+    covers: Setup and operation of the multi-channel models, hardware and software
+    access: public
+links:
+  - title: 'Programmable attenuators: downloads and documentation'
+    url: https://www.minicircuits.com/WebStore/softwaredownload/programmable-attenuators-downloads-and-documentation
+  - title: Programming examples for programmable attenuators (Python, LabVIEW, C#, VB, MATLAB)
+    url: https://www.minicircuits.com/WebStore/pte_example_download.html?fam=Programmable%20Attenuator
+  - title: Programming examples and troubleshooting (Test Solutions programming manual)
+    url: https://www.minicircuits.com/softwaredownload/Prog_Examples_Troubleshooting.pdf
+  - title: RF programmable attenuators (product family)
+    url: https://www.minicircuits.com/WebStore/RF-Programmable-Attenuators.html
+software:
+  - name: Mini-Circuits programmable attenuator .NET DLL (mcl_RUDAT_NET45.dll, USB control from Windows)
+    kind: vendor-sdk
+    url: https://www.minicircuits.com/WebStore/softwaredownload/programmable-attenuators-downloads-and-documentation
+  - name: QCoDeS (RUDAT-13G-90 over USB; the RUDAT and RCDAT share one programming manual)
+    kind: python-driver
+    ref: qcodes.instrument_drivers.Minicircuits.MiniCircuitsRudat13G90Usb
+    url: https://github.com/microsoft/Qcodes/blob/main/src/qcodes/instrument_drivers/Minicircuits/_minicircuits_rudat_13g_90.py
+notes:
+  - Ethernet models accept the maker's commands over HTTP, Telnet or SSH from any operating system. USB models use the .NET DLL on Windows or direct USB programming on Linux.
+  - The QCoDeS driver targets the RUDAT-13G-90 over USB, not the RCDAT, so check its commands against the programming manual before using it on an RCDAT.
+  - One programming manual covers the ZVVA, RUDAT, RCDAT, RC4DAT and RC8DAT families, but single-channel and multi-channel models have separate user guides (AN49-005 and AN49-011), so read the one that matches the model number.

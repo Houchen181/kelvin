@@ -1,0 +1,26 @@
+schema: 1
+id: srs/sim922
+maker: Stanford Research Systems
+model: SIM922
+name: SRS SIM922 diode temperature monitor
+kind: temperature-controller
+categories: [cryogenics]
+interfaces: [rs-232, gpib]
+control: scpi
+manuals:
+  - title: SIM922 Operation and Service Manual
+    url: https://www.thinksrs.com/downloads/pdfs/manuals/SIM922m.pdf
+    covers: 'Remote operation: module command reference, serial settings (reached through a SIM900 mainframe)'
+    access: public
+links:
+  - title: SIM922 and SIM923 product page
+    url: https://www.thinksrs.com/products/sim922923.html
+  - title: SIM922 and SIM923 manuals page
+    url: https://www.thinksrs.com/mult/sim922923m.html
+  - title: SIM922A and SIM923A manuals page (newer single-channel models)
+    url: https://www.thinksrs.com/mult/sim922923am.html
+  - title: Application note on communicating with SIM modules (ComSIMs)
+    url: https://www.thinksrs.com/downloads/pdfs/applicationnotes/ComSIMs.pdf
+notes:
+  - Four-channel silicon-diode temperature monitor module (1.4 K to 475 K) reached through a SIM900 mainframe.
+  - The newer single-channel SIM922A has a separate manual (SIM922Am.pdf), so the SIM922 manual should not be used for it.

@@ -1,0 +1,37 @@
+schema: 1
+id: picowatt/avs-47
+maker: Picowatt (RV-Elektroniikka)
+model: AVS-47B
+name: Picowatt AVS-47B AC resistance bridge
+covers: [AVS-47]
+kind: resistance-bridge
+categories: [cryogenics]
+interfaces: [gpib, rs-232, usb]
+control: text
+manuals:
+  - title: AVS-47B Instruction Manual (latest, 2018 revision)
+    url: https://www.picowatt.fi/support/avs47bmanual_20180424_1101_1110.pdf
+    access: public
+  - title: AVS47-Serial/USB-W User Guide
+    url: https://www.picowatt.fi/interfacing/avs47_serial_usb/avs47_serial_usb_w_userguide.pdf
+    covers: Serial interface option (USB or RS-232) for computer control
+    access: public
+links:
+  - title: AVS-47B product page
+    url: https://www.picowatt.fi/avs47b/avs47b.html
+  - title: Picowatt support page (older manuals)
+    url: https://www.picowatt.fi/support/support.html
+  - title: AVS47-IB GPIB interface
+    url: https://www.picowatt.fi/interfacing/avs47ib_gpib/avs47ib.html
+  - title: USB-Picobus interface
+    url: https://www.picowatt.fi/interfacing/usb_picobus/usb_picobus.html
+  - title: AVS-47B interface configurations (PDF)
+    url: https://www.picowatt.fi/avs47b/avs47_configurations.pdf
+software:
+  - name: InstrumentKit
+    kind: python-driver
+    ref: instruments.picowatt.PicowattAVS47
+    url: https://github.com/instrumentkit/InstrumentKit/blob/main/src/instruments/picowatt/picowattavs47.py
+notes:
+  - Computer control needs one of the maker's isolated interface options (USB-Picobus, serial/USB or RS-232, or the AVS47-IB GPIB interface); the bridge is configured with short ASCII commands such as MUX and ADC.
+  - The AVS-47B manual and interface guides are on the maker's own site; the AVS-48SI is the maker's newer bridge and the product page links a comparison.

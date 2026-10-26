@@ -1,0 +1,30 @@
+schema: 1
+id: andeen-hagerling/ah2700a
+maker: Andeen-Hagerling
+model: AH 2700A
+name: Andeen-Hagerling AH 2700A ultra-precision capacitance bridge
+covers: [AH 2550A]
+kind: capacitance-bridge
+interfaces: [gpib, rs-232]
+control: text
+links:
+  - title: AH 2700A product page
+    url: https://www.andeen-hagerling.com/ah2700a.htm
+  - title: AH 2700A product brochure (PDF)
+    url: https://www.andeen-hagerling.com/ah2700a.pdf
+  - title: Technical support articles
+    url: https://www.andeen-hagerling.com/support/
+  - title: AH2700A to IBM PC type serial port (RS-232 settings and first commands)
+    url: https://www.andeen-hagerling.com/support/2700topc.htm
+software:
+  - name: Andeen-Hagerling LabVIEW instrument drivers (AH 2700A and AH 2550A)
+    kind: vendor-sdk
+    url: https://www.andeen-hagerling.com/download/labview.htm
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.andeenhagerling.AH2700A
+    url: https://github.com/pymeasure/pymeasure/blob/master/pymeasure/instruments/andeenhagerling/ah2700a.py
+notes:
+  - The command reference is in the Operation and Maintenance Manual supplied with the bridge; no public copy was found on the maker's site.
+  - The maker's serial-port article gives the default RS-232 settings (9600 baud, 8 data bits, no parity, 1 stop bit, Xon/Xoff flow control) and shows a ">" prompt that accepts commands such as "single".
+  - The command language is the maker's own ASCII set (the PyMeasure driver uses SHOW ALL, FR and Q); the 2700A also answers the IEEE-488.2 commands *IDN? and *RST.

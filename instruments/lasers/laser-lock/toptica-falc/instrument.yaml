@@ -1,0 +1,23 @@
+schema: 1
+id: toptica/falc
+maker: TOPTICA Photonics
+model: FALC pro
+name: TOPTICA FALC pro fast analog laser lock (the FALC 110 has no computer control)
+kind: laser-lock
+interfaces: []
+control: unknown
+links:
+  - title: FALC pro product page
+    url: https://www.toptica.com/products/locking-driving-electronics/falc-pro
+  - title: FALC pro product information (PDF)
+    url: https://www.toptica.com/downloads/pif/product_info_TOPTICA_FALC-pro_en.pdf
+  - title: TOPTICA locking electronics comparison (computer control row)
+    url: https://www.toptica.com/laser-locking-electronics-comparison
+software:
+  - name: TOPTICA Python Laser SDK (toptica-lasersdk, DLC pro device classes)
+    kind: vendor-sdk
+    ref: toptica.lasersdk.dlcpro
+    url: https://pypi.org/project/toptica-lasersdk/
+notes:
+  - The FALC pro page describes a digital control interface for remote operation and full integration with the DLC pro, so it is set up through the DLC pro's command interface or Python SDK. No public FALC pro manual was found.
+  - TOPTICA's comparison table shows no computer control for the FALC 110 and mFALC 110, which are therefore analog only.

@@ -1,0 +1,37 @@
+schema: 1
+id: ozoptics/entangled-source
+maker: OZ Optics
+model: EPS-1000
+name: OZ Optics polarization-entangled photon sources (EPS-1000, EPG-1000, EPG-2000)
+kind: photon-source
+interfaces: []
+control: unknown
+manuals:
+  - title: EPS-1000 Polarization Entangled Photon Sources - operating instructions
+    url: https://www.ozoptics.com/ALLNEW_PDF/OI-EPS_1000_Rev0_BC73898.pdf
+    covers: Operating instructions; password-protected PDF, password from OZ Optics customer service
+    access: owners
+  - title: EPG-1000 Polarization Entangled Photon Sources - operating instructions
+    url: https://www.ozoptics.com/ALLNEW_PDF/OI-EPG-1000_Rev0_BC74207.pdf
+    covers: Operating instructions; password-protected PDF, password from OZ Optics customer service
+    access: owners
+  - title: EPG-2000 Polarization Entangled Photon Sources - operating instructions
+    url: https://www.ozoptics.com/ALLNEW_PDF/OI-EPG%202000-Rev0_BC74206.pdf
+    covers: Operating instructions; password-protected PDF, password from OZ Optics customer service
+    access: owners
+links:
+  - title: OZ Optics Operating Instructions/Manuals index
+    url: https://www.ozoptics.com/products/operating_instructions_manuals.html
+  - title: OZ Optics Polarization Entangled Photon Sources product page
+    url: https://www.ozoptics.com/products/polarization-entangled-photon-sources.html
+  - title: Polarization-Entangled Photon Source Broadband datasheet (DTS0158)
+    url: https://www.ozoptics.com/ALLNEW_PDF/DTS0158.pdf
+  - title: Polarization-Entangled Photon Source Narrowband 810 nm datasheet (DTS0200)
+    url: https://www.ozoptics.com/ALLNEW_PDF/DTS0200.pdf
+  - title: Bright Polarization-Entangled Photon Source, Narrowband datasheet (DTS0197)
+    url: https://www.ozoptics.com/ALLNEW_PDF/DTS0197.pdf
+  - title: Bright Polarization-Entangled Photon Source, Broadband datasheet (DTS0198)
+    url: https://www.ozoptics.com/ALLNEW_PDF/DTS0198.pdf
+notes:
+  - The three operating manuals are encrypted PDFs, so the command set could not be checked; OZ Optics customer service issues the password.
+  - The public datasheets and product page do not state a remote-control interface. pylablib handles other OZ Optics serial products (TF100, DD100, EPC04).

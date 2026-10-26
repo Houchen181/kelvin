@@ -1,0 +1,23 @@
+schema: 1
+id: oxford/ips120
+maker: Oxford Instruments
+model: IPS120-10
+name: Oxford Instruments IPS120-10 superconducting magnet power supply
+kind: magnet-supply
+interfaces: [rs-232, gpib]
+control: text
+links:
+  - title: Quantum Design Oxford legacy product support
+    url: https://qd-oxford.com/services/legacy_product_support.html
+software:
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.oxfordinstruments.IPS120_10
+    url: https://github.com/pymeasure/pymeasure/blob/master/pymeasure/instruments/oxfordinstruments/ips120_10.py
+  - name: qcodes_contrib_drivers
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.OxfordInstruments.IPS120.OxfordInstruments_IPS120
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/OxfordInstruments/IPS120.py
+notes:
+  - 'Oxford Instruments no longer hosts this manual: nanoscience.oxinst.com now redirects to Quantum Design Oxford, whose legacy support page does not list the IPS120-10. Some older Oxford manuals are on the Mercury Support site (mymercurysupport.com).'
+  - The QCoDeS contrib driver notes that the IPS 120 does not answer *IDN?, can be used over RS-232 or GPIB with similar commands, and that serial commands are prefixed with @n for the ISOBUS address.

@@ -1,0 +1,19 @@
+schema: 1
+id: edwards/tic
+maker: Edwards Vacuum (Atlas Copco)
+model: TIC
+name: Edwards TIC turbo and instrument controller
+covers: [TIC Instrument Controller]
+kind: vacuum-pump
+interfaces: [rs-232]
+control: text
+links:
+  - title: TIC Turbo and Instrument Controller datasheet
+    url: https://www.edwardsvacuum.com/content/dam/brands/edwards-vacuum/general-vacuum/downloads/measurement-and-control/vacuum-gauge-and-pump-controllers/3601-0654-01-TIC-Turbo-and-Instr-Controller-Datasheet.pdf
+  - title: TIC Instrument Controller datasheet
+    url: https://www.edwardsvacuum.com/content/dam/brands/edwards-vacuum/general-vacuum/downloads/measurement-and-control/vacuum-gauge-and-pump-controllers/3601-0224-01-TIC-Instrument-Controller.pdf
+  - title: Edwards download library (datasheets only; instruction manuals are supplied on request)
+    url: https://www.edwardsvacuum.com/en-uk/vacuum-pumps/download-library
+notes:
+  - 'No public command reference: Edwards'' download library lists only datasheets and says instruction manuals come from a sales representative. The serial protocol is documented in the separate TIC serial communications manual (D397-30-880), available from Edwards or a distributor.'
+  - 'The serial link is master/slave: the TIC replies only to messages sent by the host, so a host has to poll it.'

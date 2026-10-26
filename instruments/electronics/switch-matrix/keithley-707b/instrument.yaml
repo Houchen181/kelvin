@@ -1,0 +1,30 @@
+schema: 1
+id: keithley/707b
+maker: Keithley (Tektronix)
+model: 707B
+name: Keithley 707B / 708B switching matrix
+covers: [708B]
+kind: switch-matrix
+interfaces: [gpib, lan, rs-232]
+control: text
+manuals:
+  - title: Models 707B and 708B Switching System Reference Manual (707B-901-01C)
+    url: https://download.tek.com/manual/707B-901-01C_Jan_2025_Ref.pdf
+    covers: Switching and scanning, advanced operation and descriptions of the programming commands
+    access: public
+  - title: Models 707B and 708B Switching Matrix User's Manual (707B-900-01D)
+    url: https://download.tek.com/manual/707B-900-01D_Jan_2025_User.pdf
+    covers: Installation, front-panel operation, maintenance and troubleshooting
+    access: public
+links:
+  - title: 700 Series semiconductor switching systems product page
+    url: https://www.tek.com/en/products/keithley/semiconductor-test-systems/700-series-semiconductor-switching-systems
+  - title: 707B and 708B datasheet page
+    url: https://www.tek.com/en/datasheet/707b-and-708b-semiconductor-switch-matrix-mainframes
+examples:
+  - title: Keithley examples for the 700B series (TSP scan with external trigger)
+    url: https://github.com/tektronix/keithley/tree/HEAD/Instrument_Examples/Series_700B
+    license: Tektronix Sample Source Code License (custom, see LICENSE)
+notes:
+  - Programmed with Keithley's TSP (Lua-based) command set; the official examples repository has a .tsp scan example that is run from Test Script Builder.
+  - The 708B is the single-slot version (up to 96 crosspoints) and the 707B the six-slot version (up to 576 crosspoints).

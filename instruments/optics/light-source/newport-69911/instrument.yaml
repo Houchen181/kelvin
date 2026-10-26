@@ -1,0 +1,19 @@
+schema: 1
+id: newport/69911
+maker: Newport (MKS)
+model: '69911'
+name: Newport (Oriel) 69911 arc lamp power supply
+kind: light-source
+interfaces: [rs-232]
+control: text
+manuals:
+  - title: 69911 Arc Lamp Power Supply Manual
+    url: https://api.p1.mks.com/medias/sys_master/root/h70/hc3/9574045974558/90073995B-M69911-Arc-Lamp-Power-Supply-Manual.pdf
+    covers: Operation of the supply; the product page describes its RS-232 interface for setting lamp parameters, monitoring output and switching power remotely
+    access: public
+links:
+  - title: 69911 Arc Lamp Power Supply product page
+    url: https://www.newport.com/p/69911
+notes:
+  - The RS-232 interface sets the lamp operating parameters, monitors the light output level and switches lamp power on and off remotely.
+  - The Newport product page is a JavaScript application that sometimes returns only a shell, so retry if a fetch returns no content.

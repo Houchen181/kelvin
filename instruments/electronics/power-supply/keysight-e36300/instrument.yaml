@@ -1,0 +1,26 @@
+schema: 1
+id: keysight/e36300
+maker: Keysight
+model: E36312A
+name: Keysight E36300 series triple-output programmable DC power supplies
+covers: [E36311A, E36313A]
+kind: power-supply
+interfaces: [usb-tmc, lan, gpib]
+control: scpi
+manuals:
+  - title: E36300 Series Programming Guide
+    url: https://www.keysight.com/us/en/assets/9018-04577/programming-guides/9018-04577.pdf
+    covers: SCPI programming information for the E36300 Series
+    access: public
+software:
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.keysight.KeysightE36312A
+    url: https://github.com/pymeasure/pymeasure/blob/master/pymeasure/instruments/keysight/keysightE36312A.py
+  - name: qcodes_contrib_drivers
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.Keysight.Keysight_E36313A.E36313A
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/Keysight/Keysight_E36313A.py
+notes:
+  - One programming guide covers the E36311A, E36312A and E36313A. The education model EDU36311A has its own guides and is not covered here.
+  - Keysight's product and support pages are not linked; the document asset page here opens as an HTML landing page for the PDF. The interface list is that of the full-featured E36312A and E36313A.

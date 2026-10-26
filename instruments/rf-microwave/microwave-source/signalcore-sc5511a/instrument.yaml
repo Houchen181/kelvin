@@ -1,0 +1,32 @@
+schema: 1
+id: signalcore/sc5511a
+maker: SignalCore
+model: SC5511A
+name: SignalCore SC5511A 20 GHz RF signal source
+kind: microwave-source
+interfaces: [usb]
+control: library
+manuals:
+  - title: SC5511A User Manual
+    url: https://www.signalcore.com/downloads/sc5510x_11x/SC5511A_Manual.pdf
+    covers: Operation and programming of the SC5511A module
+    access: public
+links:
+  - title: SC5511A 20 GHz signal source product page (manuals, datasheet, setup packages)
+    url: https://www.signalcore.com/20ghz_signal-source.html
+  - title: SC5510A and SC5511A datasheet
+    url: https://www.signalcore.com/downloads/sc5510x_11x/sc5510a_sc5511a_datasheet.pdf
+  - title: SC5510A and SC5511A Software Front Panel user guide
+    url: https://www.signalcore.com/downloads/sc5510x_11x/sc5510a_sc5511a_sfp_user_guide.pdf
+  - title: SC5510 and SC5511 GUI manual
+    url: https://www.signalcore.com/downloads/sc5510x_11x/sc5510_sc5511_gui_manual_interactive.pdf
+software:
+  - name: SC5511A setup package (driver software and example code, 32-bit and 64-bit)
+    kind: vendor-sdk
+    url: https://www.signalcore.com/20ghz_signal-source.html
+  - name: SC5511A Software Front Panel (GUI)
+    kind: vendor-software
+    url: https://www.signalcore.com/20ghz_signal-source.html
+notes:
+  - 'The module is not controlled with SCPI text: the setup package supplies driver software and example code, and the user manual covers programming.'
+  - The product page lists a USB-SPI (7100045-01) and a USB-RS232 (7100045-02) interface option. Frequency list mode with software and hardware triggering is supported, while amplitude list, dwell time list and pulse modes are only on the B version.

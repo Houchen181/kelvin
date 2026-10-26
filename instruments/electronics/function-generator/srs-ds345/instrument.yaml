@@ -1,0 +1,23 @@
+schema: 1
+id: srs/ds345
+maker: Stanford Research Systems
+model: DS345
+name: SRS DS345 function generator
+kind: function-generator
+interfaces: [gpib, rs-232]
+control: scpi
+manuals:
+  - title: DS345 Synthesized Function Generator Operation and Service Manual
+    url: https://www.thinksrs.com/downloads/pdfs/manuals/DS345m.pdf
+    covers: Remote operation over GPIB and RS-232, including the command list
+    access: public
+links:
+  - title: DS345 product page
+    url: https://www.thinksrs.com/products/ds345.html
+software:
+  - name: InstrumentKit
+    kind: python-driver
+    ref: instruments.srs.SRS345
+    url: https://instrumentkit.readthedocs.io/en/latest/apiref/srs.html
+notes:
+  - 30 MHz synthesized function generator with 16,300-point arbitrary waveforms; the SRS page lists RS-232 and GPIB as options, so confirm that the interface board is fitted before planning automation.

@@ -1,0 +1,40 @@
+schema: 1
+id: ami/1700
+maker: American Magnetics
+model: '1700'
+name: AMI Model 1700 liquid level instrument
+kind: level-meter
+interfaces: [lan, rs-232]
+control: scpi
+manuals:
+  - title: Model 1700 Liquid Level Instrument Manual (Rev. 6, July 2022, helium and nitrogen)
+    url: https://www.americanmagnetics.com/support/manuals/Model1700-Rev6.pdf
+    covers: 'Remote interface reference: SCPI-based command set for RS-232 and Ethernet'
+    access: public
+  - title: Model 1700 Liquid Helium Level Instrument Manual (helium version, Rev. 4, July 2022)
+    url: https://www.americanmagnetics.com/support/manuals/Model1700-Rev4-HeOnly.pdf
+    access: public
+  - title: Model 1700 Liquid Nitrogen Level Instrument Manual (nitrogen version, Rev. 4, July 2022)
+    url: https://www.americanmagnetics.com/support/manuals/Model1700-Rev4-N2Only.pdf
+    access: public
+links:
+  - title: Model 1700 product page
+    url: https://www.americanmagnetics.com/1700.php
+  - title: AMI drivers and manuals page (manual revisions, firmware, LabVIEW drivers)
+    url: https://www.americanmagnetics.com/New_Support.php
+software:
+  - name: pylablib
+    kind: python-driver
+    ref: pylablib.devices.AmericanMagnetics.AM1700
+    url: https://pylablib.readthedocs.io/en/latest/devices/AmericanMagnetics.html
+  - name: AMI LabVIEW drivers (Model 1700 and Model 430, NI-VISA over Ethernet or serial)
+    kind: vendor-sdk
+    url: https://bitbucket.org/americanmagneticsinc/ami-drivers/src/master/
+examples:
+  - title: AMI drivers repository (example LabVIEW VIs, includes a Model 1700 folder)
+    url: https://bitbucket.org/americanmagneticsinc/ami-drivers/src/master/
+    license: unknown
+notes:
+  - Reads helium or nitrogen level from AMI sensors. Remote control is over RS-232 (115200 baud) or 10Base-T Ethernet with a SCPI-based command set.
+  - pylablib's driver uses TCP port 7180 for Ethernet and channel-specific queries such as MEAS:<channel>:LEVEL?, not a bare LEVEL? query.
+  - Rev. 6 is the combined helium and nitrogen manual; the Rev. 4 editions are specific to one cryogen.

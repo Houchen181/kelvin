@@ -1,0 +1,45 @@
+schema: 1
+id: teledyne/kinetix
+maker: Teledyne Photometrics
+model: Kinetix
+name: Teledyne Photometrics Kinetix sCMOS camera (PVCAM SDK)
+kind: camera
+interfaces: [pcie, usb]
+control: library
+manuals:
+  - title: PVCAM SDK online reference guide (HTML, Doxygen)
+    url: https://docs.teledynevisionsolutions.com/pvcam-sdk/
+    covers: 'PVCAM C library: camera enumeration, parameters and acquisition functions'
+    access: public
+links:
+  - title: Kinetix product page
+    url: https://www.teledynevisionsolutions.com/products/kinetix/
+  - title: Kinetix user manual
+    url: https://flir.netx.net/file/asset/60503/original/attachment/
+  - title: Kinetix family catalogue
+    url: https://flir.netx.net/file/asset/60502/original/attachment/
+  - title: PVCAM SDK and driver (downloads need a Teledyne login)
+    url: https://www.teledynevisionsolutions.com/products/pvcam-sdk-amp-driver/
+software:
+  - name: PVCAM SDK
+    kind: vendor-sdk
+    ref: pvcam.h
+    url: https://www.teledynevisionsolutions.com/products/pvcam-sdk-amp-driver/
+  - name: PyVCAM
+    kind: python-driver
+    ref: pyvcam.camera.Camera
+    url: https://github.com/Photometrics/PyVCAM
+  - name: pylablib
+    kind: python-driver
+    ref: pylablib.devices.Photometrics.PvcamCamera
+    url: https://github.com/AlexShkarin/pyLabLib/blob/main/pylablib/devices/Photometrics/pvcam.py
+examples:
+  - title: PyVCAM (Photometrics Python wrapper with examples)
+    url: https://github.com/Photometrics/PyVCAM
+    license: MIT
+  - title: OpenCV_PVCAM (calling PVCAM from OpenCV)
+    url: https://github.com/Photometrics/OpenCV_PVCAM
+    license: MIT
+notes:
+  - The PVCAM driver and SDK downloads require a Teledyne login; PyVCAM (pip install PyVCAM) needs the PVCAM runtime installed first.
+  - The pylablib wrapper is a generic PVCAM wrapper and is not Kinetix-specific.

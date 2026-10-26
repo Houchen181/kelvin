@@ -1,0 +1,34 @@
+schema: 1
+id: newport/cornerstone
+maker: Newport (MKS)
+model: Cornerstone 130
+name: Newport Oriel Cornerstone 130 and 260 monochromators
+covers: [Cornerstone 260]
+kind: monochromator
+interfaces: [rs-232, usb, gpib]
+control: text
+manuals:
+  - title: Cornerstone 130B Monochromator Manual
+    url: https://api.p1.mks.com/medias/sys_master/software/software/h30/hb7/9358972125214/90088262B-MCS130B-Manual.pdf
+    access: public
+  - title: Oriel Cornerstone 260 User Manual (Rev A)
+    url: https://api.p1.mks.com/medias/sys_master/images/images/hae/h47/8797226926110/Oriel-Cornerstone-260-User-Manual-RevA.pdf
+    access: public
+links:
+  - title: CS130B-1-FH Cornerstone 130B product page
+    url: https://www.newport.com/p/CS130B-1-FH
+  - title: CS260-RG-1-MC-A Cornerstone 260 product page
+    url: https://www.newport.com/p/CS260-RG-1-MC-A
+  - title: Cornerstone 130B data sheet
+    url: https://api.p1.mks.com/medias/sys_master/software/software/h52/h38/9135873720350/Cornerstone-130B-REV01.pdf
+  - title: Cornerstone 260 data sheet
+    url: https://api.p1.mks.com/medias/sys_master/images/images/h61/h4f/9134874624030/DS-121401-Cornerstone-260.pdf
+  - title: Oriel Mono Utility v5.1 quick start guide
+    url: https://api.p1.mks.com/medias/sys_master/software/software/h42/h3c/9708022628382/MONOUTILITY-QSG-C-Mono-Utility-v5.1-Quick-Start-Guide.pdf
+software:
+  - name: Oriel Mono Utility
+    kind: vendor-software
+    url: https://www.newport.com/p/CS130B-1-FH
+notes:
+  - 'Interfaces depend on the model: the 130B lists USB 2.0 and RS-232, while the 260 variants checked list RS-232 and IEEE-488, and Newport''s Mono Utility software controls the instrument from a PC.'
+  - The Newport product pages are JavaScript applications that sometimes return only a shell, so retry if a fetch returns no content.

@@ -1,0 +1,21 @@
+schema: 1
+id: idquantique/id900
+maker: ID Quantique
+model: ID900
+name: ID Quantique ID900 and ID1000 Time Controllers
+covers: [ID1000]
+kind: photon-counter
+interfaces: [lan]
+control: scpi
+links:
+  - title: ID1000 Time Controller Series product page
+    url: https://www.idquantique.com/quantum-detection-systems/products/id1000-time-controller/
+  - title: ID900 brochure
+    url: https://marketing.idquantique.com/acton/attachment/11868/f-023e/1/-/-/-/-/ID900_Brochure.pdf
+  - title: ID1000 brochure
+    url: https://marketing.idquantique.com/acton/attachment/11868/f-ffc7113f-15f8-42ce-9a03-95c808468748/1/-/-/-/-/ID1000_Brochure.pdf
+  - title: ID Quantique support portal (login required)
+    url: https://support.idquantique.com/support/login
+notes:
+  - IDQ lists an ID900 User Manual and a Time Controller Series User Manual only as download buttons that open a pop-up instead of linking to a file, so the command reference is not public.
+  - A third-party open-source driver (pr-single-photons) sends hierarchical SCPI-style commands such as INPUT1:STATE? and DEVICE:CONFIGURATION:LOAD over ZeroMQ, and the ID1000 page says units come with LabVIEW VIs and Python scripts.

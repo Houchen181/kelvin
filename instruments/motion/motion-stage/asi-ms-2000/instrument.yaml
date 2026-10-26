@@ -1,0 +1,54 @@
+schema: 1
+id: asi/ms-2000
+maker: Applied Scientific Instrumentation
+model: MS-2000
+name: ASI MS-2000 and Tiger stage controllers
+covers: [RM-2000, MFC-2000, TG-1000 (Tiger)]
+kind: motion-stage
+categories: [microscopy]
+interfaces: [rs-232, usb]
+control: text
+manuals:
+  - title: Serial command quick start
+    url: https://docs.asiimaging.com/command_quick_start
+    covers: Common MS-2000 and Tiger serial commands, reply format and error codes
+    access: public
+  - title: Serial command index
+    url: https://docs.asiimaging.com/commands
+    covers: One page per serial command
+    access: public
+  - title: RS-232 communication tech note
+    url: https://docs.asiimaging.com/tech_note_rs232_comm
+    covers: Serial settings and USB connection
+    access: public
+  - title: Differences between the Tiger and MS-2000 instruction sets
+    url: https://docs.asiimaging.com/tiger_ms2k_difference
+    access: public
+  - title: Low level command set
+    url: https://docs.asiimaging.com/low_level_command
+    covers: Binary low-level commands for the MS-2000 and MFC-2000
+    access: public
+links:
+  - title: MS-2000 product documentation
+    url: https://docs.asiimaging.com/products/ms2000
+  - title: Tiger (TG-1000) product documentation
+    url: https://docs.asiimaging.com/products/tiger
+  - title: MS-2000, MFC-2000 and RM-2000 operation manual
+    url: https://docs.asiimaging.com/ms2000_operation
+  - title: Python and serial control examples
+    url: https://docs.asiimaging.com/python
+software:
+  - name: ASI Console and Tiger Console (serial consoles for MS-2000 and Tiger)
+    kind: vendor-software
+    url: https://www.asiimaging.com/support/download/asi-console/
+  - name: Micro-Manager ASIStage device adapter (MS-2000 family)
+    kind: other-driver
+    ref: ASIStage
+    url: https://github.com/micro-manager/mmCoreAndDevices/tree/main/DeviceAdapters/ASIStage
+  - name: Micro-Manager ASITiger device adapter (Tiger family)
+    kind: other-driver
+    ref: ASITiger
+    url: https://github.com/micro-manager/mmCoreAndDevices/tree/main/DeviceAdapters/ASITiger
+notes:
+  - Serial settings are 8 data bits, no parity, 1 stop bit and no flow control; the MS-2000 baud rate is set by a DIP switch (9600 by default) and the Tiger uses 115200.
+  - On the Tiger, commands that set a letter-specified parameter need the card address in front, and VB F selects its more explicit reply format; only one program at a time can use the serial port.

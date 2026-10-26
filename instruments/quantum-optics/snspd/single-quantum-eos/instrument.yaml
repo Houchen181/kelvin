@@ -1,0 +1,42 @@
+schema: 1
+id: single-quantum/eos
+maker: Single Quantum
+model: Eos
+name: Single Quantum Eos SNSPD system
+kind: snspd
+interfaces: [lan, web-api]
+control: web-api
+manuals:
+  - title: Single Quantum Eos General User Manual
+    url: https://docs.singlequantum.com/general/index.html
+    covers: Operation, maintenance and troubleshooting of the Eos system (no command set; remote control is documented in the Retina manual below)
+    access: public
+  - title: Retina manual - Remote Control
+    url: https://docs.singlequantum.com/retina/6_remote_control.html
+    covers: JSON-RPC 2.0 over HTTP at the driver's /api endpoint, read-out WebSocket at /counts, WebSQController and NerveController Python classes with their methods
+    access: public
+  - title: Retina manual - Appendix (Nerve migration guide)
+    url: https://docs.singlequantum.com/retina/7_appendix.html
+    covers: HTTP endpoints, JSON-RPC method changes between the WebSQ and Nerve drivers, WebSocket/SSE events, method compatibility reference
+    access: public
+  - title: Atlas driver Operation (WebSQ driver)
+    url: https://docs.singlequantum.com/atlas/index.html
+    covers: Ethernet connection to the driver, WebSQ browser interface, Help-menu download of sample code for talking to the WebSQ driver
+    access: public
+links:
+  - title: Eos Excellence Line product page
+    url: https://www.singlequantum.com/solutions/excellence-line/
+  - title: SQ Documentation home
+    url: https://docs.singlequantum.com/index.html
+software:
+  - name: SQ Python controller classes (WebSQController.py, NerveController.py)
+    kind: vendor-sdk
+    url: https://docs.singlequantum.com/retina/6_remote_control.html
+  - name: qcodes_contrib_drivers
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.SingleQuantum.SingleQuantum.WebSQControlqcode
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/SingleQuantum/SingleQuantum.py
+notes:
+  - The JSON-RPC endpoint is http://<driver IP>/api and the manual describes no login or token; counts also stream over a binary WebSocket at /counts, whose frame layout differs between the WebSQ and Nerve drivers.
+  - The remote-control chapter sits in the Retina section but covers both the WebSQ (Atlas) and Nerve (Retina) drivers, so check which driver the system has before choosing WebSQController.py or NerveController.py; the Eos manual's troubleshooting chapter refers to the Atlas driver.
+  - The QCoDeS contrib driver connects over a TCP socket with JSON messages (default port 12000 in its source), not the HTTP JSON-RPC interface in the current manual, so test it against your driver version first.

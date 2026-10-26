@@ -1,0 +1,31 @@
+schema: 1
+id: vialux/dmd
+maker: ViALUX
+model: V-7000
+name: ViALUX V-7000 DMD module with the ALP-4.3 API
+covers: [V-7001]
+kind: spatial-light-modulator
+interfaces: [usb]
+control: library
+manuals:
+  - title: ALP-4.3 API description (registration-gated download area)
+    url: https://www.vialux.de/ViALUX-Website/registration-for-download.html
+    access: sign-in
+links:
+  - title: ALP Controller Suite (software API)
+    url: https://www.vialux.de/ViALUX-Website/alp-controller-suite.html
+  - title: SuperSpeed V-Modules (V-7001)
+    url: https://www.vialux.de/ViALUX-Website/dlp-subsystems-superspeed-v-modules.html
+  - title: ALP-4 Controller Suite data sheet
+    url: https://www.vialux.de/Website/PDF/ALP/E_ALP-4%20Controller-Suite.pdf
+  - title: SuperSpeed V-Modules data sheet
+    url: https://www.vialux.de/Website/PDF/ALP/E_SuperSpeed%20V-Modules.pdf
+  - title: V-Modules technical specifications
+    url: https://www.vialux.de/Website/PDF/ALP/V-Modules_specifications.pdf
+software:
+  - name: ViALUX ALP Controller Suite (ALP-4.x API, Windows DLL and Linux shared library)
+    kind: vendor-sdk
+    url: https://www.vialux.de/ViALUX-Website/alp-controller-suite.html
+notes:
+  - The ALP API supports C++, C#, VB.NET, Python, MATLAB and LabVIEW, with binary, grayscale, sequence-composition and scrolling modes; the V-7001 module is described as USB 3.0 with on-board DDR3 memory.
+  - The API description and downloads are in ViALUX's registration-gated download area, and the PyPI package ALP4lib is a community Python wrapper that loads the ViALUX libraries.

@@ -1,0 +1,17 @@
+schema: 1
+id: cryomech/cpa
+maker: Cryomech (Bluefors)
+model: CPA
+name: Cryomech CPA helium compressors (remote monitoring)
+covers: [CPA1110, CPA1114]
+kind: compressor
+interfaces: []
+control: unknown
+links:
+  - title: Bluefors support page (Cryomech product support contact)
+    url: https://bluefors.com/support/
+  - title: Bluefors and Cryomech support documents (login required)
+    url: https://bluefors.com/support-documents/
+notes:
+  - 'No Cryomech manual is public: the Bluefors support login that holds product documents is, per its page, for Bluefors and Cryomech customers. The CPAxxxx Digital Panel User Manual is the register reference cited by open-source drivers; ask Cryomech or Bluefors support for it.'
+  - The remote protocol is Modbus (binary registers), which none of the control values describes, so control is left as unknown. The open-source cpa1110 package describes Modbus RTU over RS-232/RS-485 and Modbus TCP over Ethernet, and the Simons Observatory SOCS agent uses Ethernet on TCP port 502 (third-party sources, not checked against Cryomech's manual).

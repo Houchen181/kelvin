@@ -1,0 +1,24 @@
+schema: 1
+id: keysight/dsox3000
+maker: Keysight
+model: InfiniiVision 3000 X-Series
+name: Keysight InfiniiVision 3000 X-Series oscilloscopes
+kind: oscilloscope
+interfaces: [lan, usb-tmc, gpib]
+control: scpi
+manuals:
+  - title: Programmer's Guide for InfiniiVision 3000 X-Series Oscilloscopes
+    url: https://www.keysight.com/us/en/assets/9018-06894/programming-guides/9018-06894.pdf
+    covers: SCPI command reference (printable PDF edition)
+    access: public
+  - title: Programmer's Guide for InfiniiVision 3000T X-Series Oscilloscopes
+    url: https://www.keysight.com/us/en/assets/9018-07265/programming-guides/9018-07265.pdf
+    covers: SCPI command reference for the 3000T models
+    access: public
+  - title: Programmer's Guide for InfiniiVision 3000G X-Series Oscilloscopes
+    url: https://www.keysight.com/us/en/assets/9922-01537/programming-guides/InfiniiVision-3000G-X-Series-Oscilloscopes-Programmers-Guide.pdf
+    covers: SCPI command reference for the 3000G models
+    access: public
+notes:
+  - The 3000 X-Series, 3000T X-Series and 3000G X-Series each have their own programmer's guide; pick the one that matches the oscilloscope family.
+  - Keysight's product and support pages are not linked; the document asset pages here open as an HTML landing page for the PDF.

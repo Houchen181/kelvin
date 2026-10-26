@@ -1,0 +1,25 @@
+schema: 1
+id: qutools/qued
+maker: qutools
+model: quED
+name: qutools quED entanglement demonstrator
+kind: photon-source
+interfaces: []
+control: unknown
+manuals:
+  - title: quED manual (10/2021)
+    url: https://www.qutools.com/files/quED/quED_manual.pdf
+    access: public
+  - title: quED quickstart manual (10/2021)
+    url: https://www.qutools.com/files/quED/quED_quickstart_manual.pdf
+    access: public
+  - title: quCR manual V3.2 (control and read-out unit, 10/2019)
+    url: https://www.qutools.com/files/quED/quCR_manual_V3.2.pdf
+    access: public
+links:
+  - title: quED product page
+    url: https://qutools.com/qued/
+  - title: quED datasheet
+    url: https://www.qutools.com/files/quED/qutools_quED_Datasheet.pdf
+notes:
+  - The quED product page lists a control and read-out unit (quCR) with a four-channel counter and coincidence logic but does not describe the computer interface, so start with the quCR manual (not read in full). The quED-TOM add-on page mentions software for recording tomography data.

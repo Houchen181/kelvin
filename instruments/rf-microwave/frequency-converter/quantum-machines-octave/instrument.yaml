@@ -1,0 +1,35 @@
+schema: 1
+id: quantum-machines/octave
+maker: Quantum Machines
+model: Octave
+name: Quantum Machines Octave up- and down-converter
+kind: frequency-converter
+interfaces: [lan]
+control: library
+manuals:
+  - title: Octave guide (QOP documentation)
+    url: https://docs.quantum-machines.co/latest/docs/Guides/octave/
+    covers: Connecting to the Octave from qm-qua, up- and down-conversion chains, clock, LO source, RF output gain and mode, calibration and batch commands
+    access: public
+  - title: Octave hardware description (QOP documentation)
+    url: https://docs.quantum-machines.co/latest/docs/Hardware/octave/
+    covers: Synthesizers, up-converters, down-converters and their LO connections
+    access: public
+links:
+  - title: QOP networking and QM router
+    url: https://docs.quantum-machines.co/latest/docs/Hardware/network_and_router/
+software:
+  - name: qm-qua
+    kind: vendor-sdk
+    ref: qm.octave.QmOctaveConfig
+    url: https://pypi.org/project/qm-qua/
+  - name: qualang-tools (Octave calibration result plotter)
+    kind: vendor-sdk
+    url: https://pypi.org/project/qualang-tools/
+examples:
+  - title: qua-libs (configuration_with_octave.py files in the spin-qubit and quantum-dot control applications)
+    url: https://github.com/qua-platform/qua-libs
+    license: BSD-3-Clause
+notes:
+  - 'The docs describe no stand-alone remote interface for the Octave: it is set up from Python through qm-qua (QmOctaveConfig with the Octave name, IP and port, passed to QuantumMachinesManager) and driven with qm.octave calls such as set_lo_frequency, set_rf_output_gain and calibrate_element.'
+  - The Octave clock can be internal or an external 10 MHz reference (ClockMode), and the guide gives the RF output gain range as -20 to 20 dB in 0.5 dB steps.

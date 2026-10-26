@@ -1,0 +1,21 @@
+schema: 1
+id: toptica/teraflash
+maker: TOPTICA Photonics
+model: TeraFlash pro
+name: TOPTICA TeraFlash pro terahertz time-domain spectrometer
+kind: thz-spectrometer
+interfaces: [lan]
+control: text
+links:
+  - title: TeraFlash pro product page
+    url: https://www.toptica.com/products/terahertz/teraflash-pro
+  - title: TeraFlash pro product information sheet (PDF)
+    url: https://www.toptica.com/downloads/pif/product-info_TOPTICA_teraflash-pro_en.pdf
+software:
+  - name: teraflash-ctrl (University of Bern, unofficial, CC BY-NC 4.0)
+    kind: python-driver
+    ref: teraflash.TeraFlash
+    url: https://pypi.org/project/teraflash-ctrl/
+notes:
+  - TOPTICA's product information sheet lists an Ethernet computer interface with a GUI or a command set, but the command set is not published; request it from TOPTICA support.
+  - The University of Bern package controls the instrument over TCP with a protocol reverse-engineered using Wireshark; it is unofficial, incomplete and does not support the scanning stage.

@@ -1,0 +1,17 @@
+schema: 1
+id: bartington/mag-03
+maker: Bartington Instruments
+model: Mag-03
+name: Bartington Mag-03 three-axis fluxgate magnetometer
+kind: magnetometer
+interfaces: [analog]
+control: none
+manuals:
+  - title: 'Three-Axis Magnetic Field Sensors Mag-03: operation manual (OM1004)'
+    url: https://www.bartingtondownloads.com/wp-content/uploads/OM1004.pdf
+    access: public
+links:
+  - title: Mag-03 datasheet (DS0013)
+    url: https://www.bartingtondownloads.com/wp-content/uploads/DS0013.pdf
+notes:
+  - The Mag-03 outputs three analogue voltages (0 to +/-10 V) proportional to Bx, By and Bz, so there is nothing to control remotely; read the outputs with a DAQ or ADC and a suitable power supply (Bartington sells acquisition units separately).

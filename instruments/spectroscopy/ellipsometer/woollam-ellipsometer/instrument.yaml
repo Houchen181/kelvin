@@ -1,0 +1,32 @@
+schema: 1
+id: woollam/ellipsometer
+maker: J.A. Woollam
+model: RC2 / M-2000 / alpha 2.0
+name: J.A. Woollam spectroscopic ellipsometers (CompleteEASE)
+covers: [VASE, IR-VASE, theta-SE, VUV-VASE]
+kind: ellipsometer
+interfaces: [usb, lan]
+control: library
+links:
+  - title: CompleteEASE software (states that it features an API)
+    url: https://www.jawoollam.com/ellipsometry-software/completeease
+  - title: CompleteEASE brochure (PDF)
+    url: https://www.jawoollam.com/download/pdfs/completeease-brochure.pdf
+  - title: RC2 ellipsometer
+    url: https://www.jawoollam.com/products/rc2-ellipsometer
+  - title: M-2000 ellipsometer
+    url: https://www.jawoollam.com/products/m-2000-ellipsometer
+  - title: alpha 2.0 ellipsometer
+    url: https://www.jawoollam.com/products/alpha-2-ellipsometer
+  - title: theta-SE ellipsometer (FAQ describes the PC connections)
+    url: https://www.jawoollam.com/products/theta-se-ellipsometer
+software:
+  - name: CompleteEASE
+    kind: vendor-software
+    url: https://www.jawoollam.com/ellipsometry-software/completeease
+  - name: CompleteEASE API
+    kind: vendor-sdk
+    url: https://www.jawoollam.com/ellipsometry-software/completeease
+notes:
+  - CompleteEASE runs the instrument and, according to J.A. Woollam, features an API for custom communication and real-time feedback control; no API documentation is public, so request it from J.A. Woollam.
+  - The PC connection depends on the model; the theta-SE page states one RJ-45 network connection and one USB connection.

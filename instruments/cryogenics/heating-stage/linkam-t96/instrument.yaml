@@ -1,0 +1,27 @@
+schema: 1
+id: linkam/t96
+maker: Linkam Scientific Instruments
+model: T96
+name: Linkam T96 controller with THMS600 heating and cooling stage
+kind: heating-stage
+interfaces: [usb]
+control: library
+links:
+  - title: T96 system controller
+    url: https://www.linkam.co.uk/t96
+  - title: THMS600 heating and freezing stage
+    url: https://www.linkam.co.uk/thms600
+  - title: Linkam SDK
+    url: https://www.linkam.co.uk/sdk
+  - title: Linkam support
+    url: https://www.linkam.co.uk/support
+software:
+  - name: Linkam SDK (C++, C#, Python; Windows and Linux; USB and serial)
+    kind: vendor-sdk
+    url: https://www.linkam.co.uk/sdk
+  - name: Linkam NEXUS software
+    kind: vendor-software
+    url: https://www.linkam.co.uk/support/software/nexus
+notes:
+  - 'No public command manual: programmatic control goes through the Linkam SDK over USB. The SDK page says distributing software built on it needs per-machine licensing, and it is obtained through a quote request to Linkam.'
+  - For a ready-made application instead of the SDK, Linkam's NEXUS software controls heating, cooling and vacuum over the same USB connection.

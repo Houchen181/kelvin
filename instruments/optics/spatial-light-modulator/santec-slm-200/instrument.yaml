@@ -1,0 +1,29 @@
+schema: 1
+id: santec/slm-200
+maker: santec
+model: SLM-200
+name: santec SLM-200 spatial light modulator
+covers: [SLM-250, SLM-300]
+kind: spatial-light-modulator
+interfaces: [usb]
+control: library
+manuals:
+  - title: SLM operation manuals (SLM-200 Ver. 14.0 listed), request-form download
+    url: https://aoc.santec.com/en/support/usermanuals/slm/
+    access: sign-in
+links:
+  - title: SLM-200 product page
+    url: https://aoc.santec.com/en/products/slm/slm-200/
+  - title: SLM software page (GUI, Pattern Generator, SDK)
+    url: https://aoc.santec.com/en/products/slm/software/
+  - title: SLM software download (request form)
+    url: https://aoc.santec.com/en/support/software-downloads/slm/
+  - title: SLM-200 catalog
+    url: https://aoc.santec.com/en/assets/doc/SLM-200-C-E.pdf
+software:
+  - name: santec SLM SDK (v2.5.1, DVI and USB modes)
+    kind: vendor-sdk
+    url: https://aoc.santec.com/en/products/slm/software/
+notes:
+  - The unit can be driven in DVI mode (a drawing window on the SLM) or in USB mode (images and sequences are transferred to the unit and played back, with external-trigger sequencing); the SDK supports both, with sample code in Python, C++, C#, VB, LabVIEW and MATLAB.
+  - The operation manual and the SDK are released after filling in a request form, and santec's software page points to the open-source slmsuite library for Python.

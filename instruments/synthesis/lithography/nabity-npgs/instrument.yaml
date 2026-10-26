@@ -1,0 +1,16 @@
+schema: 1
+id: nabity/npgs
+maker: J.C. Nabity Lithography Systems
+model: NPGS
+name: JC Nabity NPGS lithography system
+kind: lithography
+interfaces: [pcie, analog]
+control: none
+links:
+  - title: NPGS system description
+    url: https://www.jcnabity.com/sysdesc.htm
+  - title: NPGS user notices
+    url: https://www.jcnabity.com/usernote.htm
+notes:
+  - NPGS is a PCIe lithography board plus Windows software that drives the SEM scan and blanker through analog and digital signals; stage and microscope interface programs (serial or Ethernet) are supplied with it.
+  - The NPGS Installation Guide and User's Manual are described on the site but not posted as public files.

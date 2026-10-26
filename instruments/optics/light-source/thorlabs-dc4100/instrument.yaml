@@ -1,0 +1,11 @@
+schema: 1
+id: thorlabs/dc4100
+maker: Thorlabs
+model: DC4100
+name: Thorlabs DC4100 four-channel LED driver
+covers: [DC4104]
+kind: light-source
+interfaces: []
+control: unknown
+notes:
+  - A third-party MATLAB MEX wrapper for the DC4100 and DC4104 exists on GitHub (AndriyChmyrov/dc4100) and requires the Thorlabs DC4100 software to be installed.

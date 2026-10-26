@@ -1,0 +1,20 @@
+schema: 1
+id: hamamatsu/lcos-slm
+maker: Hamamatsu
+model: X13138
+name: Hamamatsu X13138 series LCOS-SLM phase spatial light modulator
+kind: spatial-light-modulator
+interfaces: []
+control: none
+links:
+  - title: LCOS-SLM product family page
+    url: https://www.hamamatsu.com/us/en/product/optical-components/lcos-slm.html
+  - title: LCOS-SLM FAQ (states that a standard DVI graphics card is all that is needed)
+    url: https://www.hamamatsu.com/us/en/support/faqs/lcos-slm.html
+  - title: LCOS-SLM applications and features (application note)
+    url: https://www.hamamatsu.com/content/dam/hamamatsu-photonics/sites/documents/99_SALES_LIBRARY/lpd/application_note_LCOS_E.pdf
+  - title: LCOS-SLM principle and structure
+    url: https://lcos-slm.hamamatsu.com/us/en/learn/about_lcos-slm/principle.html
+notes:
+  - Hamamatsu's FAQ says the SLM is driven from a standard graphics card with a DVI output, ideally a two-port card so the control software sits on one monitor and the SLM on the second port; writing the phase image to that screen is the control path.
+  - The X13138 is not listed on Hamamatsu's current LCOS-SLM product pages, and no instruction manual or control-software API for it was found publicly.

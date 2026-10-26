@@ -1,0 +1,66 @@
+schema: 1
+id: pico/picoscope
+maker: Pico Technology
+model: PicoScope
+name: Pico Technology PicoScope USB oscilloscopes
+kind: oscilloscope
+interfaces: [usb]
+control: library
+manuals:
+  - title: PicoScope 6000 Series (A API) Programmer's Guide
+    url: https://www.picotech.com/download/manuals/picoscope-6000-series-a-api-programmers-guide.pdf
+    covers: ps6000a driver functions
+    access: public
+  - title: PicoScope 5000 Series (A API) Programmer's Guide
+    url: https://www.picotech.com/download/manuals/picoscope-5000-series-a-api-programmers-guide.pdf
+    covers: ps5000a driver functions
+    access: public
+  - title: PicoScope 4000 Series (A API) Programmer's Guide
+    url: https://www.picotech.com/download/manuals/picoscope-4000-series-a-api-programmers-guide.pdf
+    covers: ps4000a driver functions
+    access: public
+  - title: PicoScope 3000 Series (A API) Programmer's Guide
+    url: https://www.picotech.com/download/manuals/picoscope-3000-series-a-api-programmers-guide.pdf
+    covers: ps3000a driver functions
+    access: public
+  - title: PicoScope 2000 Series (A API) Programmer's Guide
+    url: https://www.picotech.com/download/manuals/picoscope-2000-series-a-api-programmers-guide.pdf
+    covers: ps2000a driver functions
+    access: public
+  - title: ps6000a API manual (web help)
+    url: https://www.picotech.com/helpfiles/6000a-api/index.html
+    access: public
+  - title: psospa API manual (web help)
+    url: https://www.picotech.com/helpfiles/psospa-api/index.html
+    access: public
+  - title: ps4000a API manual (web help)
+    url: https://www.picotech.com/helpfiles/4000a-api/index.html
+    access: public
+links:
+  - title: Pico Technology software and driver downloads
+    url: https://www.picotech.com/downloads
+software:
+  - name: PicoSDK (drivers and API libraries)
+    kind: vendor-sdk
+    url: https://www.picotech.com/downloads
+  - name: picosdk (official Python wrappers)
+    kind: vendor-sdk
+    url: https://pypi.org/project/picosdk/
+  - name: PicoScope 7 (oscilloscope application)
+    kind: vendor-software
+    url: https://www.picotech.com/downloads
+examples:
+  - title: PicoSDK Python wrappers and examples
+    url: https://github.com/picotech/picosdk-python-wrappers
+    license: ISC
+  - title: PicoSDK C examples
+    url: https://github.com/picotech/picosdk-c-examples
+    license: ISC
+  - title: PicoSDK Python examples
+    url: https://github.com/picotech/picosdk-python-examples
+    license: ISC
+  - title: PicoSDK NI LabVIEW examples
+    url: https://github.com/picotech/picosdk-ni-labview-examples
+    license: ISC
+notes:
+  - Each PicoScope family has its own API library and programmer's guide (ps2000a, ps3000a, ps4000a, ps5000a, ps6000a, psospa), so match the guide to the series before writing code.

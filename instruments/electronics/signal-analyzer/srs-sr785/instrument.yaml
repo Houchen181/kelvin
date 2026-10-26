@@ -1,0 +1,21 @@
+schema: 1
+id: srs/sr785
+maker: Stanford Research Systems
+model: SR785
+name: SRS SR785 dynamic signal analyzer
+kind: signal-analyzer
+interfaces: [gpib, rs-232]
+control: scpi
+manuals:
+  - title: SR785 Dynamic Signal Analyzer manual
+    url: https://www.thinksrs.com/downloads/pdfs/manuals/SR785m.pdf
+    covers: 'Chapter 5: Programming (command index and syntax, command groups, interface commands, status reporting)'
+    access: public
+links:
+  - title: SR785 product page
+    url: https://www.thinksrs.com/products/sr785.html
+  - title: SRS manuals page
+    url: https://www.thinksrs.com/downloads/man.html
+notes:
+  - Two-channel FFT analyzer (DC to 102.4 kHz) with GPIB and RS-232 interfaces fitted as standard.
+  - SRS's manuals page lists a single manual for the SR785 and no separate programming manual.

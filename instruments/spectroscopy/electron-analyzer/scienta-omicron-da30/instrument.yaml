@@ -1,0 +1,32 @@
+schema: 1
+id: scienta-omicron/da30
+maker: Scienta Omicron
+model: DA30-L
+name: Scienta Omicron DA30-L electron analyser for ARPES
+covers: [DA30-L-8000]
+kind: electron-analyzer
+interfaces: [lan]
+control: web-api
+links:
+  - title: DA30-L analyser (mentions the PEAK network API)
+    url: https://scientaomicron.com/en/Instruments/Electron-Analysers/DA30-L
+  - title: DA30-L-8000 analyser
+    url: https://scientaomicron.com/en/Instruments/Electron-Analysers/DA30-L-8000
+  - title: PEAK control and acquisition software (network-based API, SDK and API training)
+    url: https://scientaomicron.com/en/Instruments/Electron-Analysers/PEAK
+  - title: DA30-L brochure (PDF)
+    url: https://www.scientaomicron.com/Downloads/Brochures/ESPEC/DA30L_SO_Brochure.pdf
+  - title: PEAK brochure (PDF)
+    url: https://scientaomicron.com/Downloads/Brochures/ESPEC/PEAK_SO_Brochure.pdf
+  - title: PSI peakAnalyser documentation (community EPICS areaDetector driver for the PEAK API)
+    url: https://paulscherrerinstitute.github.io/peakAnalyser/peakAnalyser.html
+software:
+  - name: PEAK
+    kind: vendor-software
+    url: https://scientaomicron.com/en/Instruments/Electron-Analysers/PEAK
+  - name: PEAK SDK and API
+    kind: vendor-sdk
+    url: https://scientaomicron.com/en/Instruments/Electron-Analysers/PEAK
+notes:
+  - Current analysers are run by Scienta Omicron's PEAK software, which has a network-based API; PSI's driver documentation states that it uses JSON-RPC over HTTP or WebSocket and was tested with PEAK 1.3.0 on a DA30L. The SDK and API training are offered by Scienta Omicron and no reference is public.
+  - Analysers still running the older SES software are a separate control path; the PSI peakAnalyser README says SES analysers need a different driver.

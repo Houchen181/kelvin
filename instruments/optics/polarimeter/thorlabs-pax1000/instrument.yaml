@@ -1,0 +1,29 @@
+schema: 1
+id: thorlabs/pax1000
+maker: Thorlabs
+model: PAX1000
+name: Thorlabs PAX1000 polarimeter
+covers: [PAX1000VIS, PAX1000IR1, PAX1000IR2]
+kind: polarimeter
+interfaces: [usb-tmc]
+control: scpi
+identify:
+  idn: ^Thorlabs,PAX1000
+  example: Thorlabs,PAX1000,M00000001,0.0.7.1
+manuals:
+  - title: PAX1000 remote interface (SCPI command documentation, from Thorlabs' examples repository)
+    url: https://github.com/Thorlabs/Light_Analysis_Examples/blob/main/Python/Thorlabs%20PAX1000%20Polarimeters/SCPI_command_docu/pax1000.html
+    covers: 'Complete SCPI command list: *IDN?, *RST, SENS and INP commands, measurement modes'
+    access: public
+software:
+  - name: Thorlabs PAX1000 instrument driver (TLPAX, VISA-based)
+    kind: vendor-sdk
+    ref: TLPAX_64.dll
+    url: https://github.com/Thorlabs/Light_Analysis_Examples/tree/main/Python/Thorlabs%20PAX1000%20Polarimeters
+examples:
+  - title: Thorlabs Light_Analysis_Examples (PAX1000 examples in C++, LabVIEW, MATLAB and Python)
+    url: https://github.com/Thorlabs/Light_Analysis_Examples
+    license: MIT
+notes:
+  - Over USB-TMC (VISA resource string like USB0::0x1313::0x8031::serial::INSTR) the instrument accepts SCPI such as INP:ROT:VEL, SENS:CALC and INP:ROT:STAT; the binary-readout PyVISA example needs firmware V1.2.1 or newer.
+  - The TLPAX driver DLL, installed with Thorlabs' PAX software, is the alternative to raw SCPI.

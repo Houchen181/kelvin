@@ -1,0 +1,25 @@
+schema: 1
+id: keysight/33220a
+maker: Keysight
+model: 33220A
+name: Agilent / Keysight 33220A function / arbitrary waveform generator
+kind: function-generator
+interfaces: [gpib, usb-tmc, lan]
+control: scpi
+manuals:
+  - title: 33220A 20 MHz Function / Arbitrary Waveform Generator User's Guide (33220-90002)
+    url: https://www.keysight.com/us/en/assets/9018-04437/user-manuals/9018-04437.pdf
+    covers: 'Remote Interface Reference: SCPI command set and remote interface configuration'
+    access: public
+software:
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.agilent.Agilent33220A
+    url: https://pymeasure.readthedocs.io/en/latest/api/instruments/agilent/agilent33220A.html
+  - name: InstrumentKit
+    kind: python-driver
+    ref: instruments.agilent.Agilent33220a
+    url: https://instrumentkit.readthedocs.io/en/latest/apiref/agilent.html
+notes:
+  - 20 MHz function / arbitrary waveform generator; amplitude values assume the programmed output load (50 ohm by default), so set OUTP:LOAD INF when driving a high-impedance input.
+  - Discontinued by Keysight in 2016; the 33500B series is the suggested replacement.

@@ -1,0 +1,19 @@
+schema: 1
+id: raith/elphy
+maker: Raith
+model: ELPHY
+name: Raith ELPHY lithography attachment
+covers: [ELPHY Plus, ELPHY Quantum, ELPHY MultiBeam]
+kind: lithography
+interfaces: [analog]
+control: none
+links:
+  - title: ELPHY product page
+    url: https://raith.com/products/elphy/
+  - title: ELPHY product brochure
+    url: https://raith.com/download/elphy-product-brochure/
+  - title: Raith downloads
+    url: https://raith.com/company/downloads/
+notes:
+  - Raith does not publish a manual or programming reference for ELPHY; the public site has a brochure only.
+  - The Digital RAITH Nanosuite software has position lists for batch jobs, including scripting, and ELPHY drives the SEM beam through BNC DAC outputs.

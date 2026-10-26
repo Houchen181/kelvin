@@ -1,0 +1,21 @@
+schema: 1
+id: ipg/ylr
+maker: IPG Photonics
+model: YLR
+name: IPG Photonics YLR fiber lasers
+kind: laser
+interfaces: []
+control: unknown
+manuals:
+  - title: IPG YLR/YLPP series fieldbus specification (DOCOXISCOMXX0002)
+    url: https://stipgpkenticoprod.blob.core.windows.net/ipgpsoftware/YLR/YLR%20Laser%20Fieldbus%20Interface/Documents/DOCOXISCOMXX0002_IPG_YLR-YLPP_Series_Fieldbus_Spec.pdf
+    covers: Fieldbus (PLC) interface of the YLR and YLPP series, from IPG's public YLR software download folder
+    access: public
+links:
+  - title: IPG YLR software downloads (fieldbus interface documents and firmware updater)
+    url: https://www.ipgphotonics.com/support/software/download?title=YLR
+  - title: IPG Photonics support
+    url: https://www.ipgphotonics.com/support
+notes:
+  - IPG's public download area holds the YLR/YLPP fieldbus specification and YLR firmware tools; ask IPG support for the RS-232 command manual.
+  - PyMeasure's driver for IPG's YAR amplifiers shows IPG's RS-232 style (3 to 4 letter ASCII commands, the reply echoing the command and a colon), but it is not a YLR driver.

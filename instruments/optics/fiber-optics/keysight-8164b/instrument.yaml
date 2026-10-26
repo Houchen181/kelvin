@@ -1,0 +1,19 @@
+schema: 1
+id: keysight/8164b
+maker: Keysight
+model: 8164B
+name: Keysight 8164B lightwave measurement system
+covers: [8163B, 8166B]
+kind: fiber-optics
+interfaces: [gpib, lan]
+control: scpi
+links:
+  - title: 8164B product page
+    url: https://www.keysight.com/us/en/product/8164B/lightwave-measurement-system.html
+  - title: 8164B technical support page
+    url: https://www.keysight.com/us/en/support/8164B/lightwave-measurement-system.html
+  - title: 8163B, 8164B and 8166B data sheet (asset page)
+    url: https://www.keysight.com/us/en/assets/7018-01037/data-sheets/5988-3924.pdf
+notes:
+  - Keysight's product page states that remote programming uses GPIB or LAN; the SCPI command reference is in the 816x programming guide, which was not found on the public pages.
+  - The mainframe carries plug-in laser, attenuator and power-meter modules, so command sets depend on the installed modules.

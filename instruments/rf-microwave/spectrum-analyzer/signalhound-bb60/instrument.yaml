@@ -1,0 +1,36 @@
+schema: 1
+id: signalhound/bb60
+maker: Signal Hound
+model: BB60C
+name: Signal Hound BB60C and BB60D spectrum analyzers
+covers: [BB60D, BB60A]
+kind: spectrum-analyzer
+interfaces: [usb]
+control: library
+manuals:
+  - title: BB60 API Reference (online)
+    url: https://signalhound.com/sigdownloads/SDK/online_docs/bb_api/index.html
+    covers: 'C API (bb_api) for the BB60D, BB60C and BB60A: swept, real-time, I/Q streaming, audio demodulation and scalar network analysis, with Windows and Linux notes'
+    access: public
+  - title: BB60 API Manual (older PDF edition)
+    url: https://signalhound.com/sigdownloads/BB60C/BB60-API-Manual.pdf
+    covers: C API manual for the BB60A and BB60C; the online reference above also covers the BB60D
+    access: public
+links:
+  - title: Signal Hound Software Development Kit (SDK) page
+    url: https://signalhound.com/software/signal-hound-software-development-kit-sdk/
+  - title: BB60D product page
+    url: https://signalhound.com/products/bb60d-6-ghz-real-time-spectrum-analyzer/
+  - title: BB60C product page
+    url: https://signalhound.com/products/bb60c/
+  - title: bb_api release notes
+    url: https://signalhound.com/sigdownloads/SDK/bb_api_release_notes.txt
+  - title: Signal Hound support page
+    url: https://signalhound.com/support/
+software:
+  - name: Signal Hound SDK (bb_api; C/C++, C#, Python and MATLAB examples)
+    kind: vendor-sdk
+    url: https://signalhound.com/software/signal-hound-software-development-kit-sdk/
+notes:
+  - Control is through the bb_api C library (DLL on Windows, shared library on Linux) that comes with the SDK; Python programs call it through a C-function interface such as ctypes, and the SDK includes Python examples.
+  - On Linux the application must run as root to avoid USB data loss in the I/Q, real-time and fast sweep streaming modes.

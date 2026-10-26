@@ -1,0 +1,15 @@
+schema: 1
+id: excelitas/spcm-aqrh
+maker: Excelitas
+model: SPCM-AQRH
+name: Excelitas SPCM-AQRH single-photon counting module
+kind: single-photon-detector
+interfaces: [analog]
+control: none
+manuals:
+  - title: SPCM-AQRH datasheet and operating manual (Rev 2023-1)
+    url: https://www.excelitas.com/sites/default/files/assets/product/document/27464.pdf
+    covers: Electrical interface (single +5 V supply, TTL output pulse, TTL gate input) and operating instructions
+    access: public
+notes:
+  - Each detected photon gives a TTL pulse on a rear BNC output that must be terminated into 50 ohm; the module also has a TTL gate input and has no computer interface, so counting is done with an external counter or time tagger.

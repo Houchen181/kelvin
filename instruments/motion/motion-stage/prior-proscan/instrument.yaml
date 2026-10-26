@@ -1,0 +1,30 @@
+schema: 1
+id: prior/proscan
+maker: Prior Scientific
+model: ProScan III
+name: Prior ProScan III microscope stage controller
+kind: motion-stage
+categories: [microscopy]
+interfaces: [rs-232, usb]
+control: text
+manuals:
+  - title: ProScan III Manual (version 1.16)
+    url: https://www.prior.com/wp-content/uploads/2026/08/ProScanIII_EN_UK_Manual.pdf
+    covers: ASCII command set for serial control
+    access: public
+links:
+  - title: ProScan III controller product page
+    url: https://www.prior.com/product/proscan-iii-motorized-stage-controller/
+  - title: Prior quick start guides and operating manuals
+    url: https://www.prior.com/technical-support/downloads/quickstart-guides-and-operating-manuals/
+software:
+  - name: Prior SDK 2.0.0 (C/C++ DLL with C#, C++, MATLAB and Python examples)
+    kind: vendor-sdk
+    url: https://www.prior.com/technical-support/downloads/software/
+  - name: Micro-Manager Prior device adapter (ProScan and OptiScan controllers)
+    kind: other-driver
+    ref: Prior
+    url: https://github.com/micro-manager/mmCoreAndDevices/tree/main/DeviceAdapters/Prior
+notes:
+  - The controller takes ASCII commands over RS-232 or USB; the ASCII command section of the ProScan III manual is the reference.
+  - Prior's SDK is a C/C++ DLL for ProScan III and OptiScan III controllers, with examples in C#, C++, MATLAB and Python.

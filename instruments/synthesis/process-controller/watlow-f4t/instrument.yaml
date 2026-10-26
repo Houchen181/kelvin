@@ -1,0 +1,37 @@
+schema: 1
+id: watlow/f4t
+maker: Watlow
+model: F4T
+name: Watlow F4T controllers
+kind: process-controller
+interfaces: [lan, rs-485]
+control: text
+manuals:
+  - title: F4T Register List for Communication Protocols and LabVIEW (2025-05-15)
+    url: https://www.watlow.com/-/media/documents/software-and-demos/f4t-register-list-2025-05-15.ashx
+    covers: Register addresses for every parameter (Excel workbook)
+    access: public
+  - title: F4T Controller Setup and Operation User's Guide (Rev D)
+    url: https://www.watlow.com/-/media/documents/user-manuals/f4t-setup-operation-manual-16802414-rev-d.ashx
+    covers: Communications setup and parameter tables
+    access: public
+  - title: Sample F4T 32-bit Modbus RTU Packet
+    url: https://www.watlow.com/-/media/documents/software-and-demos/sample-f4t-32-bit-modbus-rtu-packet.ashx
+    covers: Worked example of a 32-bit Modbus RTU packet
+    access: public
+  - title: Quick Start Guide, Modbus RTU Communication Flex Module
+    url: https://www.watlow.com/-/media/documents/user-manuals/communication-flex-module-qsg-rev-c.ashx
+    access: public
+links:
+  - title: F4T product page
+    url: https://www.watlow.com/en/products/controllers/temperature-and-process-controllers/f4t-integrated-controller
+software:
+  - name: Watlow COMPOSER (configuration software)
+    kind: vendor-software
+    url: https://www.watlow.com/en/products/controllers/temperature-and-process-controllers/f4t-integrated-controller
+  - name: Watlow Standard Bus LabVIEW driver (v6.0.109)
+    kind: vendor-sdk
+    url: https://www.watlow.com/en/products/controllers/temperature-and-process-controllers/f4t-integrated-controller
+notes:
+  - Ethernet is standard; serial Modbus RTU needs the optional communications flex module. The register list workbook is the address reference for Modbus and the other protocols.
+  - The product page also lists SCPI among the supported protocols; its command syntax was not checked.

@@ -1,0 +1,11 @@
+schema: 1
+id: agilent/4uhv
+maker: Agilent
+model: 4UHV
+name: Agilent 4UHV ion pump controller
+kind: vacuum-pump
+interfaces: []
+control: unknown
+notes:
+  - The user manual is Agilent part number 87-900-137-01; it is not linked here because Agilent's site refuses automated link checks.
+  - Agilent's flyer lists RS-232 and RS-485 as standard, with Ethernet and Profibus optional, and Local, Remote and Serial operating modes (read from search results, not checked against a manual). Control is left as unknown because no Agilent protocol document for the 4UHV could be read.

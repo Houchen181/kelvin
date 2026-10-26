@@ -1,0 +1,59 @@
+schema: 1
+id: delta-elektronika/sm
+maker: Delta Elektronika
+model: SM series
+name: Delta Elektronika SM series programmable DC power supplies
+kind: power-supply
+interfaces: [analog, rs-232, lan, gpib]
+control: scpi
+manuals:
+  - title: Product manual RS232 interface (PSC-232)
+    url: https://www.deltaelektronika.com/sites/default/files/2025-05/PSC-232_prod-manual_V202503.pdf
+    covers: 'Chapters 02 and 13: the SCPI and DPL command languages of the PSC interface; switch settings, connections and power-on defaults (SCPI, 9600 baud)'
+    access: public
+  - title: Manual PSC-488 and PSC-232 interface units (discontinued edition, V202201)
+    url: https://www.deltaelektronika.com/sites/default/files/2022-11/Man%20PSC488_232%20V202201_1.pdf
+    covers: Earlier edition of the GPIB (PSC-488) and RS-232 interface manual
+    access: public
+  - title: Product manual Ethernet interface (PSC-ETH Gen2)
+    url: https://www.deltaelektronika.com/sites/default/files/2025-11/PSC-ETH_Gen2_prod-manual_202511.pdf
+    covers: Ethernet programming with SCPI commands, web interface and sequencer
+    access: public
+  - title: Programming Guide Ethernet and Sequencer SM3300 series
+    url: https://www.deltaelektronika.com/sites/default/files/2025-11/SM3300_Parser_P0210_V202511.pdf
+    access: public
+  - title: Programming Guide Ethernet and Sequencer SM6K series
+    url: https://www.deltaelektronika.com/sites/default/files/2026-06/SM6K_Programming_Guide_V202605-1.pdf
+    access: public
+  - title: Product manual SM800 series
+    url: https://www.deltaelektronika.com/sites/default/files/2026-05/SM800_prod-manual_V202503-2.pdf
+    access: public
+  - title: Product manual SM1500 series
+    url: https://www.deltaelektronika.com/sites/default/files/2026-05/SM1500_prod-manual_V202504-2.pdf
+    access: public
+  - title: SM3000 series manual (discontinued; SM15-200D, SM30-100D, SM45-70D, SM70-45D, SM120-25D, SM300-10D)
+    url: https://www.deltaelektronika.com/sites/default/files/upload/MANUAL_SM3000_V201802.pdf
+    covers: Digital (D) models of the 3 kW SM3000 series, replaced by the SM3300 series in 2017; section 9 points IEEE-488 and RS-232 programming to the external PSC-488 module or the internal PSC-232 interface
+    access: public
+  - title: SM700 series manual (discontinued; SM1540-D, SM3004-D, SM7020-D)
+    url: https://www.deltaelektronika.com/sites/default/files/upload/MANUAL_SM700.pdf
+    access: public
+links:
+  - title: SM800 series page
+    url: https://www.deltaelektronika.com/en/products/sm800-series
+  - title: Ethernet interface unit page
+    url: https://www.deltaelektronika.com/en/ethernet-interface-unit
+  - title: RS232 interface unit page
+    url: https://www.deltaelektronika.com/en/rs232-interface-external-unit
+software:
+  - name: PyMeasure (SM 70-45 D)
+    kind: python-driver
+    ref: pymeasure.instruments.deltaelektronika.SM7045D
+    url: https://github.com/pymeasure/pymeasure/blob/master/pymeasure/instruments/deltaelektronika/sm7045d.py
+  - name: InstrumentKit (PSC-ETH-2 interface)
+    kind: python-driver
+    ref: instruments.delta_elektronika.PscEth
+    url: https://github.com/instrumentkit/InstrumentKit/blob/main/src/instruments/delta_elektronika/psc_eth.py
+notes:
+  - The supply itself is programmed through an analog input (isolated if needed); digital control goes through a PSC interface unit (PSC-232 for RS-232, PSC-488 for GPIB, PSC-ETH for Ethernet) fitted inside or beside the supply. The PSC-232 manual says the unit accepts SCPI (factory default, 9600 baud) or the DPL language and that up to 15 units can share one RS-232 port by address.
+  - The discontinued SM3000 D models (for example the SM 70-45 D, replaced by the SM3300 series) keep their manual on the maker's discontinued-products page, and the PyMeasure driver targets the SM 70-45 D over GPIB with SCPI-style commands. The old delta-elektronika.nl upload links now redirect to web pages, so use the deltaelektronika.com file links.

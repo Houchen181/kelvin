@@ -1,0 +1,30 @@
+schema: 1
+id: zeiss/sem
+maker: ZEISS
+model: SmartSEM (GeminiSEM / Sigma / EVO / Crossbeam)
+name: ZEISS SEM and FIB-SEM systems (SmartSEM, Python scripting API)
+covers: [GeminiSEM family, Sigma, EVO, Crossbeam]
+kind: electron-microscope
+interfaces: [lan]
+control: library
+links:
+  - title: GeminiSEM family (mentions the Python scripting API from ZEISS)
+    url: https://www.zeiss.com/microscopy/en/products/sem-fib-sem/sem/geminisem-family.html
+  - title: SmartSEM software (Macro-Editor with over 250 instrument control functions)
+    url: https://www.zeiss.com/microscopy/en/products/software/zeiss-smartsem.html
+  - title: SmartSEM aftersales flyer (PDF)
+    url: https://asset-downloads.zeiss.com/catalogs/download/mic/654ede53-1372-4035-b283-fef01abaa731/EN_aftersales-flyer_SmartSEM_A4.rel.1.0.pdf
+  - title: ZEISS Sigma
+    url: https://www.zeiss.com/microscopy/en/products/sem-fib-sem/sem/sigma.html
+  - title: ZEISS Crossbeam FIB-SEM
+    url: https://www.zeiss.com/microscopy/en/products/sem-fib-sem/fib-sem.html
+software:
+  - name: SmartSEM
+    kind: vendor-software
+    url: https://www.zeiss.com/microscopy/en/products/software/zeiss-smartsem.html
+  - name: ZEISS Python scripting API (advertised for GeminiSEM)
+    kind: vendor-sdk
+    url: https://www.zeiss.com/microscopy/en/products/sem-fib-sem/sem/geminisem-family.html
+notes:
+  - SmartSEM has a Macro-Editor with access to over 250 instrument control functions, and ZEISS advertises a Python scripting API on the GeminiSEM family; availability on Sigma, EVO and Crossbeam is not stated on the pages checked.
+  - No API reference is public, so ask ZEISS service for the documentation and licensing that apply to the specific model and SmartSEM version.

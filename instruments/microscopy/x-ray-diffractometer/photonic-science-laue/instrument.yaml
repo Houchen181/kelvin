@@ -1,0 +1,24 @@
+schema: 1
+id: photonic-science/laue
+maker: Photonic Science
+model: Laue crystal orientation system
+name: Photonic Science Laue crystal orientation system
+kind: x-ray-diffractometer
+interfaces: [lan]
+control: library
+links:
+  - title: Laue crystal orientation systems (Laue family)
+    url: https://photonicscience.com/products/laue-single-crystal-orientation-system-laue-family/
+  - title: Laue software (macro interface, programmable sequences, dual Gigabit Ethernet)
+    url: https://photonicscience.com/products/laue-single-crystal-orientation-system-laue-software/
+  - title: Laue system options (micro scripting language for automation)
+    url: https://photonicscience.com/products/laue-single-crystal-orientation-system-options/
+  - title: Laue install and support
+    url: https://photonicscience.com/products/laue-single-crystal-orientation-system-install-support/
+software:
+  - name: Photonic Science Laue software
+    kind: vendor-software
+    url: https://photonicscience.com/products/laue-single-crystal-orientation-system-laue-software/
+notes:
+  - The dedicated Laue software controls the stages, X-ray source and detector, and Photonic Science lists a macro interface and a micro scripting language for automation; external remote control is not described.
+  - No programming manual is public, so ask Photonic Science what scripting documentation ships with a given system.

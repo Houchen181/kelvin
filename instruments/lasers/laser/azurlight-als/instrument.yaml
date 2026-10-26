@@ -1,0 +1,21 @@
+schema: 1
+id: azurlight/als
+maker: Azurlight Systems
+model: ALS
+name: Azurlight Systems ALS fiber lasers and amplifiers
+kind: laser
+interfaces: [analog]
+control: none
+links:
+  - title: ALS high-power fiber lasers overview (infrared and visible series)
+    url: https://azurlight-systems.com/high-power-fiber-lasers-low-noise-single-mode-single-frequency/
+  - title: 1064 nm series product page
+    url: https://azurlight-systems.com/portfolio_page/1064-nm-high-power-fiber-lasers-amplifiers-50w-single-mode-single-frequency/
+  - title: 1064 nm IR series datasheet
+    url: https://azurlight-systems.com/wp-content/uploads/2019/05/DT08-Azurlight-Systems-1064-nm-IR-series.pdf
+  - title: 1030 nm IR series datasheet
+    url: https://azurlight-systems.com/wp-content/uploads/2019/05/DT07-Azurlight-Systems-1030-nm-IR-series.pdf
+  - title: 532 nm VIS series datasheet
+    url: https://azurlight-systems.com/wp-content/uploads/2019/05/DT05-Azurlight-Systems-532-nm-VIS-series-.pdf
+notes:
+  - Every ALS product page checked (532, 1030 and 1064 nm) lists laser control by multi-turn potentiometer, touch screen and analog voltage, with analog (local/remote) interfacing and no digital port, and no manual is public. Ask Azurlight (sales@azurlight-systems.com) if a digital interface is needed.

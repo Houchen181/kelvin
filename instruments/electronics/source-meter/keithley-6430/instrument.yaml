@@ -1,0 +1,31 @@
+schema: 1
+id: keithley/6430
+maker: Keithley (Tektronix)
+model: '6430'
+name: Keithley 6430 sub-femtoamp remote SourceMeter
+kind: source-meter
+interfaces: [gpib, rs-232]
+control: scpi
+manuals:
+  - title: Model 6430 Sub-Femtoamp Remote SourceMeter Reference Manual (6430-901-01G)
+    url: https://download.tek.com/manual/6430-901-01G_Jan_2021_Ref-2.pdf
+    covers: Programming commands, advanced operation, maintenance and troubleshooting
+    access: public
+links:
+  - title: Manual page on tek.com (6430-901-01)
+    url: https://www.tek.com/en/specialty-instruments/keithley-high-resistance-low-current-electrom-manual/6430-901-01
+  - title: Electrometers product family page
+    url: https://www.tek.com/en/products/keithley/low-level-sensitive-and-specialty-instruments/electrometers
+  - title: 6430 datasheet
+    url: https://download.tek.com/datasheet/6430.pdf
+software:
+  - name: qcodes_contrib_drivers
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.Tektronix.Keithley_6430.Keithley_6430
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/HEAD/src/qcodes_contrib_drivers/drivers/Tektronix/Keithley_6430.py
+examples:
+  - title: Keithley example for the 6430 (low-level current measurement with the preamp, C# and VISA)
+    url: https://github.com/tektronix/keithley/tree/HEAD/Instrument_Examples/Model_6430
+    license: Tektronix Sample Source Code License (custom, see LICENSE)
+notes:
+  - Source-measure unit built around a remote PreAmp for sub-femtoamp current measurements; it accepts SCPI over GPIB and RS-232.

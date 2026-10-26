@@ -66,17 +66,32 @@ safely, the maker's manual, and a starting point for the experiment. They are co
 
 **[Browse the catalog →](CATALOG.md)**
 
-| Instruments | | Experiments | |
-|---|---|---|---|
-| [Electronics](instruments/electronics) | source-meters, lock-ins, preamps, DMMs, DACs, generators, DAQ | Transport | R(T), Hall, gating, Landau fans, nonlinear Hall, dI/dV, critical current |
-| [RF and microwave](instruments/rf-microwave) | signal generators, VNAs, spectrum analyzers, AOM drivers, qubit controllers | Magnetometry | SQUID M(T) and M(H), AC susceptibility |
-| [Timing](instruments/timing) | pulse and delay generators, photon counters, time taggers | Optics | PL, Raman, mapping, photocurrent, reflectance, MOKE |
-| [Lasers](instruments/lasers) | CW, tunable and ultrafast lasers, diode controllers, wavemeters | Ultrafast and nonlinear | SHG rotational anisotropy, pump-probe |
-| [Optics](instruments/optics) | spectrometers, spectrographs, cameras, power meters, choppers, PEMs | Spin resonance | NV ODMR, Rabi, Ramsey, echo, T1, FMR |
-| [Motion](instruments/motion) | piezo positioners, scanners, stages, delay lines, rotation mounts | Quantum devices | Coulomb diamonds, resonators, qubits |
-| [Cryogenics](instruments/cryogenics) | temperature controllers, PPMS/MPMS, dilution refrigerators, vacuum | Acoustics | SAW transmission, acoustoelectric |
-| [Magnets](instruments/magnets) | magnet supplies, gaussmeters | AMO | AOM calibration, PLE scans |
-| [Scanning probe](instruments/scanning-probe) | SPM controllers | Environment | cooldown logs |
+| Instrument category | What is in it |
+|---|---|
+| [Electronics](instruments/electronics) | source-meters, lock-ins, preamps, DMMs, DACs, SIM900 modules, impedance and capacitance bridges, generators, scopes, DAQ |
+| [RF and microwave](instruments/rf-microwave) | signal generators, VNAs, spectrum analyzers, AOM drivers, RF switches and attenuators, qubit controllers |
+| [Timing](instruments/timing) | pulse and delay generators, sequencers (ARTIQ/Sinara), time taggers, counters, frequency references |
+| [Lasers](instruments/lasers) | CW, tunable and ultrafast lasers, OPOs and OPAs, frequency combs, diode controllers, laser locks, wavemeters |
+| [Optics](instruments/optics) | spectrometers, cameras, power meters, OSAs, shutters and filter wheels, SLMs and DMDs, fiber optics, light sources |
+| [Quantum optics](instruments/quantum-optics) | SNSPDs, SPADs, entangled-pair and single-photon sources, crystal ovens |
+| [Motion](instruments/motion) | piezo positioners and scanners, stages, delay lines, rotation mounts, microscope stages |
+| [Cryogenics](instruments/cryogenics) | temperature controllers and monitors, PPMS/MPMS, dilution refrigerators, compressors, vacuum, strain and pressure cells |
+| [Magnets](instruments/magnets) | magnet supplies, magnetometers, gaussmeters |
+| [Microscopy](instruments/microscopy) | STM/AFM controllers, SEM/FIB, optical tweezers, X-ray diffraction |
+| [Spectroscopy](instruments/spectroscopy) | FTIR, THz, ellipsometry, ARPES analyzers, NMR and EPR |
+| [Synthesis](instruments/synthesis) | furnace controllers, mass-flow controllers, deposition monitors, lithography |
+
+| Experiment area | Experiments |
+|---|---|
+| [Transport](experiments/transport) | R(T), Hall, gating, Landau fans, nonlinear Hall, dI/dV, critical current |
+| [Magnetometry](experiments/magnetometry) | SQUID M(T) and M(H), AC susceptibility |
+| [Optics](experiments/optics) | PL, Raman, mapping, photocurrent, reflectance, MOKE |
+| [Ultrafast and nonlinear](experiments/ultrafast-nonlinear) | SHG rotational anisotropy, pump-probe |
+| [Spin resonance](experiments/spin-resonance) | NV ODMR, Rabi, Ramsey, echo, T1, FMR |
+| [Quantum devices](experiments/quantum-devices) | Coulomb diamonds, resonators, qubits |
+| [Acoustics](experiments/acoustics) | SAW transmission, acoustoelectric |
+| [AMO](experiments/amo) | AOM calibration, PLE scans |
+| [Environment](experiments/environment) | cooldown logs |
 
 The categories, kinds and areas are defined in [`collection.yaml`](collection.yaml).
 

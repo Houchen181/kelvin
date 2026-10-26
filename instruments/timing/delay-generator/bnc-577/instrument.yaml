@@ -1,0 +1,28 @@
+schema: 1
+id: bnc/577
+maker: Berkeley Nucleonics
+model: '577'
+name: Berkeley Nucleonics Model 575 and 577 digital delay and pulse generators
+covers: ['575']
+kind: delay-generator
+interfaces: [usb, rs-232, lan, gpib]
+control: scpi
+manuals:
+  - title: Model 577 Digital Delay Pulse Generator User Manual (document version 1.5)
+    url: https://www.berkeleynucleonics.com/docs/bnc-model-577-user-manual.html
+    covers: Section 8 Remote Communication (RS-232, USB, GPIB, Ethernet), IEEE 488.2 common commands and section 8.6 SCPI command summary
+    access: public
+  - title: Model 575 Digital Delay Pulse Generator User Manual
+    url: https://www.berkeleynucleonics.com/docs/bnc-model-575-user-manual.html
+    covers: Chapter 8 Programming the 575 (RS-232, USB, GPIB, Ethernet); the command set follows SCPI but includes commands outside the standard
+    access: public
+links:
+  - title: Model 577 datasheet page
+    url: https://www.berkeleynucleonics.com/docs/bnc-model-577-datasheet.html
+  - title: Model 575 datasheet page
+    url: https://www.berkeleynucleonics.com/docs/bnc-model-575-datasheet.html
+  - title: BNC software and drivers page
+    url: https://www.berkeleynucleonics.com/docs/software-drivers.html
+notes:
+  - RS-232 and USB are standard and Ethernet and GPIB are options. USB appears as a virtual serial port (FT232 with FTDI drivers), and the optional Ethernet module is a Digi Connect ME that must be switched to raw TCP (default socket port 2101) before it can be used as a plain socket.
+  - Both manuals warn against sending any command containing the * character while the unit is booting, which can lock it up. The 575 manual also advises waiting for each reply (about 10 ms at 115200 baud) before sending the next command.

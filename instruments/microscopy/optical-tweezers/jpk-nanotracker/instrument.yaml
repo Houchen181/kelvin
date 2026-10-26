@@ -1,0 +1,14 @@
+schema: 1
+id: jpk/nanotracker
+maker: Bruker (JPK)
+model: NanoTracker 2
+name: JPK (Bruker) NanoTracker optical tweezers
+kind: optical-tweezers
+interfaces: [analog]
+control: none
+links:
+  - title: JPK NanoTracker 2 product page (Bruker)
+    url: https://www.bruker.com/en/products-and-solutions/microscopes/optical-tweezers/jpk-nanotracker-2.html
+notes:
+  - No programming or remote-control manual is public. Bruker describes a scriptable software interface and an ExperimentPlanner module for automation inside the NanoTracker software; ask Bruker for its documentation.
+  - External cameras, spectrometers and detectors are integrated or triggered with TTL signals.

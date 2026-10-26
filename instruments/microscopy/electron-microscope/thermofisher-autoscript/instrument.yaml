@@ -1,0 +1,23 @@
+schema: 1
+id: thermofisher/autoscript
+maker: Thermo Fisher Scientific
+model: AutoScript 4
+name: Thermo Fisher SEM and DualBeam (FIB-SEM) systems automated with AutoScript
+kind: electron-microscope
+interfaces: [lan]
+control: library
+links:
+  - title: AutoScript 4 datasheet (PDF)
+    url: https://documents.thermofisher.com/TFS-Assets/MSD/Datasheets/autoscript-4-datasheet.pdf
+software:
+  - name: AutoScript 4
+    kind: vendor-sdk
+    ref: autoscript_sdb_microscope_client.SdbMicroscopeClient
+    url: https://documents.thermofisher.com/TFS-Assets/MSD/Datasheets/autoscript-4-datasheet.pdf
+  - name: OpenFIBSEM (community package, MIT)
+    kind: python-driver
+    ref: fibsem.microscope.FibsemMicroscope
+    url: https://pypi.org/project/fibsem/
+notes:
+  - AutoScript is a Python API for Thermo Fisher SEM and DualBeam systems covering imaging, patterning, stage motion and gas injection; no public API reference was found, so ask Thermo Fisher for the documentation that ships with AutoScript.
+  - OpenFIBSEM wraps AutoScript's SdbMicroscopeClient and, in its source, connects to the microscope over the network (default port 7520).

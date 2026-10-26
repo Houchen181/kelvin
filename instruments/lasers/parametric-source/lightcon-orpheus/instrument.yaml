@@ -1,0 +1,45 @@
+schema: 1
+id: lightcon/orpheus
+maker: Light Conversion
+model: ORPHEUS
+name: Light Conversion ORPHEUS optical parametric amplifiers
+kind: parametric-source
+interfaces: [usb, lan, web-api]
+control: web-api
+manuals:
+  - title: WinTopas4 documentation (software for Topas and Orpheus OPAs)
+    url: https://lightconupdater.blob.core.windows.net/documentation/WinTopas4/index.html
+    covers: Introduction and user guide; the introduction names Topas and Orpheus OPAs and a REST interface for multi-client control
+    access: public
+  - title: Topas4 API description
+    url: https://lightconupdater.blob.core.windows.net/documentation/WinTopas4/apis.html
+    covers: REST API with JSON, non-blocking actions, server discovery by UDP multicast, authorized IP for state changes, links to the .NET SDK and NuGet package
+    access: public
+  - title: Topas4 public API reference
+    url: https://lightconupdater.blob.core.windows.net/documentation/WinTopas4/Topas4PublicAPI/Main.html
+    covers: Shutter, wavelength and motor control, authentication, saved motor positions
+    access: public
+links:
+  - title: ORPHEUS product page
+    url: https://lightcon.com/products/orpheus-optical-parametric-amplifiers/
+  - title: ORPHEUS datasheet
+    url: https://lightcon.com/datasheet/orpheus-collinear-opa/
+  - title: Light Conversion support (device manuals and software need a customer portal sign-in)
+    url: https://lightcon.com/support/
+  - title: WinTopas4 system requirements (migration page)
+    url: https://lightconupdater.blob.core.windows.net/documentation/WinTopas4/How-Tos/Migrate.html
+software:
+  - name: lightcon (Light Conversion Python package, REST client for Topas4-based OPAs)
+    kind: vendor-sdk
+    ref: lightcon.wintopas.WinTopas
+    url: https://pypi.org/project/lightcon/
+  - name: LightConversion.Topas4 (.NET library for the Topas4 API, unlisted on NuGet; the SDK zip on the API page has it too)
+    kind: vendor-sdk
+    url: https://www.nuget.org/packages/LightConversion.Topas4/
+examples:
+  - title: Topas4 API SDK and examples (linked from the WinTopas4 API page; C#, Python, LabVIEW, Matlab, Visual Basic and Postman examples are listed there)
+    url: https://github.com/DomasM/Topas4PublicAPI
+    license: unknown
+notes:
+  - 'Remote control goes through the Topas4 server that WinTopas4 runs on the PC attached to the device: a REST API with JSON, non-blocking actions (poll for completion), and an authorized client IP needed for calls that change the system state.'
+  - ORPHEUS hardware manuals and device-specific software sit in Light Conversion's customer portal and need a sign-in; the WinTopas4 documentation and API description listed above are public.

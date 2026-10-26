@@ -1,0 +1,11 @@
+schema: 1
+id: saes/nextorr
+maker: SAES Getters
+model: NEXTorr
+name: SAES NEXTorr NEG-ion pumps with the NIOPS controller
+kind: vacuum-pump
+interfaces: []
+control: unknown
+notes:
+  - SAES's site could not be reached when this entry was written (its TLS certificate had expired), so no SAES page is linked.
+  - Ask SAES for the NIOPS controller manual and its serial protocol before automating.

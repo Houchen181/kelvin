@@ -1,0 +1,56 @@
+schema: 1
+id: m-labs/artiq-sinara
+maker: M-Labs
+model: Kasli
+name: ARTIQ and Sinara hardware (Kasli, Urukul, Zotino, Sampler, Phaser, Mirny)
+covers: [Urukul, Zotino, Sampler, Phaser, Mirny]
+kind: sequencer
+interfaces: [lan]
+control: library
+manuals:
+  - title: ARTIQ manual
+    url: https://m-labs.hk/artiq/manual/
+    covers: Entry point to the ARTIQ documentation (installing, core device, RTIO concepts, drivers)
+    access: public
+  - title: Core real-time drivers (ARTIQ manual)
+    url: https://m-labs.hk/artiq/manual/core_drivers_reference.html
+    covers: artiq.coredevice drivers for Urukul, Zotino, Sampler, Phaser and Mirny and the Core class
+    access: public
+  - title: Core device (ARTIQ manual)
+    url: https://m-labs.hk/artiq/manual/core_device.html
+    access: public
+  - title: Sinara hardware wiki
+    url: https://github.com/sinara-hw/meta/wiki
+    covers: Overview of the Sinara boards and how they connect to Kasli
+    access: public
+links:
+  - title: ARTIQ Real-Time I/O concepts
+    url: https://m-labs.hk/artiq/manual/rtio.html
+  - title: Getting started with the core device
+    url: https://m-labs.hk/artiq/manual/getting_started_core.html
+  - title: Installing ARTIQ
+    url: https://m-labs.hk/artiq/manual/installing.html
+  - title: Kasli hardware repository
+    url: https://github.com/sinara-hw/Kasli
+  - title: Urukul hardware repository
+    url: https://github.com/sinara-hw/Urukul
+  - title: Zotino hardware repository
+    url: https://github.com/sinara-hw/Zotino
+  - title: Sampler hardware repository
+    url: https://github.com/sinara-hw/Sampler
+  - title: Phaser hardware repository
+    url: https://github.com/sinara-hw/Phaser
+  - title: Mirny hardware repository
+    url: https://github.com/sinara-hw/Mirny
+software:
+  - name: ARTIQ
+    kind: vendor-sdk
+    ref: artiq.coredevice.core.Core
+    url: https://github.com/m-labs/artiq
+examples:
+  - title: 'ARTIQ source repository: artiq/examples'
+    url: https://github.com/m-labs/artiq/tree/master/artiq/examples
+    license: LGPL-3.0
+notes:
+  - The Sinara boards have no vendor command protocol. Experiments are Python kernels that ARTIQ compiles and runs on the Kasli core device over Ethernet, using the artiq.coredevice drivers for Urukul, Zotino, Sampler, Phaser and Mirny.
+  - The ARTIQ manual documents the software and drivers, while the Sinara wiki and the hardware repositories document the board designs.

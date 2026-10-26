@@ -1,0 +1,28 @@
+schema: 1
+id: vaunix/lda
+maker: Vaunix Technology Corporation
+model: LDA
+name: Vaunix Lab Brick LDA digital attenuators
+kind: rf-attenuator
+interfaces: [usb]
+control: library
+links:
+  - title: Lab Brick software downloads (attenuator API, LabVIEW and GUI packages)
+    url: https://vaunix.com/software/
+  - title: Lab Brick digital attenuators (product page)
+    url: https://vaunix.com/digital-attenuators/
+  - title: Lab Brick LDA series digital attenuators datasheet
+    url: https://vaunix.com/resources/digital%20attenuators-datasheet.pdf
+  - title: Lab Brick support page
+    url: https://vaunix.com/support/
+software:
+  - name: Vaunix Lab Brick LDA SDK (Windows DLLs and Linux library)
+    kind: vendor-sdk
+    url: https://vaunix.com/software/
+  - name: qcodes_contrib_drivers
+    kind: python-driver
+    ref: qcodes_contrib_drivers.drivers.Vaunix.LDA.Vaunix_LDA
+    url: https://github.com/QCoDeS/Qcodes_contrib_drivers/blob/main/src/qcodes_contrib_drivers/drivers/Vaunix/LDA.py
+notes:
+  - No standalone programmer's guide is posted on the maker's site. The product page says each unit ships with a USB flash drive holding the SDKs, a LabVIEW driver, Python examples and a digital programming guide, and the attenuator API download is on the software page.
+  - The QCoDeS contrib driver wraps Vaunix's VNX_atten64.dll (VNX_atten.dll on 32-bit Windows), was tested on the LDA-133 and LDA-802Q, and does not implement the API's sweep profiles.

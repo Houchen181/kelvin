@@ -1,0 +1,25 @@
+schema: 1
+id: keysight/81160a
+maker: Keysight
+model: 81160A
+name: Keysight 81150A and 81160A pulse function arbitrary noise generators
+covers: [81150A]
+kind: pulse-generator
+interfaces: [gpib, usb-tmc, lan]
+control: scpi
+manuals:
+  - title: 81150A and 81160A Pulse Function Arbitrary Noise Generator User Guide
+    url: https://www.keysight.com/us/en/assets/9018-03445/user-manuals/9018-03445.pdf
+    covers: User guide for both generators
+    access: sign-in
+links:
+  - title: 81150A and 81160A data sheet (Keysight asset page)
+    url: https://www.keysight.com/us/en/assets/7018-01537/data-sheets/5989-6433.pdf
+software:
+  - name: PyMeasure
+    kind: python-driver
+    ref: pymeasure.instruments.keysight.Keysight81160A
+    url: https://github.com/pymeasure/pymeasure/blob/master/pymeasure/instruments/keysight/keysight81160A.py
+notes:
+  - The PyMeasure Keysight81160A driver builds on its Agilent33500 class and exposes the two channels as ch_1 and ch_2, with GPIB addressing shown in its docstring.
+  - The user guide behind the Keysight asset page is gated, so a Keysight sign-in is needed to download it.

@@ -1,6 +1,6 @@
 schema: 1
 id: hubner/cobolt
-maker: HÜBNER Photonics (Cobolt)
+maker: HÜBNER Photonics
 model: 06-01
 name: HÜBNER Photonics Cobolt 04-01 / 06-01 / 08-01 series lasers
 covers: [04-01, 08-01]

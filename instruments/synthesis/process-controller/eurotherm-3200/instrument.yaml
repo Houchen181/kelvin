@@ -1,0 +1,38 @@
+schema: 1
+id: eurotherm/3200
+maker: Eurotherm (Watlow)
+model: 3200 series
+name: Eurotherm 3200, 3500 and 2400 controllers
+covers: ['3204', '3208', '3216', 32h8, '3500', '3504', '3508', '2400', '2404', '2408', '2416']
+kind: process-controller
+interfaces: [rs-232, rs-485, lan]
+control: text
+manuals:
+  - title: 3200 Engineering Manual (HA028651 Iss 15)
+    url: https://www.eurotherm.com/?wpdmdl=27913
+    covers: Chapter 15, Digital Communications, including 15.6 Parameter Modbus Addresses
+    access: public
+  - title: 3504/3508 Engineering Manual (HA027988 Iss 19)
+    url: https://www.eurotherm.com/?wpdmdl=27895
+    access: public
+  - title: 2000 Series MODBUS and EI-BISYNCH Handbook (HA026230 Iss 3)
+    url: https://www.eurotherm.com/?wpdmdl=27877
+    covers: Modbus and EI-Bisynch communications for the 2000 series, which includes the 2400
+    access: public
+links:
+  - title: 3200 temperature/process controller product page
+    url: https://www.eurotherm.com/products/temperature-controllers/single-loop-temperature-controllers/3200-temperature-process-controller/
+  - title: 3500 advanced temperature controller and programmer product page
+    url: https://www.eurotherm.com/products/temperature-controllers/multi-loop-temperature-controllers/3500-advanced-temperature-controller-and-programmer/
+  - title: 2400 temperature controller/programmer product page
+    url: https://www.eurotherm.com/en/products/temperature-controllers-en/single-loop-temperature-controllers-en/2400-temperature-controller-programmer/
+software:
+  - name: Eurotherm iTools (configuration, monitoring and OPC server)
+    kind: vendor-software
+    url: https://www.eurotherm.com/products/power-control/power-control-software/eurotherm-itools/
+  - name: 2400 Series LabVIEW 7.0 driver
+    kind: vendor-sdk
+    url: https://www.eurotherm.com/us/download/2400-series-labview-7-0-driver/
+notes:
+  - Remote control is Modbus RTU over EIA-232 or 2-wire EIA-485; the 3500 can also use Modbus TCP over Ethernet. Parameter Modbus addresses are listed per series, so use the table for your own model.
+  - The 2000 series handbook covers both Modbus and EI-Bisynch, so confirm which protocol your 2400 is set to. Eurotherm lists most 2400 variants as no longer available.

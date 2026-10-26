@@ -1,0 +1,24 @@
+schema: 1
+id: uniblitz/vmm-d3
+maker: Uniblitz (Vincent Associates)
+model: VMM-D3
+name: Uniblitz VMM-D3 three-channel shutter driver
+covers: [VMM-D4]
+kind: shutter
+interfaces: [rs-232, analog]
+control: text
+manuals:
+  - title: VMM-D3 / VMM-D4 User Manual (v2.10 Rev B)
+    url: https://www.uniblitz.com/wp-content/uploads/2021/08/VMM_D3_D4-User-Manual-2.10_Rev_B.pdf
+    covers: Both drivers; RS-232C control and unit addressing (the product page names this manual for serial details)
+    access: public
+links:
+  - title: VMM-D3 product page
+    url: https://www.uniblitz.com/products/vmm-d3-shutter-driver/
+  - title: VMM-D3 datasheet
+    url: https://www.uniblitz.com/wp-content/uploads/2017/01/vmmd3datasheet.pdf
+  - title: Uniblitz technical documents
+    url: https://www.uniblitz.com/technical-documents/
+notes:
+  - Each of the three channels can be driven by TTL inputs or by RS-232 commands, and up to eight drivers (24 shutters) can share one serial port by giving each unit its own address on switch SW1.
+  - The product page states that channel 4 is not operational on the VMM-D3.

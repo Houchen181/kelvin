@@ -19,7 +19,7 @@
       "type": "array",
       "items": { "enum": ["gpib", "usb-tmc", "usb", "lan", "rs-232", "rs-485", "pcie", "pxie", "analog", "web-api"] }
     },
-    "control": { "enum": ["scpi", "text", "library", "web-api", "none"] },
+    "control": { "enum": ["scpi", "text", "library", "web-api", "none", "unknown"] },
     "identify": {
       "type": "object",
       "description": "Only for instruments without a card: the *IDN? reply as a regex (matched ignoring case)",
@@ -52,7 +52,7 @@
         "required": ["name", "kind", "url"],
         "properties": {
           "name": { "type": "string" },
-          "kind": { "enum": ["python-driver", "vendor-sdk", "vendor-software"] },
+          "kind": { "enum": ["python-driver", "other-driver", "vendor-sdk", "vendor-software"] },
           "ref": { "type": "string", "description": "Module and class, e.g. pymeasure.instruments.srs.sr830.SR830" },
           "url": { "type": "string", "pattern": "^https://" }
         }

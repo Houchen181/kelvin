@@ -1,0 +1,27 @@
+schema: 1
+id: tescan/sharksem
+maker: TESCAN
+model: SharkSEM / FIB-SEM Expert PI
+name: TESCAN SEM and FIB-SEM systems (SharkSEM remote-control API, Automation SDK)
+kind: electron-microscope
+interfaces: [lan]
+control: library
+links:
+  - title: FIB-SEM Expert PI and VisualCoder (Automation SDK with Python and SharkSEM client libraries)
+    url: https://tescan.com/product-portfolio/add-ons/fib-sem-expert-pi-visualcoder
+  - title: Digital Twin (describes Expert PI as the Python API for script-based control)
+    url: https://tescan.com/news/digital-twin-electron-microscope
+  - title: TESCAN CLARA (Python API for FIB-SEM prototyping)
+    url: https://tescan.com/product-portfolio/sem/clara
+software:
+  - name: Tescan Automation SDK (included with FIB-SEM Expert PI)
+    kind: vendor-sdk
+    ref: tescanautomation.Automation
+    url: https://tescan.com/product-portfolio/add-ons/fib-sem-expert-pi-visualcoder
+  - name: OpenFIBSEM (community package, MIT)
+    kind: python-driver
+    ref: fibsem.microscope.FibsemMicroscope
+    url: https://pypi.org/project/fibsem/
+notes:
+  - TESCAN says its API is built on a TCP/IP remote-control interface, and the Automation SDK bundles Python libraries, SharkSEM client libraries, documentation and examples; that documentation is not published.
+  - OpenFIBSEM imports the SDK's tescanautomation module (Automation class), so the SDK must be installed from TESCAN first.
