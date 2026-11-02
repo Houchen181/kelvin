@@ -2,7 +2,7 @@
 
 <!-- Written by `python tools/kic.py index` from the files in this repository; edit those, not this. -->
 
-280 instruments, 49 of them with a Kelvin card; 29 experiments; 10 lab configs.
+281 instruments, 50 of them with a Kelvin card; 29 experiments; 10 lab configs.
 
 **Card status.** *community*: written from the maker's manual, not yet checked on hardware. *lab-verified*: checked on hardware by a lab (see the instrument's `verified` list). *draft*: Kelvin keeps its outputs simulated until someone checks it. *no card*: Kelvin writes one from the manual when it finds the instrument.
 
@@ -18,7 +18,7 @@
 - [RF and microwave](#rf-and-microwave) (29)
 - [Timing, pulses and photon counting](#timing-pulses-and-photon-counting) (16)
 - [Lasers and laser control](#lasers-and-laser-control) (31)
-- [Optics, detection and spectroscopy](#optics-detection-and-spectroscopy) (40)
+- [Optics, detection and spectroscopy](#optics-detection-and-spectroscopy) (41)
 - [Quantum optics and single photons](#quantum-optics-and-single-photons) (15)
 - [Motion and positioning](#motion-and-positioning) (16)
 - [Cryogenics, vacuum and sample environment](#cryogenics-vacuum-and-sample-environment) (36)
@@ -229,7 +229,8 @@ Detectors, spectrometers, cameras, modulators, shutters, light shaping and fiber
 | [Thorlabs PAX1000 polarimeter](instruments/optics/polarimeter/thorlabs-pax1000/instrument.yaml) | polarimeter | no card | USB-TMC | [manual](https://github.com/Thorlabs/Light_Analysis_Examples/blob/main/Python/Thorlabs%20PAX1000%20Polarimeters/SCPI_command_docu/pax1000.html) |  |
 | [APE pulseCheck autocorrelator](instruments/optics/autocorrelator/ape-pulsecheck/instrument.yaml) | autocorrelator | no card | USB, LAN | [support](https://www.ape-berlin.de/en/autocorrelator/pulsecheck/) |  |
 | [Thorlabs MC2000B optical chopper](instruments/optics/chopper/thorlabs-mc2000b/instrument.yaml) | chopper | no card | USB | [manual](https://media.thorlabs.com/globalassets/items/m/mc/mc2/mc2000b/ttn102010-d02.pdf) | [Scanning photocurrent microscopy](experiments/optics/photocurrent-mapping.yaml), [Pump-probe transient reflectivity](experiments/ultrafast-nonlinear/pump-probe.yaml), [Rotational-anisotropy second-harmonic generation](experiments/ultrafast-nonlinear/shg-rotational-anisotropy.yaml) |
-| [Hinds Instruments PEM-200 photoelastic modulator controller (and PEM-100)](instruments/optics/modulator/hinds-pem/instrument.yaml) | modulator | no card | USB, LAN, RS-232 | [manual](https://www.hindsinstruments.com/wp-content/uploads/PEM-200-User-Manual.pdf) | [Magneto-optical Kerr effect](experiments/optics/moke.yaml) |
+| [Hinds Instruments PEM-100 photoelastic modulator controller](instruments/optics/modulator/hinds-pem100/instrument.yaml) | modulator | no card | RS-232 | [manual](https://www.hindsinstruments.com/wp-content/uploads/PEM-100-User-Manual.pdf) | [Magneto-optical Kerr effect](experiments/optics/moke.yaml) |
+| [Hinds Instruments PEM-200 photoelastic modulator controller](instruments/optics/modulator/hinds-pem200/instrument.yaml) | modulator | [community](instruments/optics/modulator/hinds-pem200/card.yaml) | USB, LAN | [manual](https://www.hindsinstruments.com/wp-content/uploads/PEM-200-User-Manual.pdf) | [Magneto-optical Kerr effect](experiments/optics/moke.yaml) |
 | [Thorlabs FW102C six-position motorized filter wheel](instruments/optics/shutter/thorlabs-fw102c/instrument.yaml) | shutter | no card | RS-232, USB |  |  |
 | [Thorlabs MFF101 motorized filter flip mount](instruments/optics/shutter/thorlabs-mff101/instrument.yaml) | shutter | no card | USB | [manual](https://media.thorlabs.com/contentassets/e92d618c92c94cea9096b3f231859611/etn012604-d02.pdf) |  |
 | [Thorlabs SC10 optical beam shutter controller](instruments/optics/shutter/thorlabs-sc10/instrument.yaml) | shutter | no card | RS-232 | [support](https://media.thorlabs.com/contentassets/e92d618c92c94cea9096b3f231859611/etn017648-d02.pdf) |  |
@@ -568,7 +569,7 @@ Experiments that need an instrument no card covers yet, and the catalogued model
 - **Gamma Vacuum:** [SPCe](instruments/cryogenics/vacuum-pump/gamma-vacuum-spce/instrument.yaml)
 - **Hamamatsu:** [ORCA-Flash4.0 V3](instruments/optics/camera/hamamatsu-orca/instrument.yaml), [X13138](instruments/optics/spatial-light-modulator/hamamatsu-lcos-slm/instrument.yaml)
 - **HighFinesse:** [WS7](instruments/lasers/wavemeter/highfinesse-wavemeter/instrument.yaml)
-- **Hinds Instruments:** [PEM-200](instruments/optics/modulator/hinds-pem/instrument.yaml)
+- **Hinds Instruments:** [PEM-100](instruments/optics/modulator/hinds-pem100/instrument.yaml), [PEM-200](instruments/optics/modulator/hinds-pem200/instrument.yaml)
 - **HOLOEYE Photonics:** [PLUTO-2.1](instruments/optics/spatial-light-modulator/holoeye-slm/instrument.yaml)
 - **HORIBA:** [iHR320](instruments/optics/spectrometer/horiba-ihr/instrument.yaml)
 - **HP / Agilent:** [34401A](instruments/electronics/multimeter/hp-34401a/instrument.yaml)

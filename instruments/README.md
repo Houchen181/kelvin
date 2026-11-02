@@ -10,7 +10,7 @@ Sorted by category, then kind: `<category>/<kind>/<maker>-<model>/`. Each folder
 | [RF and microwave](rf-microwave) | 26 | 6 |
 | [Timing, pulses and photon counting](timing) | 16 | 4 |
 | [Lasers and laser control](lasers) | 29 | 5 |
-| [Optics, detection and spectroscopy](optics) | 38 | 8 |
+| [Optics, detection and spectroscopy](optics) | 39 | 9 |
 | [Quantum optics and single photons](quantum-optics) | 15 | 0 |
 | [Motion and positioning](motion) | 16 | 4 |
 | [Cryogenics, vacuum and sample environment](cryogenics) | 32 | 5 |

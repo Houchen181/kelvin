@@ -80,7 +80,8 @@ Detectors, spectrometers, cameras, modulators, shutters, light shaping and fiber
 
 | Instrument | Card | Talks over | Manual |
 |---|---|---|---|
-| [Hinds Instruments PEM-200 photoelastic modulator controller (and PEM-100)](modulator/hinds-pem) | no card | USB, LAN, RS-232 | [manual](https://www.hindsinstruments.com/wp-content/uploads/PEM-200-User-Manual.pdf) |
+| [Hinds Instruments PEM-100 photoelastic modulator controller](modulator/hinds-pem100) | no card | RS-232 | [manual](https://www.hindsinstruments.com/wp-content/uploads/PEM-100-User-Manual.pdf) |
+| [Hinds Instruments PEM-200 photoelastic modulator controller](modulator/hinds-pem200) | [community](modulator/hinds-pem200/card.yaml) | USB, LAN | [manual](https://www.hindsinstruments.com/wp-content/uploads/PEM-200-User-Manual.pdf) |
 
 ## Shutters, filter wheels and flip mounts
 

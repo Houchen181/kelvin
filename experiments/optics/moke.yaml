@@ -13,7 +13,7 @@ roles:
   modulation:
     kind: [function-generator, modulator]
     does: Modulates the laser, or the polarization with a photoelastic modulator.
-    suggested: [keysight/33500b, hinds/pem]
+    suggested: [keysight/33500b, hinds/pem200, hinds/pem100]
   lockin:
     kind: lock-in
     does: Reads the balanced detector's difference signal.

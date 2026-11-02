@@ -1,0 +1,24 @@
+schema: 1
+id: hinds/pem100
+maker: Hinds Instruments
+model: PEM-100
+name: Hinds Instruments PEM-100 photoelastic modulator controller
+kind: modulator
+interfaces: [rs-232]
+control: text
+manuals:
+  - title: PEM-100 Photoelastic Modulator User Manual
+    url: https://www.hindsinstruments.com/wp-content/uploads/PEM-100-User-Manual.pdf
+    covers: 'Chapter 5 RS232 settings (Table 5.1), chapter 8 Command Line Interpreter (CLI port settings and command descriptions, Tables 8.1-8.2) and the RS232-to-USB / RS232-to-IEEE-488 converters'
+    access: public
+links:
+  - title: PEM-100 controller product bulletin (PDF)
+    url: https://www.hindsinstruments.com/wp-content/uploads/PEM-100-Controller-Product-Bulletin.pdf
+  - title: Hinds resources and user manuals
+    url: https://www.hindsinstruments.com/resources/
+software:
+  - name: PEM-100 LabVIEW driver and controller software (listed on the resources page)
+    kind: vendor-sdk
+    url: https://www.hindsinstruments.com/resources/
+notes:
+  - The PEM-100 is RS-232 only (settings in Table 5.1 of its manual), with its own command line interpreter; the PEM-200's card (hinds/pem200) doesn't fit it.
