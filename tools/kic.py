@@ -1503,11 +1503,8 @@ FORM = ROOT / ".github" / "ISSUE_TEMPLATE" / "new-card.yml"
 NO_RESPONSE = "_No response_"   # what GitHub writes for a field left empty
 FENCE = re.compile(r"^\s*(`{3,}|~{3,})")
 LOGIN = re.compile(r"^[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})(?:\[bot\])?$")   # a GitHub user name
-USB_ID = re.compile(r"^[0-9a-fA-F]{4}:[0-9a-fA-F]{4}$")
-# USB-serial chips that many makers build in and every adapter cable has: their IDs say nothing of the instrument behind
-# them, and a card that listed one would claim every such port in a scan (Kelvin leaves them out too)
-GENERIC_USB = frozenset({"0403:6001", "0403:6010", "0403:6011", "0403:6014", "0403:6015", "067b:2303", "10c4:ea60",
-                         "10c4:ea70", "1a86:7523", "1a86:55d4"})
+# USB IDs: USB_ID and GENERIC_USB above (a generic USB-serial chip's ID says nothing of the instrument behind it, and
+# a card that listed one would claim every such port in a scan, so the form's are left out as validate refuses them)
 NOT_NAMED = "not named"   # a hardware check's lab, when the person who sent it gave no credit
 MAX_LINE = 200            # characters of a one-line answer (maker, model, firmware, credit)
 MAX_SUMMARY = 2000        # characters of what was checked on hardware, as its verified entry keeps it
