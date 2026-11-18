@@ -103,6 +103,23 @@ Cards decide what Kelvin treats as safe, so every card change gets a second look
 - [ ] `identify.usb`, if given, lists only the IDs this model reports, never a USB-serial chip's own.
 - [ ] `manual` names the manual and chapter the card follows; its `manual_url` is listed under `manuals`.
 
+## Send a card from Kelvin
+
+A card your lab reviewed in Kelvin can come here without copying files: **Send to the collection** next to it in
+**Lab → Cards…** (or ask Kelvin in a chat to send it). Kelvin first shows exactly what goes, then opens the **Send a
+card from Kelvin** issue form in your browser, filled in: the card, its maker, model, kind and interfaces, its id here
+when the collection has it, an identity reply and USB IDs with the serial numbers taken out, and a summary of the
+check on hardware from your lab's record for you to edit. Kelvin leaves out addresses, serial numbers, host names, file
+paths and names; the **Credit** field is yours to fill in. A card too long for the link is copied for you to paste.
+Nothing is sent until you submit the form from your own GitHub account, and Kelvin needs no GitHub token.
+
+The workflow `.github/workflows/card-from-issue.yml` then runs `python tools/kic.py from-issue` on the issue. It puts
+the card into its instrument's folder as `card.yaml` (or makes the folder of an instrument the collection lacks),
+brings `instrument.yaml` up to date (`card: card.yaml`, the card's manual, a `verified` entry for the check on
+hardware), runs `validate` and `index`, and opens a pull request crediting you. It comments on the issue with the
+pull request's link, or with what to fix: edit the issue and it runs again. The maintainer reviews the pull request
+like any card change; nothing is merged without that review.
+
 ## Report a hardware check
 
 Open an issue with the **Hardware verification** form, or a pull request that adds a `verified` entry. Say which

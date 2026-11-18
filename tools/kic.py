@@ -8,9 +8,10 @@
     python tools/kic.py manuals [ID ...]       download manuals, e.g. for a lab PC that is offline
     python tools/kic.py links                  check that every manual and link still answers
     python tools/kic.py probe ID ADDRESS       ask an instrument who it is and read its settings (sets nothing)
+    python tools/kic.py from-issue BODY        file a card sent from Kelvin as an issue (--event: the workflow's)
 
-find, install, manuals and links need only Python 3.9 or later. validate, index, manuals --pin and probe also need
-PyYAML (pip install pyyaml), and probe needs PyVISA (pip install pyvisa pyvisa-py).
+find, install, manuals and links need only Python 3.9 or later. validate, index, manuals --pin, probe and from-issue
+also need PyYAML (pip install pyyaml), and probe needs PyVISA (pip install pyvisa pyvisa-py).
 """
 from __future__ import annotations
 
@@ -21,11 +22,12 @@ import json
 import os
 import re
 import sys
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Set, Tuple
+from typing import Any, Dict, List, Optional, Sequence, Set, Tuple
 
 ROOT = Path(__file__).resolve().parent.parent
 INDEX = ROOT / "index.json"
@@ -106,9 +108,9 @@ class Problems:
 _LOADER: Any = None
 
 
-def load_yaml(path: Path) -> Any:
-    """YAML as Kelvin reads it: YAML 1.2 number rules, so 1e7 and 1.0e7 are numbers (PyYAML alone follows
-    YAML 1.1, where an exponent needs a sign and "1.0e7" is a string)."""
+def yaml_loader() -> Any:
+    """PyYAML's safe loader with Kelvin's number rules (YAML 1.2), so 1e7 and 1.0e7 are numbers (PyYAML alone follows
+    YAML 1.1, where an exponent needs a sign and "1.0e7" is a string). Safe: it builds plain data, never objects."""
     global _LOADER
     try:
         import yaml
@@ -121,8 +123,22 @@ def load_yaml(path: Path) -> Any:
                                      re.compile(r"^[-+]?(?:[0-9][0-9_]*)?\.?[0-9_]*[eE][-+]?[0-9]+$"),
                                      list("-+0123456789."))
         _LOADER = Loader
+    return _LOADER
+
+
+def load_yaml(path: Path) -> Any:
+    """A YAML file as Kelvin reads it (yaml_loader)."""
+    loader = yaml_loader()
+    import yaml
     with open(path, encoding="utf-8") as f:
-        return yaml.load(f, Loader=_LOADER)
+        return yaml.load(f, Loader=loader)
+
+
+def load_yaml_text(text: str) -> Any:
+    """YAML text as Kelvin reads it (yaml_loader)."""
+    loader = yaml_loader()
+    import yaml
+    return yaml.load(text, Loader=loader)
 
 
 def sha256(path: Path) -> str:
@@ -789,7 +805,9 @@ def kelvin_crosscheck(c: Collection) -> Optional[str]:
     return "Kelvin's own card, lab and plan parsers"
 
 
-def cmd_validate(args: argparse.Namespace) -> int:
+def check_all(kelvin: bool = True) -> Tuple[Collection, Problems, Optional[str]]:
+    """Every instrument, card, lab config and experiment checked: (the collection, its problems, what else checked
+    them: Kelvin's own parsers, when Kelvin is installed in this Python and `kelvin`)."""
     p = Problems()
     c = Collection(p)
     for iid, data in c.instruments.items():
@@ -798,7 +816,11 @@ def cmd_validate(args: argparse.Namespace) -> int:
         check_lab(name, data, c)
     for eid, data in c.experiments.items():
         check_experiment(eid, data, c)
-    also = None if args.no_kelvin else kelvin_crosscheck(c)
+    return c, p, kelvin_crosscheck(c) if kelvin else None
+
+
+def cmd_validate(args: argparse.Namespace) -> int:
+    c, p, also = check_all(not args.no_kelvin)
     for w in p.warnings if args.warnings else []:
         print("warning: " + w)
     for e in p.errors:
@@ -1057,15 +1079,23 @@ def build_shelf(index: Dict[str, Any]) -> Dict[str, str]:
     return pages
 
 
+def index_files(c: Collection) -> Tuple[Dict[str, Any], Dict[str, str]]:
+    """(the index, every file `index` writes from it: index.json, CATALOG.md and the instruments/ READMEs, by path). A
+    date YAML read as one (a verified entry's date: 2026-10-26, unquoted) goes into index.json as its text."""
+    index = build_index(c)
+    files = {"index.json": json.dumps(index, indent=1, ensure_ascii=False, default=str) + "\n",
+             "CATALOG.md": build_catalog(index)}
+    files.update(build_shelf(index))
+    return index, files
+
+
 def cmd_index(args: argparse.Namespace) -> int:
     p = Problems()
     c = Collection(p)
     if p.errors:
         print("\n".join("error: " + e for e in p.errors))
         return 1
-    index = build_index(c)
-    files = {"index.json": json.dumps(index, indent=1, ensure_ascii=False) + "\n", "CATALOG.md": build_catalog(index)}
-    files.update(build_shelf(index))
+    index, files = index_files(c)
     if args.check:
         stale = [name for name, new in files.items()
                  if not (ROOT / name).exists() or (ROOT / name).read_text(encoding="utf-8") != new]
@@ -1463,6 +1493,608 @@ def cmd_probe(args: argparse.Namespace) -> int:
     return 0
 
 
+# ---------------------------------------------------------------- from-issue: a card sent from Kelvin
+
+# A lab sends a card it reviewed from Kelvin as an issue on the "Send a card from Kelvin" form (new-card.yml), from the
+# person's own GitHub account; .github/workflows/card-from-issue.yml runs this on the issue and opens a pull request
+# with what it writes. An issue is anyone's text: its card is read with a safe loader only, ids are checked before they
+# name a folder, folders come only from checked ids, and nothing in the issue is ever run.
+FORM = ROOT / ".github" / "ISSUE_TEMPLATE" / "new-card.yml"
+NO_RESPONSE = "_No response_"   # what GitHub writes for a field left empty
+FENCE = re.compile(r"^\s*(`{3,}|~{3,})")
+LOGIN = re.compile(r"^[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})(?:\[bot\])?$")   # a GitHub user name
+USB_ID = re.compile(r"^[0-9a-fA-F]{4}:[0-9a-fA-F]{4}$")
+# USB-serial chips that many makers build in and every adapter cable has: their IDs say nothing of the instrument behind
+# them, and a card that listed one would claim every such port in a scan (Kelvin leaves them out too)
+GENERIC_USB = frozenset({"0403:6001", "0403:6010", "0403:6011", "0403:6014", "0403:6015", "067b:2303", "10c4:ea60",
+                         "10c4:ea70", "1a86:7523", "1a86:55d4"})
+NOT_NAMED = "not named"   # a hardware check's lab, when the person who sent it gave no credit
+MAX_LINE = 200            # characters of a one-line answer (maker, model, firmware, credit)
+MAX_SUMMARY = 2000        # characters of what was checked on hardware, as its verified entry keeps it
+LISTS = ("manuals", "links", "software", "examples", "notes", "verified")   # instrument.yaml's lists, in their order
+
+
+class IssueProblem(Exception):
+    """What keeps an issue's card out of the collection, in words for the person who sent it."""
+
+    def __init__(self, problems: List[str]) -> None:
+        super().__init__("; ".join(problems))
+        self.problems = problems
+
+
+def form_fields(form: Optional[Path] = None) -> List[Tuple[str, str]]:
+    """(id, label) of each answer the issue form asks for. Kelvin fills the form in by the ids; GitHub heads each answer
+    in the issue with its label, which is how from-issue reads it back."""
+    data = load_yaml(form or FORM)
+    return [(str(item["id"]), str((item.get("attributes") or {}).get("label") or "").strip())
+            for item in data.get("body") or [] if isinstance(item, dict) and item.get("id")]
+
+
+def issue_answers(body: str, fields: Sequence[Tuple[str, str]]) -> Dict[str, str]:
+    """The issue's answers by field id, read from its body as GitHub writes it: "### <label>", then the answer. A
+    heading inside a code block (the card) is part of the answer it is in."""
+    heads = {"### " + label: fid for fid, label in fields}
+    found: Dict[str, List[str]] = {}
+    current: Optional[str] = None
+    fence = ""
+    for line in body.replace("\r\n", "\n").replace("\r", "\n").split("\n"):
+        mark = FENCE.match(line)
+        if fence:
+            if mark and mark.group(1)[0] == fence[0] and len(mark.group(1)) >= len(fence) \
+                    and not line.strip()[len(mark.group(1)):].strip():
+                fence = ""
+        elif mark:
+            fence = mark.group(1)
+        elif line.strip() in heads:
+            current = heads[line.strip()]
+            found[current] = []
+            continue
+        if current is not None:
+            found[current].append(line)
+    answers = {}
+    for fid, lines in found.items():
+        text = "\n".join(lines).strip()
+        answers[fid] = "" if text == NO_RESPONSE else text
+    return answers
+
+
+def unfenced(text: str) -> str:
+    """An answer's text out of the code block GitHub puts it in (the card, which the form shows as YAML)."""
+    lines = text.strip("\n").split("\n")
+    mark = FENCE.match(lines[0])
+    if mark:
+        lines = lines[1:]
+        if lines and FENCE.match(lines[-1]) and not lines[-1].strip().strip(mark.group(1)[0]):
+            lines = lines[:-1]
+    inner = "\n".join(lines).strip("\n")
+    return inner + "\n" if inner.strip() else ""
+
+
+def one_line(answers: Dict[str, str], key: str, label: str, problems: List[str]) -> str:
+    """A one-line answer with its spaces evened out and nothing unprintable; a problem when it is too long."""
+    text = "".join(ch for ch in " ".join(str(answers.get(key) or "").split()) if ch.isprintable())
+    if len(text) > MAX_LINE:
+        problems.append("%s is longer than %d characters" % (label, MAX_LINE))
+        return ""
+    return text
+
+
+def read_card(text: str) -> Dict[str, Any]:
+    """The card from an issue, as data only: read with the safe loader (Kelvin's number rules), never with anchors or
+    aliases (a few lines of them can stand for more than a computer holds), and a mapping."""
+    import yaml
+    try:
+        for event in yaml.parse(text, Loader=yaml.SafeLoader):
+            if isinstance(event, yaml.AliasEvent) or getattr(event, "anchor", None):
+                raise IssueProblem(["the card uses YAML anchors or aliases (& and *): write it out in full"])
+        data = load_yaml_text(text)
+    except yaml.YAMLError as e:
+        mark = getattr(e, "problem_mark", None)
+        raise IssueProblem(["the card is not valid YAML%s: %s" % (
+            " (its line %d)" % (mark.line + 1) if mark is not None else "", getattr(e, "problem", None) or e)])
+    if not isinstance(data, dict):
+        raise IssueProblem(["the card must be a mapping (card: 1, id: ..., parameters: ...)"])
+    return data
+
+
+def scalar(value: Any) -> str:
+    """A text as a YAML scalar that reads back as itself, with Kelvin's number rules: plain where it can be (1.07 and
+    2026-11-17 can't), else in double quotes."""
+    text = str(value)
+    if text and text == text.strip() and "\n" not in text:
+        try:
+            if load_yaml_text("v: " + text) == {"v": text}:
+                return text
+        except Exception:   # not readable as plain text: quoted below
+            pass
+    return json.dumps(text, ensure_ascii=False)
+
+
+def same_data(a: Any, b: Any) -> bool:
+    return json.dumps(a, sort_keys=True, default=str) == json.dumps(b, sort_keys=True, default=str)
+
+
+def set_top(text: str, key: str, value: str) -> str:
+    """The card with another value on its top-level `key:` line (its id or kind), every other line as written."""
+    return re.sub(r"(?m)^%s:[ \t]*\S.*$" % re.escape(key), lambda m: "%s: %s" % (key, scalar(value)), text, count=1)
+
+
+def with_usb(text: str, ids: List[str]) -> str:
+    """The card with identify.usb set to these USB IDs, written into its identify block; the rest as written."""
+    flow = "usb: [%s]" % ", ".join(json.dumps(u) for u in ids)
+    lines = text.rstrip("\n").split("\n")
+    one = next((i for i, line in enumerate(lines) if re.match(r"^identify:[ \t]*\{.*\}[ \t]*$", line)), None)
+    if one is not None:   # identify: {idn: ..., example: ...} on one line
+        identify = load_yaml_text(lines[one]).get("identify") or {}
+        identify["usb"] = ids
+        lines[one] = "identify: {%s}" % ", ".join("%s: %s" % (k, json.dumps(v, ensure_ascii=False))
+                                                  for k, v in identify.items())
+        return "\n".join(lines) + "\n"
+    at = next((i for i, line in enumerate(lines) if re.match(r"^identify:[ \t]*(#.*)?$", line)), None)
+    if at is None:   # none yet: a block of its own, before the parameters
+        p = next((i for i, line in enumerate(lines) if line.startswith("parameters:")), len(lines))
+        lines[p:p] = ["identify:", "  " + flow]
+        return "\n".join(lines) + "\n"
+    end = at + 1
+    while end < len(lines) and (not lines[end].strip() or lines[end][:1] in " \t"):
+        end += 1
+    indent = next((re.match(r"^([ \t]+)", line).group(1) for line in lines[at + 1:end] if line.strip()), "  ")
+    usb = next((i for i in range(at + 1, end) if re.match(r"^%susb:" % re.escape(indent), lines[i])), None)
+    if usb is None:   # after the block's last line (idn, example), before any blank lines
+        last = max([i for i in range(at + 1, end) if lines[i].strip()] or [at])
+        lines.insert(last + 1, indent + flow)
+    else:   # its value, on its line or as a list under it, replaced
+        stop = usb + 1
+        while stop < end and (not lines[stop].strip() or lines[stop].startswith(indent + "- ")
+                              or len(lines[stop]) - len(lines[stop].lstrip()) > len(indent)):
+            stop += 1
+        lines[usb:stop] = [indent + flow]
+    return "\n".join(lines) + "\n"
+
+
+def entries(text: str) -> List[List[str]]:
+    """A YAML file's lines by top-level key: each entry a key's line and the lines under it (comments before the first
+    key make an entry of their own)."""
+    out: List[List[str]] = [[]]
+    for line in text.rstrip("\n").split("\n"):
+        if re.match(r"^[A-Za-z_][\w-]*:", line):
+            out.append([line])
+        else:
+            out[-1].append(line)
+    return [e for e in out if e]
+
+
+def key_of(entry: List[str]) -> str:
+    m = re.match(r"^([A-Za-z_][\w-]*):", entry[0])
+    return m.group(1) if m else ""
+
+
+def entries_text(out: List[List[str]]) -> str:
+    return "\n".join(line for e in out for line in e).rstrip("\n") + "\n"
+
+
+def put_entry(out: List[List[str]], lines: List[str], before: Sequence[str]) -> None:
+    """A top-level entry put before the first of the keys `before` that the file has, else last."""
+    at = next((i for i, e in enumerate(out) if key_of(e) in before), len(out))
+    out.insert(at, lines)
+
+
+def add_item(out: List[List[str]], key: str, item: List[str]) -> None:
+    """One more item in a top-level list of instrument.yaml (its lines given as "  - ..." and "    ..."), at the list's
+    own indent; a list the file doesn't have yet goes where the collection's order puts it."""
+    for e in out:
+        if key_of(e) != key:
+            continue
+        if not re.match(r"^%s:[ \t]*(#.*)?$" % re.escape(key), e[0]):
+            raise IssueProblem(["%s is written on one line in the instrument's instrument.yaml, which from-issue can't "
+                                "add to: a maintainer writes it as a list of lines" % key])
+        first = next((line for line in e[1:] if re.match(r"^\s*- ", line)), "  - ")
+        indent = re.match(r"^(\s*)- ", first).group(1)
+        end = len(e)
+        while end > 1 and not e[end - 1].strip():
+            end -= 1
+        e[end:end] = [indent + line[2:] for line in item]
+        return
+    put_entry(out, [key + ":"] + item, LISTS[LISTS.index(key) + 1:] if key in LISTS else ())
+
+
+def control_of(card: Dict[str, Any]) -> str:
+    """How an instrument is controlled (collection.yaml's controls), from its card."""
+    if card.get("library"):
+        return "library"
+    params = card.get("parameters") if isinstance(card.get("parameters"), dict) else {}
+    commands = json.dumps([[p.get("get"), p.get("set")] for p in params.values() if isinstance(p, dict)])
+    if card.get("jsonrpc") or re.search(r'"(GET|PUT|POST|PATCH) /', commands):
+        return "web-api"
+    identify = card.get("identify") if isinstance(card.get("identify"), dict) else {}
+    query = str(identify.get("query") or "*IDN?").strip().upper()
+    return "scpi" if identify.get("idn") and query == "*IDN?" else "text"
+
+
+def usb_answer(text: str, problems: List[str]) -> Tuple[List[str], List[str]]:
+    """(the USB IDs given, in lower case; those of them that are generic USB-serial chips', which are left out)."""
+    ids, generic = [], []
+    for word in [w for w in re.split(r"[\s,;]+", text or "") if w]:
+        if not USB_ID.match(word):
+            problems.append("USB IDs: %r is not VID:PID in hex, such as 1313:8078" % word[:40])
+        elif word.lower() in GENERIC_USB:
+            generic.append(word.lower())
+        elif word.lower() not in ids:
+            ids.append(word.lower())
+    return ids, generic
+
+
+def known_as(c: Collection, replies: List[str], skip: str) -> List[str]:
+    """The collection's instruments (other than `skip`) whose identity pattern matches one of these replies. Only the
+    collection's own patterns are matched, never the issue's: one written to take long would hold the workflow."""
+    out = []
+    for other, data in c.instruments.items():
+        identify = (c.cards.get(other) or data).get("identify") or {}
+        pattern = identify.get("idn") if isinstance(identify, dict) else None
+        if other == skip or not pattern:
+            continue
+        try:
+            if any(re.search(str(pattern), r[:500], re.I) for r in replies):
+                out.append(other)
+        except re.error:
+            continue
+    return out
+
+
+def summary_line(text: str) -> str:
+    """What was checked on hardware as one line for its verified entry: its lines joined, bullets left out."""
+    lines = [re.sub(r"^[-*•]\s*", "", line.strip()) for line in (text or "").splitlines()]
+    joined = "; ".join(line for line in lines if line).replace(":;", ":")
+    return "".join(ch for ch in joined if ch.isprintable())[:MAX_SUMMARY]
+
+
+class Filing:
+    """What from-issue does with an issue's card: the files it writes (by path from the collection's root) and what it
+    says of them."""
+
+    def __init__(self, iid: str, folder: str) -> None:
+        self.iid = iid
+        self.folder = folder
+        self.files: Dict[str, str] = {}
+        self.new = False
+        self.replaced = ""        # the status of the card it replaces, when the instrument had one
+        self.notes: List[str] = []
+
+
+def file_card(answers: Dict[str, str], c: Collection, author: str, date: str) -> Filing:
+    """The files that put an issue's card into the collection, not written yet: the card as card.yaml in its
+    instrument's folder, and that instrument.yaml made or brought up to date (card: card.yaml, the card's manual, a
+    verified entry for a check on hardware). IssueProblem when the issue can't go in as it is."""
+    problems: List[str] = []
+    text = unfenced(answers.get("card") or "")
+    if not text.strip():
+        raise IssueProblem(["The card is empty: paste the card under The card (Kelvin copies it for you when it is "
+                            "too long for the link)"])
+    card = read_card(text)
+    cid = str(card.get("id") or "")
+    given = one_line(answers, "instrument", "Its id in the collection", problems).lower()
+    if not ID.match(cid):
+        problems.append("the card's id %r is not maker/model in lowercase letters, digits, '-' and '.'" % cid[:80])
+    if given and not ID.match(given):
+        problems.append("Its id in the collection, %r, is not an id such as srs/sr830" % given)
+    elif given and given not in c.instruments:
+        problems.append("the collection has no instrument %s: leave Its id in the collection empty to add a new one, "
+                        "or give the id CATALOG.md lists it under" % given)
+    if card.get("identify") is not None and not isinstance(card.get("identify"), dict):
+        problems.append("the card's identify must be a mapping {idn, example}")
+    if problems:
+        raise IssueProblem(problems)
+    iid = given or cid
+    usb, generic = usb_answer(answers.get("usb") or "", problems)
+    firmware = one_line(answers, "firmware", "Firmware", problems)
+    credit = one_line(answers, "credit", "Credit", problems)
+    replies = [r for r in [str((card.get("identify") or {}).get("example") or ""),
+                           one_line(answers, "idn", "Its identity reply", problems)] if r]
+    if iid in c.instruments:
+        f, inst, expected = existing_instrument(iid, card, c, replies)
+    else:
+        f, inst, expected = new_instrument(iid, card, answers, c, replies, problems)
+    if problems:
+        raise IssueProblem(problems)
+
+    # the card under the instrument's id and kind, with the USB IDs given: each a line of its own, checked as data
+    kind = expected["kind"]
+    edited, want = text, dict(card)
+    if cid != iid:
+        edited, want["id"] = set_top(edited, "id", iid), iid
+        f.notes.append("The card's id was %s; it is filed under the instrument's id, %s." % (code(cid), code(iid)))
+    if card.get("kind") != kind:
+        edited, want["kind"] = set_top(edited, "kind", kind), kind
+        f.notes.append("The card's kind was %s; it is %s, the instrument's kind." % (code(card.get("kind")),
+                                                                                    code(kind)))
+    identify = card.get("identify") or {}
+    have = [str(u).lower() for u in identify.get("usb") or []]
+    merged = have + [u for u in usb if u not in have]
+    if merged != have:
+        try:
+            edited = with_usb(edited, merged)
+        except Exception:   # an identify block it can't read line by line: said below, as any edit that didn't take
+            pass
+        want["identify"] = dict(identify, usb=merged)
+        f.notes.append("Added the USB ID%s %s to the card's identify.usb." % (
+            "s" if len(merged) - len(have) > 1 else "", ", ".join(code(u) for u in merged if u not in have)))
+    if generic:
+        f.notes.append("Left out %s: generic USB-serial chips' IDs, which every instrument with such a chip or "
+                       "cable has." % ", ".join(code(u) for u in generic))
+    if not same_data(read_card(edited), want):
+        raise IssueProblem(["the card couldn't be filed as %s, kind %s%s by changing its lines: write those into the "
+                            "card yourself" % (iid, kind, ", with its USB IDs" if merged != have else "")])
+
+    # instrument.yaml: the card's manual, and the check on hardware when there was one
+    url = str(card.get("manual_url") or "")
+    if https(url) and url not in [m.get("url") for m in expected.get("manuals") or [] if isinstance(m, dict)]:
+        title = " ".join(str(card.get("manual") or "").split())[:MAX_LINE] or "%s %s manual" % (
+            expected.get("maker"), expected.get("model"))
+        add_item(inst, "manuals", ["  - title: " + scalar(title), "    url: " + scalar(url), "    access: public"])
+        expected.setdefault("manuals", []).append({"title": title, "url": url, "access": "public"})
+        f.notes.append("Added the card's manual to manuals: %s" % url)
+    checked = summary_line(answers.get("checked") or "")
+    if checked:
+        entry = {"lab": credit or NOT_NAMED, "by": author, "date": date}
+        lines = ["  - lab: " + scalar(entry["lab"]), "    by: " + scalar(author), "    date: " + json.dumps(date)]
+        if firmware:
+            entry["firmware"] = firmware
+            lines.append("    firmware: " + scalar(firmware))
+        entry["summary"] = checked
+        lines.append("    summary: " + scalar(checked))
+        add_item(inst, "verified", lines)
+        expected.setdefault("verified", []).append(entry)
+    inst_text = entries_text(inst)
+    if not same_data(load_yaml_text(inst_text), expected):
+        raise IssueProblem(["the instrument's instrument.yaml couldn't be brought up to date line by line; a "
+                            "maintainer will add the card by hand"])
+    f.files = {f.folder + "/card.yaml": edited, f.folder + "/instrument.yaml": inst_text}
+    return f
+
+
+def existing_instrument(iid: str, card: Dict[str, Any], c: Collection,
+                        replies: List[str]) -> Tuple[Filing, List[List[str]], Dict[str, Any]]:
+    """(the filing, instrument.yaml's entries, what it must read as) for an instrument the collection has: the card
+    goes into its folder, replacing the card it had, and identify moves into the card."""
+    f = Filing(iid, rel(c.paths[iid]))
+    data = c.instruments[iid]
+    inst = entries((c.paths[iid] / "instrument.yaml").read_text(encoding="utf-8"))
+    expected = json.loads(json.dumps(data, default=str))
+    old = c.cards.get(iid)
+    if old is not None:
+        f.replaced = str(old.get("status") or "draft")
+    pattern = ((old or data).get("identify") or {}).get("idn")
+    try:   # the collection's own pattern, never the issue's
+        same = not pattern or not replies or any(re.search(str(pattern), r[:500], re.I) for r in replies)
+    except re.error:
+        same = True
+    if not same:
+        f.notes.append("Its identity reply %s doesn't match %s's identify.idn, %s: is it the same instrument?" % (
+            code(replies[-1]), code(iid), code(pattern)))
+    if data.get("card") != "card.yaml":
+        put_entry(inst, ["card: card.yaml"], LISTS)
+        expected["card"] = "card.yaml"
+    if "identify" in data:   # identify lives in the card once there is one
+        inst = [e for e in inst if key_of(e) != "identify"]
+        expected.pop("identify")
+        no_idn = not (card.get("identify") or {}).get("idn")
+        f.notes.append("instrument.yaml had identify (%s); it lives in the card now%s." % (
+            code(json.dumps(data.get("identify"), ensure_ascii=False)),
+            ", which has no identify.idn: a scan won't recognise it" if no_idn else ""))
+    return f, inst, expected
+
+
+def new_instrument(iid: str, card: Dict[str, Any], answers: Dict[str, str], c: Collection, replies: List[str],
+                   problems: List[str]) -> Tuple[Filing, List[List[str]], Dict[str, Any]]:
+    """(the filing, instrument.yaml's entries, what it must read as) for an instrument the collection lacks, in the
+    folder its kind puts it in (made from checked ids only)."""
+    maker = one_line(answers, "maker", "Maker", problems)
+    model = one_line(answers, "model", "Model", problems)
+    kind = one_line(answers, "kind", "Kind", problems) or str(card.get("kind") or "")
+    interfaces = list(dict.fromkeys(w for w in re.split(r"[\s,;]+", (answers.get("interfaces") or "").lower()) if w))
+    if not maker:
+        problems.append("say who makes it, under Maker")
+    if not model:
+        problems.append("say which model it is, under Model")
+    if kind not in c.kind_category:
+        problems.append("Kind %r is not one of the collection's kinds (collection.yaml): %s" % (
+            kind[:60], ", ".join(sorted(c.kind_category))))
+    unknown = [w for w in interfaces if w not in c.meta["interfaces"]]
+    if unknown or not interfaces:
+        problems.append("say how it connects under Interfaces, from: %s%s" % (
+            ", ".join(c.meta["interfaces"]), " (not %s)" % ", ".join(unknown) if unknown else ""))
+    others = known_as(c, replies, iid)
+    if others:
+        problems.append("the collection has this instrument already, as %s: its identity pattern matches %s. Give "
+                        "that id under Its id in the collection" % (" or ".join(others), replies[0][:80]))
+    folder = c.folder_for(iid, kind)
+    if (ROOT / folder).exists():
+        problems.append("%s/ is there already, with another instrument's files" % folder)
+    f = Filing(iid, folder)
+    f.new = True
+    slugs = {str(d.get("maker") or "").lower(): i.split("/")[0] for i, d in c.instruments.items()}
+    slug = slugs.get(maker.lower())
+    if slug and slug != iid.split("/")[0]:
+        f.notes.append("The collection's other %s instruments have ids that start %s/; this one is %s." % (
+            code(maker), code(slug), code(iid)))
+    name = " ".join(str(card.get("model") or "").split())[:MAX_LINE]
+    control = control_of(card)
+    expected: Dict[str, Any] = {"schema": 1, "id": iid, "maker": maker, "model": model, "kind": kind,
+                                "interfaces": interfaces, "control": control, "card": "card.yaml"}
+    lines = ["schema: 1", "id: " + scalar(iid), "maker: " + scalar(maker), "model: " + scalar(model)]
+    if name and name != "%s %s" % (maker, model):
+        lines.append("name: " + scalar(name))
+        expected["name"] = name
+    lines += ["kind: " + kind, "interfaces: [%s]" % ", ".join(interfaces), "control: " + control, "card: card.yaml"]
+    return f, entries("\n".join(lines)), expected
+
+
+def write_lf(path: Path, text: str) -> None:
+    """Text written with LF line ends on any computer (Path.write_text takes newline= only from Python 3.10)."""
+    with open(path, "w", encoding="utf-8", newline="\n") as f:
+        f.write(text)
+
+
+class Changes:
+    """The files from-issue writes, each kept as it was, so that a problem leaves the collection as it found it."""
+
+    def __init__(self) -> None:
+        self.was: Dict[Path, Optional[bytes]] = {}
+        self.made: List[Path] = []   # folders it made, outermost first
+
+    def write(self, path: Path, text: str) -> None:
+        if path not in self.was:
+            self.was[path] = path.read_bytes() if path.exists() else None
+        missing = [p for p in [path.parent] + list(path.parent.parents) if not p.exists()]
+        for p in reversed(missing):
+            p.mkdir()
+            self.made.append(p)
+        write_lf(path, text)
+
+    def undo(self) -> None:
+        for path, data in self.was.items():
+            if data is not None:
+                path.write_bytes(data)
+            elif path.exists():
+                path.unlink()
+        for p in reversed(self.made):
+            try:
+                p.rmdir()
+            except OSError:
+                pass
+        self.was, self.made = {}, []
+
+
+def schema_problems(paths: Sequence[Path]) -> List[str]:
+    """instrument.yaml files against schema/instrument.schema.json, as validate.yml checks them (when jsonschema is
+    installed)."""
+    try:
+        from jsonschema import Draft202012Validator
+    except ImportError:   # none here, or one too old for the schemas' draft: validate.yml's own step checks them
+        return []
+    schema = json.loads((ROOT / "schema" / "instrument.schema.json").read_text(encoding="utf-8"))
+    validator = Draft202012Validator(schema)
+    return ["%s: %s" % (rel(p), e.message) for p in paths for e in validator.iter_errors(load_yaml(p))]
+
+
+def from_issue(body: str, author: str, date: str, kelvin: bool = True) -> Tuple[Filing, Dict[str, str]]:
+    """An issue's card filed in the collection, its index rebuilt: (what was done, the issue's answers). Every file is
+    checked (validate, the JSON schemas) before the index is written; any problem leaves the collection as it was and
+    raises IssueProblem, saying only what the card brought (not problems the collection had before)."""
+    answers = issue_answers(body, form_fields())
+    p = Problems()
+    c = Collection(p)
+    f = file_card(answers, c, author, date)
+    if all((ROOT / name).exists() and (ROOT / name).read_text(encoding="utf-8") == text
+           for name, text in f.files.items()):
+        raise IssueProblem(["Nothing to change: the collection has this card already, as sent"])
+    changes = Changes()
+    try:
+        for name, text in f.files.items():
+            changes.write(ROOT / name, text)
+        c2, p2, _ = check_all(kelvin)
+        errors = list(p2.errors)
+        if errors:
+            changes.undo()
+            before = set(check_all(kelvin)[1].errors)
+            raise IssueProblem([e for e in errors if e not in before] or [
+                "the collection fails validate by itself just now, not because of this card; a maintainer will fix "
+                "it. Then edit this issue to send it again"])
+        problems = schema_problems([ROOT / name for name in f.files if name.endswith("instrument.yaml")])
+        if problems:
+            raise IssueProblem(problems)
+        for name, text in index_files(c2)[1].items():
+            changes.write(ROOT / name, text)
+    except BaseException:
+        changes.undo()
+        raise
+    return f, answers
+
+
+def code(text: Any) -> str:
+    """Text as Markdown code, also in a table: never a link, a mention or a cell of its own."""
+    text = " ".join(str(text).split()).replace("`", "'").replace("|", "\\|")
+    return "`%s`" % text if text else "(none)"
+
+
+def fenced(text: str) -> str:
+    """Text as a Markdown code block it can't end early: its fence is longer than any run of ~ in it."""
+    fence = "~" * (max([len(m) for m in re.findall(r"~+", text)] + [2]) + 1)
+    return "%s\n%s\n%s" % (fence, text.rstrip("\n"), fence)
+
+
+def pull_request(f: Filing, answers: Dict[str, str], number: int, author: str, author_id: str) -> Dict[str, str]:
+    """The pull request's title and text, and the commit's message, for a filed card."""
+    title = "Card for %s%s" % (f.iid, " (#%d)" % number if number else "")
+    what = ("a new instrument, %s, in %s/" % (code(f.iid), f.folder) if f.new else
+            "the card of %s in %s/, replacing its %s card" % (code(f.iid), f.folder, f.replaced) if f.replaced else
+            "a card for %s in %s/, which had none" % (code(f.iid), f.folder))
+    rows = ["| %s | %s |" % (label, code(answers[fid])) for fid, label in form_fields()
+            if fid not in ("card", "checked") and answers.get(fid)]
+    lines = (["Closes #%d" % number, ""] if number else []) + [
+        "%s sent this card from Kelvin: %s." % ("@" + author if author else "Someone", what), "",
+        "| Field | Answer |", "|---|---|"] + rows
+    if answers.get("checked"):
+        lines += ["", "**What was checked on hardware**", "", fenced(answers["checked"])]
+    if f.notes:
+        lines += ["", "**What from-issue changed or noticed**", ""] + ["- " + n for n in f.notes]
+    lines += ["", "Review it as any card (CONTRIBUTING.md, Review checklist for cards). `validate`, `index` and the "
+              "JSON schemas passed when the workflow made this branch; GitHub starts no other workflow for a pull "
+              "request a workflow opened, so close and reopen it to run validate.yml on it. Editing the issue makes "
+              "this branch again from it."]
+    credit = "\n\nCo-authored-by: %s <%s+%s@users.noreply.github.com>" % (author, author_id, author) \
+        if author and author_id else ""
+    commit = "%s\n\nSent from Kelvin as issue #%d by %s.%s\n" % (title, number, author or "someone", credit)
+    return {"title.txt": title + "\n", "pr.md": "\n".join(lines) + "\n", "commit.txt": commit}
+
+
+def failure_comment(problems: List[str]) -> str:
+    return ("Thank you for sending a card from Kelvin. It can't go into the collection yet:\n\n%s\n\nEdit this issue "
+            "to fix it (the card is under **The card**); the check runs again after each edit.\n"
+            % fenced("\n".join("- " + p for p in problems)))
+
+
+def issue_from_event(path: str) -> Tuple[str, int, str, str, str]:
+    """(body, number, author, author's user id, date) of the issue in a GitHub event payload (the workflow's
+    GITHUB_EVENT_PATH): a file, so the issue's text never passes through a shell."""
+    event = json.loads(Path(path).read_text(encoding="utf-8"))
+    issue = event.get("issue") if isinstance(event.get("issue"), dict) else {}
+    user = issue.get("user") if isinstance(issue.get("user"), dict) else {}
+    return (str(issue.get("body") or ""), int(issue.get("number") or 0), str(user.get("login") or ""),
+            str(user.get("id") or ""), str(issue.get("created_at") or "")[:10])
+
+
+def cmd_from_issue(args: argparse.Namespace) -> int:
+    if args.event:
+        body, number, author, author_id, date = issue_from_event(args.event)
+    else:
+        body = sys.stdin.read() if args.body in (None, "-") else Path(args.body).read_text(encoding="utf-8")
+        number, author, author_id, date = args.issue or 0, args.author or "", args.author_id or "", args.date or ""
+    author = author if LOGIN.match(author) else ""
+    author_id = author_id if re.match(r"^\d{1,20}$", author_id) else ""
+    date = date if DATE.match(date) else time.strftime("%Y-%m-%d", time.gmtime())
+    report = Path(args.report) if args.report else None
+    try:
+        f, answers = from_issue(body, author or "someone", date, kelvin=not args.no_kelvin)
+    except IssueProblem as e:
+        for problem in e.problems:
+            print("problem: " + problem)
+        if report is not None:
+            report.mkdir(parents=True, exist_ok=True)
+            write_lf(report / "comment.md", failure_comment(e.problems))
+        return 1
+    print("Filed %s's card in %s/ (%s); validate passes, and index.json, CATALOG.md and the READMEs are rebuilt." % (
+        f.iid, f.folder, "a new instrument" if f.new else "replacing its %s card" % f.replaced if f.replaced else
+        "it had no card"))
+    for note in f.notes:
+        print("  " + note)
+    if report is not None:
+        report.mkdir(parents=True, exist_ok=True)
+        for name, text in pull_request(f, answers, number, author, author_id).items():
+            write_lf(report / name, text)
+    return 0
+
+
 # ---------------------------------------------------------------- command line
 
 def main(argv: Optional[List[str]] = None) -> int:
@@ -1503,6 +2135,17 @@ def main(argv: Optional[List[str]] = None) -> int:
     pr.add_argument("--var", action="append", help="a card variable, e.g. --var axis=2")
     pr.add_argument("--backend", help="PyVISA backend, e.g. @py for pyvisa-py")
     pr.set_defaults(func=cmd_probe)
+    fi = sub.add_parser("from-issue", help="file a card sent from Kelvin as an issue (the new-card form)")
+    fi.add_argument("body", nargs="?", help="a file with the issue's body (- or none: read it from stdin)")
+    fi.add_argument("--event", help="GitHub's event payload (GITHUB_EVENT_PATH): the issue's body, number and author")
+    fi.add_argument("--issue", type=int, help="the issue's number")
+    fi.add_argument("--author", help="who opened it: their GitHub user name, credited for the card")
+    fi.add_argument("--author-id", help="their GitHub user id, for the commit's Co-authored-by")
+    fi.add_argument("--date", help="the hardware check's date, YYYY-MM-DD (default: today)")
+    fi.add_argument("--report", help="a folder for the pull request's title.txt, pr.md and commit.txt, or the "
+                                     "issue's comment.md when the card can't go in")
+    fi.add_argument("--no-kelvin", action="store_true", help="skip Kelvin's own parsers even if Kelvin is installed")
+    fi.set_defaults(func=cmd_from_issue)
     args = ap.parse_args(argv)
     return args.func(args)
 

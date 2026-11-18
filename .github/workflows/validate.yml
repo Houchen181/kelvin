@@ -15,9 +15,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
-      - run: pip install pyyaml jsonschema
+      - run: pip install pyyaml jsonschema pytest
       - name: Check every instrument, card, experiment and lab config
         run: python tools/kic.py validate --warnings
+      - name: Test tools/kic.py (from-issue, on a copy of the collection)
+        run: python -m pytest -q tests
       - name: Check the files against the JSON schemas
         run: |
           python - <<'EOF'

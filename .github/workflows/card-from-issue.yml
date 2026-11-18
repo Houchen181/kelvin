@@ -1,0 +1,83 @@
+name: card from issue
+
+# A card sent from Kelvin arrives as an issue on the "Send a card from Kelvin" form (label new-card). This files it with
+# tools/kic.py from-issue and opens a pull request for the maintainer to review, or comments on the issue with what to
+# fix. It never merges anything. The issue is anyone's text: it reaches kic.py only as GitHub's event file, never through
+# a shell, and kic.py reads it as data (YAML with a safe loader, ids checked before they name a folder).
+
+on:
+  issues:
+    types: [opened, edited]
+
+permissions:
+  contents: write        # push the branch card/issue-<n>
+  pull-requests: write   # open the pull request
+  issues: write          # comment on the issue
+
+concurrency:             # an edit while the last run is going on: the edit wins
+  group: card-from-issue-${{ github.event.issue.number }}
+  cancel-in-progress: true
+
+jobs:
+  card:
+    if: github.event.issue.state == 'open' && contains(github.event.issue.labels.*.name, 'new-card')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install pyyaml jsonschema
+      - name: File the card (validate and index run in it)
+        id: card
+        run: |
+          if python tools/kic.py from-issue --event "$GITHUB_EVENT_PATH" --report "$RUNNER_TEMP/report"; then
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ok=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Say on the issue what to fix
+        if: steps.card.outputs.ok == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NUMBER: ${{ github.event.issue.number }}
+        run: |
+          comment="$RUNNER_TEMP/report/comment.md"
+          if [ ! -f "$comment" ]; then
+            mkdir -p "$RUNNER_TEMP/report"
+            printf 'The card in this issue could not be read; the maintainer will look at the workflow run: %s\n' \
+              "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" > "$comment"
+          fi
+          gh issue comment "$NUMBER" --body-file "$comment"
+      - name: Push the branch and open a pull request
+        if: steps.card.outputs.ok == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NUMBER: ${{ github.event.issue.number }}
+          BASE: ${{ github.event.repository.default_branch }}
+        run: |
+          branch="card/issue-$NUMBER"
+          report="$RUNNER_TEMP/report"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -C "$branch"
+          git add -A -- instruments index.json CATALOG.md
+          git commit --quiet -F "$report/commit.txt"
+          if git fetch --quiet origin "$branch" 2>/dev/null && git diff --quiet FETCH_HEAD HEAD; then
+            echo "The branch has these files already: nothing to push."
+            exit 0
+          fi
+          git push --force origin "$branch"
+          url=$(gh pr list --head "$branch" --state open --json url --jq '.[0].url // empty')
+          if [ -n "$url" ]; then
+            gh issue comment "$NUMBER" --body "The pull request now has the card as this issue has it: $url"
+          elif url=$(gh pr create --base "$BASE" --head "$branch" --title "$(cat "$report/title.txt")" \
+                       --body-file "$report/pr.md"); then
+            gh issue comment "$NUMBER" --body "Thank you. The card is ready for the maintainer's review: $url"
+          else
+            compare="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/compare/$BASE...$branch?expand=1"
+            gh issue comment "$NUMBER" --body "Thank you. The card checks out and is on the branch $branch. This repository doesn't let workflows open pull requests, so the maintainer opens it here: $compare"
+          fi

@@ -1,0 +1,81 @@
+name: Send a card from Kelvin
+description: A card your lab reviewed in Kelvin, for the collection. Kelvin fills this form in; you check it and submit it.
+title: "Card: "
+labels: [new-card]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Kelvin filled this in from a card your lab reviewed (**Lab → Cards… → Send to the collection**, or ask Kelvin to
+        send it). Everything here becomes public under your GitHub account: check each field before you submit. A
+        workflow turns the issue into a pull request for the maintainer to review and comments here with its link, or
+        with what to fix (edit the issue and it runs again).
+  - type: input
+    id: instrument
+    attributes:
+      label: Its id in the collection
+      description: The instrument's id in CATALOG.md (maker/model), when the collection has it. Leave it empty for an instrument the collection lacks.
+      placeholder: srs/sr844
+  - type: input
+    id: maker
+    attributes:
+      label: Maker
+      placeholder: Stanford Research Systems
+    validations:
+      required: true
+  - type: input
+    id: model
+    attributes:
+      label: Model
+      placeholder: SR844
+    validations:
+      required: true
+  - type: input
+    id: kind
+    attributes:
+      label: Kind
+      description: One of the kinds in collection.yaml, such as lock-in, source-meter or temperature-controller.
+      placeholder: lock-in
+    validations:
+      required: true
+  - type: input
+    id: interfaces
+    attributes:
+      label: Interfaces
+      description: How it connects, from collection.yaml, separated by commas (gpib, usb-tmc, usb, lan, rs-232, rs-485, pcie, pxie, analog, web-api).
+      placeholder: gpib, rs-232
+  - type: input
+    id: idn
+    attributes:
+      label: Its identity reply
+      description: An example of its answer to *IDN? (or its card's identity query), with the serial number taken out.
+      placeholder: "Stanford_Research_Systems,SR844,<serial number>,ver1.006"
+  - type: input
+    id: usb
+    attributes:
+      label: USB IDs
+      description: VID:PID in hex, separated by commas, when it is a USB device of its own. Not those of a USB-serial adapter cable or chip (FTDI, Prolific, Silicon Labs, WCH).
+      placeholder: "1313:8078"
+  - type: input
+    id: firmware
+    attributes:
+      label: Firmware
+      placeholder: "1.006"
+  - type: textarea
+    id: checked
+    attributes:
+      label: What was checked on hardware
+      description: Kelvin starts this from your lab's record. Say what you compared (readings against the front panel, which outputs you moved, into what load). Leave it empty if the card was only read against the manual.
+  - type: input
+    id: credit
+    attributes:
+      label: Credit
+      description: Optional. The lab or name to credit for the hardware check, as you want it shown publicly. Kelvin never fills this in.
+  - type: textarea
+    id: card
+    attributes:
+      label: The card
+      description: The card's YAML. Kelvin puts it here, or, when it is too long for the link, copies it for you to paste here (Ctrl+V, or ⌘V on a Mac).
+      render: yaml
+    validations:
+      required: true
