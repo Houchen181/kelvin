@@ -34,6 +34,28 @@ jobs:
                       bad += 1
           sys.exit(1 if bad else 0)
           EOF
+      - name: USB IDs are VID:PID, and never a USB-serial chip's own
+        run: |
+          python - <<'EOF'
+          import json, sys
+          sys.path.insert(0, "tools")
+          import jsonschema, kic
+          ok, bad = kic.Problems(), kic.Problems()
+          kic.check_usb("instrument.yaml", {"usb": ["1313:8078", "0403:FAF0"]}, ok)   # a maker's own, on FTDI's too
+          kic.check_usb("card.yaml", {"usb": ["0403:6001", "1313:80", "1a86:7523", "1313:8078", "1313:8078"]}, bad)
+          assert not ok.errors, ok.errors
+          assert len(bad.errors) == 4, bad.errors
+          assert "FTDI FT232R" in bad.errors[0] and "names no instrument" in bad.errors[0], bad.errors
+          assert "not VID:PID" in bad.errors[1] and "WCH CH340" in bad.errors[2] and "twice" in bad.errors[3], bad.errors
+          assert kic.index_usb({"usb": ["1313:8078", "1313:8078".upper()]}) == ["1313:8078"]
+          assert kic.index_usb({"idn": "^ACME,"}) == [] and kic.index_usb(None) == []
+          validator = jsonschema.Draft202012Validator(json.load(open("schema/instrument.schema.json")))
+          entry = {"schema": 1, "id": "acme/widget", "maker": "ACME", "model": "Widget", "kind": "power-meter",
+                   "interfaces": ["usb"], "control": "text", "identify": {"usb": ["1313:8078"]}}
+          assert not list(validator.iter_errors(entry))
+          entry["identify"]["usb"] = ["1313:80"]
+          assert list(validator.iter_errors(entry))
+          EOF
       - name: index.json and CATALOG.md are up to date
         run: python tools/kic.py index --check
       - name: install into an empty Kelvin folder

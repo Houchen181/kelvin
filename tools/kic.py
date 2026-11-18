@@ -57,6 +57,31 @@ CONDITION = re.compile(r"^\s*([A-Za-z_]\w*)\.([A-Za-z_]\w*)\s*(<=|>=|==|!=|<|>)\
 # Reads that can start something on the instrument (a measurement that switches an output on, a self-test);
 # probe never sends them, as Kelvin's own "Try it" doesn't.
 RISKY_READ = re.compile(r"^:?(MEAS|READ|INIT|\*TST|\*CAL|\*RST|\*TRG|TRIG|\*SAV|\*RCL)", re.I)
+USB_ID = re.compile(r"^[0-9a-fA-F]{4}:[0-9a-fA-F]{4}$")   # VID:PID in hex, as identify.usb gives it
+# The IDs of the generic USB-serial bridge chips, and of USB-RS-232 adapters sold under their own IDs, as they come:
+# any maker's product can sit behind one, so such an ID names no instrument, and Kelvin never names one by it. The same
+# list as Kelvin's own (labharness/usbids.py, GENERIC, with each ID's source: the Linux kernel's USB-serial drivers,
+# the usb.ids list, the chip makers' data sheets and drivers). A maker's own product ID under a chip maker's vendor
+# ID, such as Thorlabs' 0403:faf0, is the maker's, not the chip's.
+GENERIC_USB = {
+    "0403:6001": "FTDI FT232R", "0403:6006": "FTDI FT232", "0403:6010": "FTDI FT2232", "0403:6011": "FTDI FT4232H",
+    "0403:6014": "FTDI FT232H", "0403:6015": "FTDI FT-X", "0403:6040": "FTDI FT2233HP", "0403:6041": "FTDI FT4233HP",
+    "0403:6042": "FTDI FT2232HP", "0403:6043": "FTDI FT4232HP", "0403:6044": "FTDI FT233HP",
+    "0403:6045": "FTDI FT232HP", "0403:6048": "FTDI FT4232HA", "0403:8372": "FTDI FT8U100AX",
+    "0403:fbfa": "FTDI FT232RL",
+    "067b:2303": "Prolific PL2303", "067b:2304": "Prolific PL2303TB", "067b:23a3": "Prolific PL2303GC",
+    "067b:23b3": "Prolific PL2303GB", "067b:23c3": "Prolific PL2303GT", "067b:23d3": "Prolific PL2303GL",
+    "067b:23e3": "Prolific PL2303GE", "067b:23f3": "Prolific PL2303GS",
+    "10c4:ea60": "Silicon Labs CP210x", "10c4:ea61": "Silicon Labs CP210x", "10c4:ea63": "Silicon Labs CP210x",
+    "10c4:ea70": "Silicon Labs CP2105", "10c4:ea71": "Silicon Labs CP2108", "10c4:ea7a": "Silicon Labs CP2105",
+    "10c4:ea7b": "Silicon Labs CP2108",
+    "1a86:7523": "WCH CH340", "1a86:7522": "WCH CH340", "1a86:5523": "WCH CH341", "4348:5523": "WCH CH341",
+    "1a86:55d2": "WCH CH342", "1a86:55d3": "WCH CH343", "1a86:55d5": "WCH CH344", "1a86:55d8": "WCH CH9101",
+    "1a86:55d4": "WCH CH9102", "1a86:55d7": "WCH CH9103", "1a86:55df": "WCH CH9104",
+    "04d8:00dd": "Microchip MCP2221", "04d8:00df": "Microchip MCP2200",
+    "0557:2008": "ATEN UC-232A", "110a:1110": "Moxa UPort 1110", "110a:1130": "Moxa UPort 1130",
+    "110a:1131": "Moxa UPort 1131", "110a:1150": "Moxa UPort 1150", "110a:1151": "Moxa UPort 1151",
+}
 
 INSTRUMENT_KEYS = ["schema", "id", "maker", "model", "name", "covers", "kind", "categories", "interfaces", "control",
                    "identify", "card", "manuals", "links", "software", "examples", "notes", "verified"]
@@ -271,9 +296,7 @@ def check_card(where: str, card: Dict[str, Any], p: Problems) -> None:
 
     identify = card.get("identify") or {}
     check_identify(where, identify, p)
-    for u in identify.get("usb") or []:
-        if not re.match(r"^[0-9a-fA-F]{4}:[0-9a-fA-F]{4}$", str(u)):
-            p.error(where, "identify.usb: %r is not VID:PID in hex" % u)
+    check_usb(where, identify, p)
     for key, value in (card.get("connection") or {}).items():
         kind = CONNECTION.get(key)
         if kind is None:
@@ -399,6 +422,27 @@ def check_identify(where: str, identify: Any, p: Problems) -> None:
         p.error(where, "identify.example %r does not match identify.idn" % example)
 
 
+def check_usb(where: str, identify: Any, p: Problems) -> None:
+    """identify.usb, in a card or an instrument.yaml: the USB IDs the instrument itself reports, VID:PID in hex, by
+    which Kelvin names one that doesn't answer *IDN?. Never a generic USB-serial chip's own ID (GENERIC_USB): that
+    says only which chip is inside, which any maker's product may have."""
+    ids = identify.get("usb") if isinstance(identify, dict) else None
+    if ids is None:
+        return
+    if not isinstance(ids, list):
+        p.error(where, 'identify.usb is a list of USB IDs, VID:PID in hex, such as ["1313:8078"]')
+        return
+    for u in ids:
+        if not USB_ID.match(str(u)):
+            p.error(where, "identify.usb: %r is not VID:PID in hex" % u)
+        elif str(u).lower() in GENERIC_USB:
+            p.error(where, "identify.usb: %s is the %s's own ID, which any maker's product built on that USB-serial "
+                    "chip has, so it names no instrument (Kelvin never names one by it): list only an ID the maker "
+                    "gave this instrument" % (u, GENERIC_USB[str(u).lower()]))
+    if len({str(u).lower() for u in ids}) < len(ids):
+        p.error(where, "identify.usb lists an ID twice")
+
+
 def check_library(where: str, lib: Any, p: Problems) -> None:
     if not isinstance(lib, dict):
         p.error(where, "library must be a mapping")
@@ -472,12 +516,13 @@ def check_instrument(iid: str, data: Dict[str, Any], c: Collection) -> None:
         if card.get("kind") != data.get("kind"):
             p.error(where, "kind %r differs from the card's %r" % (data.get("kind"), card.get("kind")))
         if data.get("identify"):
-            p.error(where, "identify lives in the card when there is one")
+            p.error(where, "identify lives in the card when there is one (its USB IDs too: the card's identify.usb)")
         urls = [m.get("url") for m in data.get("manuals") or [] if isinstance(m, dict)]
         if card.get("manual_url") and card["manual_url"] not in urls:
             p.error(where, "list the card's manual_url under manuals")
     else:
         check_identify(where, data.get("identify") or {}, p)
+        check_usb(where, data.get("identify") or {}, p)
         if data.get("verified"):
             p.error(where, "verified reports belong to instruments with a card")
     for i, v in enumerate(data.get("verified") or []):
@@ -795,7 +840,7 @@ def build_index(c: Collection) -> Dict[str, Any]:
     instruments = []
     for iid, d in c.instruments.items():
         card = c.cards.get(iid)
-        identify = (card or d).get("identify") or {}
+        identify = (card or d).get("identify") or {}   # the card's, or without a card the instrument.yaml's
         path = c.paths[iid]
         instruments.append({
             "id": iid, "maker": d["maker"], "model": d["model"], "name": display_name(d),
@@ -803,7 +848,7 @@ def build_index(c: Collection) -> Dict[str, Any]:
             "categories": [c.category(iid)] + [x for x in d.get("categories") or [] if x != c.category(iid)],
             "interfaces": d.get("interfaces") or [], "control": d["control"],
             "identify": {k: identify[k] for k in ("idn", "example", "query") if identify.get(k)} or None,
-            "usb": [str(u).lower() for u in identify.get("usb") or []],
+            "usb": index_usb(identify),
             "card": None if card is None else {
                 "path": rel(path / "card.yaml"), "sha256": sha256(path / "card.yaml"), "status": card["status"],
                 "kelvin_file": kelvin_file(iid), "model": card["model"]},
@@ -861,6 +906,13 @@ def plan_instruments(plan: Dict[str, Any]) -> Set[str]:
         if m:
             keys.append(m.group(1))
     return {k.split(".")[0] for k in keys if k} | {str(n) for n in plan.get("requires") or []}
+
+
+def index_usb(identify: Any) -> List[str]:
+    """An instrument's USB IDs for index.json, from its identify (the card's, or without a card the instrument.yaml's):
+    VID:PID in lowercase hex, each once, as Kelvin looks them up."""
+    ids = identify.get("usb") if isinstance(identify, dict) else None
+    return list(dict.fromkeys(str(u).strip().lower() for u in ids)) if isinstance(ids, list) else []
 
 
 INTERFACE_NAMES = {"gpib": "GPIB", "usb-tmc": "USB-TMC", "usb": "USB", "lan": "LAN", "rs-232": "RS-232",

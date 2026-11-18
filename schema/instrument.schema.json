@@ -22,9 +22,18 @@
     "control": { "enum": ["scpi", "text", "library", "web-api", "none", "unknown"] },
     "identify": {
       "type": "object",
-      "description": "Only for instruments without a card: the *IDN? reply as a regex (matched ignoring case)",
+      "description": "Only for instruments without a card: the *IDN? reply as a regex (matched ignoring case), and the USB IDs the instrument reports",
       "additionalProperties": false,
-      "properties": { "idn": { "type": "string" }, "example": { "type": "string" } }
+      "properties": {
+        "idn": { "type": "string" },
+        "example": { "type": "string" },
+        "usb": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^[0-9a-fA-F]{4}:[0-9a-fA-F]{4}$" },
+          "description": "The USB IDs the instrument itself reports, VID:PID in hex, such as 1313:8078, by which Kelvin names one that doesn't answer *IDN?. Never a USB-serial chip's own ID (FTDI 0403:6001, CH340 1a86:7523...): tools/kic.py validate refuses those"
+        }
+      }
     },
     "card": { "const": "card.yaml" },
     "manuals": {

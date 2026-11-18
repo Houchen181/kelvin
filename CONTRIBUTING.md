@@ -29,6 +29,7 @@ control: scpi                           # scpi, text, library, web-api or none
 identify:                               # only when there is no card: the *IDN? reply, as a regex
   idn: "^ACME,SM-200[01],"
   example: "ACME,SM-2000,12345,1.02"
+  usb: ["1234:5678"]                    # the USB IDs it reports, VID:PID in hex (see USB IDs below)
 manuals:
   - title: SM-2000 Programming Manual
     url: https://www.acme.example/manuals/sm-2000-programming.pdf
@@ -46,6 +47,26 @@ notes:
 - **Links:** only the maker's own pages (or its official GitHub or PyPI), opened by you. Never link third-party
   manual mirrors, and never commit a manual's PDF.
 - **Drivers:** only ones you have seen in the project's docs or source.
+
+### USB IDs
+
+An instrument that doesn't answer `*IDN?` (a maker's USB device driven through its SDK, a USB-serial instrument
+with a protocol of its own, a USB-TMC instrument that ignores `*IDN?`) is named by its USB ID instead: VID:PID in
+hex, such as `1313:8078`. Kelvin names a plugged-in instrument by it (its scan, and its list of what is plugged
+in), with the manual listed here.
+
+- **Where it goes:** `identify.usb`, a list: in the card when there is one, otherwise in `instrument.yaml`. List
+  every ID the model reports, and only IDs you have seen on the instrument or in its maker's documentation.
+- **Finding it:** plug the instrument in, then
+  - Windows: Device Manager, the device, Properties, Details, **Hardware Ids**: `USB\VID_1313&PID_8078` is
+    `1313:8078`.
+  - Linux: `lsusb`, which prints `ID 1313:8078` before the device's name.
+  - Mac: System Information, USB, the device: its **Vendor ID** (`0x1313`) and **Product ID** (`0x8078`).
+- **Never a generic adapter's IDs.** When the instrument shows up as a USB-serial cable or the chip inside it does
+  (an FTDI, Prolific, Silicon Labs CP210x, WCH CH340 or CH9102, Microchip MCP2200, an ATEN or Moxa adapter, with the
+  chip's own IDs such as `0403:6001` or `1a86:7523`), leave `usb` out: those IDs only say which chip is inside, and
+  any maker's product built on that chip has them. `validate` refuses them. A maker's own product ID on such a chip,
+  such as Thorlabs' `0403:faf0`, is the maker's and belongs here.
 
 ## Add or update a card
 
@@ -79,6 +100,7 @@ Cards decide what Kelvin treats as safe, so every card change gets a second look
       calibration, firmware, sensor curves, coil constants, persistent-switch heaters, current limits.
 - [ ] `on_connect` only sets up the connection (terminations, headers, listen mode); it never sets a parameter.
 - [ ] `identify.idn` matches this model and no other.
+- [ ] `identify.usb`, if given, lists only the IDs this model reports, never a USB-serial chip's own.
 - [ ] `manual` names the manual and chapter the card follows; its `manual_url` is listed under `manuals`.
 
 ## Report a hardware check
