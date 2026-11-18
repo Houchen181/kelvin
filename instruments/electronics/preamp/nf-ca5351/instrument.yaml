@@ -6,6 +6,11 @@ name: NF Corporation CA5351 programmable current amplifier
 kind: preamp
 interfaces: [lan, gpib, usb]
 control: scpi
+identify:
+  # USB IDs, from these sources:
+  #   https://www.nfcorp.co.jp/english/doc_portal/download/pdf/manual/mi/EN_CA5351_InstructionManual_001.pdf
+  #   https://www.nfcorp.co.jp/files/CA5351_InstructionManual_En.pdf
+  usb: ["0d4a:0068"]
 manuals:
   - title: Programmable Current Amplifier CA5351 Operations manual
     url: https://www.nfcorp.co.jp/english/doc_portal/download/pdf/manual/mi/EN_CA5351_InstructionManual_001.pdf

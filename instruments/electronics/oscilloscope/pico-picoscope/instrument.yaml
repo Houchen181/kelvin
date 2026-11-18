@@ -6,6 +6,24 @@ name: Pico Technology PicoScope USB oscilloscopes
 kind: oscilloscope
 interfaces: [usb]
 control: library
+identify:
+  # USB IDs, from http://www.linux-usb.org/usb.ids
+  usb:
+    - "0ce9:1001"
+    - "0ce9:1007"
+    - "0ce9:1008"
+    - "0ce9:1009"
+    - "0ce9:100e"
+    - "0ce9:1012"
+    - "0ce9:1016"
+    - "0ce9:1018"
+    - "0ce9:1200"
+    - "0ce9:1201"
+    - "0ce9:1202"
+    - "0ce9:1203"
+    - "0ce9:1204"
+    - "0ce9:1211"
+    - "0ce9:1212"
 manuals:
   - title: PicoScope 6000 Series (A API) Programmer's Guide
     url: https://www.picotech.com/download/manuals/picoscope-6000-series-a-api-programmers-guide.pdf

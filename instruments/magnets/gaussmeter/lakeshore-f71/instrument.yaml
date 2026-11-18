@@ -7,6 +7,9 @@ covers: [F41]
 kind: gaussmeter
 interfaces: [usb, lan, gpib]
 control: scpi
+identify:
+  # USB IDs, from https://github.com/lakeshorecryotronics/python-driver/blob/main/lakeshore/teslameter.py
+  usb: ["1fb9:0405", "1fb9:0406"]
 manuals:
   - title: F71/F41 Teslameter Manual (Rev. 2.0)
     url: https://www.lakeshore.com/docs/default-source/product-downloads/manuals/f41_f71manual.pdf

@@ -7,6 +7,11 @@ covers: [LI5650, LI5655, LI5645]
 kind: lock-in
 interfaces: [usb, gpib, rs-232, lan]
 control: scpi
+identify:
+  # USB IDs, from these sources:
+  #   https://www.nfcorp.co.jp/english/doc_portal/download/pdf/manual/mi/EN_LI5655_LI5660_RemoteControl.pdf
+  #   https://www.nfcorp.co.jp/english/doc_portal/download/pdf/manual/mi/EN_LI5645_LI5650_RemoteControl.pdf
+  usb: ["0d4a:0049", "0d4a:004d", "0d4a:004f", "0d4a:0050"]
 manuals:
   - title: LI5655 / LI5660 Remote Control manual
     url: https://www.nfcorp.co.jp/english/doc_portal/download/pdf/manual/mi/EN_LI5655_LI5660_RemoteControl.pdf

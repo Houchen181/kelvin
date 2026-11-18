@@ -6,6 +6,11 @@ name: PicoQuant HydraHarp 400 TCSPC / time tagger
 kind: photon-counter
 interfaces: [usb]
 control: library
+identify:
+  # USB IDs, from these sources:
+  #   https://downloads.picoquant.com/manuals/discontinued/HydraHarp400_DLL_Linux_Manual.pdf
+  #   https://github.com/PicoQuant/HH400-v3.x-Demos/blob/master/Linux/64bit/library/udev/HydraHarp400.rules
+  usb: ["0e0d:0004", "0e0d:0009"]
 manuals:
   - title: HydraHarp 400 HHLib programming manual (Windows)
     url: https://downloads.picoquant.com/manuals/discontinued/HydraHarp400_DLL_Manual.pdf

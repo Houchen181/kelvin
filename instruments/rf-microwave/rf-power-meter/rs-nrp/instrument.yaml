@@ -7,6 +7,61 @@ covers: [NRP18S, NRP18SN, NRP33SN-V, NRP6AN, NRP18P, NRP40P, NRP50P, NRP-Z47]
 kind: rf-power-meter
 interfaces: [usb-tmc, usb, lan]
 control: scpi
+identify:
+  # USB IDs, from these sources:
+  #   https://scdn.rohde-schwarz.com/ur/pws/dl_downloads/pdm/cl_manuals/user_manual/1177_6017_01/NRPxAN_UserManual_en_18.pdf
+  #   https://scdn.rohde-schwarz.com/ur/pws/dl_downloads/pdm/cl_manuals/user_manual/1179_5760_01/NRPxxP_UserManual_en_08.pdf
+  #   https://scdn.rohde-schwarz.com/ur/pws/dl_downloads/pdm/cl_manuals/user_manual/1177_5079_01/NRPxSN_UserManual_en_26.pdf
+  #   https://scdn.rohde-schwarz.com/ur/pws/dl_downloads/pdm/cl_manuals/user_manual/1178_3686_01/NRP18S-xx_UserManual_en_17.pdf
+  #   http://www.linux-usb.org/usb.ids
+  #   https://www.rohde-schwarz.com/us/driver-pages/remote-control/3-visa-and-tools_231388.html
+  usb:
+    - "0aad:0178"
+    - "0aad:0179"
+    - "0aad:014e"
+    - "0aad:014f"
+    - "0aad:0143"
+    - "0aad:017c"
+    - "0aad:017e"
+    - "0aad:00e2"
+    - "0aad:0137"
+    - "0aad:0138"
+    - "0aad:0139"
+    - "0aad:0145"
+    - "0aad:0146"
+    - "0aad:0168"
+    - "0aad:015f"
+    - "0aad:0160"
+    - "0aad:0161"
+    - "0aad:0162"
+    - "0aad:024a"
+    - "0aad:024b"
+    - "0aad:026a"
+    - "0aad:024c"
+    - "0aad:026b"
+    - "0aad:0148"
+    - "0aad:014a"
+    - "0aad:014c"
+    - "0aad:0003"
+    - "0aad:000c"
+    - "0aad:0013"
+    - "0aad:0014"
+    - "0aad:0015"
+    - "0aad:0016"
+    - "0aad:0017"
+    - "0aad:0018"
+    - "0aad:0019"
+    - "0aad:0021"
+    - "0aad:0023"
+    - "0aad:002c"
+    - "0aad:002d"
+    - "0aad:002f"
+    - "0aad:0051"
+    - "0aad:0052"
+    - "0aad:0062"
+    - "0aad:0070"
+    - "0aad:0083"
+    - "0aad:0095"
 manuals:
   - title: R&S NRPxS(N) Power Sensors User Manual (version 26, firmware 03.50)
     url: https://scdn.rohde-schwarz.com/ur/pws/dl_downloads/pdm/cl_manuals/user_manual/1177_5079_01/NRPxSN_UserManual_en_26.pdf

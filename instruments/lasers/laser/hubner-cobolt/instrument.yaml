@@ -7,6 +7,9 @@ covers: [04-01, 08-01]
 kind: laser
 interfaces: [usb, rs-232]
 control: text
+identify:
+  # USB IDs, from https://hubner-photonics.com/wp-content/uploads/2026/04/D0951-D-Manual-Cobolt-06-01-Series-12-V.pdf
+  usb: ["25dc:03ec", "25dc:03ed", "25dc:03f3"]
 manuals:
   - title: Cobolt 06-01 Series Owner's Manual (D0136-P, October 2023)
     url: https://hubner-photonics.com/wp-content/uploads/2023/11/D0136-P_Manual-Cobolt-06-01-Series_October_2023-1.pdf

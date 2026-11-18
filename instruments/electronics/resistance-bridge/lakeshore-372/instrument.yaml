@@ -10,6 +10,8 @@ control: scpi
 identify:
   idn: ^LSCI,MODEL372,
   example: LSCI,MODEL372,372184,05302003
+  # USB IDs, from https://github.com/lakeshorecryotronics/python-driver/blob/main/lakeshore/model_372.py
+  usb: ["1fb9:0305"]
 manuals:
   - title: Manual for Model 372 AC Bridge and Temperature Controller
     url: https://www.lakeshore.com/docs/default-source/product-downloads/manuals/372_manual.pdf

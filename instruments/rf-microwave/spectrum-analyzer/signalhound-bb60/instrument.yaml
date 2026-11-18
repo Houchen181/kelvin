@@ -7,6 +7,9 @@ covers: [BB60D, BB60A]
 kind: spectrum-analyzer
 interfaces: [usb]
 control: library
+identify:
+  # USB IDs, from http://www.linux-usb.org/usb.ids
+  usb: ["2817:0002"]
 manuals:
   - title: BB60 API Reference (online)
     url: https://signalhound.com/sigdownloads/SDK/online_docs/bb_api/index.html

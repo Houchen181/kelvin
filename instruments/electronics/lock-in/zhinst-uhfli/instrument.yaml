@@ -7,6 +7,9 @@ covers: [UHFAWG]
 kind: lock-in
 interfaces: [usb, lan]
 control: library
+identify:
+  # USB IDs, from http://www.linux-usb.org/usb.ids
+  usb: ["1e7b:0003"]
 manuals:
   - title: 'UHF User Manual: Device Node Tree (online)'
     url: https://docs.zhinst.com/uhf_user_manual/nodedoc.html

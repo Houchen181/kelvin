@@ -7,6 +7,11 @@ covers: [MultiHarp 160]
 kind: photon-counter
 interfaces: [usb]
 control: library
+identify:
+  # USB IDs, from these sources:
+  #   https://github.com/PicoQuant/snAPI/blob/main/Linux/MultiHarp.rules
+  #   https://downloads.picoquant.com/manuals/MultiHarp150_160_DLL_Linux_Manual.pdf
+  usb: ["0e0d:0013"]
 manuals:
   - title: MultiHarp 150/160 MHLib programming manual (Windows)
     url: https://downloads.picoquant.com/manuals/MultiHarp150_160_DLL_Manual.pdf

@@ -7,6 +7,11 @@ covers: [RUDAT, ZVVA, RC4DAT, RC8DAT]
 kind: rf-attenuator
 interfaces: [usb, lan]
 control: text
+identify:
+  # USB IDs, from these sources:
+  #   https://www.minicircuits.com/softwaredownload/Prog_Manual-6-Programmable_Attenuator.pdf
+  #   https://www.minicircuits.com/softwaredownload/Prog_Examples_Troubleshooting.pdf
+  usb: ["20ce:0023"]
 manuals:
   - title: 'Programming Manual: Programmable Attenuators (ZVVA, RUDAT, RCDAT, RC4DAT, RC8DAT series)'
     url: https://www.minicircuits.com/softwaredownload/Prog_Manual-6-Programmable_Attenuator.pdf

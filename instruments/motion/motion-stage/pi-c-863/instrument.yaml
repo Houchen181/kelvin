@@ -7,6 +7,9 @@ covers: [C-863.11, C-863.12]
 kind: motion-stage
 interfaces: [usb, rs-232]
 control: text
+identify:
+  # USB IDs, from https://github.com/torvalds/linux/blob/master/drivers/usb/serial/ftdi_sio_ids.h
+  usb: ["1a72:1007"]
 manuals:
   - title: C-863.12 Mercury DC Motor Controller User Manual MS249 (v2.1.0, 2025-02-14)
     url: https://www.physikinstrumente.com/en/products/controllers-and-drivers/motion-controllers-drivers-for-linear-torque-stepper-dc-servo-motors/c-863-mercury-servo-controller-900606/

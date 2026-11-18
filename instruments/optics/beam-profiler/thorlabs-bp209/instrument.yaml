@@ -7,6 +7,11 @@ covers: [BP209-VIS, BP209-IR1, BP209-IR2]
 kind: beam-profiler
 interfaces: [usb]
 control: library
+identify:
+  # USB IDs, from these sources:
+  #   https://github.com/Thorlabs/Light_Analysis_Examples/blob/main/Python/Thorlabs%20BP209%20Beam%20Profiler/TLBP2.py
+  #   http://www.linux-usb.org/usb.ids
+  usb: ["1313:8019"]
 manuals:
   - title: BP209 Series Beam software user manual
     url: https://media.thorlabs.com/globalassets/items/b/bp/bp2/bp209-ir2_m/doc-104056.pdf

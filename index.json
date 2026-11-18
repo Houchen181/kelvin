@@ -3895,7 +3895,12 @@
    ],
    "control": "scpi",
    "identify": null,
-   "usb": [],
+   "usb": [
+    "0d4a:0049",
+    "0d4a:004d",
+    "0d4a:004f",
+    "0d4a:0050"
+   ],
    "card": null,
    "manuals": [
     {
@@ -4344,7 +4349,9 @@
    ],
    "control": "library",
    "identify": null,
-   "usb": [],
+   "usb": [
+    "1e7b:0002"
+   ],
    "card": null,
    "manuals": [
     {
@@ -4530,7 +4537,9 @@
    ],
    "control": "library",
    "identify": null,
-   "usb": [],
+   "usb": [
+    "1e7b:0003"
+   ],
    "card": null,
    "manuals": [
     {
@@ -5255,7 +5264,23 @@
    ],
    "control": "library",
    "identify": null,
-   "usb": [],
+   "usb": [
+    "0ce9:1001",
+    "0ce9:1007",
+    "0ce9:1008",
+    "0ce9:1009",
+    "0ce9:100e",
+    "0ce9:1012",
+    "0ce9:1016",
+    "0ce9:1018",
+    "0ce9:1200",
+    "0ce9:1201",
+    "0ce9:1202",
+    "0ce9:1203",
+    "0ce9:1204",
+    "0ce9:1211",
+    "0ce9:1212"
+   ],
    "card": null,
    "manuals": [
     {
@@ -5901,7 +5926,9 @@
    ],
    "control": "scpi",
    "identify": null,
-   "usb": [],
+   "usb": [
+    "0d4a:0068"
+   ],
    "card": null,
    "manuals": [
     {
@@ -6122,7 +6149,9 @@
     "idn": "^LSCI,MODEL372,",
     "example": "LSCI,MODEL372,372184,05302003"
    },
-   "usb": [],
+   "usb": [
+    "1fb9:0305"
+   ],
    "card": null,
    "manuals": [
     {
@@ -7606,7 +7635,11 @@
    ],
    "control": "text",
    "identify": null,
-   "usb": [],
+   "usb": [
+    "25dc:03ec",
+    "25dc:03ed",
+    "25dc:03f3"
+   ],
    "card": null,
    "manuals": [
     {
@@ -8888,7 +8921,10 @@
    ],
    "control": "scpi",
    "identify": null,
-   "usb": [],
+   "usb": [
+    "1fb9:0405",
+    "1fb9:0406"
+   ],
    "card": null,
    "manuals": [
     {
@@ -10297,7 +10333,10 @@
    ],
    "control": "text",
    "identify": null,
-   "usb": [],
+   "usb": [
+    "104d:3002",
+    "104d:3006"
+   ],
    "card": null,
    "manuals": [
     {
@@ -10376,7 +10415,9 @@
    ],
    "control": "text",
    "identify": null,
-   "usb": [],
+   "usb": [
+    "104d:3001"
+   ],
    "card": null,
    "manuals": [
     {
@@ -10542,7 +10583,9 @@
    ],
    "control": "text",
    "identify": null,
-   "usb": [],
+   "usb": [
+    "1a72:1007"
+   ],
    "card": null,
    "manuals": [
     {
@@ -11279,7 +11322,9 @@
    ],
    "control": "library",
    "identify": null,
-   "usb": [],
+   "usb": [
+    "1313:8019"
+   ],
    "card": null,
    "manuals": [
     {
@@ -15372,7 +15417,9 @@
    ],
    "control": "text",
    "identify": null,
-   "usb": [],
+   "usb": [
+    "20ce:0023"
+   ],
    "card": null,
    "manuals": [
     {
@@ -15573,7 +15620,54 @@
    ],
    "control": "scpi",
    "identify": null,
-   "usb": [],
+   "usb": [
+    "0aad:0178",
+    "0aad:0179",
+    "0aad:014e",
+    "0aad:014f",
+    "0aad:0143",
+    "0aad:017c",
+    "0aad:017e",
+    "0aad:00e2",
+    "0aad:0137",
+    "0aad:0138",
+    "0aad:0139",
+    "0aad:0145",
+    "0aad:0146",
+    "0aad:0168",
+    "0aad:015f",
+    "0aad:0160",
+    "0aad:0161",
+    "0aad:0162",
+    "0aad:024a",
+    "0aad:024b",
+    "0aad:026a",
+    "0aad:024c",
+    "0aad:026b",
+    "0aad:0148",
+    "0aad:014a",
+    "0aad:014c",
+    "0aad:0003",
+    "0aad:000c",
+    "0aad:0013",
+    "0aad:0014",
+    "0aad:0015",
+    "0aad:0016",
+    "0aad:0017",
+    "0aad:0018",
+    "0aad:0019",
+    "0aad:0021",
+    "0aad:0023",
+    "0aad:002c",
+    "0aad:002d",
+    "0aad:002f",
+    "0aad:0051",
+    "0aad:0052",
+    "0aad:0062",
+    "0aad:0070",
+    "0aad:0083",
+    "0aad:0095"
+   ],
    "card": null,
    "manuals": [
     {
@@ -15833,7 +15927,9 @@
    ],
    "control": "library",
    "identify": null,
-   "usb": [],
+   "usb": [
+    "2817:0002"
+   ],
    "card": null,
    "manuals": [
     {
@@ -17611,7 +17707,10 @@
    ],
    "control": "library",
    "identify": null,
-   "usb": [],
+   "usb": [
+    "0e0d:0004",
+    "0e0d:0009"
+   ],
    "card": null,
    "manuals": [
     {
@@ -17702,7 +17801,9 @@
    ],
    "control": "library",
    "identify": null,
-   "usb": [],
+   "usb": [
+    "0e0d:0013"
+   ],
    "card": null,
    "manuals": [
     {

@@ -7,6 +7,9 @@ covers: [HF2IS]
 kind: lock-in
 interfaces: [usb]
 control: library
+identify:
+  # USB IDs, from http://www.linux-usb.org/usb.ids
+  usb: ["1e7b:0002"]
 manuals:
   - title: 'HF2 User Manual: Communication and Connectivity chapter (online)'
     url: https://docs.zhinst.com/hf2_user_manual/programming.html
