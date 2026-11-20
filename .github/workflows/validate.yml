@@ -6,10 +6,18 @@ on:
 
 jobs:
   validate:
-    runs-on: ubuntu-latest
+    # ubuntu-latest became Ubuntu 26.04 (November 2026), whose runners have no Python 3.9 for setup-python: the 3.9 job
+    # failed before any check ran. Kelvin still runs on 3.9 (a lab's conda environment), so that job keeps 22.04.
+    name: validate (${{ matrix.python }})
+    runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
-        python: ["3.9", "3.13"]
+        include:
+          - python: "3.9"
+            os: ubuntu-22.04
+          - python: "3.13"
+            os: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
